@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use OnToGraPh in your work, please cite the software and include the commit you evaluated."
+title: "OnToGraPh"
+type: software
+authors:
+  - family-names: "Degni"
+    given-names: "Fabrizio"
+repository-code: "https://github.com/sev7enITA/OntoGraph"
+url: "https://openontograph.org/"
+abstract: "A standalone semantic governance engine for modeling, reviewing, releasing and verifying shared rules across applications."
+keywords:
+  - ontology
+  - semantic governance
+  - knowledge graph
+  - human oversight
+  - release verification

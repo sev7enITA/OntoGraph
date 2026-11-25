@@ -1,73 +1,96 @@
-<img src="assets/brand/ontograph-wordmark.png" alt="OnToGraPh logo" width="420">
-
 # OnToGraPh
 
-**A standalone semantic governance engine. Model shared meaning, release rules and verify how applications behave.**
+[![OnToGraPh. One rule, two applications. Aurora 21 shows the CRM applying the new decision while the PMS returns the previous decision. Both report the same release digest.](assets/brand/github-cover.png)](https://openontograph.org/demo/)
 
-Two applications can report the same release and still make different decisions. OntoGraph helps governance and risk teams find that divergence, trace it to the approved rule and check what happens after a withdrawal. It links source evidence, semantic impact, approval, per-application delivery and observed behavior. Start locally with Python and SQLite, then bring your own model and sources. The workspace includes a process modeler, graph and atomic inspector, release versions, and a reproducible synthetic case.
+[![Verify OntoGraph](https://github.com/sev7enITA/OntoGraph/actions/workflows/verify.yml/badge.svg)](https://github.com/sev7enITA/OntoGraph/actions/workflows/verify.yml)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-dffb78?labelColor=101419)](#run-the-engine-and-studio)
+[![Project site](https://img.shields.io/badge/Website-openontograph.org-dffb78?labelColor=101419)](https://openontograph.org/)
 
-[English website](https://openontograph.org/) · [Simplified Chinese website](https://openontograph.org/zh/) · [GitHub Wiki](https://github.com/sev7enITA/OntoGraph/wiki) · [Versioned documentation](docs/wiki/README.md) · [Competitive landscape](https://openontograph.org/#market) · [Brand assets](assets/brand)
+**OnToGraPh is a standalone semantic governance engine.** It connects dictionaries, taxonomies and ontology relationships to versioned rules, human approval and tests of downstream behavior. A data steward can trace a field back to its source, a reviewer can decide whether a rule should be released, and an operator can see which applications actually applied it.
 
-| | Value proposition |
+[Project website](https://openontograph.org/) · [简体中文](https://openontograph.org/zh/) · [Wiki](https://github.com/sev7enITA/OntoGraph/wiki) · [Market and standards](docs/wiki/MARKET-AND-STANDARDS.md) · [Issues](https://github.com/sev7enITA/OntoGraph/issues)
+
+## Start here
+
+| Explore | What you can do |
 | --- | --- |
-| **O** | **Operational Ontology.** Connect shared definitions to the rules and applications that use them. |
-| **T** | **Traceability to Every Field.** Follow a property to its source, the rules it changes and the applications that depend on it. |
-| **G** | **Governance with Human Authority.** Review a release, monitor adoption and observations, and withdraw a version when needed. |
-| **P** | **Proof of Behavior.** Compare each application's declared version with the outcome of an independent, scoped test. |
+| **[Run the interactive pilot](https://openontograph.org/pilot/)** · [中文](https://openontograph.org/pilot/zh/) | Follow a PolicyWatcher signal into a PALO case, change its evidence or authority, or try the standalone route. The public demo opens in a browser without an account. |
+| **[Inspect the Aurora 21 evidence](https://openontograph.org/demo/)** · [中文](https://openontograph.org/demo/zh/) | Watch two simulated applications report the same release but produce different decisions. See how an unreachable application leaves withdrawal unproven. |
+| **[Open the local Studio](#run-the-engine-and-studio)** | Edit a process visually, inspect individual properties and relationships, and review local versions with the bundled sample. |
+| **[Watch the 90-second walkthrough](https://openontograph.org/film/)** · [中文](https://openontograph.org/film/zh/) | Follow the same pilot with narration, captions and a transcript. |
 
-## Open the visual workspace
+## From meaning to evidence
+
+| Principle | What OnToGraPh connects |
+| --- | --- |
+| **O · Operational Ontology** | Stable dictionary and taxonomy identifiers, typed relationships, physical fields, processes, controls and consuming applications. |
+| **T · Traceability to Every Field** | Source excerpts and applicability judgments, affected fields and rules, release manifests and consumer observations. |
+| **G · Governance with Human Authority** | Frozen candidates, assigned reviewers, objections and quorum, separate publish authority and withdrawal. Release activation requires adequate evidence and approval. |
+| **P · Proof of Behavior** | Per-application delivery and receipts, independent scoped probes, expiring observations and proof that a withdrawn rule stopped being used. |
+
+The engine exports portable JSON release bundles and a JSON-LD projection using SKOS, OWL/RDFS and PROV-O terms. Release hashes and audit history can be checked against independently retained checkpoints. [Framework and roles](docs/FRAMEWORK.md) · [Formats, controls and CLI](docs/PROTOCOL.md)
+
+## Run the engine and Studio
+
+The reference engine runs with Python 3.10 or later and the standard SQLite module. It runs offline after cloning.
 
 ```sh
+git clone https://github.com/sev7enITA/OntoGraph.git
+cd OntoGraph
+python3 -m ontograph demo
 python3 -m ontograph studio
 ```
 
-Open [OnToGraPh Studio](http://127.0.0.1:8765/). The workspace starts in the native Process Modeler, with visual editing, an Excel process inventory, live properties and diagram export. Open **Semantic Studio** to link a process to a control, inspect and edit nested properties, and compare local drafts. [Studio guide](docs/wiki/STUDIO.md) · [Process modeler preview](assets/studio/process-modeler.png) · [Semantic Studio preview](assets/studio/semantic-studio.png)
+Open [the local Studio](http://127.0.0.1:8765/) to start in the Process Modeler. Choose **Semantic Studio** to inspect and edit nested properties, link a process to a control, and compare local drafts. [Studio guide](docs/wiki/STUDIO.md)
 
-## Run Aurora 21
+[![Semantic Studio with the Aurora 21 graph, typed objects and the property inspector.](assets/studio/semantic-studio.png)](docs/wiki/STUDIO.md)
 
-Requires Python 3.10 or later with the standard SQLite module. No model, network connection, package install or external service is required.
+[Process Modeler preview](assets/studio/process-modeler.png) · [Evidence Workbench preview](assets/studio/evidence-workbench.png)
+
+### Export the evidence locally
 
 ```sh
-python3 -m ontograph demo
-mkdir -p out
-python3 -m ontograph demo --report out/aurora.json --html out/aurora.html
+evidence_dir=$(mktemp -d)
+python3 -m ontograph demo --report "$evidence_dir/aurora.json" --html "$evidence_dir/aurora.html"
 python3 -m unittest discover -s tests -v
 ```
 
-Open `out/aurora.html` to inspect the observations. GitHub Actions publishes the HTML and JSON together as the `ontograph-aurora-demo` workflow artifact. A run produces fresh output files. Choose new output paths for subsequent runs.
+Open the exported `aurora.html` to inspect the observations. The verification workflow also publishes the HTML and JSON as its `ontograph-aurora-demo` artifact. [GitHub Actions runs](https://github.com/sev7enITA/OntoGraph/actions/workflows/verify.yml)
 
-The project website serves the synthetic report in English and Simplified Chinese. To refresh it, generate new HTML and JSON files using the command above, and generate the second HTML file with `python3 -m ontograph demo --language zh-Hans --html out/aurora-zh.html`. Update `site/demo/index.html`, `site/demo/zh/index.html` and the shared `site/demo/report.json` together.
+## What the pilot demonstrated
 
-| Step | CRM | PMS |
-| --- | --- | --- |
-| Baseline | Behavior verified on the declared cases | Behavior verified on the declared cases |
-| New requirement | Correct | Declares the expected digest and returns the previous decision on a discriminating case |
-| Withdrawal while PMS is unreachable | Withdrawal verified | Unproven |
-| Reconciliation | Withdrawal verified | Withdrawal verified |
-| Recovery with a newly approved candidate | Behavior verified | Behavior verified |
+### Aurora 21 and standalone adoption
 
-All of Aurora 21 is synthetic. The two applications are simulators. Verification is scoped to observed cases and its freshness window. The report keeps business outcome unassessed.
+In **Aurora 21**, a simulated PMS reported the expected release digest while returning the previous rule's decision. During withdrawal, an unreachable PMS stayed unproven until a probe observed the withdrawn behavior had stopped. A newly approved candidate restored verified behavior on the declared cases. [Aurora 21 case notes](docs/wiki/AURORA-21.md) · [Evidence JSON](https://openontograph.org/demo/report.json)
 
-## What is implemented
+A separate **calibration laboratory** used its own dictionary, taxonomy and rule. It returned allow, hold and out of scope with network access denied. Activation and withdrawal each required their own observation. [Run the standalone calibration](examples/hub_pilot/README.md#run-the-standalone-control)
 
-- Dictionary and taxonomy with stable IDs. A typed dependency graph links concepts, limited ontology classes, physical fields, processes, controls, contracts and applications.
-- Case-scoped evidence with an excerpt hash, origin, observation time and a recorded applicability judgment. Local import of a PolicyWatcher evidence packet creates a draft requiring human review.
-- Deterministic rule, scope and probe validation. Releases include positive and negative probes. A changed rule shared with the prior release requires a case per app that distinguishes their behavior.
-- Frozen release candidates, an auditable review quorum, separate publish authority and transactional compare-and-swap. An objection or insufficient source evidence blocks activation.
-- Per-app rule delivery. Consumer assertions remain separate from independent, expiring behavioral observations. A withdrawal stops delivery immediately. Observation confirms whether behavior at each consumer stopped.
-- Offline JSON package and JSON-LD graph projection using SKOS, OWL/RDFS and PROV-O terms. Release and audit hashes can be checked against independently retained checkpoints.
+### One hub, three frameworks
 
-## How PolicyWatcher and PALO benefit
+OnToGraPh grew out of **PolicyWatcher** and **PALO Framework**. It can serve as their shared ontology layer and can also be adopted on its own.
 
-OnToGraPh is a standalone product and a spin-off of PolicyWatcher and PALO Framework. The three-framework hub is one use of its reusable ontology layer: dictionaries, taxonomies, typed relationships, fields and versioned controls. PolicyWatcher provides evidence from the bottom up. PALO defines governance authority from the top down. OnToGraPh links them to rules and observed outcomes that can inform both projects. [Governance hub](docs/wiki/HUB.md)
+| Framework | Role in the hub |
+| --- | --- |
+| [PolicyWatcher](https://policywatcher.online/) | Provides bottom-up evidence of an observed policy change. A read-only adapter can resolve a released rule back to its source. |
+| **OnToGraPh** | Binds the source change to an approved dictionary, rule and scope, and records what authorized consumers do. |
+| [PALO Framework](https://github.com/sev7enITA/PALOframework) | Provides top-down human authority and lifecycle gates. Its Assessment Path can receive a case with its release evidence for review. |
 
-- **PolicyWatcher** supplies the source evidence. The offline adapter turns a locally supplied packet and authorized excerpt into a draft for human review. The recorded link from change to rule, release and observed decision can support follow-up on a detected policy change. [PolicyWatcher](https://policywatcher.online/) · [Evidence exchange](docs/PROTOCOL.md#inputs-and-optional-adapters)
-- **PALO Framework** supplies governance roles, gates and evidence requirements. OnToGraPh implements a concrete lifecycle for semantic changes and exports release and audit records that can inform a PALO review. [PALO Framework](https://paloframework.org/) · [Lifecycle and controls](docs/FRAMEWORK.md#the-six-gates)
+A live PolicyWatcher record passed through a local OnToGraPh registry to a local instance of PALO’s Assessment Path. A signal with a mismatched change ID passed the format validator and was held by the scoped rule. The matched signal reopened **Measure** and **Prove** for human review. The case remained pending. [Recorded evidence](https://openontograph.org/pilot/evidence.json) · [Reproduction instructions](examples/hub_pilot/README.md)
 
-A live PolicyWatcher packet passed through a local OnToGraPh release into PALO’s Assessment Path. PALO reopened Measure and Prove for human review. A separate calibration laboratory exercised the same engine offline with its own model. [Run the integration and standalone pilots](https://github.com/sev7enITA/OntoGraph/tree/main/examples/hub_pilot)
+## Where it fits
 
-## Operator guide
+Use catalogs or ontology editors to maintain definitions, graph engines to query relationships, and Git and CI to manage code. OnToGraPh focuses on the point after a shared rule is approved. It helps teams establish what each application did, whether an exception is still open and whether a withdrawn rule stopped running.
 
-[Framework and controls](docs/FRAMEWORK.md) · [Protocol and CLI](docs/PROTOCOL.md) · [Market proposal and pilot](docs/MARKET.md) · [Cross-model reviews](docs/REVIEWS.md)
+The reference implementation uses one local registry per workspace. Aurora 21 uses simulators, and the hub pilot used scripted roles and a local PALO client. Observations cover declared cases and freshness windows. Qualification on real consumer systems, production tenancy and an independent observer deployment remain customer-pilot work. [Competitive landscape](https://openontograph.org/#market) · [Market proposal and adoption criteria](docs/MARKET.md) · [Cross-model reviews](docs/REVIEWS.md)
 
-This reference uses one local registry per workspace and trusts the host operator and named observers. Production tenancy, identity federation, independent probe adapters, external attestations, high availability and a recovery rehearsal require a deployment design and qualification. The framework does not make legal determinations or certify compliance. The demo and the test suite show the reference behavior.
+## Documentation and project files
+
+| Start with | Read or use it for |
+| --- | --- |
+| [Documentation index](docs/wiki/README.md) and [GitHub Wiki](https://github.com/sev7enITA/OntoGraph/wiki) | Orientation, design principles, Visual Studio, the governance hub and Aurora 21 |
+| [Framework](docs/FRAMEWORK.md) and [protocol](docs/PROTOCOL.md) | Governance roles, release operations, evidence contracts and interoperability |
+| [Engine and local Studio](ontograph/) | Python modules and the visual workspace |
+| [Examples](examples/) and [tests](tests/) | Reference fixtures, the optional hub adapters and regression checks |
+| [Website](site/) and [brand assets](assets/brand/) | Source for the bilingual public site, pilot and project wordmark |
+
+OnToGraPh was created by **Fabrizio Degni**. If you find an issue or want to propose an example, include the affected version, steps and the expected result. [Open an issue](https://github.com/sev7enITA/OntoGraph/issues/new) · [Citation metadata](CITATION.cff)
