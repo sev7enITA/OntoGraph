@@ -12,7 +12,7 @@ Open [OnToGraPh Studio](http://127.0.0.1:8765/). The local server uses a synthet
 
 ## Start in the process modeler
 
-The first screen reuses the code, structure and workflow of the PolicyAsCode workbench. It includes the process inventory, block, sequence and entity views, an editable canvas, shape palette, live properties, source panel and exports. The browser saves draft changes and layout. Export the modeler workbook to transfer the draft with its nodes and links, then reload it using the import control.
+The native Process Modeler is the first screen. It includes the process inventory, block, sequence and entity views, an editable canvas, shape palette, live properties, source panel and exports. The browser saves draft changes and layout. Export the modeler workbook to transfer the draft with its nodes and links, then reload it using the import control.
 
 [Process modeler preview](../../assets/studio/process-modeler.png)
 
@@ -28,11 +28,29 @@ The link between the workspaces is an explicit projection of a process. Release 
 
 [Graph and property inspector preview](../../assets/studio/semantic-studio.png)
 
+## Follow a change across layers
+
+Use **Semantics**, **Controls and delivery**, or **Sources and tests** on the graph. The selected layer is emphasized and related context remains visible. The graph scope controls the visible dependencies. Everything stays linked to the same editable model and field-level inspector.
+
+In **Structure**, use **Import PolicyWatcher evidence** with a published evidence packet and an authorized excerpt. Set the draft’s UTC effective time to cover the new and existing captures. The source opens in the inspector pending human review. The offline intake preserves the upstream references and computes the local excerpt hash.
+
+In **Evidence**, choose a release phase and application. Compare the expected package with the declared receipt, then open the observed case and its artifact reference, hash, observer and capture time. Aurora 21 labels the simulated systems. An unreachable app stays unproven and business outcome remains unassessed.
+
+[Evidence workbench preview](../../assets/studio/evidence-workbench.png)
+
+## Compare two pilot arms
+
+Open **Paired pilot** to compare OnToGraPh and the incumbent using the same preregistered cases. Record each arm's activation for a case and the exact consuming instance. Enter the observer, UTC capture time, artifact SHA-256 and laboratory or customer custody reference. Use the same measurement window for review, first and second adapter and maintenance effort.
+
+Load Aurora 21 to rehearse the workflow. Only OnToGraPh's synthetic outcomes are filled. Run the review against a second arm when its measurements are available. A false withdrawal confirmation fails the assessment. Export the dossier and its assessment together, or re-import the dossier to continue editing.
+
+The assessor checks consistency of the submitted bindings and calculates outcomes from the declared cases. Verify actual instance identity, artifact bytes and custody with the operator responsible for the pilot.
+
 ## Formats and local registry
 
 | Workspace | Import and export |
 | --- | --- |
-| Process modeler | PolicyAsCode/OnToGraPh Excel workbooks based on the modeler's template. JSON, Mermaid, PlantUML, SVG and ZIP exports. |
+| Process modeler | OnToGraPh Excel workbooks, including earlier inventories based on the modeler's template. JSON, Mermaid, PlantUML, SVG and ZIP exports. |
 | Semantic Studio | Release JSON and the `OntoGraph Release` workbook with individual paths, types and values. JSON-LD, XLSX, Mermaid, PlantUML, SVG and ZIP exports. |
 
 Keep the **Path**, **Type** and **Value** columns in the semantic workbook. Edit values in their declared type. Workbook import uses the same validator as JSON import.

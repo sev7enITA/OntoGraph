@@ -12,10 +12,12 @@ from urllib.parse import urlsplit
 from zipfile import ZIP_DEFLATED, ZipFile
 
 from .aurora import example, run
+from .exchange import policywatcher_evidence
 from .model import (
     DECISIONS, KINDS, RELATIONS, Rejected, canonical, digest, equal, evaluate, impact,
-    indexed, jsonld, require, validate, verify_discrimination,
+    indexed, jsonld, record, require, timestamp, validate, verify_discrimination,
 )
+from .pilot import assess, example_from_report
 from .report import render_report
 from .store import Registry
 
@@ -31,6 +33,9 @@ ASSETS = {
     "/studio.js": (WEB / "studio.js", "text/javascript; charset=utf-8"),
     "/graph.js": (WEB / "graph.js", "text/javascript; charset=utf-8"),
     "/inspector.js": (WEB / "inspector.js", "text/javascript; charset=utf-8"),
+    "/evidence.js": (WEB / "evidence.js", "text/javascript; charset=utf-8"),
+    "/pilot.js": (WEB / "pilot.js", "text/javascript; charset=utf-8"),
+    "/proof.css": (WEB / "proof.css", "text/css; charset=utf-8"),
     "/brand.png": (BRAND / "ontograph-avatar.png", "image/png"),
     "/brand-wordmark.png": (BRAND / "ontograph-wordmark.png", "image/png"),
 }
@@ -237,6 +242,8 @@ class StudioHandler(BaseHTTPRequestHandler):
                         "decisions": sorted(DECISIONS), "registry": self.server.registry is not None})
         elif path == "/api/demo":
             self._json(demo_data())
+        elif path == "/api/pilot-example":
+            self._json(example_from_report(demo_data()))
         elif path == "/evidence-report":
             self._send(render_report(demo_data()).encode(), "text/html; charset=utf-8")
         else:
@@ -269,6 +276,18 @@ class StudioHandler(BaseHTTPRequestHandler):
             payload = parse_json(data)
             if path == "/api/validate":
                 self._json(inspect(payload))
+            elif path == "/api/pilot/assess":
+                self._json(assess(payload))
+            elif path == "/api/policywatcher-draft":
+                record(payload, ("packet", "excerpt"), "PolicyWatcher intake", ("effective_at",))
+                packet = payload["packet"]
+                if isinstance(packet, str):
+                    packet = parse_json(packet)
+                evidence = policywatcher_evidence(packet, payload["excerpt"])
+                if "effective_at" in payload:
+                    require(timestamp(evidence["observed_at"]) <= timestamp(payload["effective_at"]),
+                            "Set the draft effective time on or after " + evidence["observed_at"])
+                self._json({"evidence": evidence})
             elif path == "/api/export":
                 content, media, filename = create_export(payload)
                 self._send(content, media, filename=filename)

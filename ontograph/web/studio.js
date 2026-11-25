@@ -1,5 +1,7 @@
 import {createGraph} from "./graph.js";
 import {renderInspector} from "./inspector.js";
+import {renderEvidence} from "./evidence.js";
+import {createPilot} from "./pilot.js";
 
 const $ = id => document.getElementById(id);
 const own = (object, key) => object != null && Object.hasOwn(object, key);
@@ -87,7 +89,7 @@ function entryShape(model) {
 let model, base, capabilities, storageKey;
 let selection = [], view = "graph", checked = null, activeCheck = 0, sourceDirty = false;
 let versions = [], past = [], future = [], compareIndex = "seed";
-let evidence = null;
+let evidence = null, evidenceRequest = null, pilotReady = false;
 const graph = createGraph($("graph"), select);
 
 function safeLoad(key) {
@@ -134,6 +136,10 @@ function switchView(next) {
   render();
   if (next === "versions") void validateCurrent(false);
   if (next === "evidence" && !evidence) void showDemo();
+  if (next === "pilot" && !pilotReady) {
+    createPilot($("pilot-root"), call, download);
+    pilotReady = true;
+  }
 }
 function changed(draft, path = selection) {
   if (show(draft) === show(model)) return;
@@ -314,7 +320,7 @@ function render() {
   if (!sourceDirty) $("code-editor").value = show(model);
   if (view === "graph") {
     renderNavigator();
-    graph.render({document: model, selection, mode: $("graph-mode").value});
+    graph.render({document: model, selection, mode: $("graph-mode").value, layer: $("graph-layer").value});
     renderInspector($("inspector"), {document: model, path: selection, onSelect: select, onUpdate: update, onDelete: remove});
     synchronizeZoom();
   } else if (view === "studio") {
@@ -538,41 +544,49 @@ function createRelation() {
     };
   });
 }
-const evidenceLabels = {
-  verified: "Verified on test cases", mismatch: "Mismatch", unproven: "Unproven",
-  withdrawal_verified: "Withdrawal verified", allow: "Allow", hold: "Hold",
-  out_of_scope: "Out of scope", unobservable: "Unreachable", inactive: "Inactive",
-};
 async function showDemo() {
+  if (evidenceRequest) return evidenceRequest;
   const root = $("evidence-result");
   root.replaceChildren(el("p", "Loading simulation…", {role: "status"}));
-  try {
-    evidence ||= await call("./api/demo");
-    const rows = el("div", null, {class: "item-list"});
-    const phases = [
-      ["baseline", "Baseline"], ["drift", "New rule"], ["unreachable", "Withdrawal requested"],
-      ["withdrawn", "Withdrawal verified"], ["restored", "Recovery"],
-    ];
-    for (const [key, title] of phases) {
-      const section = el("details", null, key === "drift" ? {open: ""} : {});
-      section.append(el("summary", title));
-      for (const application of evidence[key].applications) {
-        const row = el("div", null, {class: "diff-row"});
-        row.append(el("strong", application.application.toUpperCase()),
-          el("span", evidenceLabels[application.state] || application.state, {class: "state-badge", "data-state": application.state}));
-        for (const probe of application.probes) {
-          const observation = probe.observation?.actual_outcome;
-          row.append(el("p", `${probe.probe} · expected ${evidenceLabels[probe.expected] || probe.expected} · observed ${evidenceLabels[observation] || observation || "pending"}`));
-        }
-        section.append(row);
-      }
-      rows.append(section);
-    }
-    root.replaceChildren(el("p", "Aurora 21 uses simulated CRM and PMS systems. This report uses the included demo model."),
-      rows, el("a", "Open offline report", {href: "./evidence-report", target: "_blank", rel: "noopener"}));
-  } catch (error) {
+  evidenceRequest = call("./api/demo").then(report => {
+    renderEvidence(root, report);
+    evidence = report;
+  }).catch(error => {
     root.replaceChildren(el("p", error.message, {role: "status"}));
-  }
+  }).finally(() => { evidenceRequest = null; });
+  return evidenceRequest;
+}
+
+function importPolicyWatcherEvidence() {
+  openDialog("Import PolicyWatcher evidence", form => {
+    const packet = el("textarea", null, {name: "packet", rows: "6", maxlength: "1000000", required: ""});
+    const excerpt = el("textarea", null, {name: "excerpt", rows: "4", maxlength: "8192", required: ""});
+    const effective = el("input", null, {name: "effective_at", value: model.effective_at, required: "",
+      maxlength: "20", placeholder: "YYYY-MM-DDTHH:MM:SSZ"});
+    form.append(
+      el("p", "Supply a published evidence packet and the authorized excerpt. A reviewer must confirm applicability before release."),
+      field("Evidence packet JSON", packet),
+      field("Authorized excerpt", excerpt),
+      field("Draft effective time (UTC)", effective),
+    );
+    return async data => {
+      const effectiveAt = data.get("effective_at").trim();
+      const {evidence: entry} = await call("./api/policywatcher-draft", {
+        packet: data.get("packet"), excerpt: data.get("excerpt"), effective_at: effectiveAt,
+      });
+      if (model.evidence.some(item => item.id === entry.id)) throw new Error("This change is already in the draft.");
+      if (model.evidence.some(item => item.observed_at > effectiveAt)) {
+        throw new Error("The effective time must also cover the evidence already in the draft.");
+      }
+      const draft = clone(model);
+      const path = ["evidence", draft.evidence.length];
+      draft.effective_at = effectiveAt;
+      draft.evidence.push(entry);
+      changed(draft, path);
+      switchView("graph");
+      tell("Evidence added to the draft for human review.", "warn");
+    };
+  });
 }
 
 function renderBridge() {
@@ -721,14 +735,16 @@ action("discard-code", () => {
   tell("JSON source restored from the visual draft.");
 });
 action("export-button", exportFile);
-action("demo-button", () => switchView("evidence"));
+action("demo-button", showDemo);
 action("add-object", createObject);
 action("add-relation", createRelation);
+action("import-policywatcher", importPolicyWatcherEvidence);
 action("graph-fit", () => { graph.fit(); synchronizeZoom(); });
 action("graph-reset", () => { graph.reset(); synchronizeZoom(); });
 action("graph-zoom-in", () => { graph.zoom(1.2); synchronizeZoom(); });
 action("graph-zoom-out", () => { graph.zoom(1 / 1.2); synchronizeZoom(); });
 $("graph-mode").addEventListener("change", render);
+$("graph-layer").addEventListener("change", render);
 $("search").addEventListener("input", () => { if (model) renderNavigator(); });
 $("kind-filter").addEventListener("change", () => { if (model) renderNavigator(); });
 $("compare-base").addEventListener("change", () => { compareIndex = $("compare-base").value; void validateCurrent(); });

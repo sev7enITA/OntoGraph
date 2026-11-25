@@ -113,12 +113,12 @@
             <p class="eyebrow">OnToGraPh Studio</p>
             <h2 id="studio-title">From process to property.</h2>
           </div>
-          <p>Start with the original PolicyAsCode process modeler. The Semantic Studio extends that workflow to controls, evidence, and release versions.</p>
+          <p>Run OnToGraPh as a standalone Studio for dictionaries, taxonomies, ontology classes, typed relationships, fields, and versioned controls.</p>
         </div>
         <div class="studio-grid">
           <figure class="studio-figure">
             <a class="screen-link" href="assets/modellatore-processi.webp" aria-label="Open the full-size process modeler screenshot">
-              <img src="assets/modellatore-processi.webp" width="1440" height="900" loading="lazy" decoding="async" alt="The PolicyAsCode modeler shows a process canvas, editing tools, and a properties panel.">
+              <img src="assets/modellatore-processi.webp" width="1440" height="900" loading="lazy" decoding="async" alt="OnToGraPh’s Process Modeler shows a process canvas, editing tools, and a properties panel.">
             </a>
             <figcaption>
               <span class="figure-title">Process modeler</span>
@@ -131,10 +131,11 @@
             </a>
             <figcaption>
               <span class="figure-title">Semantic Studio</span>
-              <span>Edit visually or in JSON, compare drafts, and validate changes.</span>
+              <span>Switch graph layers, edit visually or in JSON, and compare release drafts.</span>
             </figcaption>
           </figure>
         </div>
+        <p class="studio-local-capabilities">In the local Studio, open Evidence to compare delivery, receipts, and observations. Use Paired Pilot to assess OnToGraPh and your current stack on the same cases.</p>
         <div class="studio-actions">
           <a class="button secondary" href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/wiki/STUDIO.md">
             Read the Studio guide <span aria-hidden="true">↗</span>
@@ -267,7 +268,7 @@
             <p class="eyebrow">Blue Ocean hypothesis</p>
             <h3 id="market-blue-title">A verified semantic change across systems</h3>
             <p>Start with a data governance, AI governance or operational risk team that owns a shared control across two applications with different owners. Keep the existing catalog, graph engine and delivery pipeline in place.</p>
-            <a class="text-link" href="#ecosystem">See how the projects build on each other <span aria-hidden="true">↓</span></a>
+            <a class="text-link" href="#ecosystem">See the governance hub <span aria-hidden="true">↓</span></a>
           </div>
           <dl class="market-actions">
             <div><dt>Eliminate</dt><dd>The assumption that a matching receipt proves a change took effect.</dd></div>
@@ -297,20 +298,40 @@
 
     <section class="wrap section" id="ecosystem" aria-labelledby="ecosystem-title">
       <div class="section-heading">
-        <h2 id="ecosystem-title">How the projects build on each other</h2>
-        <p class="ecosystem-overview">OnToGraPh builds on PolicyWatcher’s evidence capture, PALO Framework’s governance lifecycle and the PolicyAsCode modeler. Its versioned semantics and per-application evidence can serve as a shared foundation for PolicyWatcher and PALO Framework.</p>
+        <h2 id="ecosystem-title">One governance hub. Three frameworks.</h2>
+        <p class="ecosystem-overview">The hub is one reference use of OnToGraPh’s reusable ontology layer. PALO Framework sets the governance mandate, PolicyWatcher detects source changes, and OnToGraPh is a spin-off of both that serves as the hub’s shared engine for semantic change and verification.</p>
       </div>
-      <div class="studio-grid ecosystem-grid">
+      <div class="ecosystem-grid">
         <article>
+          <p class="ecosystem-role">Top-down governance</p>
+          <h3><a class="text-link" href="https://paloframework.org/PALO_PlatformMap.html">PALO Framework <span aria-hidden="true">↗</span></a></h3>
+          <p>Set the mandate, assign who can decide, define review gates, and review evidence on the case.</p>
+        </article>
+        <article>
+          <p class="ecosystem-role">Bottom-up evidence</p>
           <h3><a class="text-link" href="https://policywatcher.online/">PolicyWatcher <span aria-hidden="true">↗</span></a></h3>
-          <p>OnToGraPh imports a PolicyWatcher evidence packet and an authorized excerpt into a local draft for human review. In a future pilot, the observed downstream decisions could inform PolicyWatcher’s follow-up on the change.</p>
+          <p>Detect a change, preserve the source and versions, and supply evidence for human review and follow-up.</p>
         </article>
-        <article>
-          <h3><a class="text-link" href="https://paloframework.org/">PALO Framework <span aria-hidden="true">↗</span></a></h3>
-          <p>PALO Framework supplies the governance roles and review gates. Teams using PALO can use exported OnToGraPh release and evidence records as inputs to their reviews.</p>
+        <article class="ecosystem-engine">
+          <p class="ecosystem-role">Semantic change and verification</p>
+          <h3><a class="text-link" href="#studio">OnToGraPh <span aria-hidden="true">↑</span></a></h3>
+          <p>Connect a source change to the affected control, approved release, and decision observed in each application.</p>
         </article>
       </div>
-      <p class="ecosystem-scope">The offline import and evidence export are available in the reference. Automated feedback and live integration are pilot work.</p>
+      <div class="ecosystem-routes">
+        <article>
+          <h3>Start with a mandate</h3>
+          <p>Open a PALO case and set its review criteria. Model the change in OnToGraPh and return release and observation records to the same case for PALO review.</p>
+        </article>
+        <article>
+          <h3>Start with a detected change</h3>
+          <p>Import a PolicyWatcher evidence packet into OnToGraPh for human review. Use the exported findings in the same PALO case and for follow-up in PolicyWatcher.</p>
+        </article>
+      </div>
+      <div class="ecosystem-foot">
+        <p class="ecosystem-scope">PALO already receives PolicyWatcher monitoring signals for human review. OnToGraPh supports offline import, evidence export, and manual handoffs. Automated feedback and production integration are pilot work.</p>
+        <a class="text-link" href="https://github.com/sev7enITA/OntoGraph/wiki/Governance-Hub">Read the Governance Hub guide <span aria-hidden="true">↗</span></a>
+      </div>
     </section>
 
     <section class="wrap section explore" aria-labelledby="explore-title">

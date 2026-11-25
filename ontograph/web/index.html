@@ -7,6 +7,7 @@
   <title>OnToGraPh · Semantic Studio</title>
   <link rel="icon" href="./brand.png" type="image/png">
   <link rel="stylesheet" href="./studio.css">
+  <link rel="stylesheet" href="./proof.css">
   <script src="./studio.js" type="module"></script>
 </head>
 <body>
@@ -15,9 +16,11 @@
     <div class="app-identity">
       <div class="brand">
         <img src="./brand-wordmark.png" alt="OnToGraPh" width="116" height="28">
-        <span class="brand-studio">Semantic Studio</span>
       </div>
-      <a class="button workspace-link" href="./processi/">Process Modeler</a>
+      <nav class="workspace-modules" aria-label="Studio modules">
+        <a class="workspace-module" href="./processi/">Process Modeler</a>
+        <span class="workspace-module" aria-current="page">Semantic Studio</span>
+      </nav>
     </div>
     <div class="file-actions" role="group" aria-label="Model files">
       <label class="button file-button" for="import-input">
@@ -39,22 +42,38 @@
     </div>
   </header>
 
-  <main class="workspace" id="workspace">
-    <div class="model-header">
+  <main class="workspace" id="workspace" tabindex="-1">
+    <header class="model-header">
       <div>
         <h1 id="model-title">Semantic model</h1>
         <p id="model-scope"></p>
       </div>
       <div id="summary-strip" class="summary-strip" aria-label="Model summary"></div>
-    </div>
+    </header>
 
     <div class="workspace-controls">
-      <nav id="view-select" class="view-select" aria-label="Model views">
-        <button type="button" data-view="graph" aria-pressed="true" aria-controls="panel-graph">Graph</button>
-        <button type="button" data-view="studio" aria-pressed="false" aria-controls="panel-studio">Structure</button>
-        <button type="button" data-view="code" aria-pressed="false" aria-controls="panel-code">JSON</button>
-        <button type="button" data-view="versions" aria-pressed="false" aria-controls="panel-versions">Versions</button>
-        <button type="button" data-view="evidence" aria-pressed="false" aria-controls="panel-evidence">Evidence</button>
+      <nav id="view-select" class="view-select" aria-label="Workbench views">
+        <div class="view-group" role="group" aria-labelledby="views-model">
+          <span id="views-model">Model</span>
+          <div class="view-buttons">
+            <button type="button" data-view="graph" aria-pressed="true" aria-controls="panel-graph">Graph</button>
+            <button type="button" data-view="studio" aria-pressed="false" aria-controls="panel-studio">Structure</button>
+            <button type="button" data-view="code" aria-pressed="false" aria-controls="panel-code">JSON</button>
+          </div>
+        </div>
+        <div class="view-group" role="group" aria-labelledby="views-release">
+          <span id="views-release">Release</span>
+          <div class="view-buttons">
+            <button type="button" data-view="versions" aria-pressed="false" aria-controls="panel-versions">Versions</button>
+          </div>
+        </div>
+        <div class="view-group" role="group" aria-labelledby="views-verification">
+          <span id="views-verification">Verification</span>
+          <div class="view-buttons">
+            <button type="button" data-view="evidence" aria-pressed="false" aria-controls="panel-evidence">Evidence</button>
+            <button type="button" data-view="pilot" aria-pressed="false" aria-controls="panel-pilot">Pilot</button>
+          </div>
+        </div>
       </nav>
       <div class="review-actions" role="group" aria-label="Model changes">
         <div class="change-actions">
@@ -95,11 +114,20 @@
           <button id="add-relation" class="accent-button" type="button">+ Relationship</button>
         </div>
         <div class="graph-tools" role="group" aria-label="Graph controls">
-          <label class="visually-hidden" for="graph-mode">Graph scope</label>
-          <select id="graph-mode">
-            <option value="focus">Object and relationships</option>
-            <option value="all">Entire model</option>
-          </select>
+          <label class="graph-control"><span>Layer</span>
+            <select id="graph-layer">
+              <option value="all">All layers</option>
+              <option value="semantics">Semantics</option>
+              <option value="controls">Controls and delivery</option>
+              <option value="verification">Sources and tests</option>
+            </select>
+          </label>
+          <label class="graph-control"><span>Scope</span>
+            <select id="graph-mode">
+              <option value="focus">Object and relationships</option>
+              <option value="all">Entire model</option>
+            </select>
+          </label>
           <div class="zoom-controls">
             <button id="graph-zoom-out" class="icon-button" type="button" aria-label="Zoom out" title="Zoom out">−</button>
             <output id="graph-zoom" for="graph-zoom-out graph-zoom-in graph-reset" aria-label="Zoom level">100%</output>
@@ -124,6 +152,7 @@
     <section id="panel-studio" class="content-panel" data-panel="studio" aria-labelledby="studio-title" hidden>
       <div class="section-heading">
         <h2 id="studio-title">Model structure</h2>
+        <button id="import-policywatcher" type="button" class="accent-button">Import PolicyWatcher evidence</button>
       </div>
       <div id="bridge-panel" class="bridge-panel" hidden></div>
       <div id="studio-list" class="studio-list"></div>
@@ -161,13 +190,20 @@
     <section id="panel-evidence" class="content-panel evidence-panel" data-panel="evidence" aria-labelledby="evidence-title" hidden>
       <div class="section-heading">
         <div>
-          <h2 id="evidence-title">Aurora 21 evidence</h2>
-          <p class="section-description">Synthetic exercise with two simulated applications.</p>
+          <h2 id="evidence-title">Evidence</h2>
+          <p class="section-description">Inspect deliveries, receipts and observations from the Aurora 21 simulation.</p>
         </div>
         <button id="demo-button" type="button" class="accent-button">Load demo evidence</button>
       </div>
       <div id="evidence-result" class="evidence-result"></div>
       <div id="registry-panel" class="registry-panel" hidden></div>
+    </section>
+
+    <section id="panel-pilot" class="content-panel pilot-panel" data-panel="pilot" aria-labelledby="pilot-title" hidden>
+      <div class="section-heading">
+        <h2 id="pilot-title">Paired pilot</h2>
+      </div>
+      <div id="pilot-root"></div>
     </section>
   </main>
 

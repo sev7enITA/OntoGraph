@@ -17,7 +17,8 @@ OnToGraPh links the source excerpt, the affected control, the approval and the d
 | --- | --- |
 | [Why OnToGraPh exists](WHY-ONTOGRAPH.md) | The problem, who faces it and the questions the project answers |
 | [Market position and standards](MARKET-AND-STANDARDS.md) | How the project can complement catalogs, knowledge graphs and Git/CI workflows |
-| [Visual Studio](STUDIO.md) | The original process modeler, semantic projection, field-level editing and export |
+| [Visual Studio](STUDIO.md) | The native Process Modeler, semantic layers, field-level editing and paired pilot |
+| [Governance hub](HUB.md) | Top-down PALO authority, bottom-up PolicyWatcher evidence and the shared OnToGraPh engine |
 | [Aurora 21](AURORA-21.md) | A rule changes, the PMS declares the expected digest and produces a divergent result |
 | [Framework](../FRAMEWORK.md) | Roles, accountability, the six PALO phases and the scope of evidence |
 | [Protocol and CLI](../PROTOCOL.md) | Formats, operations, PolicyWatcher exchange, observation and withdrawal |
@@ -25,7 +26,7 @@ OnToGraPh links the source excerpt, the affected control, the approval and the d
 
 ## How PolicyWatcher and PALO benefit
 
-OnToGraPh derives its approach to sources from PolicyWatcher, its accountable roles and review gates from PALO Framework, and its visual workspace from PolicyAsCode. It provides a shared semantic foundation for linking those sources and decisions to a specific version, control, application and observed outcome.
+OnToGraPh runs independently with your own model and evidence. In the three-framework hub, this spin-off of PolicyWatcher and PALO Framework provides dictionaries, taxonomies, typed relationships and versioned controls. PolicyWatcher provides source evidence from the bottom up. PALO provides authority and review gates from the top down. OnToGraPh links both to a version, application and observed outcome. [Three-framework hub](HUB.md)
 
 | Project | What it contributes | What OnToGraPh can return |
 | --- | --- | --- |

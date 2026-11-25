@@ -17,23 +17,52 @@
 <script defer src="functional-editor.js"></script>
 <script defer src="boot.js"></script>
 </head>
-<body>
+<body class="process-workspace">
+<a class="process-skip" href="#process-workspace">Skip to workspace</a>
 <header class="hdr"><div class="hdr-in">
-  <div><h1 class="process-brand"><img src="../brand-wordmark.png" alt="OnToGraPh" width="128" height="31"> <span>Process Modeler</span></h1><div class="sub" id="sub">Import the process inventory workbook, edit steps and flows, and explore sequence, flow and entity diagrams with policy results. Aurora 21 is a synthetic scenario. Everything runs in your browser.</div></div>
-  <div class="actions">
-    <label class="btn primary" for="file">Import Excel<input type="file" id="file" accept=".xlsx"></label>
-    <button class="btn" id="dl-xlsx" type="button">Download Excel</button>
-    <button class="btn" id="open-modeler" type="button" aria-pressed="false">Modeler</button><button class="btn" id="close-modeler" type="button" aria-pressed="true">Inventory</button>
-    <button class="btn" id="dl-code" type="button">Download code (ZIP)</button>
-    <button class="btn" id="dl-svg" type="button">Download SVG</button>
-    <button class="btn" id="cp-mmd" type="button">Copy Mermaid</button>
-    <button class="btn" id="cp-puml" type="button">Copy PlantUML</button>
-    <button class="btn ghost" id="reset" type="button">Reset demo</button>
-    <a class="btn ghost process-nav" id="open-governance" href="../governance?from=processi">Semantic Studio →</a>
+  <div class="process-identity">
+    <img class="process-logo" src="../brand-wordmark.png" alt="OnToGraPh" width="116" height="28">
+    <nav class="workspace-modules" aria-label="Studio modules">
+      <span class="workspace-module" aria-current="page">Process Modeler</span>
+      <a class="workspace-module process-nav" id="open-governance" href="../governance?from=processi">Semantic Studio</a>
+    </nav>
   </div>
 </div></header>
 
-<main class="wrap">
+<div class="process-toolbar">
+  <div class="process-scope">
+    <h1 class="sr-only">Process Modeler</h1>
+    <div class="sub" id="sub">Import the process inventory workbook, edit steps and flows, and explore sequence, flow and entity diagrams with policy results. Aurora 21 is a synthetic scenario. Everything runs in your browser.</div>
+  </div>
+  <div class="actions process-actions">
+    <div class="process-action-group" role="group" aria-labelledby="process-views">
+      <span id="process-views">Process views</span>
+      <div>
+        <button class="btn" id="open-modeler" type="button" aria-pressed="false">Modeler</button>
+        <button class="btn" id="close-modeler" type="button" aria-pressed="true">Inventory</button>
+      </div>
+    </div>
+    <div class="process-action-group" role="group" aria-labelledby="process-files">
+      <span id="process-files">Workbook and diagrams</span>
+      <div>
+        <label class="btn primary" for="file">Import Excel<input type="file" id="file" accept=".xlsx"></label>
+        <button class="btn" id="dl-xlsx" type="button">Download Excel</button>
+        <details class="process-exports">
+          <summary class="btn">Export diagrams</summary>
+          <div class="process-export-menu">
+            <button class="btn" id="dl-code" type="button">Download code (ZIP)</button>
+            <button class="btn" id="dl-svg" type="button">Download SVG</button>
+            <button class="btn" id="cp-mmd" type="button">Copy Mermaid</button>
+            <button class="btn" id="cp-puml" type="button">Copy PlantUML</button>
+          </div>
+        </details>
+      </div>
+    </div>
+    <button class="btn ghost" id="reset" type="button">Reset demo</button>
+  </div>
+</div>
+
+<main class="wrap" id="process-workspace" tabindex="-1">
   <div class="col">
     <section class="card">
       <h2>Inventory <span class="kpis" id="kpis"></span></h2>

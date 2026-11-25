@@ -24,10 +24,6 @@ h1,h2,h3{margin:0;text-wrap:balance}
 .muted{color:var(--fg-muted)} .mono{font-family:var(--font-mono);font-size:.88em}
 .hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
 .hdr-in{max-width:1400px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
-.hdr h1{font-size:1.05rem;font-weight:700}
-.process-brand{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
-.process-brand img{display:block;width:128px;height:auto}
-.hdr .sub{font-size:.78rem;color:var(--fg-muted)}
 .actions{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
 .btn{padding:7px 12px;border-radius:8px;font-weight:600;font-size:.82rem;background:var(--surface-2);border:1px solid var(--line);display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 .btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
@@ -104,4 +100,163 @@ input[type=file]{display:none}
   .actions .btn{padding:5px 8px;font-size:.73rem}
   .fe-stage{order:-1}
   .fe-palette{border-top:1px solid var(--line)}
+}
+
+/* Process workspace uses the same navigation, materials and focus cues as Semantic Studio. */
+.process-workspace {
+  color-scheme: dark;
+  --bg: #081017;
+  --surface: #111e28;
+  --surface-2: #172631;
+  --fg: #edf6f7;
+  --fg-muted: #b6c5cc;
+  --line: #304852;
+  --accent: #85ecf0;
+  --accent-ink: #082128;
+  --accent-soft: #183440;
+  --module-active: #d8f788;
+  background: radial-gradient(ellipse at 48% 0%, #142630 0%, transparent 36rem), var(--bg);
+  font-size: 15px;
+}
+.process-workspace .hdr { background: rgb(12 22 29 / .94); }
+.process-workspace .hdr-in,
+.process-workspace .wrap,
+.process-workspace .process-toolbar {
+  max-inline-size: 118rem;
+  padding-inline: clamp(.8rem, 2.1vw, 2.2rem);
+}
+.process-workspace .hdr-in { padding-block: .58rem; }
+.process-identity,
+.workspace-modules {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.process-identity { gap: .4rem 1rem; }
+.process-logo { display: block; inline-size: 116px; block-size: auto; }
+.workspace-modules {
+  gap: .2rem;
+  padding-inline-start: .72rem;
+  border-inline-start: 1px solid var(--line);
+}
+.workspace-module {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.25rem;
+  padding: .35rem .55rem;
+  border: 1px solid transparent;
+  color: var(--fg-muted);
+  font-size: .83rem;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.workspace-module:hover { color: var(--fg); }
+.workspace-module[aria-current="page"] {
+  color: var(--module-active);
+  border-color: var(--line);
+  border-block-end-color: var(--module-active);
+  background: var(--surface);
+}
+.process-skip {
+  position: fixed;
+  z-index: 30;
+  color: var(--accent);
+  background: var(--bg);
+}
+.process-skip:not(:focus) { clip-path: inset(50%); overflow: hidden; inline-size: 1px; block-size: 1px; }
+.process-skip:focus { inset: .65rem auto auto .65rem; padding: .55rem; }
+
+.process-toolbar { margin-inline: auto; padding-block-start: .8rem; }
+.process-scope { margin-block-end: .65rem; }
+.process-scope .sub { margin-block-start: .35rem; font-size: .9rem; color: var(--fg-muted); overflow-wrap: anywhere; }
+.process-actions {
+  align-items: end;
+  gap: .45rem .55rem;
+  margin-inline: 0;
+  padding: .4rem .54rem;
+  border: 1px solid var(--line);
+  border-block-start-color: #48606a;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #192b37, #0c1821 72%);
+}
+.process-action-group { display: grid; min-inline-size: 0; gap: .2rem; padding-inline-start: .48rem; border-inline-start: 1px solid var(--line); }
+.process-action-group > span {
+  color: var(--fg-muted);
+  font: 650 .65rem/1.35 var(--font-mono);
+  letter-spacing: .065em;
+  text-transform: uppercase;
+}
+.process-action-group > div { display: flex; flex-wrap: wrap; gap: .27rem; }
+.process-workspace .btn { min-block-size: 2.1rem; border-radius: 5px; }
+.process-workspace .btn:hover:not(:disabled) { border-color: #4d728c; }
+.process-actions .btn[aria-pressed="true"] { background: var(--accent-soft); border-block-end-color: var(--accent); }
+.process-actions #reset { margin-inline-start: auto; }
+.process-actions label.btn { position: relative; cursor: pointer; }
+.process-exports { position: relative; }
+.process-exports > summary { cursor: pointer; list-style: none; }
+.process-exports > summary::-webkit-details-marker { display: none; }
+.process-exports > summary::after {
+  content: "";
+  inline-size: .35rem;
+  block-size: .35rem;
+  margin-inline-start: .18rem;
+  border-inline-end: 1px solid currentColor;
+  border-block-end: 1px solid currentColor;
+  transform: rotate(45deg) translateY(-.12rem);
+}
+.process-exports > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.process-export-menu {
+  position: absolute;
+  inset: calc(100% + .25rem) auto auto 0;
+  z-index: 10;
+  display: grid;
+  gap: .25rem;
+  padding: .35rem;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--bg);
+  box-shadow: 0 .6rem 1.4rem #0008;
+}
+.process-actions input[type="file"] {
+  position: absolute;
+  display: block;
+  inline-size: 1px;
+  block-size: 1px;
+  clip-path: inset(50%);
+  overflow: hidden;
+}
+.process-actions .btn:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+.process-workspace .card,
+.process-workspace #functional-editor {
+  border-radius: 5px;
+  border-block-start-color: #48606a;
+  background: linear-gradient(155deg, #182c37, var(--surface) 13rem);
+  box-shadow: 0 .55rem 1.2rem rgb(0 3 6 / .22);
+}
+.process-workspace .wrap { padding-block-start: .65rem; }
+.process-workspace .fe-command { margin-block: .85rem .7rem; }
+.process-workspace .fe-layout { border-block-start-color: var(--accent); }
+.process-workspace :is(#fe-canvas, .diagram-workspace .diagram) {
+  background-color: #07131d;
+  background-image:
+    radial-gradient(ellipse at 40% 36%, #122b36b8, transparent 67%),
+    linear-gradient(90deg, #1e374461 1px, transparent 1px),
+    linear-gradient(#1e374461 1px, transparent 1px);
+  background-size: 100% 100%, 23px 23px, 23px 23px;
+}
+
+@media (max-width: 34rem) {
+  .process-workspace .hdr-in,
+  .process-workspace .wrap,
+  .process-workspace .process-toolbar { padding-inline: .58rem; }
+  .process-identity { inline-size: 100%; justify-content: space-between; gap: .3rem; }
+  .process-logo { inline-size: 102px; }
+  .workspace-modules { padding-inline-start: 0; border-inline-start: 0; }
+  .workspace-module { font-size: .76rem; padding-inline: .32rem; }
+  .process-actions #reset { margin-inline-start: 0; }
+  .process-export-menu { position: static; margin-block-start: .25rem; }
+}
+@media (max-width: 23rem) {
+  .process-identity { justify-content: flex-start; }
 }

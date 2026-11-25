@@ -1,4 +1,4 @@
-// The process inventory workbook uses the original PolicyAsCode sheet and column names.
+// Keep legacy sheet and column names compatible with existing inventories.
 (function (root, factory) {
   if (typeof module === "object" && module.exports) module.exports = factory(require("./functional-graph.js"));
   else root.DGCensus = factory(root.DGFunctionalGraph);

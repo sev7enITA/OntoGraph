@@ -2,9 +2,9 @@
 
 # OnToGraPh
 
-**Govern semantic changes and verify how applications behave after release.**
+**A standalone semantic governance engine. Model shared meaning, release rules and verify how applications behave.**
 
-Two applications can report the same release and still make different decisions. OntoGraph helps governance and risk teams find that divergence, trace it to the approved rule and check what happens after a withdrawal. It links source evidence, semantic impact, approval, per-application delivery and observed behavior. The offline reference implementation includes a reproducible synthetic case for buyer evaluation.
+Two applications can report the same release and still make different decisions. OntoGraph helps governance and risk teams find that divergence, trace it to the approved rule and check what happens after a withdrawal. It links source evidence, semantic impact, approval, per-application delivery and observed behavior. Start locally with Python and SQLite, then bring your own model and sources. The workspace includes a process modeler, graph and atomic inspector, release versions, and a reproducible synthetic case.
 
 [English website](https://www.fabriziodegni.com/OnToGraPh/) · [Simplified Chinese website](https://www.fabriziodegni.com/OnToGraPh/zh/) · [GitHub Wiki](https://github.com/sev7enITA/OntoGraph/wiki) · [Versioned documentation](docs/wiki/README.md) · [Competitive landscape](https://www.fabriziodegni.com/OnToGraPh/#market) · [Brand assets](assets/brand)
 
@@ -21,7 +21,7 @@ Two applications can report the same release and still make different decisions.
 python3 -m ontograph studio
 ```
 
-Open [OnToGraPh Studio](http://127.0.0.1:8765/). The workspace starts in the original PolicyAsCode-derived process modeler, with visual editing, an Excel process inventory, live properties and diagram export. Open **Semantic Studio** to link a process to a control, inspect and edit nested properties, and compare local drafts. [Studio guide](docs/wiki/STUDIO.md) · [Process modeler preview](assets/studio/process-modeler.png) · [Semantic Studio preview](assets/studio/semantic-studio.png)
+Open [OnToGraPh Studio](http://127.0.0.1:8765/). The workspace starts in the native Process Modeler, with visual editing, an Excel process inventory, live properties and diagram export. Open **Semantic Studio** to link a process to a control, inspect and edit nested properties, and compare local drafts. [Studio guide](docs/wiki/STUDIO.md) · [Process modeler preview](assets/studio/process-modeler.png) · [Semantic Studio preview](assets/studio/semantic-studio.png)
 
 ## Run Aurora 21
 
@@ -59,7 +59,7 @@ All of Aurora 21 is synthetic. The two applications are simulators. Verification
 
 ## How PolicyWatcher and PALO benefit
 
-OnToGraPh builds on PolicyWatcher’s evidence capture, the PALO governance lifecycle and the PolicyAsCode modeler. Its versioned semantic models and application-level evidence can serve as a shared foundation for both projects.
+OnToGraPh is a standalone product and a spin-off of PolicyWatcher and PALO Framework. The three-framework hub is one use of its reusable ontology layer: dictionaries, taxonomies, typed relationships, fields and versioned controls. PolicyWatcher provides evidence from the bottom up. PALO defines governance authority from the top down. OnToGraPh links them to rules and observed outcomes that can inform both projects. [Governance hub](docs/wiki/HUB.md)
 
 - **PolicyWatcher** supplies the source evidence. The offline adapter turns a locally supplied packet and authorized excerpt into a draft for human review. The recorded link from change to rule, release and observed decision can support follow-up on a detected policy change. [PolicyWatcher](https://policywatcher.online/) · [Evidence exchange](docs/PROTOCOL.md#inputs-and-optional-adapters)
 - **PALO Framework** supplies governance roles, gates and evidence requirements. OnToGraPh implements a concrete lifecycle for semantic changes and exports release and audit records that can inform a PALO review. [PALO Framework](https://paloframework.org/) · [Lifecycle and controls](docs/FRAMEWORK.md#the-six-gates)

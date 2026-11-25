@@ -19,6 +19,11 @@ const KINDS = {
   probe: ["Probe", "#bfd3a0", "T"]
 };
 const KIND_ORDER = Object.keys(KINDS);
+const LAYERS = {
+  semantics: new Set(["concept", "class", "field", "process"]),
+  controls: new Set(["rule", "control", "contract", "application"]),
+  verification: new Set(["evidence", "probe"]),
+};
 
 const RELATIONS = {
   broader: "broader",
@@ -106,7 +111,7 @@ function modelGraph(model) {
   return { nodes, edges };
 }
 
-function focusGraph(graph, selection, previousKey) {
+function focusGraph(graph, selection, previousKey, showProbes) {
   const { nodes, edges } = graph;
   const selectedNode = nodes.get(pathKey(selection.slice(0, 2)));
   const selectedEdge = edges.find(edge => pathKey(edge.path) === pathKey(selection));
@@ -132,6 +137,7 @@ function focusGraph(graph, selection, previousKey) {
   for (const edge of edges) {
     if (rules.has(edge.source)) included.add(edge.target);
     if (contracts.has(edge.target) && nodes.get(edge.source)?.kind === "application") included.add(edge.source);
+    if (showProbes && rules.has(edge.target) && nodes.get(edge.source)?.kind === "probe") included.add(edge.source);
   }
   if (selectedNode && !included.has(selectedNode.key)) {
     included.add(selectedNode.key);
@@ -229,6 +235,14 @@ function applySelection(svg, selection) {
   });
 }
 
+function applyLayer(svg, layer) {
+  const kinds = Object.hasOwn(LAYERS, layer) ? LAYERS[layer] : null;
+  svg.querySelectorAll("[data-kinds]").forEach(element => {
+    const related = element.dataset.kinds.split(" ").some(kind => kinds?.has(kind));
+    element.classList.toggle("og-context", Boolean(kinds && !related));
+  });
+}
+
 const STYLE = `
   .og-graph text { font-family: system-ui, -apple-system, sans-serif; }
   .og-stage { font-weight: 650; font-size: 11px; fill: #a1b0c6; letter-spacing: .045em; }
@@ -248,6 +262,7 @@ const STYLE = `
   .og-node-icon-background { fill: var(--node-color); fill-opacity: .15; }
   .og-node-icon { fill: var(--node-color); font-size: 12px; font-weight: 700; }
   .og-node-label { fill: #f0f5fc; font-size: 11.7px; font-weight: 650; }
+  .og-context:not(:hover):not(:focus-visible):not([aria-pressed="true"]) { opacity: .62; }
   .og-node:focus-visible, .og-edge:focus-visible { outline: none; }
   .og-empty { fill: #a1b0c6; font-size: 15px; }
 `;
@@ -290,7 +305,7 @@ function drawGraph(graph, layout, id, focus, onSelect) {
     const pos = edgeGeometry(positions.get(edge.source), positions.get(edge.target), index);
     const primary = focus && ["implements", "consumes", "rule for"].includes(edge.label);
     const classes = ["og-edge", edge.virtual && "og-reference", primary && "og-primary"].filter(Boolean);
-    const group = svgElement("g", { class: classes.join(" ") });
+    const group = svgElement("g", { class: classes.join(" "), "data-kinds": `${left.kind} ${right.kind}` });
     interactive(group, edge.path, `${left.label} · ${edge.label} · ${right.label}`, onSelect);
     group.append(
       svgElement("path", { class: "og-edge-line", d: pos.line, "marker-end": `url(#${arrowId})` }),
@@ -306,7 +321,7 @@ function drawGraph(graph, layout, id, focus, onSelect) {
     const [kind, color, icon] = KINDS[node.kind];
     const group = svgElement("g", {
       class: node.key === graph.anchor ? "og-node og-anchor" : "og-node",
-      transform: `translate(${x} ${y})`, "data-kind": node.kind
+      transform: `translate(${x} ${y})`, "data-kind": node.kind, "data-kinds": node.kind
     });
     group.style.setProperty("--node-color", color);
     interactive(group, node.path, `${kind} · ${node.label}`, onSelect);
@@ -393,13 +408,14 @@ export function createGraph(container, onSelect) {
   });
 
   return {
-    render({ document: model, selection, mode = "focus" }) {
+    render({ document: model, selection, mode = "focus", layer = "all" }) {
       const path = Array.isArray(selection) ? selection : selection?.path ?? [];
       const graph = modelGraph(model);
-      const visible = mode === "all" ? graph : focusGraph(graph, path, anchorKey);
+      const visible = mode === "all" ? graph : focusGraph(graph, path, anchorKey, layer === "verification");
       const signature = JSON.stringify([mode, visible.anchor, [...visible.nodes.values()], visible.edges]);
       if (svg && drawnSignature === signature) {
         applySelection(svg, path);
+        applyLayer(svg, layer);
         return;
       }
       const focusedPath = container.ownerDocument.activeElement?.dataset.graphPath;
@@ -415,6 +431,7 @@ export function createGraph(container, onSelect) {
       svg = drawGraph(visible, layout, id, mode === "focus", onSelect);
       container.replaceChildren(svg);
       applySelection(svg, path);
+      applyLayer(svg, layer);
       setScale(scale, false);
       if (autoWidth) fitWidth(newMode);
       if (focusedPath) {

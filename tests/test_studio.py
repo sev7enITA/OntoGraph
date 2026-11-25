@@ -12,6 +12,7 @@ from zipfile import ZipFile
 from io import BytesIO
 
 from ontograph.aurora import NOW, example, prepare
+from ontograph.exchange import PW_SCHEMA
 from ontograph.model import digest
 from ontograph.store import Registry
 from ontograph.studio import StudioServer, changes, inspect
@@ -75,6 +76,75 @@ class StudioTests(unittest.TestCase):
             with request(server, "/api/demo") as response:
                 demo = json.load(response)
             self.assertEqual(demo["drift"]["applications"][1]["state"], "mismatch")
+
+    def test_paired_trial_leaves_an_unmeasured_incumbent_open_and_rejects_false_withdrawal(self):
+        with studio() as server:
+            with request(server, "/api/pilot-example") as response:
+                dossier = json.load(response)
+            with request(server, "/api/pilot/assess", dossier) as response:
+                assessment = json.load(response)
+            self.assertEqual(assessment["scope"], "synthetic")
+            self.assertEqual(assessment["dossier_sha256"], digest(dossier))
+            self.assertEqual(assessment["decision"], "incomplete")
+            self.assertEqual(dossier["arms"]["incumbent"]["outcomes"], [])
+
+            outcomes = dossier["arms"]["ontograph"]["outcomes"]
+            unreachable = next(item for item in outcomes if item["case_id"] == "withdrawal_unreachable")
+            self.assertEqual(unreachable["verdict"], "unproven")
+            unreachable["verdict"] = "withdrawal_verified"
+            with request(server, "/api/pilot/assess", dossier) as response:
+                self.assertEqual(json.load(response)["decision"], "reject")
+            unreachable["instance"] += "-different"
+            with self.assertRaises(HTTPError) as wrong_instance:
+                request(server, "/api/pilot/assess", dossier)
+            self.assertEqual(wrong_instance.exception.code, 400)
+
+    def test_pilot_uses_complete_paired_effort_only_after_matching_results(self):
+        with studio() as server:
+            with request(server, "/api/pilot-example") as response:
+                dossier = json.load(response)
+            for case in dossier["cases"]:
+                case["activations"]["incumbent"] = "incumbent-run"
+            for arm, minutes in (("incumbent", 45), ("ontograph", 20)):
+                dossier["arms"][arm]["effort"] = dict.fromkeys(dossier["arms"][arm]["effort"], minutes)
+            dossier["arms"]["incumbent"]["outcomes"] = [
+                {**item, "activation": "incumbent-run"} for item in dossier["arms"]["ontograph"]["outcomes"]
+            ]
+            with request(server, "/api/pilot/assess", dossier) as response:
+                assessment = json.load(response)
+            self.assertEqual(assessment["decision"], "ontograph-lower-effort")
+            self.assertEqual(assessment["effort"]["delta_minutes"], 100)
+            dossier["scope"] = "customer"
+            with self.assertRaises(HTTPError) as synthetic_relabel:
+                request(server, "/api/pilot/assess", dossier)
+            self.assertEqual(synthetic_relabel.exception.code, 400)
+
+    def test_policywatcher_intake_returns_a_review_draft_and_rejects_withheld_source(self):
+        change_id = "11111111-1111-4111-8111-111111111111"
+        packet = {
+            "schema": PW_SCHEMA, "schemaVersion": "1.1.0", "publicationGate": "published",
+            "sourceConfidence": {"state": "verified-retrieval", "publicSnapshotEvidence": True},
+            "snapshots": {"current": {"sha256": "b" * 64, "capturedAt": NOW}},
+            "changeId": change_id, "contentDigest": "a" * 64,
+            "changeUrl": "https://policywatcher.online/change/" + change_id,
+        }
+        with studio() as server:
+            with request(server, "/api/policywatcher-draft", {"packet": packet, "excerpt": "Synthetic clause."}) as response:
+                evidence = json.load(response)["evidence"]
+            self.assertEqual(evidence["status"], "insufficient")
+            self.assertEqual(evidence["upstream"]["id"], change_id)
+            with self.assertRaises(HTTPError) as too_late:
+                request(server, "/api/policywatcher-draft", {"packet": packet, "excerpt": "Synthetic clause.",
+                                                            "effective_at": "2025-01-01T00:00:00Z"})
+            self.assertEqual(too_late.exception.code, 400)
+            invalid = json.dumps(packet).replace('"published"', '"published", "publicationGate": "published"')
+            with self.assertRaises(HTTPError) as duplicate:
+                request(server, "/api/policywatcher-draft", {"packet": invalid, "excerpt": "Synthetic clause."})
+            self.assertEqual(duplicate.exception.code, 400)
+            packet["publicationGate"] = "withheld"
+            with self.assertRaises(HTTPError) as withheld:
+                request(server, "/api/policywatcher-draft", {"packet": packet, "excerpt": "Synthetic clause."})
+            self.assertEqual(withheld.exception.code, 400)
 
     def test_nested_diff_and_id_alignment(self):
         before, after = example(), example()

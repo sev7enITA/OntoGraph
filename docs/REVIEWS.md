@@ -22,3 +22,11 @@ On 25 November 2026, we challenged the positioning against the buyer's incumbent
 | **Inkling 2 Mini Uncensored**, LM Studio (local inference) | A buyer with governed Git/CI can reasonably decline a second governance layer until a real-instance test establishes receipt, decision and withdrawal under auditable custody. Compare stale-decision detection, false withdrawal confirmations and reviewer verification time. | Publish the counterargument alongside the offer. Account for maintenance, evidence custody and the people responsible for each adapter when comparing the costs. |
 
 These model reviews challenged the proposed claims and pilot design. The project’s observed evidence remains the Aurora 21 simulation. [Counterargument for buyers](https://www.fabriziodegni.com/OnToGraPh/#skeptics)
+
+## Studio implementation
+
+- Gemini's distinction between a simulation and operational evidence is visible in the Evidence layer and the paired pilot's scope. The seeded dossier leaves the incumbent unmeasured.
+- GLM's identity and custody challenge becomes a case binding that the paired pilot checks against each submitted result. The pilot requires an observer, capture time, artifact hash and custody reference. An operator still has to verify them against the actual system.
+- Inkling's incumbent case becomes an assessment outcome. When both arms match the preregistered cases and the incumbent's total recorded effort is equal or lower, the assessor reports the incumbent as viable.
+
+[Studio workflow](wiki/STUDIO.md) · [Shared governance hub](wiki/HUB.md)

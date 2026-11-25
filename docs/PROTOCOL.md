@@ -66,4 +66,10 @@ Export with `call DATABASE export` and preserve the manifest digest in a channel
 
 For an independent RDF interpreter check on the synthetic output, run
 `uv run --with rdflib python examples/verify_projection.py out/aurora.json`.
+
+### Paired pilot dossiers
+
+The loopback Studio accepts `ontograph.pilot/1` at `POST /api/pilot/assess`. A dossier preregisters each scenario, application, instance, common release reference and expected activation per arm. A recorded observation binds its case, instance and activation to a verdict, observer, UTC capture time, artifact reference, SHA-256 and custody reference. The assessor compares submitted identities and verdicts to the preregistered cases and hashes the dossier. Accountable operators verify the identities, artifact bytes and custody outside the assessor.
+
+The pilot remains incomplete while either arm has missing results. A false withdrawal confirmation or other missed required result from OnToGraPh rejects the assessment. Compare effort only after both arms meet the same required evidence; retain missing measurements as unknown. The synthetic example fills the OnToGraPh arm from Aurora 21 and leaves the incumbent unmeasured. The assessor works separately from the local registry's release authority and never publishes or withdraws a release.
 This optional test parses JSON-LD, round-trips the graph via N-Triples, queries the taxonomy in SPARQL and checks the PROV-O derivation. The core runtime remains dependency-free.

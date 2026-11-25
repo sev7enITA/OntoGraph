@@ -113,12 +113,12 @@
             <p class="eyebrow">OnToGraPh 工作台</p>
             <h2 id="studio-title">从流程深入到属性。</h2>
           </div>
-          <p>从原有的 PolicyAsCode 流程建模器开始。语义工作台在原有流程上增加了控制措施、证据和发布版本的管理。</p>
+          <p>OnToGraPh 工作台可独立运行，统一管理字典、分类体系、本体类、带类型的关系、字段和版本化控制项。</p>
         </div>
         <div class="studio-grid">
           <figure class="studio-figure">
             <a class="screen-link" href="../assets/modellatore-processi.webp" aria-label="查看流程建模器原尺寸截图">
-              <img src="../assets/modellatore-processi.webp" width="1440" height="900" loading="lazy" decoding="async" alt="PolicyAsCode 流程建模器包含流程画布、编辑工具和属性面板。">
+              <img src="../assets/modellatore-processi.webp" width="1440" height="900" loading="lazy" decoding="async" alt="OnToGraPh 流程建模器展示流程画布、编辑工具和属性面板。">
             </a>
             <figcaption>
               <span class="figure-title">流程建模器</span>
@@ -131,10 +131,11 @@
             </a>
             <figcaption>
               <span class="figure-title">语义工作台</span>
-              <span>可通过可视化界面或 JSON 编辑，比较草稿并校验变更。</span>
+              <span>切换图谱层级，通过可视化界面或 JSON 编辑，并比较发布草稿。</span>
             </figcaption>
           </figure>
         </div>
+        <p class="studio-local-capabilities">在本地工作台的「证据」视图中对照交付记录、回执和观测结果。通过「对照试点」用同一组案例评估 OnToGraPh 和现有系统。</p>
         <div class="studio-actions">
           <a class="button secondary" href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/wiki/STUDIO.md" hreflang="en">
             阅读工作台指南（英文） <span aria-hidden="true">↗</span>
@@ -267,7 +268,7 @@
             <p class="eyebrow">蓝海战略假设</p>
             <h3 id="market-blue-title">跨系统验证语义变更</h3>
             <p>从数据治理、AI 治理或运营风险团队切入，选择一个由两位应用负责人共同落实的控制项。保留现有数据目录、图谱引擎和交付流水线。</p>
-            <a class="text-link" href="#ecosystem">了解各项目如何相互支撑 <span aria-hidden="true">↓</span></a>
+            <a class="text-link" href="#ecosystem">了解治理枢纽 <span aria-hidden="true">↓</span></a>
           </div>
           <dl class="market-actions">
             <div><dt>剔除</dt><dd>剔除“回执一致即代表变更已生效”的假设。</dd></div>
@@ -297,20 +298,40 @@
 
     <section class="wrap section" id="ecosystem" aria-labelledby="ecosystem-title">
       <div class="section-heading">
-        <h2 id="ecosystem-title">各项目如何相互支撑</h2>
-        <p class="ecosystem-overview">OnToGraPh 建立在 PolicyWatcher 的证据采集、PALO Framework 的治理生命周期以及 PolicyAsCode 的建模器之上。它的版本化语义和逐应用证据可以成为 PolicyWatcher 与 PALO Framework 的共同基础。</p>
+        <h2 id="ecosystem-title">一个治理枢纽，三套协同框架。</h2>
+        <p class="ecosystem-overview">治理枢纽是 OnToGraPh 可复用本体层的一种参考用法。PALO Framework 设定治理要求，PolicyWatcher 监测来源变更。OnToGraPh 由两者衍生，作为枢纽共用的语义变更与验证引擎。</p>
       </div>
-      <div class="studio-grid ecosystem-grid">
+      <div class="ecosystem-grid">
         <article>
+          <p class="ecosystem-role">自上而下的治理</p>
+          <h3><a class="text-link" href="https://paloframework.org/PALO_PlatformMap.html" hreflang="en">PALO Framework <span aria-hidden="true">↗</span></a></h3>
+          <p>明确治理要求、决策权限和审核关卡，并审阅案例证据。</p>
+        </article>
+        <article>
+          <p class="ecosystem-role">自下而上的证据</p>
           <h3><a class="text-link" href="https://policywatcher.online/" hreflang="en">PolicyWatcher <span aria-hidden="true">↗</span></a></h3>
-          <p>OnToGraPh 将 PolicyWatcher 的证据包和经授权的原文摘录导入本地草稿，交由人工审核。未来可在试点中使用所观察到的下游应用决策，为 PolicyWatcher 跟进变更提供依据。</p>
+          <p>发现变更，保留原始来源与版本记录，为人工审核和后续跟进提供证据。</p>
         </article>
-        <article>
-          <h3><a class="text-link" href="https://paloframework.org/" hreflang="en">PALO Framework <span aria-hidden="true">↗</span></a></h3>
-          <p>PALO Framework 提供治理角色和审核关卡。采用 PALO 的团队可以将 OnToGraPh 导出的发布记录和证据作为审核依据。</p>
+        <article class="ecosystem-engine">
+          <p class="ecosystem-role">语义变更与验证</p>
+          <h3><a class="text-link" href="#studio">OnToGraPh <span aria-hidden="true">↑</span></a></h3>
+          <p>将来源变更与受影响的控制项、获批的版本和各应用中观察到的决策关联起来。</p>
         </article>
       </div>
-      <p class="ecosystem-scope">参考实现已支持离线导入和证据导出。自动反馈和实时集成留待试点验证。</p>
+      <div class="ecosystem-routes">
+        <article>
+          <h3>从治理要求出发</h3>
+          <p>在 PALO 中建立案例并设定审查标准。在 OnToGraPh 中为变更建模，再将发布与观测记录纳入同一案例，供 PALO 审查。</p>
+        </article>
+        <article>
+          <h3>从监测到的变更出发</h3>
+          <p>将 PolicyWatcher 的证据包导入 OnToGraPh 进行人工审核。将导出结果纳入同一 PALO 案例，并用于 PolicyWatcher 的后续跟进。</p>
+        </article>
+      </div>
+      <div class="ecosystem-foot">
+        <p class="ecosystem-scope">PALO 已可接收 PolicyWatcher 的监测信号，供人工审核。OnToGraPh 目前支持离线导入、证据导出和人工交接。自动反馈和生产环境集成仍需试点验证。</p>
+        <a class="text-link" href="https://github.com/sev7enITA/OntoGraph/wiki/Governance-Hub" hreflang="en">阅读治理枢纽指南（英文） <span aria-hidden="true">↗</span></a>
+      </div>
     </section>
 
     <section class="wrap section explore" aria-labelledby="explore-title">
