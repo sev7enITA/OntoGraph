@@ -45,7 +45,10 @@ ASSETS.update({
                  "functional-graph.js", "census.js", "evaluator.js", "vendor/xlsx.full.min.js",
                  "vendor/mermaid.min.js", "vendor/jszip.min.js")
 })
-REGISTRY_ACTIONS = frozenset(("status", "propose", "review", "publish", "withdraw", "export", "events"))
+REGISTRY_ACTIONS = frozenset((
+    "status", "propose", "review", "publish", "withdraw", "export", "events",
+    "export_policy", "record_ci", "ci_status",
+))
 MAX_REQUEST = 8_000_000
 MISSING = object()
 

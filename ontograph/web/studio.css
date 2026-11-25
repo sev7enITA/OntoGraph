@@ -412,6 +412,9 @@ button:active:not(:disabled) { transform: translateY(1px); }
 .evidence-result :is(th, caption), .studio-list :is(th, caption) { color: var(--muted); }
 .registry-panel:empty { display: none; }
 .registry-panel { margin-top: 1.2rem; border-top: 1px solid var(--line-subtle); padding-top: 1rem; }
+.registry-panel :is(p, pre) { overflow-wrap: anywhere; }
+.registry-result { white-space: pre-wrap; }
+.registry-panel textarea { resize: vertical; font-family: var(--mono); }
 .bridge-panel:empty { display: none; }
 .bridge-panel { margin-bottom: 1.1rem; border: 1px solid #32576b; border-radius: var(--radius); padding: .75rem; background: var(--inset); overflow-wrap: anywhere; }
 .data-table { border-collapse: collapse; width: 100%; font-size: .84rem; }

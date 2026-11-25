@@ -1,0 +1,39 @@
+# Create a manual Azure Pipelines definition that points to this file.
+trigger: none
+pr: none
+
+parameters:
+  - name: policyBundlePath
+    displayName: Repository path to the committed OnToGraPh policy export
+    type: string
+    default: ''
+  - name: expectedRelease
+    displayName: Independently retained digest of the reviewed release
+    type: string
+    default: ''
+
+pool:
+  vmImage: ubuntu-24.04
+
+steps:
+  - checkout: self
+    persistCredentials: false
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.13'
+  - bash: |
+      set -euo pipefail
+      curl --fail --silent --show-error --location --output "$OPA_BINARY" \
+        https://github.com/open-policy-agent/opa/releases/download/v1.21.2/opa_linux_amd64_static
+      printf '%s  %s\n' 830ab11f61ffec760b5e19db0d7ad02bf037e13f5ef4d665faeaf17632177527 "$OPA_BINARY" | sha256sum --check
+      chmod u+x "$OPA_BINARY"
+      python -m ontograph.policy_ci "$POLICY_BUNDLE_PATH" "$CHECKS_DIR" \
+        --opa "$OPA_BINARY" --expected-release "$EXPECTED_POLICY_RELEASE" --tracked --receipt
+    displayName: Test the committed policy and record CI evidence
+    env:
+      OPA_BINARY: $(Agent.TempDirectory)/opa
+      CHECKS_DIR: $(Build.ArtifactStagingDirectory)/policy-checks
+      POLICY_BUNDLE_PATH: ${{ parameters.policyBundlePath }}
+      EXPECTED_POLICY_RELEASE: ${{ parameters.expectedRelease }}
+  - publish: $(Build.ArtifactStagingDirectory)/policy-checks
+    artifact: ontograph-verified-policy

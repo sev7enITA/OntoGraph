@@ -17,6 +17,7 @@
 | **[Run the interactive pilot](https://openontograph.org/pilot/)** · [中文](https://openontograph.org/pilot/zh/) | Follow a PolicyWatcher signal into a PALO case, change its evidence or authority, or try the standalone route. The public demo opens in a browser without an account. |
 | **[Inspect the Aurora 21 evidence](https://openontograph.org/demo/)** · [中文](https://openontograph.org/demo/zh/) | Watch two simulated applications report the same release but produce different decisions. See how an unreachable application leaves withdrawal unproven. |
 | **[Open the local Studio](#run-the-engine-and-studio)** | Edit a process visually, inspect individual properties and relationships, and review local versions with the bundled sample. |
+| **[Run the OPA and CI pilot](examples/devops/README.md)** | Compile a reviewed rule, run its probes on the packaged OPA artifact, and trace the CI run through activation and withdrawal. |
 | **[Watch the 90-second walkthrough](https://openontograph.org/film/)** · [中文](https://openontograph.org/film/zh/) | Follow the same pilot with narration, captions and a transcript. |
 
 ## From meaning to evidence
@@ -46,6 +47,10 @@ Open [the local Studio](http://127.0.0.1:8765/) to start in the Process Modeler.
 [![Semantic Studio with the Aurora 21 graph, typed objects and the property inspector.](assets/studio/semantic-studio.png)](docs/wiki/STUDIO.md)
 
 [Process Modeler preview](assets/studio/process-modeler.png) · [Evidence Workbench preview](assets/studio/evidence-workbench.png)
+
+### Compile a rule for DevOps
+
+In Semantic Studio, open **Release → Registry & CI**. A reviewed candidate produces Rego, scoped data and tests. GitHub Actions or Azure Pipelines can validate the source and build an OPA archive. The registry can require an auditor-recorded receipt for that exact release before activation. Consumer observations then show where the rule actually ran and whether it stopped after withdrawal. [DevOps quickstart](examples/devops/README.md) · [GitHub policy workflow](.github/workflows/policy-pilot.yml)
 
 ### Export the evidence locally
 

@@ -6,7 +6,7 @@ The authority for a release is `ontograph.release/1` JSON. Run `python3 -m ontog
 
 Nodes have workspace-local identifiers and typed links. `source dependsOn target` means the source may be affected when the target changes. `control implements contract` connects results to a contract. `application consumes contract` routes delivery to the correct app. `mapsTo` is a directed physical-field mapping. `broader` and `subClassOf` are separately acyclic. No edge grants access to the linked data.
 
-The reference evaluator uses exact equality on declared JSON facts. Missing scope facts produce `hold`. A known outside scope produces `out_of_scope`. Missing or nonmatching requirements produce `hold`. Conditions are data, with no code injection or network execution. Rich policy languages such as Rego can be used by a qualified adapter and observed with the same evidence contract.
+The reference evaluator uses exact equality on declared JSON facts. Missing scope facts produce `hold`. A known outside scope produces `out_of_scope`. Missing or nonmatching requirements produce `hold`. A reviewed candidate can be compiled to the same bounded decision contract in Rego. The OPA package places conditions in JSON data and checks them against the app's scoped delivery. The consumer adapter continues to own identity and evidence custody.
 
 The registry binds the exact base activation, payload hash, reviewers, quorum, scope, per-app delivery hashes, expected cases and freshness in a frozen candidate. The release ID is the SHA-256 of the manifest. The hash profile uses UTF-8 with sorted JSON keys, compact separators and finite JSON values. Preserve array order and number representation when producing digests across languages. RFC 8785 compatibility is not claimed. A different hash profile requires a new manifest format.
 
@@ -42,7 +42,7 @@ Every `call` takes a JSON object on stdin and uses the role bound to `ONTOGRAPH_
 | Operation | Role | JSON fields |
 | --- | --- | --- |
 | `add-principal`, `disable-principal` | admin | `principal`. Enrollment adds `role` and `application` for a consumer |
-| `propose` | author | `payload`, `base`, `reviewers`, `quorum`, `reason`, optional `observation_max_age_seconds` |
+| `propose` | author | `payload`, `base`, `reviewers`, `quorum`, `reason`, optional `observation_max_age_seconds` and `ci_required` |
 | `review` | assigned reviewer | `release_id`, `choice`, `rationale` |
 | `publish` | publisher | `release_id`, `expected_head` |
 | `consumer-release` | consumer | empty object |
@@ -50,9 +50,22 @@ Every `call` takes a JSON object on stdin and uses the role bound to `ONTOGRAPH_
 | `observe` | observer | `activation`, `application`, `phase`, `probe_id`, `actual_digest`, `actual_outcome`, `captured_at`, `artifact_ref`, `artifact_sha256` |
 | `withdraw` | supervisor | `expected_head`, `reason` |
 | `export`, `status` | workspace staff | `release_id` for export, optional `activation` and `phase` for status |
+| `export-policy`, `ci-status` | workspace staff | `release_id`. Policy export requires a reviewed candidate with confirmed evidence or a previously activated release. |
+| `record-ci` | auditor | `release_id` and `receipt`. Record provider evidence before activation. Identical retries return the existing record. |
 | `events` | auditor, admin or supervisor | empty object |
 
 For an activation, use probe IDs declared in the payload and report one of `allow`, `hold`, `out_of_scope`, `unobservable`. For a withdrawal, use probe ID `withdrawal` with `inactive`, `active` or `unobservable`. An inactive app reports a null digest. New declarations are meaningful observations of the consumer's current load and require fresh independent confirmation.
+
+### Policy compilation and CI evidence
+
+`ci_required: true` is frozen into the candidate manifest. It adds a publication gate after human review. Older manifests and standard candidates omit the field.
+
+- `ontograph.opa-bundle/1` binds the original release, deterministic Rego modules, scoped data and probe tests to a `bundle_sha256`. `verify-policy --release` recreates the expected files and compares the whole bundle against a separately retained release ID.
+- `ontograph.ci-receipt/1` adds the CI provider, repository, checkout commit, run URL and attempt, OPA version, test count and SHA-256 of the deployed-form archive. GitHub and Azure templates verify the reviewed release ID and the committed bundle bytes before testing. The GitHub pilot regenerates its synthetic bundle at the workflow commit.
+- `record-github-ci` checks a successful attempt of the repository's policy workflow on the selected trusted branch and verifies the archive downloaded from that attempt. An offline `record-ci` relies on the auditor to check the provider before recording the receipt. The registry checks the receipt against the exact candidate and package, logs it, and pins it at activation.
+- `status` exposes that pinned evidence under `ci` for both activation and withdrawal. An active `consumer-release` response carries `policy_artifact_sha256` when CI evidence was recorded. The consumer's scoped `delivery_sha256`, receipt, independent observation and business outcome retain their separate meanings.
+
+[DevOps quickstart and pipeline templates](../examples/devops/README.md)
 
 ### Inputs and optional adapters
 

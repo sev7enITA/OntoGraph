@@ -1,0 +1,66 @@
+name: Verify and package policy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      bundle_path:
+        description: Repository path to a committed policy export. Leave empty for the synthetic pilot.
+        type: string
+        required: false
+      expected_release:
+        description: Independently retained digest of the reviewed release. Required with bundle_path.
+        type: string
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  opa:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.13'
+      - name: Install checksum-pinned OPA
+        run: |
+          curl --fail --silent --show-error --location --output "$RUNNER_TEMP/opa" \
+            https://github.com/open-policy-agent/opa/releases/download/v1.21.2/opa_linux_amd64_static
+          printf '%s  %s\n' 830ab11f61ffec760b5e19db0d7ad02bf037e13f5ef4d665faeaf17632177527 "$RUNNER_TEMP/opa" | sha256sum --check
+          chmod u+x "$RUNNER_TEMP/opa"
+      - name: Test compiler and registry approval boundaries
+        run: |
+          export PATH="$RUNNER_TEMP:$PATH"
+          python -m unittest discover -s tests -p test_policy.py -v
+          python -m unittest discover -s tests -p test_devops_registry.py -v
+      - name: Exercise the synthetic policy handoff
+        if: ${{ github.event_name != 'workflow_dispatch' || (inputs.bundle_path == '' && inputs.expected_release == '') }}
+        run: |
+          python -m examples.devops.run_stage prepare "$RUNNER_TEMP/policy-prepared"
+          release=$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["release"])' "$RUNNER_TEMP/policy-prepared/bundle.json")
+          python -m ontograph.policy_ci "$RUNNER_TEMP/policy-prepared/bundle.json" "$RUNNER_TEMP/policy-checks" \
+            --opa "$RUNNER_TEMP/opa" --expected-release "$release" --receipt
+          python -m examples.devops.run_stage finish "$RUNNER_TEMP/policy-prepared" "$RUNNER_TEMP/policy-checks" \
+            --opa "$RUNNER_TEMP/opa"
+      - name: Verify the committed policy export
+        if: ${{ github.event_name == 'workflow_dispatch' && (inputs.bundle_path != '' || inputs.expected_release != '') }}
+        env:
+          POLICY_BUNDLE_PATH: ${{ inputs.bundle_path }}
+          EXPECTED_POLICY_RELEASE: ${{ inputs.expected_release }}
+        run: |
+          test -n "$POLICY_BUNDLE_PATH"
+          test -n "$EXPECTED_POLICY_RELEASE"
+          python -m ontograph.policy_ci "$POLICY_BUNDLE_PATH" "$RUNNER_TEMP/policy-checks" \
+            --opa "$RUNNER_TEMP/opa" --expected-release "$EXPECTED_POLICY_RELEASE" --tracked --receipt
+      - name: Publish policy bundle and CI receipt
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ontograph-verified-policy-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/policy-checks/
+          if-no-files-found: error

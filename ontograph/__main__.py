@@ -19,6 +19,7 @@ OPERATIONS = {
     "review": "review", "publish": "publish", "withdraw": "withdraw", "acknowledge": "acknowledge",
     "observe": "observe", "status": "status", "consumer-release": "consumer_release",
     "export": "export", "events": "events",
+    "export-policy": "export_policy", "record-ci": "record_ci", "ci-status": "ci_status",
 }
 
 
@@ -62,6 +63,9 @@ def main():
             sub.add_argument("--tip", help="expected hash from an independently retained checkpoint")
         if command == "verify-release":
             sub.add_argument("--release", help="expected release digest from an independent source")
+    policy = subs.add_parser("verify-policy", help="verify a generated OPA policy package")
+    policy.add_argument("file", type=Path)
+    policy.add_argument("--release", help="expected release digest from an independent source")
     init = subs.add_parser("init")
     init.add_argument("database", type=Path)
     init.add_argument("workspace")
@@ -69,6 +73,13 @@ def main():
     call = subs.add_parser("call", help="invoke a registry operation with a JSON object on stdin")
     call.add_argument("database", type=Path)
     call.add_argument("operation", choices=OPERATIONS)
+    github = subs.add_parser("record-github-ci", help="record an actual successful GitHub policy artifact as auditor")
+    github.add_argument("database", type=Path)
+    github.add_argument("release", help="candidate digest")
+    github.add_argument("--repository", required=True, help="trusted GitHub owner/repository")
+    github.add_argument("--run", required=True, type=int, help="Actions run ID")
+    github.add_argument("--attempt", type=int, default=1)
+    github.add_argument("--branch", default="main", help="trusted source branch for the policy workflow")
     args = parser.parse_args()
     try:
         if args.command == "demo":
@@ -101,9 +112,24 @@ def main():
             with args.file.open(encoding="utf-8") as file:
                 ledger = load(file)
             display({"tip": verify_events(ledger, args.tip)})
+        elif args.command == "verify-policy":
+            from .policy import verify_bundle
+
+            with args.file.open(encoding="utf-8") as file:
+                display({"bundle_sha256": verify_bundle(load(file), args.release)})
         elif args.command == "init":
             os.umask(0o077)
             display({"credential": Registry(args.database).initialize(args.workspace, args.admin)})
+        elif args.command == "record-github-ci":
+            from .github_policy import fetch_receipt
+
+            require(args.database.is_file(), "Registry does not exist")
+            token = os.environ.get("ONTOGRAPH_TOKEN")
+            require(token, "Set ONTOGRAPH_TOKEN to the auditor credential")
+            registry = Registry(args.database)
+            bundle = registry.export_policy(token, args.release)
+            receipt = fetch_receipt(bundle, args.repository, args.run, args.attempt, args.branch)
+            display(registry.record_ci(token, args.release, receipt))
         else:
             require(args.database.is_file(), "Registry does not exist")
             token = os.environ.get("ONTOGRAPH_TOKEN")

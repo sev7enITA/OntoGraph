@@ -170,9 +170,11 @@ class Registry:
                 "Candidate record does not match manifest")
         return row, manifest, payload
 
-    def propose(self, token, payload, base, reviewers, quorum, reason, observation_max_age_seconds=3600):
+    def propose(self, token, payload, base, reviewers, quorum, reason, observation_max_age_seconds=3600,
+                ci_required=False):
         validate(payload)
         nonempty(reason, "change rationale")
+        require(type(ci_required) is bool, "CI requirement must be a boolean")
         require(type(base) is int and base >= 0, "Invalid base activation")
         require(type(reviewers) is list and 1 <= len(reviewers) <= 20, "Invalid reviewer list")
         require(len({identifier(item) for item in reviewers}) == len(reviewers), "Duplicate reviewer")
@@ -200,6 +202,8 @@ class Registry:
                         "payload_sha256": digest(payload), "impact": impact(prior, payload),
                         "deliveries": {node["id"]: digest(consumer_bundle(payload, node["id"]))
                                        for node in payload["nodes"] if node["kind"] == "application"}}
+            if ci_required:
+                manifest["ci_required"] = True
             release_id = digest(manifest)
             if self._one(db, "SELECT id FROM candidates WHERE id=?", release_id):
                 return release_id
@@ -222,6 +226,84 @@ class Registry:
                               {"release": release_id, "choice": choice, "rationale": rationale})
             db.execute("INSERT INTO reviews VALUES (?,?,?,?,?)", (seq, release_id, actor["id"], choice, rationale))
 
+    @staticmethod
+    def _require_approval(db, release_id, manifest, payload):
+        require(all(item["status"] == "confirmed" for item in payload["evidence"]),
+                "Disputed or insufficient evidence blocks publication")
+        votes = db.execute("""SELECT r.reviewer,r.choice,p.active FROM reviews r
+            JOIN principals p ON p.id=r.reviewer WHERE r.candidate=? AND r.seq IN (
+              SELECT MAX(seq) FROM reviews WHERE candidate=? GROUP BY reviewer
+            )""", (release_id, release_id)).fetchall()
+        assigned = [vote for vote in votes if vote["reviewer"] in manifest["reviewers"]]
+        require(not any(vote["choice"] == "object" for vote in assigned), "Unresolved reviewer objection")
+        require(sum(vote["choice"] == "approve" and vote["active"] for vote in assigned) >= manifest["quorum"],
+                "Approval quorum not met")
+
+    @staticmethod
+    def _release_export(release_id, manifest, payload):
+        return {"release": release_id, "manifest": manifest, "payload": payload,
+                "graph": jsonld(payload, manifest["workspace"], release_id)}
+
+    def export_policy(self, token, release_id):
+        """Build a deterministic, scoped OPA package after governance review."""
+        from .policy import build_bundle
+
+        with self.transaction() as db:
+            self._authenticate(db, token, ROLES - {"consumer"})
+            _, manifest, payload = self._candidate(db, release_id)
+            if self._one(db, "SELECT seq FROM activations WHERE candidate=?", release_id) is None:
+                self._require_approval(db, release_id, manifest, payload)
+            return build_bundle(self._release_export(release_id, manifest, payload))
+
+    @staticmethod
+    def _ci_evidence(db, release_id):
+        events = db.execute("""SELECT seq,actor,payload FROM events
+                               WHERE kind='release.ci_recorded' ORDER BY seq DESC""")
+        for row in events:
+            data = json.loads(row["payload"])
+            if data["release"] == release_id:
+                yield {"event": row["seq"], "recorded_by": row["actor"], "receipt": data["receipt"]}
+
+    @staticmethod
+    def _activated_ci(db, activation):
+        event = db.execute("SELECT payload FROM events WHERE seq=? AND kind='release.published'",
+                           (activation,)).fetchone()
+        return json.loads(event["payload"]).get("ci") if event else None
+
+    def ci_status(self, token, release_id):
+        with self.transaction() as db:
+            self._authenticate(db, token, ROLES - {"consumer"})
+            _, manifest, _ = self._candidate(db, release_id)
+            activation = self._one(db, "SELECT seq FROM activations WHERE candidate=?", release_id)
+            evidence = (self._activated_ci(db, activation["seq"]) if activation else
+                        next(self._ci_evidence(db, release_id), None))
+            return {"release": release_id, "required": manifest.get("ci_required", False),
+                    "evidence": evidence}
+
+    def record_ci(self, token, release_id, receipt):
+        """An auditor records evidence checked against the actual provider run."""
+        from .policy import build_bundle
+        from .policy_ci import validate_receipt
+
+        with self.transaction(write=True) as db:
+            actor = self._authenticate(db, token, {"auditor"})
+            _, manifest, payload = self._candidate(db, release_id)
+            bundle = build_bundle(self._release_export(release_id, manifest, payload))
+            validate_receipt(receipt, release_id, bundle["bundle_sha256"])
+            for evidence in self._ci_evidence(db, release_id):
+                prior = evidence["receipt"]
+                if prior == receipt:
+                    return evidence
+                identity = ("provider", "repository", "run_url", "run_attempt")
+                require(any(prior[key] != receipt[key] for key in identity),
+                        "This run attempt already has different recorded evidence")
+            require(self._one(db, "SELECT seq FROM activations WHERE candidate=?", release_id) is None,
+                    "CI evidence must be recorded before activation")
+            self._require_approval(db, release_id, manifest, payload)
+            seq = self._event(db, actor["id"], "release.ci_recorded",
+                              {"release": release_id, "receipt": receipt})
+            return {"event": seq, "recorded_by": actor["id"], "receipt": receipt}
+
     def publish(self, token, release_id, expected_head):
         with self.transaction(write=True) as db:
             actor = self._authenticate(db, token, {"publisher"})
@@ -235,17 +317,14 @@ class Registry:
                 require(all(app["state"] == "withdrawal_verified" for app in previous["applications"]),
                         "Current withdrawal requires independent verification for every application")
             require(timestamp(payload["effective_at"]) <= timestamp(self.clock()), "Release is not yet effective")
-            require(all(item["status"] == "confirmed" for item in payload["evidence"]),
-                    "Disputed or insufficient evidence blocks publication")
-            votes = db.execute("""SELECT r.reviewer,r.choice,p.active FROM reviews r
-                JOIN principals p ON p.id=r.reviewer WHERE r.candidate=? AND r.seq IN (
-                  SELECT MAX(seq) FROM reviews WHERE candidate=? GROUP BY reviewer
-                )""", (release_id, release_id)).fetchall()
-            assigned = [vote for vote in votes if vote["reviewer"] in manifest["reviewers"]]
-            require(not any(vote["choice"] == "object" for vote in assigned), "Unresolved reviewer objection")
-            require(sum(vote["choice"] == "approve" and vote["active"] for vote in assigned) >= manifest["quorum"],
-                    "Approval quorum not met")
-            seq = self._event(db, actor["id"], "release.published", {"release": release_id, "base": expected_head})
+            self._require_approval(db, release_id, manifest, payload)
+            ci = next(self._ci_evidence(db, release_id), None)
+            require(not manifest.get("ci_required") or ci is not None,
+                    "Approved CI evidence required before activation")
+            publication = {"release": release_id, "base": expected_head}
+            if ci:
+                publication["ci"] = ci
+            seq = self._event(db, actor["id"], "release.published", publication)
             db.execute("INSERT INTO activations VALUES (?,?,?,NULL)", (seq, release_id, self.clock()))
             return seq
 
@@ -371,9 +450,13 @@ class Registry:
                 state = "withdrawal_verified" if phase == "withdraw" else "verified"
             applications.append({"application": app, "state": state, "phase": phase,
                                  "receipt": dict(receipt) if receipt else None, "probes": probes})
-        return {"activation": activation["seq"], "release": activation["candidate"], "phase": phase,
-                "manifest": manifest, "activation_state": "withdrawn" if phase == "withdraw" else "published",
-                "applications": applications, "as_of": self.clock(), "business_outcome": "not_assessed"}
+        result = {"activation": activation["seq"], "release": activation["candidate"], "phase": phase,
+                  "manifest": manifest, "activation_state": "withdrawn" if phase == "withdraw" else "published",
+                  "applications": applications, "as_of": self.clock(), "business_outcome": "not_assessed"}
+        ci = self._activated_ci(db, activation["seq"])
+        if ci:
+            result["ci"] = ci
+        return result
 
     def status(self, token, activation=None, phase=None):
         with self.transaction() as db:
@@ -397,16 +480,19 @@ class Registry:
                 return {"activation": head["seq"], "phase": "withdraw", "payload": None}
             delivery = consumer_bundle(payload, app)
             require(digest(delivery) == manifest["deliveries"][app], "Delivery integrity mismatch")
-            return {"activation": head["seq"], "phase": "activate", "release": head["candidate"],
-                    "payload_sha256": manifest["payload_sha256"], "delivery_sha256": manifest["deliveries"][app],
-                    "payload": delivery}
+            result = {"activation": head["seq"], "phase": "activate", "release": head["candidate"],
+                      "payload_sha256": manifest["payload_sha256"], "delivery_sha256": manifest["deliveries"][app],
+                      "payload": delivery}
+            ci = self._activated_ci(db, head["seq"])
+            if ci:
+                result["policy_artifact_sha256"] = ci["receipt"]["artifact_sha256"]
+            return result
 
     def export(self, token, release_id):
         with self.transaction() as db:
             self._authenticate(db, token, ROLES - {"consumer"})
             _, manifest, payload = self._candidate(db, release_id)
-            return {"release": release_id, "manifest": manifest, "payload": payload,
-                    "graph": jsonld(payload, manifest["workspace"], release_id)}
+            return self._release_export(release_id, manifest, payload)
 
     def events(self, token):
         with self.transaction() as db:

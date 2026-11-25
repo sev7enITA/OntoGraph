@@ -647,37 +647,51 @@ function renderRegistry() {
   if (!capabilities.registry) return;
   const root = $("registry-panel");
   root.hidden = false;
+  $("open-registry").hidden = false;
   const form = el("form", null, {class: "form-stack"});
   const token = el("input", null, {type: "password", autocomplete: "off", required: "", name: "token"});
   const action = selectInput("action", [
     ["status", "Activation status"], ["propose", "Prepare candidate"], ["review", "Record vote"],
+    ["export_policy", "Export OPA policy bundle"], ["record_ci", "Record CI receipt"],
+    ["ci_status", "Check candidate CI evidence"],
     ["publish", "Publish candidate"], ["withdraw", "Withdraw release"], ["export", "Export candidate"], ["events", "Audit"],
   ]);
   const parameters = el("div", null, {class: "form-stack"});
-  const result = el("pre", "", {tabindex: "0", role: "status"});
+  const resultTitle = el("h4", "", {hidden: ""});
+  const result = el("pre", "", {class: "registry-result", tabindex: "0", role: "status"});
   let knownHead = 0;
   let knownRelease = "";
   const send = el("button", "Run operation", {type: "submit", class: "button"});
   form.append(field("Role token", token), field("Operation", action), parameters, send);
   root.replaceChildren(el("h3", "Local registry"),
-    el("p", "The token stays on this page. The registry enforces roles and quorum."), form, result);
+    el("p", "Use your assigned role token to prepare and review a candidate, then export its OPA policy for CI."),
+    el("p", "CI evidence identifies the tested bundle, commit and pipeline run. Proof that an application applied or stopped using a rule comes from independent observations."),
+    form, resultTitle, result);
   const param = (key, label, attributes = {}) => {
     const input = el("input", null, {name: key, required: "", ...attributes});
     parameters.append(field(label, input));
   };
   function renderParameters() {
     parameters.replaceChildren();
-    if (["review", "publish", "export"].includes(action.value)) {
+    send.textContent = action.value === "export_policy" ? "Download OPA bundle" : "Run operation";
+    if (["review", "publish", "export", "export_policy", "record_ci", "ci_status"].includes(action.value)) {
       param("release_id", "Candidate digest", {value: knownRelease, pattern: "[0-9a-f]{64}"});
     }
     if (action.value === "propose") {
       param("base", "Baseline activation", {type: "number", min: "0", value: String(knownHead)});
       param("reviewers", "Reviewer IDs, comma-separated");
       param("quorum", "Quorum", {type: "number", min: "1", value: "1"});
+      parameters.append(field("Require CI evidence before publication", selectInput("ci_required", [
+        ["false", "No"], ["true", "Yes"],
+      ])));
     }
     if (action.value === "review") parameters.append(field("Vote", selectInput("choice", [
       ["approve", "Approve"], ["object", "Object"],
     ])));
+    if (action.value === "record_ci") parameters.append(
+      field("CI receipt JSON", el("textarea", null, {name: "receipt", rows: "6", maxlength: "65536", required: ""})),
+      el("p", "Auditor step. Check the successful provider run and its downloaded evidence against the candidate before recording the receipt."),
+    );
     if (["publish", "withdraw"].includes(action.value)) param("expected_head", "Expected current activation",
       {type: "number", min: "0", value: String(knownHead)});
     if (["propose", "withdraw"].includes(action.value)) param("reason", "Reason");
@@ -689,21 +703,37 @@ function renderRegistry() {
     event.preventDefault();
     try {
       send.disabled = true;
+      resultTitle.hidden = true;
+      result.textContent = "";
       const {token: secret, action: key, ...args} = Object.fromEntries(new FormData(form));
       if (key === "propose") {
         canChange();
         args.payload = model;
         args.reviewers = args.reviewers.split(",").map(value => value.trim()).filter(Boolean);
+        args.ci_required = args.ci_required === "true";
+      }
+      if (key === "record_ci") {
+        try {
+          args.receipt = JSON.parse(args.receipt);
+        } catch {
+          throw new Error("Paste the JSON receipt from the checked CI run.");
+        }
       }
       for (const number of ["base", "quorum", "expected_head"]) if (number in args) args[number] = Number(args[number]);
       const response = (await call("./api/registry", {action: key, arguments: args}, {
         headers: {Authorization: "Bearer " + secret},
       })).result;
-      result.textContent = show(response) ?? "Operation recorded.";
+      const ciOperation = ["record_ci", "ci_status"].includes(key);
+      resultTitle.textContent = ciOperation ? "CI provenance" : key === "status" ? "Application evidence" : "Operation result";
+      resultTitle.hidden = false;
+      result.textContent = key === "export_policy"
+        ? show({release: response.release, bundle_sha256: response.bundle_sha256})
+        : (show(response) ?? "Operation recorded.");
       if (key === "propose") knownRelease = response;
       if (key === "status") knownHead = response.activation;
       if (key === "publish") knownHead = response;
       if (key === "export") download(show(response), "ontograph-candidate.json");
+      if (key === "export_policy") download(show(response), "ontograph-policy-" + args.release_id.slice(0, 12) + ".json");
     } catch (error) {
       result.textContent = error.message;
     } finally {
@@ -735,6 +765,10 @@ action("discard-code", () => {
   tell("JSON source restored from the visual draft.");
 });
 action("export-button", exportFile);
+action("open-registry", () => {
+  switchView("evidence");
+  $("registry-panel").querySelector("select[name=action]").focus();
+});
 action("demo-button", showDemo);
 action("add-object", createObject);
 action("add-relation", createRelation);
