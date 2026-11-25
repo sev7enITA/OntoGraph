@@ -63,3 +63,7 @@ NVIDIA or a catalog can propose mappings as a separate application of this schem
 ### Verify outside the registry
 
 Export with `call DATABASE export` and preserve the manifest digest in a channel controlled by the audit owner. Run `python3 -m ontograph verify-release EXPORT.json --release EXPECTED_DIGEST`. Check the event chain with `python3 -m ontograph verify-ledger EVENTS.json --tip EXPECTED_TIP`. The checkpoint must be retained independently to detect removal of the log tail. The outputs confirm hash consistency and package scope. Inspect source applicability and application behavior independently.
+
+For an independent RDF interpreter check on the synthetic output, run
+`uv run --with rdflib python examples/verify_projection.py out/aurora.json`.
+This optional test parses JSON-LD, round-trips the graph via N-Triples, queries the taxonomy in SPARQL and checks the PROV-O derivation. The core runtime remains dependency-free.

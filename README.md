@@ -15,7 +15,7 @@ python3 -m ontograph demo --report out/aurora.json --html out/aurora.html
 python3 -m unittest discover -s tests -v
 ```
 
-Open `out/aurora.html` to inspect the observations. A run produces fresh output files. Choose new output paths for subsequent runs.
+Open `out/aurora.html` to inspect the observations. GitHub Actions publishes the HTML and JSON together as the `ontograph-aurora-demo` workflow artifact. A run produces fresh output files. Choose new output paths for subsequent runs.
 
 | Step | CRM | PMS |
 | --- | --- | --- |
