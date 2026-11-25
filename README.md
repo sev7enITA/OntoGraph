@@ -8,6 +8,14 @@ Two applications can report the same release and still make different decisions.
 
 [Wiki](docs/wiki/README.md) · [Why OntoGraph](docs/wiki/PERCHE-ONTOGRAPH.md) · [Market and standards](docs/wiki/OCEANO-BLU.md) · [Transparent logo](assets/brand/ontograph-mark.png)
 
+## Open the visual workspace
+
+```sh
+python3 -m ontograph studio
+```
+
+Open [OntoGraph Studio](http://127.0.0.1:8765/). The workspace starts in the original PolicyAsCode-derived process modeler, with visual editing, Excel census, live properties and diagram export. Open **Studio semantico** to link a process to a control, inspect and edit nested properties, compare local drafts, and work with the governance model. [Studio guide](docs/wiki/STUDIO.md) · [Process modeler preview](assets/studio/modellatore-processi.png) · [Semantic Studio preview](assets/studio/studio-semantico.png)
+
 ## Run Aurora 21
 
 Requires Python 3.10 or later with the standard SQLite module. No model, network connection, package install or external service is required.

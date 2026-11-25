@@ -10,6 +10,7 @@ OntoGraph collega il passaggio della fonte, il controllo interessato, l’approv
 | --- | --- |
 | [Perché esiste OntoGraph](PERCHE-ONTOGRAPH.md) | Il problema, chi lo incontra e le domande a cui risponde il prodotto |
 | [Oceano blu e standard](OCEANO-BLU.md) | Quando affiancarlo a cataloghi, knowledge graph o Git e CI e come misurare il vantaggio |
+| [Studio visuale](STUDIO.md) | Modellatore originario, proiezione semantica, editor atomico ed export |
 | [Aurora 21](AURORA-21.md) | Una regola cambia, il PMS dichiara il digest atteso e restituisce un risultato divergente |
 | [Framework](../FRAMEWORK.md) | Ruoli, responsabilità, sei fasi PALO, controlli e limiti delle prove |
 | [Protocollo e CLI](../PROTOCOL.md) | Formati, operazioni, scambio PolicyWatcher, osservazione e ritiro |

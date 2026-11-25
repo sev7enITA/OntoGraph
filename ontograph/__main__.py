@@ -45,6 +45,10 @@ def main():
     demo = subs.add_parser("demo", help="run the isolated synthetic scenario")
     demo.add_argument("--report", type=Path, help="write the full machine-readable evidence report")
     demo.add_argument("--html", type=Path, help="write a self-contained HTML report")
+    studio = subs.add_parser("studio", help="launch the local visual workspace")
+    studio.add_argument("--port", type=int, default=8765)
+    studio.add_argument("--model", type=Path, help="use a valid release JSON as the initial draft")
+    studio.add_argument("--registry", type=Path, help="connect an initialized local governance registry")
     specimen = subs.add_parser("example", help="print a validated synthetic release document")
     specimen.add_argument("--variant", type=int, choices=(1, 2), default=2)
     intake = subs.add_parser("policywatcher-draft", help="prepare a local evidence record requiring human review")
@@ -75,6 +79,10 @@ def main():
                 with args.html.open("x", encoding="utf-8") as file:
                     file.write(render_report(report))
             display(summary(report))
+        elif args.command == "studio":
+            from .studio import serve
+
+            serve(args.port, args.model, args.registry)
         elif args.command == "example":
             display(validate(example(args.variant)))
         elif args.command == "validate":

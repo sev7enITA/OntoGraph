@@ -8,7 +8,7 @@ Consumer receipts, observer results and business outcome are separate states. Ke
 
 ## Build and development
 
-Run `python3 -m ontograph demo` from the root. Run `python3 -m unittest discover -s tests -v` for the suite or `python3 -m unittest discover -s tests -k compare_and_swap -v` for the publication race case. Generate a real reference payload with `python3 -m ontograph example` and verify existing fixtures using `python3 -m ontograph validate examples/aurora-21.json`.
+Run `python3 -m ontograph studio` from the root for the real loopback workspace. The original process modeler opens at `/processi/` and the semantic workspace at `/governance`. Test changes with both views and use only the synthetic seed for artifacts. Run `python3 -m ontograph demo` for the standalone evidence report. Run `python3 -m unittest discover -s tests -v` for the suite or `python3 -m unittest discover -s tests -k compare_and_swap -v` for the publication race case. Generate a real reference payload with `python3 -m ontograph example` and verify existing fixtures using `python3 -m ontograph validate examples/aurora-21.json`.
 
 The Aurora case declares synthetic scenario time by injection. The normal CLI uses UTC. Tests exercise both positive and adverse behavior through the real registry, including disagreement between a receipt and a probe. Database files, runtime credentials and generated local reports belong outside tracked project paths.
 
