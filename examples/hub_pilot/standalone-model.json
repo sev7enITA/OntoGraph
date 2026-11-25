@@ -1,0 +1,36 @@
+{
+  "format": "ontograph.release/1",
+  "domain": "north-quay-calibration",
+  "purpose": "Route locally prepared calibration certificates to release or review",
+  "owner": "North Quay laboratory (synthetic)",
+  "scope": "Internal workshop example for final certificates",
+  "effective_at": "2026-01-01T00:00:00Z",
+  "evidence": [{
+    "id": "bench-procedure", "uri": "urn:north-quay:synthetic:procedure:calibration:1",
+    "excerpt": "Release a final certificate only when its uncertainty budget is recorded.",
+    "sha256": "1193fcd322a3596a8230ea01dbe549bdff72b6dc741d796bee6f6f11fa82cb41", "observed_at": "2026-01-01T00:00:00Z",
+    "status": "confirmed", "applicability": "Internal synthetic procedure for final calibration certificates"
+  }],
+  "nodes": [
+    {"id":"certificate","kind":"concept","label":"Certificate","definition":"A calibration record","owner":"Lab"},
+    {"id":"final","kind":"concept","label":"Final certificate","aliases":["Issued report"],"definition":"A certificate prepared for formal release","owner":"Lab"},
+    {"id":"stage","kind":"field","label":"Certificate stage","definition":"Bench record stage","owner":"Lab"},
+    {"id":"uncertainty","kind":"field","label":"Uncertainty budget recorded","definition":"Presence of the measurement uncertainty budget","owner":"Lab"},
+    {"id":"certificate-check","kind":"control","label":"Certificate release check","definition":"Checks required certificate content","owner":"QA"},
+    {"id":"dispatch","kind":"contract","label":"Certificate routing decision","definition":"Release, hold or outside this procedure","owner":"QA"},
+    {"id":"bench","kind":"application","label":"Bench console","definition":"Standalone synthetic customer application","owner":"Lab"}
+  ],
+  "edges": [
+    {"source":"final","predicate":"broader","target":"certificate"},
+    {"source":"stage","predicate":"mapsTo","target":"final"},
+    {"source":"certificate-check","predicate":"dependsOn","target":"uncertainty"},
+    {"source":"certificate-check","predicate":"implements","target":"dispatch"},
+    {"source":"bench","predicate":"consumes","target":"dispatch"}
+  ],
+  "rules": [{"id":"release-certificate","control":"certificate-check","evidence":"bench-procedure","applies":{"stage":"final"},"requires":{"uncertainty":true}}],
+  "probes": [
+    {"id":"complete","application":"bench","rule":"release-certificate","facts":{"stage":"final","uncertainty":true},"expected":"allow"},
+    {"id":"budget-missing","application":"bench","rule":"release-certificate","facts":{"stage":"final"},"expected":"hold"},
+    {"id":"working-copy","application":"bench","rule":"release-certificate","facts":{"stage":"draft"},"expected":"out_of_scope"}
+  ]
+}

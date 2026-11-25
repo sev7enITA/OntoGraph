@@ -64,7 +64,7 @@ OnToGraPh is a standalone product and a spin-off of PolicyWatcher and PALO Frame
 - **PolicyWatcher** supplies the source evidence. The offline adapter turns a locally supplied packet and authorized excerpt into a draft for human review. The recorded link from change to rule, release and observed decision can support follow-up on a detected policy change. [PolicyWatcher](https://policywatcher.online/) · [Evidence exchange](docs/PROTOCOL.md#inputs-and-optional-adapters)
 - **PALO Framework** supplies governance roles, gates and evidence requirements. OnToGraPh implements a concrete lifecycle for semantic changes and exports release and audit records that can inform a PALO review. [PALO Framework](https://paloframework.org/) · [Lifecycle and controls](docs/FRAMEWORK.md#the-six-gates)
 
-The reference supports offline intake and evidence export. Automated feedback to PolicyWatcher and live integration with PALO are pilot work.
+A live PolicyWatcher packet passed through a local OnToGraPh release into PALO’s Assessment Path. PALO reopened Measure and Prove for human review. A separate calibration laboratory exercised the same engine offline with its own model. [Run the integration and standalone pilots](https://github.com/sev7enITA/OntoGraph/tree/main/examples/hub_pilot)
 
 ## Operator guide
 

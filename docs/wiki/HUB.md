@@ -26,10 +26,11 @@ Open OnToGraPh Studio and edit the included model or import your own release JSO
 2. OnToGraPh creates a source record pending human review. A steward confirms the applicable passage, scope and effective date before linking the evidence to a rule.
 3. Review the change and verify its effects in dependent applications. The proof can inform a PALO decision or PolicyWatcher follow-up.
 
-## Current handoffs and pilot work
+## Current handoffs and pilot results
 
 - **PALO ↔ PolicyWatcher.** The existing PALO signal workflow and Assessment Path use a non-authoritative monitoring signal. Human review remains part of that workflow. [Signal operations](https://github.com/sev7enITA/PALOframework/blob/main/docs/palo-policywatcher-signal-operations.md)
 - **PolicyWatcher → OnToGraPh.** The Studio and CLI accept a locally supplied evidence packet and excerpt. This uses the PolicyWatcher evidence packet format. [Intake protocol](../PROTOCOL.md#inputs-and-optional-adapters)
-- **OnToGraPh → review in PALO or PolicyWatcher.** Export the release and audit records from the local registry, or bring a paired pilot dossier to the review. Manual handoff is available. Automated feedback, a shared identity boundary and production app adapters require a pilot.
+- **OnToGraPh → PALO.** An optional pilot adapter admitted a source-bound signal and imported its release evidence into PALO’s local Assessment Path. PALO reopened Measure and Prove and kept the decision pending human review. A signal carrying a different change ID was held.
+- **OnToGraPh → PolicyWatcher.** The pilot resolved a frozen rule’s upstream change through PolicyWatcher’s public read-only endpoint. Writing an observation or a decision into a production PolicyWatcher record remains outside the tested path. [Pilot method and results](https://github.com/sev7enITA/OntoGraph/tree/main/examples/hub_pilot)
 
 [Governance hub](https://www.fabriziodegni.com/OnToGraPh/#ecosystem) · [Open the Studio](STUDIO.md) · [Synthetic Aurora 21](AURORA-21.md)

@@ -33,7 +33,7 @@ OnToGraPh runs independently with your own model and evidence. In the three-fram
 | **PolicyWatcher** | A change record, evidence packet and authorized excerpt to import offline for human review. [PolicyWatcher](https://policywatcher.online/) · [Evidence exchange](../PROTOCOL.md#inputs-and-optional-adapters) | A trace from the source change to affected fields, the approved release and the outcome observed in each application. A future feedback adapter could attach those results to the policy change record. |
 | **PALO Framework** | Governance roles, lifecycle gates and evidence requirements. [PALO Framework](https://paloframework.org/) · [Lifecycle and controls](../FRAMEWORK.md#the-six-gates) | An executable semantic-release workflow and exportable records of approval, observation and withdrawal that can support a PALO review. |
 
-The reference supports offline evidence intake and export. Automated feedback to PolicyWatcher and live integration with PALO are pilot work.
+A live PolicyWatcher packet passed through a local OnToGraPh release into PALO’s Assessment Path. PALO reopened Measure and Prove for human review. A separate calibration laboratory exercised the same engine offline with its own model. [Run the integration and standalone pilots](https://github.com/sev7enITA/OntoGraph/tree/main/examples/hub_pilot)
 
 Version 0.1 is an offline reference implementation. Aurora 21 demonstrates release and verification with two simulated applications. Validation with real consumers and willingness to pay are goals for a customer pilot.
 
