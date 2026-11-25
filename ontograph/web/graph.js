@@ -68,8 +68,8 @@ function modelGraph(model) {
     if (!byCollection.has(identity)) byCollection.set(identity, key);
   };
   const lookup = (collection, id) => byCollection.get(pathKey([collection, id]));
-  const link = (source, target, label, path, virtual = false, assessment) => {
-    if (source && target && source !== target) edges.push({ source, target, label, path, virtual, assessment });
+  const link = (source, target, label, path, virtual = false, assessment, assertions) => {
+    if (source && target && source !== target) edges.push({ source, target, label, path, virtual, assessment, assertions });
   };
   for (const [collection, kind] of Object.entries({
     nodes: null, evidence: "evidence", rules: "rule", probes: "probe"
@@ -84,7 +84,7 @@ function modelGraph(model) {
     model.edges.forEach((edge, index) => {
       if (!edge || typeof edge !== "object") return;
       const label = Object.hasOwn(RELATIONS, edge.predicate) ? RELATIONS[edge.predicate] : "relationship";
-      link(lookup("nodes", edge.source), lookup("nodes", edge.target), label, ["edges", index], false, edge.assessment);
+      link(lookup("nodes", edge.source), lookup("nodes", edge.target), label, ["edges", index], false, edge.assessment, edge.assertions);
     });
   }
   if (Array.isArray(model?.rules)) {
@@ -306,9 +306,12 @@ function drawGraph(graph, layout, id, focus, onSelect, zh) {
     const primary = focus && ["implements", "consumes", "rule for"].includes(edge.label);
     const classes = ["og-edge", edge.virtual && "og-reference", primary && "og-primary"].filter(Boolean);
     const group = svgElement("g", { class: classes.join(" "), "data-kinds": `${left.kind} ${right.kind}` });
-    const assessment = edge.assessment;
+    // Display the strongest submitted consequence; interpretation and resolution belong to the engine.
+    const count = edge.assertions?.length || 0;
+    const assessment = count ? {criticality:Math.max(...edge.assertions.map(a => a.criticality))} : edge.assessment;
     const assessed = Number.isInteger(assessment?.criticality) && assessment.criticality >= 1 && assessment.criticality <= 5;
-    const weightLabel = assessed ? (zh ? `关键性 ${assessment.criticality}/5，置信度 ${assessment.confidence}` :
+    const weightLabel = count ? (zh ? `最高记录关键性 ${assessment.criticality}/5，${count} 条判断` :
+      `Highest submitted criticality ${assessment.criticality}/5 · ${count} assertions`) : assessed ? (zh ? `关键性 ${assessment.criticality}/5，置信度 ${assessment.confidence}` :
       `Criticality ${assessment.criticality}/5, confidence ${assessment.confidence}`) : "";
     interactive(group, edge.path, [left.label, edge.label, right.label, weightLabel].filter(Boolean).join(" · "), onSelect);
     group.append(

@@ -1,3 +1,4 @@
+import {assertionForm} from "./assertions.js";
 // Relationship assessments belong to the release draft. The Python engine computes every path.
 export function createWeights({$, el, field, option, call, openDialog, change, select, render,
   getModel, getSelection, canChange}) {
@@ -30,10 +31,25 @@ export function createWeights({$, el, field, option, call, openDialog, change, s
   function editEdge() {
     const model = getModel(), index = getSelection()[1], edge = model.edges[index];
     if (!edge) return;
+    const multi = () => openDialog(t("Evidence and resolution", "证据与裁定"), form => {
+      form.lang = zh ? "zh-Hans" : "en";
+      const build = assertionForm(form,model,index,{t,getBasis:async (draft,edge_index) =>
+        call("./api/assertion-basis",{model:draft,edge_index})});
+      return async data => {
+        const draft = await build(data);
+        await call("./api/validate",{model:draft});
+        if (getModel() !== model) throw new Error(t("Reopen the changed draft.","草稿已更改，请重新打开。"));
+        change(draft,["edges",index]);
+      };
+    }, t("Save to draft","保存到草稿"));
+    if (edge.assertions) { multi(); return; }
     const prior = edge.assessment;
     openDialog(t("Assess relationship", "评估关系"), form => {
       form.lang = zh ? "zh-Hans" : "en";
       form.append(el("p", [edge.source, edge.predicate, edge.target].join(" → ")));
+      const more = el("button",t("Add another judgment or a dissenting source","添加其他判断或持异议的来源"),{type:"button"});
+      more.onclick = () => { $("edit-dialog").close(); multi(); };
+      form.append(more);
       const enabled = el("input", null, {type: "checkbox", name: "assessed"});
       enabled.checked = true;
       form.append(field(t("Record an assessment", "记录关系评估"), enabled));
@@ -121,7 +137,15 @@ export function createWeights({$, el, field, option, call, openDialog, change, s
           const line = el("li",null), inspect = el("button", [step.source,step.predicate,step.target].join(" → "), {type:"button"});
           inspect.addEventListener("click", () => select(["edges",i]));
           line.append(inspect);
-          if (a) {
+          if (edge.assertions) {
+            for (const assertion of edge.assertions) {
+              const evidence = model.evidence.find(e => e.id === assertion.evidence);
+              line.append(el("p",[assertion.id, assertion.stance === "challenges" ? t("Challenges","质疑") : t("Supports","支持"),
+                assertion.criticality + "/5", assertion.confidence, assertion.assessor, assertion.asserted_at,
+                evidence.id, assertion.rationale].join(" · ")));
+            }
+            if (edge.resolution) line.append(el("p", t("Recorded selection","已记录选择") + " · " + edge.resolution.selected + " · " + edge.resolution.reviewer));
+          } else if (a) {
             const source = model.evidence.find(entry => entry.id === a.evidence);
             const status = {confirmed:t("confirmed","已确认"), disputed:t("disputed","有争议"), insufficient:t("insufficient","证据不足")};
             line.append(el("p",[t("Criticality","关键性")+" "+a.criticality+"/5",t("Confidence","置信度")+" "+a.confidence,

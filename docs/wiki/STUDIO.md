@@ -84,3 +84,7 @@ GitHub Actions and Azure Pipelines use the same verification command. An auditor
 ## Assess a relationship
 
 In Graph select an explicit relationship, choose **Assess relationship**, and enter criticality, confidence, source, assessor and rationale. Open **Weighted impact** and select a changed object to inspect the path and change its release requirement. [Interactive case](https://openontograph.org/weights/)
+
+### Resolve contradictory assessments
+
+Sign in, open **Relationship evidence**, and import the unresolved WBS model from the pilot. Select the disputed relationship. Read each source, date, rationale and pair of grades. Choose a supported assertion, name the reviewer, give the reason and save the resolution. Reload to confirm the draft was saved. Changing a claim or evidence basis requires a new resolution. The hosted workspace stores drafts by account and detects conflicting saves. Authenticated release approval remains a separate registry operation. [Hosted workspace](https://openontograph.org/OntoGraph/decisions/?lang=en) · [中文](https://openontograph.org/OntoGraph/decisions/?lang=zh-Hans) · [Working models and native results](https://openontograph.org/wbs/)

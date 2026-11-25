@@ -49,3 +49,7 @@ Version 0.1 is an offline reference implementation. Aurora 21 demonstrates relea
 [Public project site](https://openontograph.org/) · [Repository quick start](../../README.md)
 
 [Weighted relationships and decision impact](https://openontograph.org/weights/) · [Comparative research](../WEIGHTED-RELATIONSHIPS-MARKET.md)
+
+## Evidence disagreements and verified withdrawal
+
+[Read the WBS pilot](https://openontograph.org/wbs/) · [简体中文](https://openontograph.org/wbs/zh/) · [Downloadable inputs and reproduction steps](../../examples/wbs_pilot/README.md)

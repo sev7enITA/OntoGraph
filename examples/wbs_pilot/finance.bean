@@ -1,0 +1,21 @@
+; Synthetic month-end ledger, EUR. Query Expenses:Close to obtain gross claim and eligible rows.
+2026-01-01 open Expenses:Close EUR
+2026-01-01 open Assets:Clearing EUR
+
+2026-11-25 * "qualified"
+  Expenses:Close  125 EUR
+    wbs: "0017"
+    context: "Finance"
+  Assets:Clearing  -125 EUR
+
+2026-11-25 * "legacy"
+  Expenses:Close  350 EUR
+    wbs: "0017"
+    context: "Unqualified"
+  Assets:Clearing  -350 EUR
+
+2026-11-25 * "unknown"
+  Expenses:Close  225 EUR
+    wbs: "9999"
+    context: "Finance"
+  Assets:Clearing  -225 EUR

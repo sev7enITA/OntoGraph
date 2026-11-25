@@ -1,0 +1,180 @@
+{
+  "format": "ontograph.wbs-pilot/1",
+  "finished_at": "2026-11-25T23:18:24Z",
+  "data": "synthetic",
+  "applications": {
+    "finance": {
+      "engine": "beanquery 0.2.0, beancount 3.2.3",
+      "output": "Eligible ledger postings (EUR)"
+    },
+    "pmo": {
+      "engine": "LibreOffice 26.8.1.1 bf6ef2662401c7d6dce671ab4deb26ee0af3a7c1",
+      "output": "Eligible work-package budget (EUR)"
+    }
+  },
+  "approval": "Two distinct role-bound principals, both scripted in the same isolated test environment.",
+  "unresolved_candidate_block": "Required assessment from wbs has unresolved conflict on known mapsTo wbs",
+  "releases": [
+    {
+      "reason": "Recognized WBS code",
+      "candidate": "4a864275ce87ca66c5a5ac5e95a253e57c32f4316c6bcc75ba90de4eeddb52f1",
+      "payload_sha256": "5ba0788805bf6240424f24f01525824e24ba05afc48f564999a3d68c10c1be72"
+    },
+    {
+      "reason": "Unresolved Finance and PMO evidence",
+      "candidate": "f66a135b6f529b878f594c6596992a5603b89b8363697aad3db7ee70b66f7cee",
+      "payload_sha256": "0b3216993f30125593aafb702800554b9eeec246893a660855db3515f1205d18"
+    },
+    {
+      "reason": "Require department-qualified WBS",
+      "candidate": "3f4005333479f638bed3a1195eb424bfad2a791bc44819b092cc81e8b2201479",
+      "payload_sha256": "009c208194ad68ed68da12dad0e5d42fe6db90988d3b52a45558dafc628f2a5b"
+    },
+    {
+      "reason": "Explicitly restore baseline after verified withdrawal",
+      "candidate": "50bd348a84b8ff7f733f9b93d735fd8169826f6c025d6534da8b19aa17d9365e",
+      "payload_sha256": "5ba0788805bf6240424f24f01525824e24ba05afc48f564999a3d68c10c1be72"
+    }
+  ],
+  "steps": [
+    {
+      "step": "baseline",
+      "activation": 14,
+      "phase": "activate",
+      "applications": {
+        "finance": {
+          "state": "verified",
+          "eligible": 475,
+          "artifact_sha256": "57c27353dcbc140abbdb8cd637cb0cdfb6bec43ec6188daa718e7c37f1890db8"
+        },
+        "pmo": {
+          "state": "verified",
+          "eligible": 2000,
+          "artifact_sha256": "a942d90809c5aee2a4b6f38a0072af75ad15718bf6049f2a1529f5cc7ceddef9"
+        }
+      }
+    },
+    {
+      "step": "baseline_withdrawn",
+      "activation": 14,
+      "phase": "withdraw",
+      "applications": {
+        "finance": {
+          "state": "withdrawal_verified",
+          "eligible": 0,
+          "artifact_sha256": "91d6334f12398a4cf34f8731c64f1bc0332b408ba4386e7e071fc9bb4349d791"
+        },
+        "pmo": {
+          "state": "withdrawal_verified",
+          "eligible": 0,
+          "artifact_sha256": "ccb183af64bc98c3397edc117bdbcf7cd71f39f9513bd8e56ac398e3e426cd2e"
+        }
+      }
+    },
+    {
+      "step": "stale_workbook",
+      "activation": 34,
+      "phase": "activate",
+      "applications": {
+        "finance": {
+          "state": "verified",
+          "eligible": 125,
+          "artifact_sha256": "830cc3e8a26466d45853a34406a58f4ceec4546c3c95f2e8baa079f5e431e152"
+        },
+        "pmo": {
+          "state": "mismatch",
+          "eligible": 2000,
+          "artifact_sha256": "addc934fab19db33b63a20df1e54e9a7599aba2b86bde229ecdb2ea112b15f51"
+        }
+      }
+    },
+    {
+      "step": "qualified",
+      "activation": 34,
+      "phase": "activate",
+      "applications": {
+        "finance": {
+          "state": "verified",
+          "eligible": 125,
+          "artifact_sha256": "63eb650590ef2d3df4e2bcd8eaab15d020cdfb253a742210f9d7b908ca9c9a6e"
+        },
+        "pmo": {
+          "state": "verified",
+          "eligible": 800,
+          "artifact_sha256": "ffe8457800dc5f8b74d9df9699c6b5540476d321df9b0747f6762bd0b4baaa1b"
+        }
+      }
+    },
+    {
+      "step": "withdrawal_still_active",
+      "activation": 34,
+      "phase": "withdraw",
+      "applications": {
+        "finance": {
+          "state": "withdrawal_verified",
+          "eligible": 0,
+          "artifact_sha256": "bd785db431f62985337571ae5a6850b6f7a68f9b99e7c5418909e249f72ded56"
+        },
+        "pmo": {
+          "state": "mismatch",
+          "eligible": 800,
+          "artifact_sha256": "fd36ac893a6363bc42da86a454c495263d4c5d8d91ec9714a2dfe06f16353329"
+        }
+      }
+    },
+    {
+      "step": "source_unavailable",
+      "activation": 34,
+      "phase": "withdraw",
+      "applications": {
+        "finance": {
+          "state": "withdrawal_verified",
+          "eligible": 0,
+          "artifact_sha256": "bd785db431f62985337571ae5a6850b6f7a68f9b99e7c5418909e249f72ded56"
+        },
+        "pmo": {
+          "state": "unproven",
+          "eligible": null,
+          "artifact_sha256": "09301c8e1a8275047fa1f2f40c46d0d701bcdd239661edfd3152ec86ec6fdf58"
+        }
+      }
+    },
+    {
+      "step": "withdrawn",
+      "activation": 34,
+      "phase": "withdraw",
+      "applications": {
+        "finance": {
+          "state": "withdrawal_verified",
+          "eligible": 0,
+          "artifact_sha256": "fb7f5b8088588134723420853e05a196cdc64be95744599cb352ddab6214e21f"
+        },
+        "pmo": {
+          "state": "withdrawal_verified",
+          "eligible": 0,
+          "artifact_sha256": "e2138549dfee8fa1c5e3bb859953c8f3025a4c76f0574d3f31bb78933dd9b787"
+        }
+      }
+    },
+    {
+      "step": "restored",
+      "activation": 62,
+      "phase": "activate",
+      "applications": {
+        "finance": {
+          "state": "verified",
+          "eligible": 475,
+          "artifact_sha256": "1c07f868a6bd415d7f8edff7bec9fa94341fe0c991172fd184e1f7cc2d15e913"
+        },
+        "pmo": {
+          "state": "verified",
+          "eligible": 2000,
+          "artifact_sha256": "bec95854dedc5c36842da204185013fac5690c5fde7f7dc741e0c87d67478176"
+        }
+      }
+    }
+  ],
+  "readbacks": 15,
+  "ledger_tip": "fcca37d9398ddc451708e6d98f2843244c83259e3cff5cba1ee751e9ca6e9424",
+  "events": 70
+}

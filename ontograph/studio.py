@@ -31,6 +31,7 @@ ASSETS = {
     "/processi/process.css": (PROCESS / "process.css", "text/css; charset=utf-8"),
     "/studio.css": (WEB / "studio.css", "text/css; charset=utf-8"),
     "/studio.js": (WEB / "studio.js", "text/javascript; charset=utf-8"),
+    "/assertions.js": (WEB / "assertions.js", "text/javascript; charset=utf-8"),
     "/weights.js": (WEB / "weights.js", "text/javascript; charset=utf-8"),
     "/graph.js": (WEB / "graph.js", "text/javascript; charset=utf-8"),
     "/inspector.js": (WEB / "inspector.js", "text/javascript; charset=utf-8"),
@@ -133,10 +134,27 @@ def inspect(payload):
             "impact": impact(base, draft), "diff": changes(base, draft) if base else {"items": [], "total": 0}}
 
 
+def basis_for_request(payload):
+    from .model import edge_assessment
+
+    record(payload, ("model", "edge_index"), "assertion basis request")
+    model = validate(payload["model"])
+    index = payload["edge_index"]
+    require(type(index) is int and 0 <= index < len(model["edges"]), "Invalid relationship index")
+    edge = model["edges"][index]
+    require(bool(edge.get("assertions")), "Add an assertion before resolution")
+    return edge_assessment(edge, indexed(model["evidence"], "evidence"))["metadata"]
+
+
 def diagram(document, style):
     nodes = {node["id"]: (f"n{i}", re.sub(r'[^\w .,:()/+-]', " ", node["label"]).strip()[:96])
              for i, node in enumerate(document["nodes"])}
     def edge_label(edge):
+        if edge.get("assertions"):
+            from .model import edge_assessment
+            decision = edge_assessment(edge, indexed(document["evidence"], "evidence"))
+            confidence = decision["confidence"] if decision["confidence"] is not None else "unknown"
+            return f"{edge['predicate']} · criticality {decision['criticality']}/5 · confidence {confidence} · {decision['metadata']['resolution_state']}"
         rating = edge.get("assessment")
         if rating is None:
             return edge["predicate"]
@@ -290,6 +308,8 @@ class StudioHandler(BaseHTTPRequestHandler):
             payload = parse_json(data)
             if path == "/api/validate":
                 self._json(inspect(payload))
+            elif path == "/api/assertion-basis":
+                self._json(basis_for_request(payload))
             elif path == "/api/weighted-impact":
                 record(payload, ("model", "node_id"), "weighted impact request")
                 self._json(weighted_impact(payload["model"], payload["node_id"]))

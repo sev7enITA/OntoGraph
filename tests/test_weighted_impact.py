@@ -5,7 +5,7 @@ from pathlib import Path
 
 from ontograph.aurora import NOW, example, prepare
 from ontograph.exchange import verify_release
-from ontograph.model import Rejected, check_required_assessments, consumer_bundle, digest, impact, jsonld, validate, weighted_impact
+from ontograph.model import Rejected, assertion_basis, check_required_assessments, consumer_bundle, digest, impact, jsonld, validate, weighted_impact
 from ontograph.store import Registry
 from ontograph.workbook import read_xlsx, write_xlsx
 
@@ -244,3 +244,146 @@ class WeightedImpactTests(unittest.TestCase):
         self.assertEqual(report["coverage"]["unassessed_edges"], 0)
         with self.assertRaisesRegex(Rejected, "limits reached at asset"):
             check_required_assessments(doc)
+
+
+class AttributedAssertionsTests(unittest.TestCase):
+    def setUp(self):
+        self.doc = dict(example(2), required_assessment_origins=["dossier-contract"])
+        for edge in self.doc["edges"]:
+            if edge["predicate"] == "consumes":
+                edge["assessment"] = assessment()
+        self.edge = next(e for e in self.doc["edges"] if e["source"] == "crm" and e["predicate"] == "consumes")
+        del self.edge["assessment"]
+        source = dict(self.doc["evidence"][0], id="controller-record", uri="urn:test:controller")
+        self.doc["evidence"].append(source)
+        self.sources = {s["id"]: s for s in self.doc["evidence"]}
+        self.edge["assertions"] = [
+            dict(assessment(0.0, 5), id="finance", asserted_at="2026-11-25T13:00:00Z"),
+            dict(assessment(1.0, 2), id="controller", evidence="controller-record", assessor="Controller",
+                 asserted_at="2026-11-25T14:00:00Z", stance="challenges"),
+        ]
+
+    def resolve(self):
+        self.edge["resolution"] = {
+            "selected": "finance", "reviewer": "steward", "rationale": "Escalate using Finance scope.",
+            "resolved_at": self.doc["effective_at"], "basis": assertion_basis(self.edge, self.sources),
+        }
+
+    def summary(self):
+        report = weighted_impact(self.doc, "dossier-contract")
+        return (next(p for p in report["paths"] if p["nodes"][-1] == "crm"),
+                next(a for a in report["assessments"] if a["source"] == "crm"))
+
+    def test_conflict_preserves_both_sources_and_requires_current_adjudication(self):
+        route, item = self.summary()
+        self.assertEqual((route["criticality"], route["confidence"], route["status"]), (5, None, "review_required"))
+        self.assertEqual(route["unassessed_edges"], 0)
+        self.assertEqual(item["resolution_state"], "unresolved_conflict")
+        self.assertEqual({s["id"] for s in item["evidence_records"]}, set(self.sources))
+        with self.assertRaisesRegex(Rejected, "unresolved conflict"):
+            check_required_assessments(self.doc)
+        self.resolve()
+        chosen, item = self.summary()
+        self.assertEqual((chosen["confidence"], chosen["criticality"], chosen["status"]), (0, 5, "assessed"))
+        self.assertTrue(item["conflict"])
+        self.assertEqual((item["criticality_range"], item["confidence_range"]), ([2, 5], [0, 1]))
+        coverage = weighted_impact(self.doc, "dossier-contract")["coverage"]
+        self.assertEqual((coverage["disagreement_edges"], coverage["unresolved_assertion_edges"]), (1, 0))
+        self.assertEqual(item["resolution_state"], "resolved")
+        self.assertIsNone(check_required_assessments(self.doc))
+        self.edge["assertions"].reverse()
+        self.assertEqual(self.summary(), (chosen, item))
+        self.edge["assertions"][0]["rationale"] = "Updated interpretation of the second source."
+        changed, item = self.summary()
+        self.assertEqual((changed["confidence"], item["resolution_state"]), (None, "stale_resolution"))
+        with self.assertRaisesRegex(Rejected, "stale resolution"):
+            check_required_assessments(self.doc)
+
+    def test_agreement_preserves_sources_and_explicit_challenge_requires_review(self):
+        for a in self.edge["assertions"]:
+            a.update(criticality=2, confidence=0.0, stance="supports")
+        path, metadata = self.summary()
+        self.assertEqual((path["confidence"], metadata["resolution_state"]), (0, "agreement"))
+        self.assertFalse(metadata["conflict"])
+        self.edge["assertions"][0]["stance"] = "challenges"
+        path, metadata = self.summary()
+        self.assertIsNone(path["confidence"])
+        self.assertTrue(metadata["conflict"])
+        self.resolve()
+        with self.assertRaisesRegex(Rejected, "select an existing supporting"):
+            validate(self.doc)
+
+    def test_changed_evidence_or_selection_timing_and_export(self):
+        self.resolve()
+        self.assertEqual(read_xlsx(write_xlsx(self.doc)), self.doc)
+        projected = jsonld(self.doc, self.doc["domain"], digest(self.doc))["@graph"]
+        assertion_ids = {a["@id"] for a in projected if a["@type"] == "og:WeightAssertion"}
+        references = {a["prov:wasDerivedFrom"]["@id"] for a in projected if a["@id"] in assertion_ids}
+        self.assertEqual(len(assertion_ids), 2)
+        self.assertEqual(len(references), 2)
+        self.assertEqual({r["dct:identifier"] for r in projected if r["@id"] in references}, set(self.sources))
+        decision = next(r for r in projected if r["@type"] == "og:AssertionResolution")
+        self.assertTrue(decision["og:matchesCurrentBasis"])
+        self.assertIn(decision["og:selectedAssertion"]["@id"], assertion_ids)
+        before = deepcopy(self.doc)
+        self.sources["controller-record"]["applicability"] = "The evidence applies to a narrower population."
+        self.assertIn("crm", impact(before, self.doc))
+        self.assertEqual(self.summary()[1]["resolution_state"], "stale_resolution")
+        self.resolve()
+        self.edge["resolution"]["resolved_at"] = "2026-11-25T13:59:59Z"
+        with self.assertRaisesRegex(Rejected, "predates"):
+            validate(self.doc)
+
+    def test_group_validation_identity_and_digests(self):
+        self.resolve()
+        # Whole-valued JSON numbers and default stance have one adjudication basis in JS/Python.
+        before = assertion_basis(self.edge, self.sources)
+        self.edge["assertions"][0].update(confidence=0, stance="supports")
+        self.assertEqual(assertion_basis(self.edge, self.sources), before)
+        mutations = [
+            lambda e: e.update(assessment=assessment()),
+            lambda e: e.update(assertions=[]),
+            lambda e: e["assertions"][1].update(id="finance"),
+            lambda e: e["assertions"][0].update(stance=["fake"]),
+            lambda e: e["assertions"][0].update(asserted_at="2026-11-25T11:00:00Z"),
+            lambda e: e["assertions"][0].update(asserted_at=NOW),
+            lambda e: e["assertions"][1].update(evidence="missing"),
+            lambda e: e["resolution"].update(basis="unknown"),
+            lambda e: e["resolution"].update(selected="unknown"),
+        ]
+        for mutation in mutations:
+            with self.subTest(mutation=mutation), self.assertRaises(Rejected):
+                model = deepcopy(self.doc)
+                mutation(next(e for e in model["edges"] if "assertions" in e))
+                validate(model)
+
+    def test_registry_requires_named_reviewers_vote_and_stable_content(self):
+        self.resolve()
+        with tempfile.TemporaryDirectory() as folder:
+            db = Registry(Path(folder) / "db", clock=lambda: NOW)
+            tokens = prepare(db)
+            def propose():
+                return db.propose(tokens["author"], self.doc, 0, ["steward", "owner"], 1, "Adjudication")
+            first = propose()
+            db.review(tokens["owner"], first, "approve", "Reviewed scope")
+            with self.assertRaisesRegex(Rejected, "authenticated approval.*steward"):
+                db.export_policy(tokens["author"], first)
+            with self.assertRaisesRegex(Rejected, "authenticated approval.*steward"):
+                db.publish(tokens["publisher"], first, 0)
+            db.review(tokens["steward"], first, "approve", "I accept the selected assessment")
+            self.assertEqual(verify_release(db.export(tokens["author"], first)), first)
+            self.edge["assertions"][0]["confidence"] = 0.7
+            self.doc.pop("required_assessment_origins")
+            changed = propose()
+            self.assertNotEqual(changed, first)
+            db.review(tokens["steward"], changed, "approve", "Reviewed updated candidate")
+            with self.assertRaisesRegex(Rejected, "Stale assertion resolution"):
+                db.export_policy(tokens["author"], changed)
+            activation = db.publish(tokens["publisher"], first, 0)
+            self.assertGreater(activation, 0)
+
+    def test_legacy_weighted_projection_still_verifies(self):
+        doc = example(2)
+        doc["edges"][0]["assessment"] = assessment()
+        projection = jsonld(doc, doc["domain"], digest(doc))
+        self.assertEqual(digest(projection), "92a537a8e6a051a8838c5fbdbb4eb403458644dd22bf243faf8f1a73cd673308")

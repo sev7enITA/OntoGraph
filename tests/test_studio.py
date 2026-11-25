@@ -77,6 +77,30 @@ class StudioTests(unittest.TestCase):
                 demo = json.load(response)
             self.assertEqual(demo["drift"]["applications"][1]["state"], "mismatch")
 
+    def test_basis_for_editor_is_bound_to_actual_assertions_and_their_evidence(self):
+        model = example()
+        index = next(i for i, e in enumerate(model["edges"]) if e["predicate"] == "dependsOn")
+        edge = model["edges"][index]
+        claim = {"id": "finance", "confidence": 0.7, "criticality": 4, "assessor": "Finance",
+                 "asserted_at": model["effective_at"], "evidence": model["evidence"][0]["id"],
+                 "rationale": "Finance confirms the mapping."}
+        edge["assertions"] = [claim, dict(claim, id="pmo", stance="challenges", assessor="PMO", criticality=5)]
+        with studio() as server:
+            def details():
+                with request(server, "/api/assertion-basis", {"model": model, "edge_index": index}) as response:
+                    return json.load(response)
+            initial = details()
+            self.assertEqual(initial["resolution_state"], "unresolved_conflict")
+            self.assertIsNone(initial["assessment"])
+            edge["resolution"] = {"basis": initial["basis"], "reviewer": "steward", "selected": "finance",
+                                  "rationale": "Review applies to the Finance process.", "resolved_at": model["effective_at"]}
+            self.assertEqual(details()["resolution_state"], "resolved")
+            claim["rationale"] = "New interpretation."
+            self.assertEqual(details()["resolution_state"], "stale_resolution")
+            for format_name in ("mermaid", "plantuml"):
+                with request(server, "/api/export", {"model": model, "format": format_name}) as response:
+                    self.assertIn(b"stale_resolution", response.read())
+
     def test_weighted_impact_validates_the_draft_and_exports_the_edge_assessment(self):
         model = example()
         edge = next(e for e in model["edges"] if e["predicate"] == "dependsOn")

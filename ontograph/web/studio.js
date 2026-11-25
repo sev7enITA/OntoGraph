@@ -200,6 +200,7 @@ function renameReferences(draft, group, old, next) {
   } else if (group === "evidence") {
     for (const edge of draft.edges) {
       if (edge.assessment?.evidence === old) edge.assessment.evidence = next;
+      for (const assertion of edge.assertions || []) if (assertion.evidence === old) assertion.evidence = next;
     }
     draft.rules.forEach(rule => { if (rule.evidence === old) rule.evidence = next; });
   } else if (group === "rules") {

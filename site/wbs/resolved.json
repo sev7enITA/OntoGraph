@@ -1,0 +1,261 @@
+{
+  "domain": "wbs-dual-app",
+  "edges": [
+    {
+      "assertions": [
+        {
+          "asserted_at": "2026-11-25T10:00:00Z",
+          "assessor": "Finance analyst",
+          "confidence": 0.85,
+          "criticality": 4,
+          "evidence": "finance-note",
+          "id": "finance-local",
+          "rationale": "Use the recognized code in its ledger context. Keep the source department.",
+          "stance": "supports"
+        },
+        {
+          "asserted_at": "2026-11-25T10:30:00Z",
+          "assessor": "PMO analyst",
+          "confidence": 0.3,
+          "criticality": 5,
+          "evidence": "pmo-note",
+          "id": "pmo-dissent",
+          "rationale": "An unqualified 0017 can be a work package instead of a posting object.",
+          "stance": "challenges"
+        }
+      ],
+      "predicate": "mapsTo",
+      "resolution": {
+        "basis": "b4c36865b831af5fcffd8700ae64f24fc51d66074c2d3b861dec4e567c73cae8",
+        "rationale": "Accept Finance's mapping only with source-specific department qualification. The stricter rule holds bare codes for both applications.",
+        "resolved_at": "2026-11-25T11:30:00Z",
+        "reviewer": "steward",
+        "selected": "finance-local"
+      },
+      "source": "known",
+      "target": "wbs"
+    },
+    {
+      "assessment": {
+        "assessor": "Control owner",
+        "confidence": 0.95,
+        "criticality": 4,
+        "evidence": "policy",
+        "rationale": "The training contract names the two reports consuming this decision."
+      },
+      "predicate": "dependsOn",
+      "source": "staging",
+      "target": "known"
+    },
+    {
+      "assessment": {
+        "assessor": "Control owner",
+        "confidence": 0.95,
+        "criticality": 4,
+        "evidence": "policy",
+        "rationale": "The training contract names the two reports consuming this decision."
+      },
+      "predicate": "implements",
+      "source": "staging",
+      "target": "admission"
+    },
+    {
+      "assessment": {
+        "assessor": "Control owner",
+        "confidence": 0.95,
+        "criticality": 4,
+        "evidence": "policy",
+        "rationale": "The training contract names the two reports consuming this decision."
+      },
+      "predicate": "consumes",
+      "source": "finance",
+      "target": "admission"
+    },
+    {
+      "assessment": {
+        "assessor": "Control owner",
+        "confidence": 0.95,
+        "criticality": 4,
+        "evidence": "policy",
+        "rationale": "The training contract names the two reports consuming this decision."
+      },
+      "predicate": "consumes",
+      "source": "pmo",
+      "target": "admission"
+    },
+    {
+      "assessment": {
+        "assessor": "Control owner",
+        "confidence": 0.95,
+        "criticality": 4,
+        "evidence": "policy",
+        "rationale": "The training contract names the two reports consuming this decision."
+      },
+      "predicate": "dependsOn",
+      "source": "staging",
+      "target": "qualified"
+    }
+  ],
+  "effective_at": "2026-11-25T12:00:00Z",
+  "evidence": [
+    {
+      "applicability": "Synthetic accounting and planning reports only.",
+      "excerpt": "In the training ledger the recognized code 0017 is used as a posting object.",
+      "id": "finance-note",
+      "observed_at": "2026-11-25T09:00:00Z",
+      "sha256": "262bbbfe5f5892694a369b3609d1b01f0be16aca9257aad742dfd9712c055aa9",
+      "status": "confirmed",
+      "uri": "urn:example:wbs-pilot:finance-note"
+    },
+    {
+      "applicability": "Synthetic accounting and planning reports only.",
+      "excerpt": "The same code 0017 can name a PMO work package. A bare code does not establish the department.",
+      "id": "pmo-note",
+      "observed_at": "2026-11-25T09:00:00Z",
+      "sha256": "d8c541550a3c262b97ea69b1f2c392b5e030af60ab11d20c30196e371341e662",
+      "status": "confirmed",
+      "uri": "urn:example:wbs-pilot:pmo-note"
+    },
+    {
+      "applicability": "Synthetic accounting and planning reports only.",
+      "excerpt": "Eligibility requires a known code and its department-qualified mapping.",
+      "id": "policy",
+      "observed_at": "2026-11-25T09:00:00Z",
+      "sha256": "6ac68cec66162693b4cba21f3c2a90ab3563df407882e6a715ef7323269a0a92",
+      "status": "confirmed",
+      "uri": "urn:example:wbs-pilot:policy"
+    }
+  ],
+  "format": "ontograph.release/1",
+  "nodes": [
+    {
+      "definition": "Department-scoped WBS identifier",
+      "id": "wbs",
+      "kind": "concept",
+      "label": "Department-scoped WBS identifier",
+      "owner": "Data steward"
+    },
+    {
+      "definition": "Recognized four-character code",
+      "id": "known",
+      "kind": "field",
+      "label": "Recognized four-character code",
+      "owner": "Finance"
+    },
+    {
+      "definition": "Department matches source-specific mapping",
+      "id": "qualified",
+      "kind": "field",
+      "label": "Department matches source-specific mapping",
+      "owner": "PMO"
+    },
+    {
+      "definition": "Eligibility for this training report",
+      "id": "staging",
+      "kind": "control",
+      "label": "Eligibility for this training report",
+      "owner": "Controller"
+    },
+    {
+      "definition": "WBS admission decision",
+      "id": "admission",
+      "kind": "contract",
+      "label": "WBS admission decision",
+      "owner": "Controller"
+    },
+    {
+      "definition": "Beancount close report",
+      "id": "finance",
+      "kind": "application",
+      "label": "Beancount close report",
+      "owner": "Finance"
+    },
+    {
+      "definition": "LibreOffice Calc work-package budget",
+      "id": "pmo",
+      "kind": "application",
+      "label": "LibreOffice Calc work-package budget",
+      "owner": "PMO"
+    }
+  ],
+  "owner": "Finance and PMO",
+  "probes": [
+    {
+      "application": "finance",
+      "expected": "allow",
+      "facts": {
+        "known": true,
+        "qualified": true
+      },
+      "id": "finance-qualified",
+      "rule": "admit-row"
+    },
+    {
+      "application": "finance",
+      "expected": "hold",
+      "facts": {
+        "known": true,
+        "qualified": false
+      },
+      "id": "finance-legacy",
+      "rule": "admit-row"
+    },
+    {
+      "application": "finance",
+      "expected": "hold",
+      "facts": {
+        "known": false,
+        "qualified": true
+      },
+      "id": "finance-unknown",
+      "rule": "admit-row"
+    },
+    {
+      "application": "pmo",
+      "expected": "allow",
+      "facts": {
+        "known": true,
+        "qualified": true
+      },
+      "id": "pmo-qualified",
+      "rule": "admit-row"
+    },
+    {
+      "application": "pmo",
+      "expected": "hold",
+      "facts": {
+        "known": true,
+        "qualified": false
+      },
+      "id": "pmo-legacy",
+      "rule": "admit-row"
+    },
+    {
+      "application": "pmo",
+      "expected": "hold",
+      "facts": {
+        "known": false,
+        "qualified": true
+      },
+      "id": "pmo-unknown",
+      "rule": "admit-row"
+    }
+  ],
+  "purpose": "Test WBS decision delivery and withdrawal.",
+  "required_assessment_origins": [
+    "wbs"
+  ],
+  "rules": [
+    {
+      "applies": {},
+      "control": "staging",
+      "evidence": "policy",
+      "id": "admit-row",
+      "requires": {
+        "known": true,
+        "qualified": true
+      }
+    }
+  ],
+  "scope": "Isolated training ledgers and budgets. No external customer records."
+}

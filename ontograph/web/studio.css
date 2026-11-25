@@ -515,3 +515,5 @@ dialog::backdrop { background: rgb(4 10 16 / .76); }
 .weight-path li p { margin: .25rem 0; }
 
 .weights-gate { display: flex; align-items: center; gap: .5rem; margin-top: .75rem; }
+
+.assertion-record{overflow-wrap:anywhere}.decision-state{font-weight:650}.decision-state[data-state="unresolved_conflict"],.decision-state[data-state="stale_resolution"]{color:#ffc78e}

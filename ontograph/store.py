@@ -7,7 +7,7 @@ import sqlite3
 from contextlib import closing, contextmanager
 
 from .model import (
-    DECISIONS, canonical, check_required_assessments, consumer_bundle, digest, identifier, impact, indexed, jsonld,
+    DECISIONS, assertion_basis, canonical, check_required_assessments, consumer_bundle, digest, identifier, impact, indexed, jsonld,
     nonempty, require, text_digest, timestamp, utcnow, validate, verify_discrimination,
 )
 
@@ -195,6 +195,12 @@ class Registry:
             now = self.clock()
             require(all(timestamp(item["observed_at"]) <= timestamp(now) for item in payload["evidence"]),
                     "Evidence timestamp is in the future")
+            for edge in payload["edges"]:
+                for assertion in edge.get("assertions", []):
+                    require(timestamp(assertion["asserted_at"]) <= timestamp(now), "Assertion timestamp is in the future")
+                if "resolution" in edge:
+                    require(timestamp(edge["resolution"]["resolved_at"]) <= timestamp(now),
+                            "Resolution timestamp is in the future")
             manifest = {"format": "ontograph.manifest/1", "workspace": self._workspace(db),
                         "base": base, "author": actor["id"], "created_at": now, "reason": reason,
                         "reviewers": sorted(reviewers), "quorum": quorum,
@@ -237,8 +243,15 @@ class Registry:
             )""", (release_id, release_id)).fetchall()
         assigned = [vote for vote in votes if vote["reviewer"] in manifest["reviewers"]]
         require(not any(vote["choice"] == "object" for vote in assigned), "Unresolved reviewer objection")
-        require(sum(vote["choice"] == "approve" and vote["active"] for vote in assigned) >= manifest["quorum"],
-                "Approval quorum not met")
+        approvals = {vote["reviewer"] for vote in assigned if vote["choice"] == "approve" and vote["active"]}
+        require(len(approvals) >= manifest["quorum"], "Approval quorum not met")
+        evidence = indexed(payload["evidence"], "evidence")
+        for edge in payload["edges"]:
+            choice = edge.get("resolution")
+            if choice:
+                require(choice["basis"] == assertion_basis(edge, evidence), "Stale assertion resolution")
+                require(choice["reviewer"] in approvals,
+                        f"Resolution requires authenticated approval by its assigned reviewer: {choice['reviewer']}")
 
     @staticmethod
     def _release_export(release_id, manifest, payload):

@@ -18,3 +18,4 @@
 - [Practical guide](https://openontograph.org/guide/) and [简体中文指南](https://openontograph.org/guide/zh-Hans.html). Import a personal library model, reconcile WBS fields across departments, and publish a read-only glossary for a Copilot agent.
 - [Architecture puzzle](https://openontograph.org/architecture/) and [架构拼图](https://openontograph.org/architecture/?lang=zh-Hans). Explore the effect of missing evidence and assumed adapters in two synthetic cases.
 - [Weighted decision impact](https://openontograph.org/weights/) and [加权关系](https://openontograph.org/weights/zh/). Five synthetic evidence scenarios compare assessed, incomplete and disputed paths to Finance processes and a mandatory release assessment requirement.
+- [WBS application pilot](https://openontograph.org/wbs/): Observed rule activation, disagreement and withdrawal in Beancount and LibreOffice Calc using synthetic data. [简体中文](https://openontograph.org/wbs/zh/)

@@ -29,7 +29,8 @@ jobs:
         run: |
           python -m ontograph weighted-impact examples/weighted/finance-close.json posting-object
           python -m examples.weighted.build_demo
-          git diff --exit-code -- site/weights/
+          python tools/build_wbs_pages.py
+          git diff --exit-code -- site/weights/ site/wbs/
       - name: Exercise standalone customer adoption
         run: python examples/hub_pilot/standalone.py "$RUNNER_TEMP/standalone-evidence"
       - name: Generate offline evidence demo
@@ -46,3 +47,22 @@ jobs:
             out/aurora.html
             out/aurora.json
           if-no-files-found: error
+
+  wbs-applications:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Install the two native business engines
+        run: |
+          sudo apt-get -qq update
+          sudo apt-get install -y --no-install-recommends libreoffice-calc
+          python -m pip install 'beancount==3.2.3' 'beanquery==0.2.0'
+          bean-query --version
+          soffice --version
+      - name: Exercise activation, disputed evidence, withdrawal and recovery
+        run: python -m unittest discover -s tests -p 'test_wbs_pilot.py' -v

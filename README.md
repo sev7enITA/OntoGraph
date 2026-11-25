@@ -103,3 +103,9 @@ OnToGraPh was created by **Fabrizio Degni**. If you find an issue or want to pro
 ## Assess the impact of a relationship change
 
 Record confidence, criticality, an assessor, rationale and a source on a typed edge. Trace a changed field or concept into decision processes, inspect missing evidence and designate scopes that must be fully assessed before release. [Interactive case](https://openontograph.org/weights/) · [Research and practitioner evidence](https://github.com/sev7enITA/OntoGraph/blob/main/docs/WEIGHTED-RELATIONSHIPS-MARKET.md)
+
+## When two teams disagree about WBS
+
+Finance and PMO can attach dated, attributed assertions to one relationship, each with its own confidence, criticality, evidence and rationale. A named reviewer can resolve the disagreement against the exact assertion set. Updating the evidence invalidates that resolution. The authenticated portal now has a per-account evidence workspace. Final release approval and application observations run through the release registry.
+
+[Try the authenticated relationship editor](https://openontograph.org/OntoGraph/decisions/?lang=en) · [中文界面](https://openontograph.org/OntoGraph/decisions/?lang=zh-Hans) · [Recorded WBS pilot](https://openontograph.org/wbs/) · [试点实测记录](https://openontograph.org/wbs/zh/) · [Reproduce the run](examples/wbs_pilot/README.md)
