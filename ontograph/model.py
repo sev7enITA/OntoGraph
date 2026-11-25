@@ -131,11 +131,14 @@ def validate(document):
         require(entry["status"] in EVIDENCE_STATES, "Invalid evidence status")
         nonempty(entry["applicability"], "applicability finding")
         if "upstream" in entry:
-            meta = record(entry["upstream"], ("provider", "id", "reported_sha256"), "upstream locator")
+            meta = record(entry["upstream"], ("provider", "id", "reported_sha256"), "upstream locator",
+                          ("reported_snapshot_sha256",))
             nonempty(meta["provider"], "provider")
             nonempty(meta["id"], "upstream ID")
-            require(isinstance(meta["reported_sha256"], str)
-                    and re.fullmatch(r"[0-9a-f]{64}", meta["reported_sha256"]), "Invalid upstream digest")
+            for field in ("reported_sha256", "reported_snapshot_sha256"):
+                if field in meta:
+                    require(isinstance(meta[field], str) and re.fullmatch(r"[0-9a-f]{64}", meta[field]),
+                            "Invalid upstream digest")
     nodes = indexed(document["nodes"], "node")
     for node in nodes.values():
         record(node, ("id", "kind", "label", "definition", "owner"), "node", ("aliases",))

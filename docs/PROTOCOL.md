@@ -56,7 +56,7 @@ For an activation, use probe IDs declared in the payload and report one of `allo
 
 ### Inputs and optional adapters
 
-Run `python3 -m ontograph policywatcher-draft PACKET.json AUTHORIZED-EXCERPT.txt`. The adapter checks the packet family, publication gate, reported availability, ID and change URL. It retains the upstream **reported** digest separately from the computed excerpt hash. It creates `insufficient` evidence pending human confirmation. The adapter accepts a locally supplied packet and excerpt and does not fetch sources, authenticate to PolicyWatcher or assert a verified upstream digest. [PolicyWatcher Evidence Packet](https://policywatcher.online/schemas/evidence-packet/v1)
+Run `python3 -m ontograph policywatcher-draft PACKET.json AUTHORIZED-EXCERPT.txt`. The adapter checks the packet family, publication gate, verified-retrieval state, public snapshot, ID and change URL. It retains the upstream **reported** packet and snapshot digests separately from the computed excerpt hash. It creates `insufficient` evidence pending human confirmation. The adapter accepts a locally supplied packet and excerpt and does not fetch sources, authenticate to PolicyWatcher or assert a verified upstream digest. [PolicyWatcher Evidence Packet](https://policywatcher.online/schemas/evidence-packet/v1)
 
 NVIDIA or a catalog can propose mappings as a separate application of this schema. A steward resolves identifiers, intended grain and applicability. Automated actions and publish permissions are outside the proposed adapter contract. The JSON-LD graph is a derived view, while the frozen JSON remains suitable for offline verification.
 

@@ -239,12 +239,20 @@ class GovernanceTests(unittest.TestCase):
     def test_policywatcher_packet_can_only_prepare_unreviewed_evidence(self):
         change = "12345678-1234-1234-1234-123456789abc"
         packet = {"schema": PW_SCHEMA, "schemaVersion": "1.1.0", "publicationGate": "published",
-                  "sourceConfidence": {"state": "available"}, "changeId": change, "contentDigest": "a" * 64,
+                  "sourceConfidence": {"state": "verified-retrieval", "publicSnapshotEvidence": True},
+                  "changeId": change, "contentDigest": "a" * 64,
                   "changeUrl": "https://policywatcher.online/change/" + change,
-                  "screeningDate": "2026-11-24T14:23:12.008Z"}
+                  "screeningDate": "2026-11-24T14:23:12.008Z",
+                  "snapshots": {"current": {"version": 4, "sha256": "b" * 64,
+                                            "capturedAt": "2026-11-24T14:22:00.125Z"}}}
         evidence = policywatcher_evidence(packet, "A short authorized passage")
         self.assertEqual(evidence["status"], "insufficient")
         self.assertNotEqual(evidence["sha256"], evidence["upstream"]["reported_sha256"])
+        self.assertEqual(evidence["upstream"]["reported_snapshot_sha256"], "b" * 64)
+        self.assertEqual(evidence["observed_at"], "2026-11-24T14:22:00Z")
+        packet["sourceConfidence"]["state"] = "review-required"
+        with self.assertRaisesRegex(Rejected, "requires review"):
+            policywatcher_evidence(packet, "A short authorized passage")
         packet["publicationGate"] = "withheld"
         with self.assertRaisesRegex(Rejected, "withheld"):
             policywatcher_evidence(packet, "A short authorized passage")
