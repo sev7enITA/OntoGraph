@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>OntoGraph Studio · Processi</title>
+<title>OnToGraPh Studio · Processes</title>
 <link rel="icon" type="image/png" href="../brand.png">
 <link rel="stylesheet" href="process.css">
 <script defer src="vendor/xlsx.full.min.js" integrity="sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT"></script>
@@ -19,66 +19,66 @@
 </head>
 <body>
 <header class="hdr"><div class="hdr-in">
-  <div><h1>OntoGraph Studio · Processi</h1><div class="sub" id="sub">Carica l'Excel di censimento, correggi passi e flussi, ottieni sequenza, blocchi ed entità con il verdetto delle policy. Scenario sintetico Aurora 21. Tutto nel browser.</div></div>
+  <div><h1 class="process-brand"><img src="../brand-wordmark.png" alt="OnToGraPh" width="128" height="31"> <span>Process Modeler</span></h1><div class="sub" id="sub">Import the process inventory workbook, edit steps and flows, and explore sequence, flow and entity diagrams with policy results. Aurora 21 is a synthetic scenario. Everything runs in your browser.</div></div>
   <div class="actions">
-    <label class="btn primary" for="file">Carica Excel<input type="file" id="file" accept=".xlsx"></label>
-    <button class="btn" id="dl-xlsx" type="button">Scarica Excel</button>
-    <button class="btn" id="open-modeler" type="button" aria-pressed="false">Modellatore</button><button class="btn" id="close-modeler" type="button" aria-pressed="true">Censimento</button>
-    <button class="btn" id="dl-code" type="button">Scarica codice (zip)</button>
-    <button class="btn" id="dl-svg" type="button">Scarica SVG</button>
-    <button class="btn" id="cp-mmd" type="button">Copia Mermaid</button>
-    <button class="btn" id="cp-puml" type="button">Copia PlantUML</button>
-    <button class="btn ghost" id="reset" type="button">Ripristina demo</button>
-    <a class="btn ghost process-nav" id="open-governance" href="../governance?from=processi">Studio semantico →</a>
+    <label class="btn primary" for="file">Import Excel<input type="file" id="file" accept=".xlsx"></label>
+    <button class="btn" id="dl-xlsx" type="button">Download Excel</button>
+    <button class="btn" id="open-modeler" type="button" aria-pressed="false">Modeler</button><button class="btn" id="close-modeler" type="button" aria-pressed="true">Inventory</button>
+    <button class="btn" id="dl-code" type="button">Download code (ZIP)</button>
+    <button class="btn" id="dl-svg" type="button">Download SVG</button>
+    <button class="btn" id="cp-mmd" type="button">Copy Mermaid</button>
+    <button class="btn" id="cp-puml" type="button">Copy PlantUML</button>
+    <button class="btn ghost" id="reset" type="button">Reset demo</button>
+    <a class="btn ghost process-nav" id="open-governance" href="../governance?from=processi">Semantic Studio →</a>
   </div>
 </div></header>
 
 <main class="wrap">
   <div class="col">
     <section class="card">
-      <h2>Censimento <span class="kpis" id="kpis"></span></h2>
-      <div class="row"><select class="inline" id="proc"></select><button class="btn small" id="add-proc" type="button">+ Processo</button><button class="btn small danger" id="del-proc" type="button">Elimina</button></div>
+      <h2>Inventory <span class="kpis" id="kpis"></span></h2>
+      <div class="row"><select class="inline" id="proc"></select><button class="btn small" id="add-proc" type="button">+ Process</button><button class="btn small danger" id="del-proc" type="button">Delete</button></div>
       <div class="row" style="margin-top:8px">
-        <label class="f grow">Nome processo<input id="p-name"></label>
+        <label class="f grow">Process name<input id="p-name"></label>
         <label class="f w120">Area / owner<select id="p-area"></select></label>
       </div>
     </section>
     <section class="card">
-      <h2>Passi del processo <button class="btn small" id="add-step" type="button">+ Passo</button></h2>
+      <h2>Process steps <button class="btn small" id="add-step" type="button">+ Step</button></h2>
       <div class="steps" id="steps"></div>
     </section>
-    <details class="card"><summary>Sistemi censiti</summary>
+    <details class="card"><summary>Inventoried systems</summary>
       <div class="lines" id="systems" style="margin-top:8px"></div>
-      <div class="row" style="margin-top:8px"><input id="sys-code" placeholder="CODICE" class="mono" style="flex:0 0 120px;padding:5px 7px;border:1px solid var(--line);border-radius:6px;background:var(--surface)"><input id="sys-name" placeholder="Nome" style="flex:1 1 120px;padding:5px 7px;border:1px solid var(--line);border-radius:6px;background:var(--surface)"><button class="btn small" id="add-sys" type="button">+ Sistema</button></div>
+      <div class="row" style="margin-top:8px"><input id="sys-code" placeholder="CODE" class="mono" style="flex:0 0 120px;padding:5px 7px;border:1px solid var(--line);border-radius:6px;background:var(--surface)"><input id="sys-name" placeholder="Name" style="flex:1 1 120px;padding:5px 7px;border:1px solid var(--line);border-radius:6px;background:var(--surface)"><button class="btn small" id="add-sys" type="button">+ System</button></div>
     </details>
-    <details class="card"><summary>Report del censimento</summary><div class="report" id="report" style="margin-top:8px"></div></details>
-    <details class="card"><summary>Codice generato</summary>
-      <p class="muted" style="font-size:.78rem;margin:8px 0">File generati dal modello corrente, disponibili per esportazione locale e revisione.</p>
+    <details class="card"><summary>Inventory report</summary><div class="report" id="report" style="margin-top:8px"></div></details>
+    <details class="card"><summary>Generated code</summary>
+      <p class="muted" style="font-size:.78rem;margin:8px 0">Files generated from the current model for local export and review.</p>
       <select class="inline" id="code-file" style="width:100%"></select>
       <pre class="code" id="code-view"></pre>
     </details>
   </div>
 
   <div class="col">
-    <section id="functional-editor" hidden aria-label="Modellatore funzionale"></section>
-    <section class="card diagram-workspace" id="diagram-workspace" aria-label="Esplora il diagramma">
-      <div class="diagram-heading"><div><p class="eyebrow">Vista generata dal modello</p><h2>Esplora il processo</h2></div><span class="diagram-provenance" id="diagram-provenance"></span></div>
-      <div class="row diagram-tabs"><div class="tabs" role="tablist" aria-label="Tipo di diagramma"><button type="button" class="tab" role="tab" aria-selected="true" aria-controls="diagram" data-kind="swimlane" id="k-sw">A blocchi</button><button type="button" class="tab" role="tab" aria-selected="false" aria-controls="diagram" data-kind="sequence" id="k-seq">Sequenza</button><button type="button" class="tab" role="tab" aria-selected="false" aria-controls="diagram" data-kind="class" id="k-cls">Entità</button></div></div>
-      <div class="diagram-find"><label class="f grow" for="diagram-search">Cerca un passo nel progetto<input id="diagram-search" type="search" placeholder="ID, nome o sistema…" autocomplete="off" aria-controls="diagram-results"></label><button type="button" class="btn small" id="diagram-clear">Azzera ricerca</button><label class="f" for="diagram-filter">Evidenzia esito<select id="diagram-filter"><option value="all">Tutti i passi</option><option value="pending">Da affrontare</option><option value="approved">Pronti (policy)</option><option value="not_evaluated">Non valutati</option></select></label></div>
-      <div id="diagram-results" class="diagram-results" aria-label="Risultati della ricerca" hidden></div>
+    <section id="functional-editor" hidden aria-label="Process modeler"></section>
+    <section class="card diagram-workspace" id="diagram-workspace" aria-label="Explore diagram">
+      <div class="diagram-heading"><div><p class="eyebrow">Generated from the model</p><h2>Explore the process</h2></div><span class="diagram-provenance" id="diagram-provenance"></span></div>
+      <div class="row diagram-tabs"><div class="tabs" role="tablist" aria-label="Diagram type"><button type="button" class="tab" role="tab" aria-selected="true" aria-controls="diagram" data-kind="swimlane" id="k-sw">Flow</button><button type="button" class="tab" role="tab" aria-selected="false" aria-controls="diagram" data-kind="sequence" id="k-seq">Sequence</button><button type="button" class="tab" role="tab" aria-selected="false" aria-controls="diagram" data-kind="class" id="k-cls">Entities</button></div></div>
+      <div class="diagram-find"><label class="f grow" for="diagram-search">Find a step in the project<input id="diagram-search" type="search" placeholder="ID, name, or system…" autocomplete="off" aria-controls="diagram-results"></label><button type="button" class="btn small" id="diagram-clear">Clear search</button><label class="f" for="diagram-filter">Highlight result<select id="diagram-filter"><option value="all">All steps</option><option value="pending">Needs attention</option><option value="approved">Ready (policy)</option><option value="not_evaluated">Unevaluated</option></select></label></div>
+      <div id="diagram-results" class="diagram-results" aria-label="Search results" hidden></div>
       <p class="diagram-filter-note" id="diagram-filter-note" role="status" aria-live="polite"></p>
       <div class="diagram-layout">
         <div class="diagram-main">
-          <div class="diagram-tools" id="diagram-tools"><div class="row" role="group" aria-label="Navigazione del diagramma"><button type="button" class="btn small" data-viewport="out" aria-label="Riduci diagramma">−</button><output id="diagram-zoom" aria-label="Livello di zoom"> </output><button type="button" class="btn small" data-viewport="in" aria-label="Ingrandisci diagramma">+</button><button type="button" class="btn small" data-viewport="fit">Adatta</button><button type="button" class="btn small" data-viewport="reset">100%</button><button type="button" class="btn small" data-viewport="fullscreen" aria-pressed="false">Schermo intero</button></div></div>
-          <div class="diagram" id="diagram" tabindex="0" role="region" aria-label="Diagramma navigabile" aria-describedby="diagram-help" aria-busy="true"><div class="diagram-state">Caricamento del diagramma…</div></div>
-          <div class="diagram-footer"><span id="dstat" role="status" aria-live="polite"></span><details class="diagram-help"><summary>Come navigare</summary><p id="diagram-help">Trascina lo sfondo per spostarti. Usa + e − oppure Ctrl/⌘ e rotella per lo zoom. Con il diagramma a fuoco: frecce per spostarti, F per adattare, 0 per il 100%, Esc per deselezionare. Su touch: un dito per spostarti, due per lo zoom.</p></details></div>
-          <div class="policy-legend" aria-label="Legenda delle policy"><span class="legend-ready">Pronto (policy)</span><span class="legend-wait">In attesa</span><span class="legend-review">Da rivedere / bloccato</span><span class="legend-neutral">Non valutato</span></div>
+          <div class="diagram-tools" id="diagram-tools"><div class="row" role="group" aria-label="Diagram navigation"><button type="button" class="btn small" data-viewport="out" aria-label="Zoom out">−</button><output id="diagram-zoom" aria-label="Zoom level"> </output><button type="button" class="btn small" data-viewport="in" aria-label="Zoom in">+</button><button type="button" class="btn small" data-viewport="fit">Fit</button><button type="button" class="btn small" data-viewport="reset">100%</button><button type="button" class="btn small" data-viewport="fullscreen" aria-pressed="false">Full screen</button></div></div>
+          <div class="diagram" id="diagram" tabindex="0" role="region" aria-label="Interactive diagram" aria-describedby="diagram-help" aria-busy="true"><div class="diagram-state">Loading diagram…</div></div>
+          <div class="diagram-footer"><span id="dstat" role="status" aria-live="polite"></span><details class="diagram-help"><summary>Navigation help</summary><p id="diagram-help">Drag the background to pan. Use + and − or Ctrl/⌘ and scroll to zoom. When the diagram has focus, use the arrows to pan, F to fit, 0 for 100%, and Esc to clear selection. On a touch screen, drag with one finger to pan or pinch with two fingers to zoom.</p></details></div>
+          <div class="policy-legend" aria-label="Policy legend"><span class="legend-ready">Ready (policy)</span><span class="legend-wait">Pending</span><span class="legend-review">Needs review / blocked</span><span class="legend-neutral">Unevaluated</span></div>
           <p class="diagram-semantics" id="diagram-semantics"></p>
         </div>
-        <aside class="diagram-inspector" aria-label="Dettagli del passo selezionato"><div class="inspector-heading"><h3>Dettagli del passo</h3><button type="button" class="btn ghost small" id="diagram-deselect">Deseleziona</button></div><div id="diagram-inspector"><p class="muted">Seleziona un blocco o cerca un passo per leggerne responsabilità, flussi ed evidenze.</p></div><h3 class="inspector-policy-title">Esito automatico delle policy <span id="vsel"></span></h3><div class="verdicts" id="verdicts"></div></aside>
+        <aside class="diagram-inspector" aria-label="Selected step details"><div class="inspector-heading"><h3>Step details</h3><button type="button" class="btn ghost small" id="diagram-deselect">Clear selection</button></div><div id="diagram-inspector"><p class="muted">Select a block or search for a step to view its responsibilities, flows, and evidence.</p></div><h3 class="inspector-policy-title">Automated policy result <span id="vsel"></span></h3><div class="verdicts" id="verdicts"></div></aside>
       </div>
     </section>
-    <details class="card"><summary>Sorgente del diagramma</summary><pre class="code" id="src"></pre></details>
+    <details class="card"><summary>Diagram source</summary><pre class="code" id="src"></pre></details>
   </div>
 </main>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>

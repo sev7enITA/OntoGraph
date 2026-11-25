@@ -1,54 +1,54 @@
-[Wiki OntoGraph](README.md)
+[OnToGraPh Wiki](README.md)
 
-# Studio visuale OntoGraph
+# OnToGraPh Visual Studio
 
-Avvia dalla radice del repository:
+Run from the repository root:
 
 ```sh
 python3 -m ontograph studio
 ```
 
-Apri [OntoGraph Studio](http://127.0.0.1:8765/). Il server è locale. Non richiede installazione di modelli, accesso al portale riservato o servizi cloud. I dati iniziali sono sintetici.
+Open [OnToGraPh Studio](http://127.0.0.1:8765/). The local server uses a synthetic starting dataset and runs without a language model, portal account or cloud service.
 
-## Il Modellatore processi è la base
+## Start in the process modeler
 
-La prima schermata riprende codice, struttura e flusso del workbench PolicyAsCode nell’edizione OntoGraph. Ritrovi il censimento, le viste a blocchi, sequenza ed entità, il canvas editabile, la palette, le proprietà live, il pannello sorgente e gli export. Le modifiche e le coordinate sono salvate nel browser. Scarica l’Excel del modellatore per trasferire la bozza, inclusi nodi e collegamenti, e ricaricalo con il comando di importazione.
+The first screen reuses the code, structure and workflow of the PolicyAsCode workbench. It includes the process inventory, block, sequence and entity views, an editable canvas, shape palette, live properties, source panel and exports. The browser saves draft changes and layout. Export the modeler workbook to transfer the draft with its nodes and links, then reload it using the import control.
 
-[Anteprima del Modellatore processi](../../assets/studio/modellatore-processi.png)
+[Process modeler preview](../../assets/studio/process-modeler.png)
 
-## Dal processo al controllo
+## Move from a process to a control
 
-1. Apri **Studio semantico** dal Modellatore processi.
-2. In **Struttura** scegli il processo e il controllo che gli vuoi associare. La proiezione crea un riferimento esplicito alla bozza di governance. Il censimento dettagliato e il layout continuano a essere editabili nel Modellatore.
-3. Nel **Grafo** seleziona un oggetto o un arco. I collegamenti portano al riferimento e l’ispettore apre oggetti, liste e valori annidati indicandone il percorso. Modifica un valore con il controllo del suo tipo. Il sorgente JSON tratta lo stesso documento.
-4. Usa **Valida** per eseguire i controlli del motore. **Salva versione** archivia una copia di lavoro con una nota in questo browser. In **Versioni** confronta proprietà e ID interessati rispetto a una baseline o a una versione precedente.
-5. In **Evidenze** ripercorri il caso Aurora 21. Il report riguarda i due simulatori integrati. L’analisi della tua bozza è accessibile dalla validazione del modello.
+1. Open **Semantic Studio** from the process modeler.
+2. In **Structure**, select a process and the control to associate with it. This creates an explicit reference in the governance draft. Continue editing the detailed inventory and layout in the modeler.
+3. Select an object or edge in **Graph**. Linked references are navigable. The inspector opens nested objects, lists and values and displays their paths. Edit a value with its typed control or use the JSON editor for the same document.
+4. Use **Validate** to run engine checks. **Save version** stores a working copy with a note in this browser. In **Versions**, compare properties and affected IDs with the baseline or an earlier version.
+5. In **Evidence**, follow Aurora 21. The report concerns the two built-in simulators. Use model validation to analyze your own draft.
 
-Il collegamento tra i due ambienti è una proiezione dichiarata del processo. Il rilascio semantico e il file di censimento hanno formati distinti. Per modificarli usa il rispettivo editor.
+The link between the workspaces is an explicit projection of a process. Release documents and process inventories use distinct formats and each has its own editor.
 
-[Anteprima del grafo e delle proprietà](../../assets/studio/studio-semantico.png)
+[Graph and property inspector preview](../../assets/studio/semantic-studio.png)
 
-## Formati e registro locale
+## Formats and local registry
 
-| Ambiente | Import ed export |
+| Workspace | Import and export |
 | --- | --- |
-| Modellatore processi | Excel PolicyAsCode/OntoGraph dal template del modellatore. Sorgenti JSON, Mermaid, PlantUML, SVG e ZIP. |
-| Studio semantico | JSON di release e workbook `OntoGraph Release` con percorsi atomici, tipi e valori. Export JSON-LD, XLSX, Mermaid, PlantUML, SVG e ZIP. |
+| Process modeler | PolicyAsCode/OnToGraPh Excel workbooks based on the modeler's template. JSON, Mermaid, PlantUML, SVG and ZIP exports. |
+| Semantic Studio | Release JSON and the `OntoGraph Release` workbook with individual paths, types and values. JSON-LD, XLSX, Mermaid, PlantUML, SVG and ZIP exports. |
 
-Nel workbook semantico mantieni la struttura delle colonne **Path**, **Type** e **Value**. Modifica le celle dei valori mantenendo il tipo dichiarato. L’import passa dalla stessa validazione del modello JSON.
+Keep the **Path**, **Type** and **Value** columns in the semantic workbook. Edit values in their declared type. Workbook import uses the same validator as JSON import.
 
-Per usare un tuo documento semantico come bozza iniziale:
+Start with your own semantic document:
 
 ```sh
 python3 -m ontograph studio --model examples/aurora-21.json
 ```
 
-Per governare una release reale di un registro **locale già inizializzato**:
+Operate a release using an **existing local registry**:
 
 ```sh
-python3 -m ontograph studio --registry percorso/al/registro.sqlite
+python3 -m ontograph studio --registry path/to/registry.sqlite
 ```
 
-In **Evidenze**, il pannello **Registro locale** usa il token del ruolo per preparare una candidata, registrare un voto, pubblicare, ritirare e consultare l’audit. L’identità, il quorum e la validità delle operazioni sono controllati dal registro. I token sono inseriti nella pagina al momento dell’uso. Il pannello resta disponibile solo sul server locale configurato.
+The **Local registry** panel in **Evidence** uses a role token to prepare a candidate, record a vote, publish, withdraw and inspect the audit trail. The registry enforces identity, quorum and operation validity. Enter tokens in the panel at the time of use. The panel is available on the configured local server.
 
-[Protocollo di rilascio](../PROTOCOL.md) · [Aurora 21](AURORA-21.md)
+[Release protocol](../PROTOCOL.md) · [Aurora 21](AURORA-21.md)

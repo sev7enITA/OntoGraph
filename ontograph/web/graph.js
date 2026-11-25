@@ -7,30 +7,30 @@ const PADDING = 22;
 let graphCount = 0;
 
 const KINDS = {
-  concept: ["Concetto", "#b6a0ed", "C"],
-  class: ["Classe", "#a3b7ff", "O"],
-  field: ["Campo", "#87c9ed", "F"],
-  process: ["Processo", "#9db0c9", "P"],
-  control: ["Controllo", "#68e0cb", "✓"],
-  contract: ["Contratto", "#9bbdff", "↔"],
-  application: ["Applicazione", "#a7d7ac", "A"],
-  evidence: ["Evidenza", "#f2c47c", "E"],
-  rule: ["Regola", "#83d3c7", "R"],
-  probe: ["Prova", "#bfd3a0", "T"]
+  concept: ["Concept", "#b6a0ed", "C"],
+  class: ["Class", "#a3b7ff", "O"],
+  field: ["Field", "#87c9ed", "F"],
+  process: ["Process", "#9db0c9", "P"],
+  control: ["Control", "#68e0cb", "✓"],
+  contract: ["Contract", "#9bbdff", "↔"],
+  application: ["Application", "#a7d7ac", "A"],
+  evidence: ["Evidence", "#f2c47c", "E"],
+  rule: ["Rule", "#83d3c7", "R"],
+  probe: ["Probe", "#bfd3a0", "T"]
 };
 const KIND_ORDER = Object.keys(KINDS);
 
 const RELATIONS = {
-  broader: "più generale",
-  subClassOf: "sottoclasse di",
-  mapsTo: "mappa su",
-  dependsOn: "dipende da",
-  implements: "attua",
-  consumes: "consuma"
+  broader: "broader",
+  subClassOf: "subclass of",
+  mapsTo: "maps to",
+  dependsOn: "depends on",
+  implements: "implements",
+  consumes: "consumes"
 };
 
 const STAGES = [
-  "Fonti e oggetti", "Regole", "Controlli", "Contratti", "Applicazioni"
+  "Sources and objects", "Rules", "Controls", "Contracts", "Applications"
 ];
 
 const STAGE_FOR_KIND = {
@@ -78,7 +78,7 @@ function modelGraph(model) {
   if (Array.isArray(model?.edges)) {
     model.edges.forEach((edge, index) => {
       if (!edge || typeof edge !== "object") return;
-      const label = Object.hasOwn(RELATIONS, edge.predicate) ? RELATIONS[edge.predicate] : "relazione";
+      const label = Object.hasOwn(RELATIONS, edge.predicate) ? RELATIONS[edge.predicate] : "relationship";
       link(lookup("nodes", edge.source), lookup("nodes", edge.target), label, ["edges", index]);
     });
   }
@@ -86,9 +86,9 @@ function modelGraph(model) {
     model.rules.forEach((rule, index) => {
       const key = pathKey(["rules", index]);
       if (!nodes.has(key)) return;
-      link(key, lookup("nodes", rule.control), "regola di", ["rules", index, "control"], true);
-      link(key, lookup("evidence", rule.evidence), "fonte", ["rules", index, "evidence"], true);
-      for (const [group, label] of [["applies", "ambito"], ["requires", "richiede"]]) {
+      link(key, lookup("nodes", rule.control), "rule for", ["rules", index, "control"], true);
+      link(key, lookup("evidence", rule.evidence), "source", ["rules", index, "evidence"], true);
+      for (const [group, label] of [["applies", "scope"], ["requires", "requires"]]) {
         for (const field of Object.keys(rule[group] ?? {})) {
           link(key, lookup("nodes", field), label, ["rules", index, group, field], true);
         }
@@ -99,8 +99,8 @@ function modelGraph(model) {
     model.probes.forEach((probe, index) => {
       const key = pathKey(["probes", index]);
       if (!nodes.has(key)) return;
-      link(key, lookup("nodes", probe.application), "verifica", ["probes", index, "application"], true);
-      link(key, lookup("rules", probe.rule), "prova la regola", ["probes", index, "rule"], true);
+      link(key, lookup("nodes", probe.application), "checks", ["probes", index, "application"], true);
+      link(key, lookup("rules", probe.rule), "tests rule", ["probes", index, "rule"], true);
     });
   }
   return { nodes, edges };
@@ -256,7 +256,7 @@ function drawGraph(graph, layout, id, focus, onSelect) {
   const { width, height, positions, stages } = layout;
   const svg = svgElement("svg", {
     viewBox: `0 0 ${width} ${height}`, width, height, role: "group",
-    "aria-label": "Grafo delle dipendenze", class: "og-graph"
+    "aria-label": "Dependency graph", class: "og-graph"
   });
   svg.style.display = "block";
   svg.append(svgElement("style", {}, STYLE));
@@ -270,14 +270,14 @@ function drawGraph(graph, layout, id, focus, onSelect) {
   defs.append(arrow);
   svg.append(defs);
   if (graph.nodes.size === 0) {
-    svg.append(svgElement("text", { class: "og-empty", x: PADDING, y: 68 }, "Nessun elemento da mostrare"));
+    svg.append(svgElement("text", { class: "og-empty", x: PADDING, y: 68 }, "No items to display"));
     return svg;
   }
 
   stages.forEach((stage, column) => {
     if (!stage.length) return;
     const x = PADDING + column * COLUMN_WIDTH;
-    const name = column === 4 && stage.some(node => node.kind === "probe") ? "Applicazioni e prove" : STAGES[column];
+    const name = column === 4 && stage.some(node => node.kind === "probe") ? "Applications and probes" : STAGES[column];
     svg.append(
       svgElement("text", { class: "og-stage", x, y: 32 }, name),
       svgElement("line", { class: "og-stage-line", x1: x, y1: 42, x2: x + NODE_WIDTH, y2: 42 })
@@ -288,7 +288,7 @@ function drawGraph(graph, layout, id, focus, onSelect) {
     const left = graph.nodes.get(edge.source);
     const right = graph.nodes.get(edge.target);
     const pos = edgeGeometry(positions.get(edge.source), positions.get(edge.target), index);
-    const primary = focus && ["attua", "consuma", "regola di"].includes(edge.label);
+    const primary = focus && ["implements", "consumes", "rule for"].includes(edge.label);
     const classes = ["og-edge", edge.virtual && "og-reference", primary && "og-primary"].filter(Boolean);
     const group = svgElement("g", { class: classes.join(" ") });
     interactive(group, edge.path, `${left.label} · ${edge.label} · ${right.label}`, onSelect);

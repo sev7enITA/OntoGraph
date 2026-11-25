@@ -1,12 +1,4 @@
-/*
- * census.js: il censimento Excel letto, validato e trasformato in modello, fatti e diagrammi
- * direttamente nel browser (e in Node per i test di parità). Specchio di:
- *   tools/import_excel.py  → parseWorkbook(sheets)      sheets = { NomeFoglio: [[riga1],[riga2],...] }
- *   tools/export_excel.py  → modelToSheets(model, rules)
- *   tools/generate.py      → buildFacts(model)
- *   tools/uml.py           → sequenceMermaid / swimlaneMermaid / classMermaid / sequencePlantUML
- * La fonte di verità resta Python in pipeline: tools/parity_census.mjs confronta i due output.
- */
+// The process inventory workbook uses the original PolicyAsCode sheet and column names.
 (function (root, factory) {
   if (typeof module === "object" && module.exports) module.exports = factory(require("./functional-graph.js"));
   else root.DGCensus = factory(root.DGFunctionalGraph);
@@ -34,15 +26,15 @@
     "Regole.Severità": ["INFO", "WARNING", "ERROR", "CRITICAL"], "Regole.Enforcement": ["observe", "advise", "approve", "block"], "Regole.Attiva": ["SI", "NO"],
   };
   const COLUMN_HELP = {
-    Sistemi: "Un sistema per riga. Il Codice è l'identificativo usato in tutti gli altri fogli (MAIUSCOLO_CON_UNDERSCORE).",
-    Referenti: "Candidati Data Owner per area. La Chiave è usata in Processi.Area e SottoProcessi.Data Owner.",
-    Processi: "Un processo per riga (P1, P2, …). Sistemi separati da ';'.",
-    SottoProcessi: "Una riga per ogni riga delle tabelle Process & Entity Mapping. Master: CODICE:ruolo; … . Open point: OP-01; OP-02.",
-    Flussi: "Un flusso tra sistemi per riga, con il payload trasferito (entità o documento).",
-    Entita: "Entità in ingresso (IN, Sistema = sorgente) e in uscita (OUT, Sistema = dove risiede). Canonico = termine del Glossario.",
-    OpenPoint: "Punti aperti del SAL. Finché aperti, i sotto-processi collegati restano in attesa.",
-    Glossario: "Termini canonici. Alias: termine@SISTEMA; … (es. opportunità@CRM; dossier@DMS).",
-    Regole: "Catalogo regole della policy: severità ed enforcement massimo sono decisi qui, non nel codice. Attiva=NO disattiva la regola.",
+    Sistemi: "One system per row. Other sheets reference the Codice identifier (UPPERCASE_WITH_UNDERSCORES).",
+    Referenti: "Candidate data owners by area. Processi.Area and SottoProcessi.Data Owner use the Chiave identifier.",
+    Processi: "One process per row (P1, P2, …). Separate systems with a semicolon.",
+    SottoProcessi: "One process or entity mapping step per row. Master: CODE:role; … . Open point: OP-01; OP-02.",
+    Flussi: "One flow per row, with its transferred entity or document.",
+    Entita: "For inputs (IN), Sistema is the source. For outputs (OUT), Sistema is the host. Canonico names a term in Glossario.",
+    OpenPoint: "Linked steps remain pending until these issues are closed.",
+    Glossario: "Canonical terms. Aliases: term@SYSTEM; … (e.g., opportunity@CRM; dossier@DMS).",
+    Regole: "Policy catalog. Set severity and maximum enforcement here. Attiva=NO disables the rule.",
     Meta: "",
   };
   Object.assign(COLUMN_HELP, FG.GRAPH_HELP);
@@ -58,12 +50,12 @@
   // ------------------------------------------------------------ parse -------
   function readSheet(sheets, name, rep) {
     const rows = sheets[name];
-    if (!rows) { rep.errors.push(`${name}!0: foglio mancante`); return []; }
+    if (!rows) { rep.errors.push(`${name}!0: missing sheet`); return []; }
     const header = (rows[1] || []).map(str);
     const expected = SHEETS[name];
     const missing = expected.filter((c) => !header.includes(c));
-    if (new Set(header.filter(Boolean)).size !== header.filter(Boolean).length) { rep.errors.push(`${name}!2: intestazioni duplicate`); return []; }
-    if (missing.length) { rep.errors.push(`${name}!2: colonne mancanti: ${missing.join(", ")}`); return []; }
+    if (new Set(header.filter(Boolean)).size !== header.filter(Boolean).length) { rep.errors.push(`${name}!2: duplicate headers`); return []; }
+    if (missing.length) { rep.errors.push(`${name}!2: missing columns: ${missing.join(", ")}`); return []; }
     const out = [];
     for (let i = 2; i < rows.length; i++) {
       const r = rows[i] || [];
@@ -72,7 +64,7 @@
       rec._row = i + 1;
       for (const c of expected) {
         const en = ENUMS[`${name}.${c}`];
-        if (en && rec[c] && !en.includes(rec[c])) rep.errors.push(`${name}!${i + 1}: ${c}='${rec[c]}' non ammesso (valori: ${en.join(", ")})`);
+        if (en && rec[c] && !en.includes(rec[c])) rep.errors.push(`${name}!${i + 1}: ${c}='${rec[c]}' is invalid (allowed values: ${en.join(", ")})`);
       }
       out.push(rec);
     }
@@ -86,52 +78,52 @@
       flowRows = R("Flussi"), entRows = R("Entita"), opRows = R("OpenPoint"), glRows = R("Glossario"), ruleRows = R("Regole");
     const meta = Object.create(null);
     for (const r of metaRows) {
-      if (!r.Chiave || Object.hasOwn(meta, r.Chiave)) rep.errors.push(`Meta!${r._row}: chiave mancante o duplicata`);
+      if (!r.Chiave || Object.hasOwn(meta, r.Chiave)) rep.errors.push(`Meta!${r._row}: missing or duplicate key`);
       meta[r.Chiave] = r.Valore;
     }
-    for (const k of ["project", "domain", "model_version"]) if (!meta[k]) rep.errors.push(`Meta!0: chiave '${k}' mancante`);
+    for (const k of ["project", "domain", "model_version"]) if (!meta[k]) rep.errors.push(`Meta!0: missing key '${k}'`);
 
     const systems = Object.create(null);
     for (const r of sysRows) {
       const code = r.Codice;
-      if (!/^[A-Z][A-Z0-9_]*$/.test(code)) rep.errors.push(`Sistemi!${r._row}: Codice '${code}' deve essere MAIUSCOLO_CON_UNDERSCORE`);
-      if (systems[code]) rep.errors.push(`Sistemi!${r._row}: Codice duplicato ${code}`);
+      if (!/^[A-Z][A-Z0-9_]*$/.test(code)) rep.errors.push(`Sistemi!${r._row}: code '${code}' must be UPPERCASE_WITH_UNDERSCORES`);
+      if (systems[code]) rep.errors.push(`Sistemi!${r._row}: duplicate code ${code}`);
       const s = { label: r.Nome, role: r.Ruolo, kind: r.Tipo, adoption: r.Adozione || "full", scope: r.Perimetro || "in" };
       if (r["Nota adozione"]) s.adoption_note = r["Nota adozione"];
       if (r.Accesso) s.access = r.Accesso;
       if (r["Deck di riferimento"]) s.external_deck = r["Deck di riferimento"];
-      if (!r.Nome) rep.errors.push(`Sistemi!${r._row}: ${code}: Nome mancante`);
+      if (!r.Nome) rep.errors.push(`Sistemi!${r._row}: ${code}: missing name`);
       systems[code] = s;
     }
     const owners = Object.create(null);
     for (const r of refRows) {
-      if (!r.Chiave) rep.errors.push(`Referenti!${r._row}: Chiave mancante`);
-      if (Object.hasOwn(owners, r.Chiave)) rep.errors.push(`Referenti!${r._row}: chiave duplicata ${r.Chiave}`);
-      if (!r.Responsabile) rep.warnings.push(`Referenti!${r._row}: ${r.Chiave}: Responsabile mancante: i sotto-processi di quest'area risulteranno senza Data Owner`);
+      if (!r.Chiave) rep.errors.push(`Referenti!${r._row}: missing key`);
+      if (Object.hasOwn(owners, r.Chiave)) rep.errors.push(`Referenti!${r._row}: duplicate key ${r.Chiave}`);
+      if (!r.Responsabile) rep.warnings.push(`Referenti!${r._row}: ${r.Chiave}: responsible person missing. Steps in this area have no data owner.`);
       owners[r.Chiave] = { area: r.Area, responsible: r.Responsabile, operatives: splitList(r.Operativi) };
     }
     const open_points = [], opIds = new Set();
     for (const r of opRows) {
-      if (!r.ID.startsWith("OP-")) rep.errors.push(`OpenPoint!${r._row}: ID '${r.ID}' deve iniziare con OP-`);
-      if (opIds.has(r.ID)) rep.errors.push(`OpenPoint!${r._row}: ID duplicato ${r.ID}`);
+      if (!r.ID.startsWith("OP-")) rep.errors.push(`OpenPoint!${r._row}: ID '${r.ID}' must start with OP-`);
+      if (opIds.has(r.ID)) rep.errors.push(`OpenPoint!${r._row}: duplicate ID ${r.ID}`);
       opIds.add(r.ID);
       open_points.push({ id: r.ID, title: r.Titolo, detail: r.Dettaglio, owner: r.Owner, status: r.Stato || "open", next_step: r["Next step"] });
     }
     const glossary = [], canon = new Set();
     for (const r of glRows) {
-      if (!r.Canonico || canon.has(r.Canonico)) rep.errors.push(`Glossario!${r._row}: termine mancante o duplicato`);
+      if (!r.Canonico || canon.has(r.Canonico)) rep.errors.push(`Glossario!${r._row}: missing or duplicate term`);
       canon.add(r.Canonico);
       const aliases = [];
       for (const [term, sysc] of splitPairs(r.Alias, "@")) {
-        if (sysc && !systems[sysc]) rep.errors.push(`Glossario!${r._row}: alias '${term}' riferisce il sistema '${sysc}' non censito`);
+        if (sysc && !systems[sysc]) rep.errors.push(`Glossario!${r._row}: alias '${term}' references system '${sysc}' has no inventory entry`);
         aliases.push({ term, system: sysc });
       }
       glossary.push({ canonical: r.Canonico, aliases, status: r.Stato || "provisional" });
     }
     const flowsBySp = Object.create(null), entsBySp = Object.create(null);
     for (const r of flowRows) {
-      for (const s of [r.Da, r.A]) if (!systems[s]) rep.errors.push(`Flussi!${r._row}: sistema '${s}' non censito nel foglio Sistemi`);
-      if (!r.Payload) rep.warnings.push(`Flussi!${r._row}: ${r.SottoProcesso} ${r.Da}→${r.A}: Payload vuoto (la policy lo segnalerà come DG-MAP-002)`);
+      for (const s of [r.Da, r.A]) if (!systems[s]) rep.errors.push(`Flussi!${r._row}: system '${s}' is missing from Sistemi`);
+      if (!r.Payload) rep.warnings.push(`Flussi!${r._row}: ${r.SottoProcesso} ${r.Da}→${r.A}: empty payload (policy DG-MAP-002)`);
       (flowsBySp[r.SottoProcesso] ||= []).push({ from: r.Da, to: r.A, payload: r.Payload });
     }
     for (const r of entRows) {
@@ -139,37 +131,37 @@
       if (r.Direzione === "IN") d.in.push({ name: r.Nome, source: r.Sistema });
       else {
         const e = { name: r.Nome, system: r.Sistema };
-        if (r.Sistema && !systems[r.Sistema]) rep.errors.push(`Entita!${r._row}: entità '${r.Nome}': sistema '${r.Sistema}' non censito`);
-        if (r.Canonico) { if (!canon.has(r.Canonico)) rep.errors.push(`Entita!${r._row}: termine canonico '${r.Canonico}' non presente nel Glossario`); e.canonical = r.Canonico; }
+        if (r.Sistema && !systems[r.Sistema]) rep.errors.push(`Entita!${r._row}: entity '${r.Nome}': system '${r.Sistema}' has no inventory entry`);
+        if (r.Canonico) { if (!canon.has(r.Canonico)) rep.errors.push(`Entita!${r._row}: canonical term '${r.Canonico}' is missing from Glossario`); e.canonical = r.Canonico; }
         d.out.push(e);
       }
     }
     const procs = Object.create(null), spSeen = new Set();
     for (const r of procRows) {
-      if (!r.ID || Object.hasOwn(procs, r.ID)) rep.errors.push(`Processi!${r._row}: ID mancante o duplicato`);
-      if (!owners[r.Area]) rep.errors.push(`Processi!${r._row}: ${r.ID}: Area '${r.Area}' non presente in Referenti`);
-      for (const s of splitList(r.Sistemi)) if (!systems[s]) rep.errors.push(`Processi!${r._row}: ${r.ID}: sistema '${s}' non censito`);
+      if (!r.ID || Object.hasOwn(procs, r.ID)) rep.errors.push(`Processi!${r._row}: missing or duplicate ID`);
+      if (!owners[r.Area]) rep.errors.push(`Processi!${r._row}: ${r.ID}: area '${r.Area}' is missing from Referenti`);
+      for (const s of splitList(r.Sistemi)) if (!systems[s]) rep.errors.push(`Processi!${r._row}: ${r.ID}: system '${s}' has no inventory entry`);
       const p = { id: r.ID, name: r.Nome, subtitle: r.Sottotitolo, area: r.Area, systems: splitList(r.Sistemi), verified: toBool(r.Verificato), subprocesses: [] };
       if (toBool(r.Esterno)) p.external = true;
       procs[r.ID] = p;
     }
     for (const r of spRows) {
       const sid = r.ID;
-      if (!sid) rep.errors.push(`SottoProcessi!${r._row}: ID mancante`);
-      if (spSeen.has(sid)) rep.errors.push(`SottoProcessi!${r._row}: ID duplicato ${sid}`);
+      if (!sid) rep.errors.push(`SottoProcessi!${r._row}: missing ID`);
+      if (spSeen.has(sid)) rep.errors.push(`SottoProcessi!${r._row}: duplicate ID ${sid}`);
       spSeen.add(sid);
-      if (!procs[r.Processo]) { rep.errors.push(`SottoProcessi!${r._row}: ${sid}: Processo '${r.Processo}' non presente nel foglio Processi`); continue; }
+      if (!procs[r.Processo]) { rep.errors.push(`SottoProcessi!${r._row}: ${sid}: process '${r.Processo}' is missing from Processi`); continue; }
       const spSystems = splitList(r.Sistemi);
-      for (const s of spSystems) if (!systems[s]) rep.errors.push(`SottoProcessi!${r._row}: ${sid}: sistema '${s}' non censito`);
+      for (const s of spSystems) if (!systems[s]) rep.errors.push(`SottoProcessi!${r._row}: ${sid}: system '${s}' has no inventory entry`);
       const master = [];
-      for (const [sysc, role] of splitPairs(r.Master)) { if (!systems[sysc]) rep.errors.push(`SottoProcessi!${r._row}: ${sid}: master '${sysc}' non censito`); master.push({ system: sysc, role }); }
-      if (!master.length) rep.warnings.push(`SottoProcessi!${r._row}: ${sid}: nessun master candidato (la policy lo segnalerà come DG-OWN-001)`);
-      if (r["Data Owner"] && !owners[r["Data Owner"]]) rep.errors.push(`SottoProcessi!${r._row}: ${sid}: Data Owner '${r["Data Owner"]}' non presente in Referenti`);
-      if (!r["Data Owner"]) rep.warnings.push(`SottoProcessi!${r._row}: ${sid}: Data Owner vuoto (la policy lo segnalerà come DG-OWN-002)`);
+      for (const [sysc, role] of splitPairs(r.Master)) { if (!systems[sysc]) rep.errors.push(`SottoProcessi!${r._row}: ${sid}: lead system '${sysc}' has no inventory entry`); master.push({ system: sysc, role }); }
+      if (!master.length) rep.warnings.push(`SottoProcessi!${r._row}: ${sid}: no lead system candidate (policy DG-OWN-001)`);
+      if (r["Data Owner"] && !owners[r["Data Owner"]]) rep.errors.push(`SottoProcessi!${r._row}: ${sid}: Data Owner '${r["Data Owner"]}' is missing from Referenti`);
+      if (!r["Data Owner"]) rep.warnings.push(`SottoProcessi!${r._row}: ${sid}: missing data owner (policy DG-OWN-002)`);
       const ops = splitList(r["Open point"]);
-      for (const o of ops) if (!opIds.has(o)) rep.errors.push(`SottoProcessi!${r._row}: ${sid}: open point '${o}' non presente nel foglio OpenPoint`);
+      for (const o of ops) if (!opIds.has(o)) rep.errors.push(`SottoProcessi!${r._row}: ${sid}: open point '${o}' is missing from OpenPoint`);
       const ents = entsBySp[sid] || { in: [], out: [] };
-      if (r.Tipo === "C" && !ents.out.length) rep.warnings.push(`SottoProcessi!${r._row}: ${sid}: tipo [C] senza entità OUT nel foglio Entita`);
+      if (r.Tipo === "C" && !ents.out.length) rep.warnings.push(`SottoProcessi!${r._row}: ${sid}: type [C] has no output entity in Entita`);
       const sp = { id: sid, name: r.Nome, systems: spSystems, flows: flowsBySp[sid] || [], type: r.Tipo, trigger: r.Trigger, entities_in: ents.in, entities_out: ents.out, master,
         data_owner: r["Data Owner"], criticality: { open: toBool(r["Criticità aperta"]), text: r["Criticità"] }, open_points: ops,
         extra_system_steps: splitPairs(r["Step extra-sistema"]).map(([n, v]) => ({ name: n, approved: toBool(v) })), verified: toBool(r.Verificato) };
@@ -178,11 +170,11 @@
       if (r["Regole business"]) sp.rules = r["Regole business"].split("|").map((x) => x.trim()).filter(Boolean);
       procs[r.Processo].subprocesses.push(sp);
     }
-    for (const sid of [...Object.keys(flowsBySp), ...Object.keys(entsBySp)]) if (!spSeen.has(sid)) rep.errors.push(`Flussi/Entita!0: righe riferite al sotto-processo '${sid}' che non esiste`);
+    for (const sid of [...Object.keys(flowsBySp), ...Object.keys(entsBySp)]) if (!spSeen.has(sid)) rep.errors.push(`Flussi/Entita!0: rows reference unknown step '${sid}'`);
     const rules = Object.create(null);
     for (const r of ruleRows) {
-      if (!r.Codice.startsWith("DG-")) rep.errors.push(`Regole!${r._row}: Codice '${r.Codice}' deve iniziare con DG-`);
-      if (Object.hasOwn(rules, r.Codice)) rep.errors.push(`Regole!${r._row}: codice duplicato ${r.Codice}`);
+      if (!r.Codice.startsWith("DG-")) rep.errors.push(`Regole!${r._row}: Codice '${r.Codice}' must start with DG-`);
+      if (Object.hasOwn(rules, r.Codice)) rep.errors.push(`Regole!${r._row}: duplicate code ${r.Codice}`);
       rules[r.Codice] = { severity: r["Severità"] || "WARNING", enforcement: r.Enforcement || "advise", category: r.Categoria, title: r.Titolo, enabled: toBool(r.Attiva || "SI") };
     }
     const model = { meta, systems, owners, glossary, open_points, processes: Object.values(procs) };
@@ -237,11 +229,11 @@
   }
 
   // -------------------------------------------------------------- uml -------
-  const STATUS_IT = { not_evaluated: "Non valutato", approved: "Pronto (policy)", pending_open_point: "In attesa", ownership_review: "Revisione ownership", semantic_review: "Revisione semantica", mapping_review: "Revisione mapping", blocked: "Bloccato" };
+  const STATUS_LABELS = { not_evaluated: "Unevaluated", approved: "Ready (policy)", pending_open_point: "Pending", ownership_review: "Ownership review", semantic_review: "Semantic review", mapping_review: "Mapping review", blocked: "Blocked" };
   const RGB = { not_evaluated: [26, 44, 64], approved: [18, 53, 47], pending_open_point: [54, 46, 34], ownership_review: [58, 34, 44], semantic_review: [37, 43, 69], mapping_review: [58, 34, 44], blocked: [58, 34, 44] };
   const HEX = Object.fromEntries(Object.entries(RGB).map(([k, [r, g, b]]) => [k, "#" + [r, g, b].map((x) => x.toString(16).padStart(2, "0")).join("")]));
   const STROKE = { not_evaluated: "#8fa6bb", approved: "#8cdebe", pending_open_point: "#f1c177", ownership_review: "#f59fa5", semantic_review: "#b5c1ff", mapping_review: "#f59fa5", blocked: "#f59fa5" };
-  const HUMAN = { manuale: "Utente", cantiere: "Cantiere", fornitore: "Fornitore", bidding: "Bidding" };
+  const HUMAN = { manuale: "User", cantiere: "Worksite", fornitore: "Supplier", bidding: "Bidding" };
   const mm = (s) => String(s).replace(/&/g, "#38;").replace(/</g, "#60;").replace(/>/g, "#62;").replace(/[\r\n]+/g, " ").replace(/"/g, "#quot;").replace(/\(/g, "#40;").replace(/\)/g, "#41;").replace(/:/g, "#58;");
   const seqLabel = (s) => String(s).replace(/:/g, "-").replace(/;/g, ",");
   const lbl = (systems, k) => (systems[k] ? systems[k].label : k);
@@ -278,7 +270,7 @@
     for (const sp of proc.subprocesses) {
       const st = statusOf(decisions, sp.id); const [r, g, b] = RGB[st];
       L.push(`  rect rgb(${r}, ${g}, ${b})`);
-      L.push(`  Note over ${syss[0]},${syss[syss.length - 1]}: ${seqLabel(sp.id + " " + sp.name)}: ${STATUS_IT[st]}`);
+      L.push(`  Note over ${syss[0]},${syss[syss.length - 1]}: ${seqLabel(sp.id + " " + sp.name)}: ${STATUS_LABELS[st]}`);
       const main = mainOf(sp);
       for (const e of sp.entities_in || []) if (humans.has(e.source)) L.push(`  H_${e.source}->>${main}: ${seqLabel(e.name)}`);
       for (const f of sp.flows || []) L.push(`  ${f.from}->>${f.to}: ${seqLabel(f.payload || "")}`);
@@ -294,7 +286,7 @@
     for (const s of syss) L.push(`participant "${lbl(systems, s)}" as ${s}`);
     for (const sp of proc.subprocesses) {
       const st = statusOf(decisions, sp.id); const main = mainOf(sp);
-      L.push(`group ${HEX[st]} ${sp.id} ${sp.name} [${STATUS_IT[st]}]`);
+      L.push(`group ${HEX[st]} ${sp.id} ${sp.name} [${STATUS_LABELS[st]}]`);
       for (const e of sp.entities_in || []) if (humans.has(e.source)) L.push(`H_${e.source} -> ${main}: ${e.name}`);
       for (const f of sp.flows || []) L.push(`${f.from} -> ${f.to}: ${f.payload || ""}`);
       if (!(sp.flows || []).length) { const outs = (sp.entities_out || []).slice(0, 2).map((e) => e.name).join("; ") || sp.name; L.push(`${main} -> ${main}: ${outs.slice(0, 70)}`); }
@@ -312,7 +304,7 @@
       for (const sp of sps) {
         const nid = diagramId(sp.id); const st = statusOf(decisions, sp.id);
         const outs = (sp.entities_out || []).map((e) => wrapLabel(e.name)).join("<br/>");
-        L.push(`    ${nid}["<b>${wrapLabel(sp.id + " · " + sp.name)}</b><br/>${STATUS_IT[st]}${outs ? "<br/><small>" + outs + "</small>" : ""}"]:::${st}`);
+        L.push(`    ${nid}["<b>${wrapLabel(sp.id + " · " + sp.name)}</b><br/>${STATUS_LABELS[st]}${outs ? "<br/><small>" + outs + "</small>" : ""}"]:::${st}`);
       }
       L.push("  end");
     }
@@ -350,8 +342,8 @@
       L.push("  }");
     }
     const allSys = [...new Set(Object.values(residence).flatMap((s) => [...s]))].sort();
-    for (const s of allSys) L.push(`  class ${systemId(s)}["${mm(lbl(systems, s))}"] {\n    <<sistema>>\n  }`);
-    for (const [c, syss] of Object.entries(residence)) for (const s of [...syss].sort()) L.push(`  ${idOf(c)} --> ${systemId(s)} : risiede in`);
+    for (const s of allSys) L.push(`  class ${systemId(s)}["${mm(lbl(systems, s))}"] {\n    <<system>>\n  }`);
+    for (const [c, syss] of Object.entries(residence)) for (const s of [...syss].sort()) L.push(`  ${idOf(c)} --> ${systemId(s)} : resides in`);
     for (const p of model.processes) for (const sp of p.subprocesses) {
       const cs = [...new Set((sp.entities_out || []).map((e) => e.canonical).filter(Boolean))].sort();
       const ins = [...new Set((sp.entities_in || []).map((e) => e.canonical).filter(Boolean))].sort();
@@ -361,9 +353,7 @@
   }
 
   // ------------------------------------------------------------- yaml -------
-  // Emettitore YAML compatibile con PyYAML safe_dump(sort_keys=False, allow_unicode=True, width=∞):
-  // stesse regole di quoting, sequenze "indentless", così il file generato nel browser coincide
-  // byte per byte con quello della pipeline (verificato da tools/parity_census.mjs).
+  // Emit YAML with PyYAML-compatible quoting and indentation.
   const RE_INT = /^[-+]?(0|[1-9][0-9_]*)$|^0o?[0-7_]+$|^0x[0-9a-fA-F_]+$|^0b[01_]+$|^[-+]?[0-9][0-9_]*(:[0-5]?[0-9])+$/;
   const RE_FLOAT = /^[-+]?(\.[0-9]+|[0-9][0-9_]*(\.[0-9_]*)?)([eE][-+]?[0-9]+)?$|^[-+]?[0-9][0-9_]*(:[0-5]?[0-9])+\.[0-9_]*$|^[-+]?\.(inf|Inf|INF)$|^\.(nan|NaN|NAN)$/;
   const RE_BOOL = /^(yes|Yes|YES|no|No|NO|true|True|TRUE|false|False|FALSE|on|On|ON|off|Off|OFF)$/;
@@ -424,7 +414,7 @@
     if (v && typeof v === "object") return Object.keys(v).length ? `${pad}${key}:\n${toYaml(v, indent + 2)}` : `${pad}${key}: {}`;
     return `${pad}${key}: ${yamlScalar(v)}`;
   }
-  const modelToYaml = (model, sourceName) => `# GENERATO da tools/import_excel.py a partire da ${sourceName || "OntoGraph-Aurora21.xlsx"}\n# Non modificare a mano: aggiornare l'Excel di censimento e rilanciare l'import.\n` + toYaml(model) + "\n";
+  const modelToYaml = (model, sourceName) => `# Generated from ${sourceName || "OntoGraph-Aurora21.xlsx"}\n# Edit the process inventory workbook and import it again to regenerate this model.\n` + toYaml(model) + "\n";
   const rulesToJson = (rules) => JSON.stringify(rules, null, 2) + "\n";
 
   function swimlanePlantUML(proc, systems, decisions) {
@@ -433,14 +423,14 @@
     for (const sp of proc.subprocesses) {
       const st = statusOf(decisions, sp.id);
       L.push(`|${lbl(systems, mainOf(sp))}|`);
-      L.push(`${HEX[st]}:${sp.id} ${sp.name}\n${STATUS_IT[st]};`);
+      L.push(`${HEX[st]}:${sp.id} ${sp.name}\n${STATUS_LABELS[st]};`);
       for (const f of sp.flows || []) L.push(`note right: ${lbl(systems, f.from)} → ${lbl(systems, f.to)}: ${f.payload || ""}`);
     }
     L.push("stop", "@enduml");
     return L.join("\n");
   }
 
-  // Tutto il codice generato dal censimento, come lo scrive la pipeline (percorso → contenuto)
+  // Generate model artifacts from the inventory, keyed by path.
   function generatedCode(model, rules, decisions, sourceName) {
     const files = { "model/landscape.yaml": modelToYaml(model, sourceName), "data/rules.json": rulesToJson(rules) };
     for (const p of model.processes) {
@@ -454,5 +444,5 @@
     return files;
   }
 
-  return { SHEETS, ENUMS, parseWorkbook, modelToSheets, buildFacts, sequenceMermaid, sequencePlantUML, swimlaneMermaid, swimlanePlantUML, classMermaid, diagramId, STATUS_IT, splitList, joinList, toYaml, modelToYaml, rulesToJson, generatedCode };
+  return { SHEETS, ENUMS, parseWorkbook, modelToSheets, buildFacts, sequenceMermaid, sequencePlantUML, swimlaneMermaid, swimlanePlantUML, classMermaid, diagramId, STATUS_LABELS, splitList, joinList, toYaml, modelToYaml, rulesToJson, generatedCode };
 });

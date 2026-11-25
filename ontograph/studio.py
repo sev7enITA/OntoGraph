@@ -21,7 +21,7 @@ from .store import Registry
 
 WEB = Path(__file__).resolve().parent / "web"
 PROCESS = WEB / "process"
-BRAND = WEB.parent.parent / "assets" / "brand" / "ontograph-avatar.png"
+BRAND = WEB.parent.parent / "assets" / "brand"
 ASSETS = {
     "/governance": (WEB / "index.html", "text/html; charset=utf-8"),
     "/index.html": (WEB / "index.html", "text/html; charset=utf-8"),
@@ -31,7 +31,8 @@ ASSETS = {
     "/studio.js": (WEB / "studio.js", "text/javascript; charset=utf-8"),
     "/graph.js": (WEB / "graph.js", "text/javascript; charset=utf-8"),
     "/inspector.js": (WEB / "inspector.js", "text/javascript; charset=utf-8"),
-    "/brand.png": (BRAND, "image/png"),
+    "/brand.png": (BRAND / "ontograph-avatar.png", "image/png"),
+    "/brand-wordmark.png": (BRAND / "ontograph-wordmark.png", "image/png"),
 }
 ASSETS.update({
     "/processi/" + name: (PROCESS / name, "text/javascript; charset=utf-8")

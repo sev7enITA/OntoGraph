@@ -1,23 +1,23 @@
 const KINDS = {
-  concept: "Concetto", class: "Classe", field: "Campo", process: "Processo",
-  control: "Controllo", contract: "Contratto", application: "Applicazione"
+  concept: "Concept", class: "Class", field: "Field", process: "Process",
+  control: "Control", contract: "Contract", application: "Application"
 };
 const COLLECTIONS = {
-  nodes: "Nodo", edges: "Relazione", evidence: "Evidenza", rules: "Regola", probes: "Prova"
+  nodes: "Node", edges: "Relationship", evidence: "Evidence", rules: "Rule", probes: "Probe"
 };
 const PROPERTY_NAMES = {
-  domain: "Dominio", purpose: "Finalità", owner: "Responsabile", scope: "Ambito",
-  effective_at: "Decorrenza", nodes: "Nodi", edges: "Relazioni", evidence: "Evidenza",
-  rules: "Regole", probes: "Prove", label: "Etichetta", definition: "Definizione", kind: "Tipo",
-  aliases: "Sinonimi", source: "Origine", target: "Destinazione", predicate: "Predicato",
-  observed_at: "Osservata il", applicability: "Applicabilità", status: "Stato",
-  excerpt: "Estratto", upstream: "Fonte a monte", control: "Controllo",
-  applies: "Ambito della regola", requires: "Condizioni richieste",
-  application: "Applicazione", rule: "Regola", facts: "Fatti", expected: "Esito atteso"
+  domain: "Domain", purpose: "Purpose", owner: "Owner", scope: "Scope",
+  effective_at: "Effective from", nodes: "Nodes", edges: "Relationships", evidence: "Evidence",
+  rules: "Rules", probes: "Probes", label: "Label", definition: "Definition", kind: "Type",
+  aliases: "Aliases", source: "Source", target: "Target", predicate: "Predicate",
+  observed_at: "Observed on", applicability: "Applicability", status: "Status",
+  excerpt: "Excerpt", upstream: "Upstream source", control: "Control",
+  applies: "Rule scope", requires: "Required conditions",
+  application: "Application", rule: "Rule", facts: "Facts", expected: "Expected result"
 };
 const VALUE_TYPES = {
-  string: "Testo", boolean: "Booleano", number: "Numero", null: "Null",
-  array: "Lista", object: "Oggetto", undefined: "Assente"
+  string: "Text", boolean: "Boolean", number: "Number", null: "Null",
+  array: "List", object: "Object", undefined: "Missing"
 };
 const REFERENCES = {
   source: "nodes", target: "nodes", control: "nodes", application: "nodes",
@@ -85,8 +85,8 @@ function referenceFor(index, path, value) {
 
 function safeJson(value) {
   return JSON.parse(value, (key, entry) => {
-    if (FORBIDDEN_KEYS.has(key)) throw new Error(`La chiave "${key}" è riservata.`);
-    if (typeof entry === "number" && !Number.isFinite(entry)) throw new Error("Il numero deve essere finito.");
+    if (FORBIDDEN_KEYS.has(key)) throw new Error(`The key "${key}" is reserved.`);
+    if (typeof entry === "number" && !Number.isFinite(entry)) throw new Error("The number must be finite.");
     return entry;
   });
 }
@@ -104,15 +104,15 @@ export function renderInspector(container, { document: model, path = [], onSelec
   const heading = element("header", "inspector-heading");
   const recordTitle = current?.label || current?.id;
   const title = typeof recordTitle === "string" ? recordTitle
-    : selection.length ? nameFor(selection) : model?.domain || "Documento";
+    : selection.length ? nameFor(selection) : model?.domain || "Document";
   const kind = Object.hasOwn(KINDS, current?.kind) ? KINDS[current.kind]
-    : Object.hasOwn(COLLECTIONS, selection[0]) ? COLLECTIONS[selection[0]] : "Modello";
+    : Object.hasOwn(COLLECTIONS, selection[0]) ? COLLECTIONS[selection[0]] : "Model";
   heading.append(element("p", "inspector-kind", kind), element("h2", "", title));
   if (typeof current?.id === "string" && current.id !== title) {
     heading.append(element("p", "inspector-id", current.id));
   }
   const address = element("code", "inspector-pointer", selectedPointer || '""');
-  address.title = selectedPointer ? "Puntatore JSON" : "Puntatore JSON vuoto della radice";
+  address.title = selectedPointer ? "JSON Pointer" : "Empty JSON Pointer for the root";
   heading.append(address);
   const error = element("p", "inspector-error");
   error.role = "alert";
@@ -143,7 +143,7 @@ export function renderInspector(container, { document: model, path = [], onSelec
     const itemActions = element("div", "inspector-actions");
     const reference = referenceFor(index, pathToValue, value);
     if (reference && reference.path.some((segment, i) => segment !== selection[i]) && typeof onSelect === "function") {
-      const link = button("inspector-ref", `Apri ${reference.label} ↗`);
+      const link = button("inspector-ref", `Open ${reference.label} ↗`);
       link.title = pointer(reference.path);
       link.addEventListener("click", () => onSelect(reference.path));
       itemActions.append(link);
@@ -152,8 +152,8 @@ export function renderInspector(container, { document: model, path = [], onSelec
       itemActions.append(jsonEditor(pathToValue, value, { replace: true }));
     }
     if (deletable && pathToValue.length && !pathToValue.some(segment => FORBIDDEN_KEYS.has(segment))) {
-      const remove = button("inspector-remove", "Rimuovi");
-      remove.title = `Rimuovi ${pointer(pathToValue)}`;
+      const remove = button("inspector-remove", "Remove");
+      remove.title = `Remove ${pointer(pathToValue)}`;
       remove.addEventListener("click", async () => {
         remove.disabled = true;
         await action(() => onDelete(pathToValue));
@@ -168,7 +168,7 @@ export function renderInspector(container, { document: model, path = [], onSelec
     const row = element("div", "inspector-field");
     row.dataset.path = pointer(pathToValue);
     const label = element("label", "inspector-label");
-    label.append(element("span", "", nameFor(pathToValue) ?? "Valore"));
+    label.append(element("span", "", nameFor(pathToValue) ?? "Value"));
     label.title = row.dataset.path;
     const type = valueType(value);
     const canEdit = editable && !pathToValue.some(segment => FORBIDDEN_KEYS.has(segment));
@@ -192,13 +192,13 @@ export function renderInspector(container, { document: model, path = [], onSelec
       input.value = type === "undefined" ? "" : String(value);
       input.readOnly = !canEdit;
     }
-    input.setAttribute("aria-label", nameFor(pathToValue) || "Valore");
+    input.setAttribute("aria-label", nameFor(pathToValue) || "Value");
     if (canEdit) {
       input.addEventListener("change", async () => {
         const currentValue = input.value;
         await action(() => {
           if (type === "number" && (currentValue === "" || !Number.isFinite(Number(currentValue)))) {
-            throw new Error("Inserisci un numero finito.");
+            throw new Error("Enter a finite number.");
           }
           const next = type === "boolean" ? currentValue === "true"
             : type === "number" ? Number(currentValue)
@@ -219,22 +219,22 @@ export function renderInspector(container, { document: model, path = [], onSelec
   function jsonEditor(parentPath, value, { replace = false } = {}) {
     const wrapper = element("details", "inspector-add");
     const isArray = Array.isArray(value);
-    const summaryText = replace ? "Modifica come JSON" : isArray ? "Aggiungi elemento" : "Aggiungi proprietà";
+    const summaryText = replace ? "Edit as JSON" : isArray ? "Add item" : "Add property";
     const form = element("form", "inspector-add-form");
     let keyInput;
     if (!replace && !isArray) {
-      const keyLabel = element("label", "inspector-label", "Chiave");
+      const keyLabel = element("label", "inspector-label", "Key");
       keyInput = element("input", "inspector-input");
       keyInput.type = "text";
       keyLabel.append(keyInput);
       form.append(keyLabel);
     }
-    const valueLabel = element("label", "inspector-label", "Valore JSON");
+    const valueLabel = element("label", "inspector-label", "JSON value");
     const input = element("textarea", "inspector-input");
     input.rows = 2;
     input.required = true;
     input.spellcheck = false;
-    input.placeholder = 'Esempi: "testo", 12, true, [], {}';
+    input.placeholder = "Examples: \"text\", 12, true, [], {}";
     if (replace && !["object", "array"].includes(valueType(value))) input.value = JSON.stringify(value) ?? "null";
     if (replace && input.value === "") {
       wrapper.addEventListener("toggle", () => {
@@ -242,7 +242,7 @@ export function renderInspector(container, { document: model, path = [], onSelec
       });
     }
     valueLabel.append(input);
-    const submit = element("button", "inspector-submit", replace ? "Salva valore" : "Aggiungi");
+    const submit = element("button", "inspector-submit", replace ? "Save value" : "Add");
     submit.type = "submit";
     form.append(valueLabel, submit);
     form.addEventListener("submit", async event => {
@@ -252,9 +252,9 @@ export function renderInspector(container, { document: model, path = [], onSelec
         if (replace) return onUpdate(parentPath, safeJson(input.value));
         const property = isArray ? value.length : keyInput.value;
         if (typeof property === "string" && FORBIDDEN_KEYS.has(property)) {
-          throw new Error(`La chiave "${property}" è riservata.`);
+          throw new Error(`The key "${property}" is reserved.`);
         }
-        if (!isArray && Object.hasOwn(value, property)) throw new Error("La chiave è già presente.");
+        if (!isArray && Object.hasOwn(value, property)) throw new Error("This key already exists.");
         return onUpdate([...parentPath, property], safeJson(input.value));
       });
       submit.disabled = false;
@@ -270,7 +270,7 @@ export function renderInspector(container, { document: model, path = [], onSelec
       const property = Array.isArray(value) ? Number(key) : key;
       host.append(renderBranch([...pathToValue, property], item));
     }
-    if (entries.length === 0) host.append(element("p", "inspector-empty", "Nessuna proprietà"));
+    if (entries.length === 0) host.append(element("p", "inspector-empty", "No properties"));
     if (editable && !pathToValue.some(segment => FORBIDDEN_KEYS.has(segment))) {
       host.append(jsonEditor(pathToValue, value));
     }
@@ -284,7 +284,7 @@ export function renderInspector(container, { document: model, path = [], onSelec
     const count = Object.keys(value).length;
     const summary = element("summary", "inspector-summary");
     const recordLabel = typeof value?.id === "string" ? value.label || value.id : null;
-    summary.append(element("span", "", recordLabel || nameFor(pathToValue) || "Valore"));
+    summary.append(element("span", "", recordLabel || nameFor(pathToValue) || "Value"));
     summary.append(element("span", "inspector-count", `${VALUE_TYPES[type]} · ${count}`));
     summary.title = address;
     const children = element("div", "inspector-children");
@@ -308,7 +308,7 @@ export function renderInspector(container, { document: model, path = [], onSelec
   }
 
   if (current === undefined) {
-    tree.append(element("p", "inspector-empty", "L’elemento selezionato non è disponibile."));
+    tree.append(element("p", "inspector-empty", "The selected item is unavailable."));
   } else if (["array", "object"].includes(valueType(current))) {
     renderChildren(tree, selection, current);
     if (selection.length) {

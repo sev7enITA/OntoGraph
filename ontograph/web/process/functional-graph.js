@@ -6,7 +6,7 @@
   'use strict';
   const LIMITS = Object.freeze({nodes:500, edges:1000, coordinate:100000, label:500, description:4000, condition:2000});
   const KINDS = ['start','task','decision','end','note'];
-  const TITLES = {start:'Inizio',task:'Attività',decision:'Decisione',end:'Fine',note:'Nota'};
+  const TITLES = {start:'Start',task:'Activity',decision:'Decision',end:'End',note:'Note'};
   const BAD = new Set(['__proto__','prototype','constructor']);
   const ID = /^[A-Za-z][A-Za-z0-9_.-]{0,79}$/;
   const own = (o,k) => Object.prototype.hasOwnProperty.call(o,k);
@@ -17,73 +17,73 @@
     const errors=[], warnings=[], seen=new WeakSet();
     function safe(v, depth=0) {
       if (!v || typeof v !== 'object') return;
-      if (depth > 8 || seen.has(v)) { errors.push('Grafo: struttura ciclica o troppo profonda.'); return; }
+      if (depth > 8 || seen.has(v)) { errors.push('Graph: circular structure or nesting depth exceeded.'); return; }
       seen.add(v);
-      if (!Array.isArray(v) && !object(v)) { errors.push('Grafo: oggetto non JSON.'); return; }
+      if (!Array.isArray(v) && !object(v)) { errors.push('Graph: expected a JSON object.'); return; }
       for (const k of Object.keys(v)) {
-        if (BAD.has(k)) errors.push('Grafo: proprietà non sicura '+k+'.');
+        if (BAD.has(k)) errors.push('Graph: unsafe property '+k+'.');
         safe(v[k],depth+1);
       }
       seen.delete(v);
     }
     safe(graph);
     function shape(o, allowed, required, where) {
-      if (!object(o)) { errors.push(where+': oggetto richiesto.'); return false; }
-      for (const k of Object.keys(o)) if (!allowed.includes(k)) errors.push(where+': proprietà non ammessa '+k+'.');
-      for (const k of required) if (!own(o,k)) errors.push(where+': manca '+k+'.');
+      if (!object(o)) { errors.push(where+': an object is required.'); return false; }
+      for (const k of Object.keys(o)) if (!allowed.includes(k)) errors.push(where+': unexpected property '+k+'.');
+      for (const k of required) if (!own(o,k)) errors.push(where+': missing '+k+'.');
       return true;
     }
     function text(o,k,max,where) {
-      if (own(o,k) && (typeof o[k] !== 'string' || textLength(o[k])>max || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(o[k]))) errors.push(where+': '+k+' deve essere testo valido (massimo '+max+' caratteri).');
+      if (own(o,k) && (typeof o[k] !== 'string' || textLength(o[k])>max || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(o[k]))) errors.push(where+': '+k+' must be valid text (maximum '+max+' characters).');
     }
-    if (!shape(graph,['version','nodes','edges','layout'],['version','nodes','edges','layout'],'Grafo')) return {errors,warnings};
-    if (graph.version!==1) errors.push('Grafo: versione non supportata.');
-    if (!Array.isArray(graph.nodes) || graph.nodes.length>LIMITS.nodes) errors.push('Grafo: nodes deve contenere al massimo '+LIMITS.nodes+' nodi.');
-    if (!Array.isArray(graph.edges) || graph.edges.length>LIMITS.edges) errors.push('Grafo: edges deve contenere al massimo '+LIMITS.edges+' collegamenti.');
+    if (!shape(graph,['version','nodes','edges','layout'],['version','nodes','edges','layout'],'Graph')) return {errors,warnings};
+    if (graph.version!==1) errors.push('Graph: unsupported version.');
+    if (!Array.isArray(graph.nodes) || graph.nodes.length>LIMITS.nodes) errors.push('Graph: nodes must be an array with at most '+LIMITS.nodes+' nodes.');
+    if (!Array.isArray(graph.edges) || graph.edges.length>LIMITS.edges) errors.push('Graph: edges must be an array with at most '+LIMITS.edges+' connections.');
     const nodes=Array.isArray(graph.nodes)?graph.nodes.slice(0,LIMITS.nodes+1):[], edges=Array.isArray(graph.edges)?graph.edges.slice(0,LIMITS.edges+1):[];
     const ids=new Set(), edgeIds=new Set(), tasks=new Set(), subprocesses=new Set((process?.subprocesses||[]).map(s=>s.id));
     for (const n of nodes) {
-      if (!shape(n,['id','kind','subprocess_id','label','description'],['id','kind'],'Nodo')) continue;
-      const where='Nodo '+String(n.id);
-      if (!safeId(n.id) || ids.has(n.id)) errors.push(where+': ID non valido o duplicato.');
+      if (!shape(n,['id','kind','subprocess_id','label','description'],['id','kind'],'Node')) continue;
+      const where='Node '+String(n.id);
+      if (!safeId(n.id) || ids.has(n.id)) errors.push(where+': invalid or duplicate ID.');
       ids.add(n.id);
-      if (!KINDS.includes(n.kind)) errors.push(where+': tipo non ammesso.');
+      if (!KINDS.includes(n.kind)) errors.push(where+': unsupported type.');
       if (n.kind==='task') {
-        if (typeof n.subprocess_id!=='string' || !subprocesses.has(n.subprocess_id)) errors.push(where+': sottoprocesso non presente in questo processo.');
-        if (tasks.has(n.subprocess_id)) errors.push(where+': sottoprocesso già presente nel grafo.');
+        if (typeof n.subprocess_id!=='string' || !subprocesses.has(n.subprocess_id)) errors.push(where+': the step is missing from this process.');
+        if (tasks.has(n.subprocess_id)) errors.push(where+': the step already appears in the graph.');
         tasks.add(n.subprocess_id);
-        if (own(n,'label') || own(n,'description')) errors.push(where+': nome e proprietà attività si modificano nel censimento.');
+        if (own(n,'label') || own(n,'description')) errors.push(where+': edit the activity name and properties in the inventory.');
       } else {
-        if (own(n,'subprocess_id')) errors.push(where+': subprocess_id ammesso solo per attività.');
+        if (own(n,'subprocess_id')) errors.push(where+': subprocess_id is only valid for activities.');
         text(n,'label',LIMITS.label,where); text(n,'description',LIMITS.description,where);
       }
     }
     for (const e of edges) {
-      if (!shape(e,['id','from','to','label','condition'],['id','from','to'],'Collegamento')) continue;
-      const where='Collegamento '+String(e.id);
-      if (!safeId(e.id) || edgeIds.has(e.id) || ids.has(e.id)) errors.push(where+': ID non valido o duplicato.');
+      if (!shape(e,['id','from','to','label','condition'],['id','from','to'],'Connection')) continue;
+      const where='Connection '+String(e.id);
+      if (!safeId(e.id) || edgeIds.has(e.id) || ids.has(e.id)) errors.push(where+': invalid or duplicate ID.');
       edgeIds.add(e.id);
-      if (!ids.has(e.from) || !ids.has(e.to)) errors.push(where+': nodo origine o destinazione sconosciuto.');
+      if (!ids.has(e.from) || !ids.has(e.to)) errors.push(where+': unknown source or target node.');
       text(e,'label',LIMITS.label,where); text(e,'condition',LIMITS.condition,where);
     }
-    if (shape(graph.layout,['positions'],['positions'],'Layout') && shape(graph.layout.positions,Object.keys(graph.layout.positions||{}),[],'Posizioni')) {
+    if (shape(graph.layout,['positions'],['positions'],'Layout') && shape(graph.layout.positions,Object.keys(graph.layout.positions||{}),[],'Positions')) {
       for (const [id,pos] of Object.entries(graph.layout.positions)) {
-        if (!safeId(id) || !ids.has(id)) errors.push('Posizione '+id+': nodo sconosciuto.');
-        if (shape(pos,['x','y'],['x','y'],'Posizione '+id)) for (const k of ['x','y']) if (typeof pos[k]!=='number' || !Number.isFinite(pos[k]) || Math.abs(pos[k])>LIMITS.coordinate) errors.push('Posizione '+id+': '+k+' non valida.');
+        if (!safeId(id) || !ids.has(id)) errors.push('Position '+id+': unknown node.');
+        if (shape(pos,['x','y'],['x','y'],'Position '+id)) for (const k of ['x','y']) if (typeof pos[k]!=='number' || !Number.isFinite(pos[k]) || Math.abs(pos[k])>LIMITS.coordinate) errors.push('Position '+id+': '+k+' is invalid.');
       }
     }
     if (!errors.length && nodes.length) {
-      if (!nodes.some(n=>n.kind==='start')) warnings.push('Lo schema non contiene un nodo Inizio.');
-      if (!nodes.some(n=>n.kind==='end')) warnings.push('Lo schema non contiene un nodo Fine.');
+      if (!nodes.some(n=>n.kind==='start')) warnings.push('The diagram has no start node.');
+      if (!nodes.some(n=>n.kind==='end')) warnings.push('The diagram has no end node.');
       for (const n of nodes) {
         const outgoing=edges.filter(e=>e.from===n.id), incoming=edges.filter(e=>e.to===n.id);
-        if (n.kind!=='note' && !outgoing.length && !incoming.length) warnings.push('Nodo '+n.id+': non collegato.');
-        if (n.kind==='decision' && outgoing.length<2) warnings.push('Decisione '+n.id+': meno di due uscite.');
-        if (n.kind==='decision' && outgoing.some(e=>!e.condition?.trim() && !e.label?.trim())) warnings.push('Decisione '+n.id+': descrivere le alternative in uscita.');
-        if (n.kind==='start' && incoming.length) warnings.push('Inizio '+n.id+': contiene collegamenti in ingresso.');
-        if (n.kind==='end' && outgoing.length) warnings.push('Fine '+n.id+': contiene collegamenti in uscita.');
+        if (n.kind!=='note' && !outgoing.length && !incoming.length) warnings.push('Node '+n.id+': disconnected.');
+        if (n.kind==='decision' && outgoing.length<2) warnings.push('Decision '+n.id+': fewer than two outgoing paths.');
+        if (n.kind==='decision' && outgoing.some(e=>!e.condition?.trim() && !e.label?.trim())) warnings.push('Decision '+n.id+': describe the outgoing alternatives.');
+        if (n.kind==='start' && incoming.length) warnings.push('Start '+n.id+': has incoming connections.');
+        if (n.kind==='end' && outgoing.length) warnings.push('End '+n.id+': has outgoing connections.');
       }
-      if (subprocesses.size>tasks.size) warnings.push('Alcuni passi censiti non sono presenti nello schema.');
+      if (subprocesses.size>tasks.size) warnings.push('Some inventory steps are absent from the diagram.');
     }
     return {errors,warnings};
   }
@@ -96,7 +96,7 @@
     return result;
   }
   function seed(process) {
-    const nodes=[{id:'start',kind:'start',label:'Inizio'}, ...(process.subprocesses||[]).map((s,i)=>({id:'task_'+(i+1),kind:'task',subprocess_id:s.id})), {id:'end',kind:'end',label:'Fine'}];
+    const nodes=[{id:'start',kind:'start',label:'Start'}, ...(process.subprocesses||[]).map((s,i)=>({id:'task_'+(i+1),kind:'task',subprocess_id:s.id})), {id:'end',kind:'end',label:'End'}];
     const positions={}, edges=[];
     nodes.forEach((n,i)=>{positions[n.id]={x:100+(i%4)*260,y:100+Math.floor(i/4)*180}; if(i)edges.push({id:'edge_'+i,from:nodes[i-1].id,to:n.id});});
     const graph={version:1,nodes,edges,layout:{positions}};
@@ -108,16 +108,16 @@
   function nodeText(process,node) {
     if(node.kind!=='task')return [nodeLabel(process,node),node.description].filter(Boolean).join('\n');
     const sp=(process.subprocesses||[]).find(s=>s.id===node.subprocess_id);
-    return [sp.id+': '+sp.name,'Tipo: '+(sp.type||''),'Sistemi: '+(sp.systems||[]).join(', '),'Owner: '+(sp.data_owner||''),'Trigger: '+(sp.trigger||'')].join('\n');
+    return [sp.id+': '+sp.name,'Type: '+(sp.type||''),'Systems: '+(sp.systems||[]).join(', '),'Owner: '+(sp.data_owner||''),'Trigger: '+(sp.trigger||'')].join('\n');
   }
   const diagramId=id=>'F_'+Array.from(id).map(c=>c.codePointAt(0).toString(16)).join('_');
   // Escape syntax, markup and directives as literal characters. No user text becomes code.
   const escapeMermaid=s=>Array.from(String(s)).map(c=>c==='\n'?'<br/>':/[A-Za-z0-9 \u0080-\uFFFF]/u.test(c)&&c!=='\u2028'&&c!=='\u2029'?c:'#'+c.codePointAt(0)+';').join('');
   const escapePlantUML=s=>Array.from(String(s)).map(c=>c==='\n'?'\\n':/[A-Za-z0-9 \u0080-\uFFFF]/u.test(c)&&c!=='\u2028'&&c!=='\u2029'?c:'&#'+c.codePointAt(0)+';').join('');
-  const edgeText=e=>[e.label,e.condition?'Condizione: '+e.condition:''].filter(Boolean).join('\n');
+  const edgeText=e=>[e.label,e.condition?'Condition: '+e.condition:''].filter(Boolean).join('\n');
   function toMermaid(process,graph=process.functional_graph) {
     assertValid(process,graph);
-    const lines=['flowchart TD','  %% Schema funzionale documentale: condizioni non eseguite.'];
+    const lines=['flowchart TD','  %% Process diagram for documentation. Conditions are descriptive.'];
     for(const n of graph.nodes) {
       const t=escapeMermaid(nodeText(process,n)), id=diagramId(n.id);
       const shape=n.kind==='decision'?`{"${t}"}`:['start','end'].includes(n.kind)?`(["${t}"])`:`["${t}"]`;
@@ -129,7 +129,7 @@
   }
   function toPlantUML(process,graph=process.functional_graph) {
     assertValid(process,graph);
-    const lines=['@startuml','hide empty description','skinparam shadowing false','title '+escapePlantUML(process.id+': '+process.name),"' Schema funzionale documentale: condizioni non eseguite."];
+    const lines=['@startuml','hide empty description','skinparam shadowing false','title '+escapePlantUML(process.id+': '+process.name),"' Process diagram for documentation. Conditions are descriptive."];
     for(const n of graph.nodes) {
       const id=diagramId(n.id), t=escapePlantUML(nodeText(process,n)), stereotype={start:'start',decision:'choice',end:'end'}[n.kind];
       if(stereotype) {lines.push('state '+id+' <<'+stereotype+'>>');lines.push('note right of '+id+' : '+t);}
@@ -142,7 +142,7 @@
   function generatedFiles(model) {
     const files={};
     for(const p of model.processes||[])if(own(p,'functional_graph')) {
-      if(!/^P\d+$/.test(p.id))throw new Error('ID processo non valido per esportazione.');
+      if(!/^P\d+$/.test(p.id))throw new Error('The process ID is invalid for export.');
       const g=p.functional_graph;assertValid(p,g);
       files['diagrams/functional/'+p.id+'.json']=JSON.stringify(g,null,2)+'\n';
       files['diagrams/functional/'+p.id+'.mmd']=toMermaid(p,g);
@@ -156,9 +156,9 @@
     SchemaCollegamenti:['Processo','ID','Da','A','Etichetta','Condizione','Campi presenti']
   };
   const GRAPH_HELP = {
-    Schemi:'Un processo per riga, anche se lo schema è vuoto. Versione del formato: 1. Fogli opzionali per gli schemi funzionali.',
-    SchemaNodi:'Tipi: start, task, decision, end, note. I task riferiscono un SottoProcesso. X/Y sono coordinate. Campi presenti conserva proprietà testuali vuote.',
-    SchemaCollegamenti:'Da e A riferiscono ID di nodi dello stesso processo. Condizione è testo documentale, non codice eseguito.'
+    Schemi:'One process per row, including empty diagrams. Format version: 1. Diagram sheets are optional.',
+    SchemaNodi:'Types: start, task, decision, end, note. Tasks reference a SottoProcesso. X/Y are coordinates. Campi presenti preserves empty text properties.',
+    SchemaCollegamenti:'Da and A reference node IDs in the same process. Condizione is descriptive text.'
   };
   function graphRows(model) {
     const rows=Object.fromEntries(Object.keys(GRAPH_SHEETS).map(k=>[k,[]]));
@@ -177,24 +177,24 @@
     const report={errors:[],warnings:[]}, processes=new Map(model.processes.map(p=>[p.id,p])), graphs=new Map();
     for(const r of rows.Schemi||[]) {
       const pid=r.Processo;
-      if(!processes.has(pid)||graphs.has(pid)){report.errors.push('Schemi: processo sconosciuto o duplicato '+pid);continue;}
+      if(!processes.has(pid)||graphs.has(pid)){report.errors.push('Schemi: unknown or duplicate process '+pid);continue;}
       graphs.set(pid,{version:Number(r.Versione)===1?1:null,nodes:[],edges:[],layout:{positions:{}}});
     }
     for(const name of ['SchemaNodi','SchemaCollegamenti'])for(const r of rows[name]||[]) {
       const g=graphs.get(r.Processo);
-      if(!g){report.errors.push(name+': processo senza dichiarazione nel foglio Schemi.');continue;}
+      if(!g){report.errors.push(name+': process is missing a declaration in Schemi.');continue;}
       const isNode=name==='SchemaNodi', item={id:r.ID};
       if(isNode){item.kind=r.Tipo;if(r.SottoProcesso)item.subprocess_id=r.SottoProcesso;}
       else {item.from=r.Da;item.to=r.A;}
       const fields=String(r['Campi presenti']||'').split(';').map(x=>x.trim()).filter(Boolean);
       const allowed=isNode?{label:'Etichetta',description:'Descrizione'}:{label:'Etichetta',condition:'Condizione'};
-      if(fields.some(k=>!own(allowed,k)))report.errors.push(name+': Campi presenti non validi.');
+      if(fields.some(k=>!own(allowed,k)))report.errors.push(name+': invalid Campi presenti value.');
       for(const [k,col] of Object.entries(allowed))if(r[col]||fields.includes(k))item[k]=r[col]||'';
       g[isNode?'nodes':'edges'].push(item);
       if(isNode&&(r.X!==''||r.Y!=='')) {
         const pos={x:r.X===''?null:Number(r.X),y:r.Y===''?null:Number(r.Y)};
-        if(!safeId(item.id)){report.errors.push(name+': ID posizione non valido.');continue;}
-        if(own(g.layout.positions,item.id))report.errors.push(name+': posizione duplicata.');
+        if(!safeId(item.id)){report.errors.push(name+': invalid position ID.');continue;}
+        if(own(g.layout.positions,item.id))report.errors.push(name+': duplicate position.');
         g.layout.positions[item.id]=pos;
       }
     }

@@ -1,89 +1,89 @@
-// Scenario Aurora 21 interamente sintetico del pilot OntoGraph.
+// Synthetic Aurora 21 scenario for the OnToGraPh reference implementation.
 const SEED = {
   "model": {
     "meta": {
       "project": "RE-DEMO",
-      "domain": "Real estate: scenario sintetico Aurora 21",
+      "domain": "Real estate: synthetic Aurora 21 scenario",
       "model_version": "1.0.0",
       "interview_date": "2026-11-25"
     },
     "systems": {
       "CRM": {
         "label": "Deal & leasing CRM",
-        "role": "Opportunità, offerte e relazioni",
+        "role": "Opportunities, offers, and relationships",
         "kind": "app",
         "adoption": "full",
         "scope": "in",
-        "access": "Sistema logico dimostrativo; nessuna connessione attiva"
+        "access": "Demo system with no live connection"
       },
       "DMS": {
         "label": "Document room",
-        "role": "Dossier, contratti ed evidenze",
+        "role": "Dossiers, contracts, and evidence",
         "kind": "app",
         "adoption": "full",
         "scope": "in",
-        "access": "Sistema logico dimostrativo; nessuna connessione attiva"
+        "access": "Demo system with no live connection"
       },
       "BI": {
         "label": "Investment analytics",
-        "role": "Valutazioni, scenari e performance",
+        "role": "Valuations, scenarios, and performance",
         "kind": "app",
         "adoption": "full",
         "scope": "in",
-        "access": "Sistema logico dimostrativo; nessuna connessione attiva"
+        "access": "Demo system with no live connection"
       },
       "ERP": {
         "label": "Finance ledger",
-        "role": "Budget, coperture e contabilità",
+        "role": "Budgets, funding, and accounting",
         "kind": "app",
         "adoption": "full",
         "scope": "in",
-        "access": "Sistema logico dimostrativo; nessuna connessione attiva"
+        "access": "Demo system with no live connection"
       },
       "PMS": {
         "label": "Property management",
-        "role": "Anagrafica asset, locazioni e servizi",
+        "role": "Asset records, leases, and services",
         "kind": "app",
         "adoption": "full",
         "scope": "in",
-        "access": "Sistema logico dimostrativo; nessuna connessione attiva"
+        "access": "Demo system with no live connection"
       },
       "BIM": {
         "label": "Technical asset register",
-        "role": "Documentazione tecnica e interventi",
+        "role": "Technical documentation and works",
         "kind": "app",
         "adoption": "full",
         "scope": "in",
-        "access": "Sistema logico dimostrativo; nessuna connessione attiva"
+        "access": "Demo system with no live connection"
       },
       "CMMS": {
         "label": "Works & maintenance",
-        "role": "Lavori, collaudi e manutenzioni",
+        "role": "Works, inspections, and maintenance",
         "kind": "app",
         "adoption": "full",
         "scope": "in",
-        "access": "Sistema logico dimostrativo; nessuna connessione attiva"
+        "access": "Demo system with no live connection"
       }
     },
     "owners": {
       "INV": {
         "area": "Investment",
-        "responsible": "Responsabile investimenti",
+        "responsible": "Investment lead",
         "operatives": []
       },
       "LEG": {
         "area": "Legal & contracts",
-        "responsible": "Responsabile legale",
+        "responsible": "Legal lead",
         "operatives": []
       },
       "TEC": {
         "area": "Technical & ESG",
-        "responsible": "Responsabile tecnico",
+        "responsible": "Technical lead",
         "operatives": []
       },
       "FIN": {
         "area": "Finance",
-        "responsible": "Responsabile finanziario",
+        "responsible": "Finance lead",
         "operatives": []
       },
       "AM": {
@@ -98,98 +98,98 @@ const SEED = {
       },
       "COM": {
         "area": "Investment committee",
-        "responsible": "Comitato investimenti",
+        "responsible": "Investment committee",
         "operatives": []
       }
     },
     "glossary": [
       {
-        "canonical": "Opportunità immobiliare",
+        "canonical": "Property opportunity",
         "status": "approved",
         "aliases": []
       },
       {
-        "canonical": "Valutazione preliminare",
+        "canonical": "Preliminary assessment",
         "status": "approved",
         "aliases": []
       },
       {
-        "canonical": "Dossier due diligence",
+        "canonical": "Due diligence dossier",
         "status": "approved",
         "aliases": []
       },
       {
-        "canonical": "Esito due diligence",
+        "canonical": "Due diligence outcome",
         "status": "approved",
         "aliases": []
       },
       {
-        "canonical": "Delibera investimento",
+        "canonical": "Investment decision",
         "status": "approved",
         "aliases": []
       },
       {
-        "canonical": "Piano finanziario",
+        "canonical": "Financial plan",
         "status": "approved",
         "aliases": []
       },
       {
-        "canonical": "Atto acquisizione",
+        "canonical": "Acquisition deed",
         "status": "approved",
         "aliases": []
       },
       {
-        "canonical": "Anagrafica asset",
+        "canonical": "Asset record",
         "status": "approved",
         "aliases": []
       },
       {
-        "canonical": "Piano valorizzazione",
+        "canonical": "Asset improvement plan",
         "status": "approved",
         "aliases": []
       },
       {
-        "canonical": "Verbale accettazione lavori",
+        "canonical": "Works acceptance record",
         "status": "approved",
         "aliases": []
       },
       {
-        "canonical": "Profilo conduttore",
+        "canonical": "Tenant profile",
         "status": "approved",
         "aliases": []
       },
       {
-        "canonical": "Contratto locazione",
+        "canonical": "Lease agreement",
         "status": "approved",
         "aliases": []
       },
       {
-        "canonical": "Verbale consegna",
+        "canonical": "Handover record",
         "status": "approved",
         "aliases": []
       },
       {
-        "canonical": "Rendiconto gestione",
+        "canonical": "Operating statement",
         "status": "approved",
         "aliases": []
       },
       {
-        "canonical": "Rapporto performance",
+        "canonical": "Performance report",
         "status": "approved",
         "aliases": []
       },
       {
-        "canonical": "Piano dismissione",
+        "canonical": "Disposal plan",
         "status": "approved",
         "aliases": []
       },
       {
-        "canonical": "Dossier trasferimento",
+        "canonical": "Transfer dossier",
         "status": "approved",
         "aliases": []
       },
       {
-        "canonical": "Report chiusura asset",
+        "canonical": "Asset closeout report",
         "status": "approved",
         "aliases": []
       }
@@ -197,26 +197,26 @@ const SEED = {
     "open_points": [
       {
         "id": "OP-01",
-        "title": "Completare evidenze tecniche del dossier",
-        "detail": "Punto dimostrativo: il referente tecnico deve completare la documentazione di esempio prima del riesame.",
+        "title": "Complete the dossier's technical evidence",
+        "detail": "Demo issue: the technical lead completes the example documentation before review.",
         "owner": "TEC",
         "status": "open",
-        "next_step": "Integrare il dossier e registrare il riesame."
+        "next_step": "Complete the dossier and record the review."
       },
       {
         "id": "OP-02",
-        "title": "Confermare criteri di selezione del conduttore",
-        "detail": "Punto dimostrativo: allineare i criteri fra Asset management e Legal. Nessuna persona reale è censita.",
+        "title": "Confirm tenant selection criteria",
+        "detail": "Demo issue: align criteria between Asset Management and Legal. The inventory uses synthetic records.",
         "owner": "AM",
         "status": "open",
-        "next_step": "Confermare i criteri e aggiornare il passo 1.11."
+        "next_step": "Confirm the criteria and update step 1.11."
       }
     ],
     "processes": [
       {
         "id": "P1",
-        "name": "Aurora 21: ciclo immobiliare end to end",
-        "subtitle": "Acquisizione → valorizzazione → locazione → gestione → dismissione. Tutti i dati sono sintetici.",
+        "name": "Aurora 21 property lifecycle",
+        "subtitle": "Acquisition, improvement, leasing, operations, and disposal. All data is synthetic.",
         "area": "AM",
         "systems": [
           "CRM",
@@ -232,9 +232,9 @@ const SEED = {
         "subprocesses": [
           {
             "id": "1.1",
-            "name": "Censisci opportunità e mandato",
+            "name": "Record opportunity and mandate",
             "type": "C",
-            "trigger": "Nuova opportunità segnalata",
+            "trigger": "New opportunity reported",
             "systems": [
               "CRM"
             ],
@@ -248,8 +248,8 @@ const SEED = {
             "entities_in": [],
             "entities_out": [
               {
-                "name": "Opportunità immobiliare",
-                "canonical": "Opportunità immobiliare",
+                "name": "Property opportunity",
+                "canonical": "Property opportunity",
                 "system": "CRM"
               }
             ],
@@ -262,18 +262,18 @@ const SEED = {
             "extra_system_steps": [],
             "verified": true,
             "controls": [
-              "Definire asset, obiettivi e responsabile"
+              "Specify the asset, objectives, and owner"
             ],
             "rules": [
-              "Confrontare la proposta con il mandato di investimento."
+              "Check the proposal against the investment mandate."
             ],
-            "volumes": "Scenario sintetico: un asset, nessuna operazione reale."
+            "volumes": "Synthetic scenario for one example asset."
           },
           {
             "id": "1.2",
-            "name": "Valuta mercato e scenario economico",
+            "name": "Assess the market and business case",
             "type": "C",
-            "trigger": "Opportunità censita",
+            "trigger": "Opportunity recorded",
             "systems": [
               "BI",
               "CRM"
@@ -287,14 +287,14 @@ const SEED = {
             "data_owner": "INV",
             "entities_in": [
               {
-                "name": "Opportunità immobiliare",
+                "name": "Property opportunity",
                 "source": "CRM"
               }
             ],
             "entities_out": [
               {
-                "name": "Valutazione preliminare",
-                "canonical": "Valutazione preliminare",
+                "name": "Preliminary assessment",
+                "canonical": "Preliminary assessment",
                 "system": "BI"
               }
             ],
@@ -302,7 +302,7 @@ const SEED = {
               {
                 "from": "CRM",
                 "to": "BI",
-                "payload": "Opportunità immobiliare"
+                "payload": "Property opportunity"
               }
             ],
             "criticality": {
@@ -313,18 +313,18 @@ const SEED = {
             "extra_system_steps": [],
             "verified": true,
             "controls": [
-              "Registrare ipotesi, fonti e sensitività"
+              "Record assumptions, sources, and sensitivities"
             ],
             "rules": [
-              "Il caso economico è una simulazione, da confermare sul caso reale."
+              "The business case uses simulated data. Validate assumptions for a real case."
             ],
-            "volumes": "Scenario sintetico: un asset, nessuna operazione reale."
+            "volumes": "Synthetic scenario for one example asset."
           },
           {
             "id": "1.3",
-            "name": "Costruisci la document room",
+            "name": "Set up the document room",
             "type": "C",
-            "trigger": "Screening preliminare positivo",
+            "trigger": "Preliminary screening passed",
             "systems": [
               "DMS",
               "BI"
@@ -338,14 +338,14 @@ const SEED = {
             "data_owner": "LEG",
             "entities_in": [
               {
-                "name": "Valutazione preliminare",
+                "name": "Preliminary assessment",
                 "source": "BI"
               }
             ],
             "entities_out": [
               {
-                "name": "Dossier due diligence",
-                "canonical": "Dossier due diligence",
+                "name": "Due diligence dossier",
+                "canonical": "Due diligence dossier",
                 "system": "DMS"
               }
             ],
@@ -353,7 +353,7 @@ const SEED = {
               {
                 "from": "BI",
                 "to": "DMS",
-                "payload": "Valutazione preliminare"
+                "payload": "Preliminary assessment"
               }
             ],
             "criticality": {
@@ -364,18 +364,18 @@ const SEED = {
             "extra_system_steps": [],
             "verified": true,
             "controls": [
-              "Censire documenti presenti, mancanti e relativa provenienza"
+              "Record available documents, missing documents, and their sources"
             ],
             "rules": [
-              "La completezza del dossier richiede una revisione nominativa."
+              "A named reviewer confirms the dossier is complete."
             ],
-            "volumes": "Scenario sintetico: un asset, nessuna operazione reale."
+            "volumes": "Synthetic scenario for one example asset."
           },
           {
             "id": "1.4",
-            "name": "Consolida due diligence e rischi",
+            "name": "Consolidate due diligence and risks",
             "type": "C",
-            "trigger": "Dossier pronto per analisi multidisciplinare",
+            "trigger": "Dossier ready for cross-functional review",
             "systems": [
               "BIM",
               "DMS"
@@ -389,14 +389,14 @@ const SEED = {
             "data_owner": "TEC",
             "entities_in": [
               {
-                "name": "Dossier due diligence",
+                "name": "Due diligence dossier",
                 "source": "DMS"
               }
             ],
             "entities_out": [
               {
-                "name": "Esito due diligence",
-                "canonical": "Esito due diligence",
+                "name": "Due diligence outcome",
+                "canonical": "Due diligence outcome",
                 "system": "BIM"
               }
             ],
@@ -404,7 +404,7 @@ const SEED = {
               {
                 "from": "DMS",
                 "to": "BIM",
-                "payload": "Dossier due diligence"
+                "payload": "Due diligence dossier"
               }
             ],
             "criticality": {
@@ -417,18 +417,18 @@ const SEED = {
             "extra_system_steps": [],
             "verified": false,
             "controls": [
-              "Raccogliere esiti tecnici, contrattuali ed ESG dai referenti"
+              "Gather technical, contractual, and ESG findings from the owners"
             ],
             "rules": [
-              "Questioni aperte ritornano alla raccolta delle evidenze."
+              "Open issues return to evidence collection."
             ],
-            "volumes": "Scenario sintetico: un asset, nessuna operazione reale."
+            "volumes": "Synthetic scenario for one example asset."
           },
           {
             "id": "1.5",
-            "name": "Delibera il piano di investimento",
+            "name": "Approve the investment plan",
             "type": "C",
-            "trigger": "Esiti della due diligence disponibili",
+            "trigger": "Due diligence outcomes available",
             "systems": [
               "DMS",
               "BIM"
@@ -442,14 +442,14 @@ const SEED = {
             "data_owner": "COM",
             "entities_in": [
               {
-                "name": "Esito due diligence",
+                "name": "Due diligence outcome",
                 "source": "BIM"
               }
             ],
             "entities_out": [
               {
-                "name": "Delibera investimento",
-                "canonical": "Delibera investimento",
+                "name": "Investment decision",
+                "canonical": "Investment decision",
                 "system": "DMS"
               }
             ],
@@ -457,7 +457,7 @@ const SEED = {
               {
                 "from": "BIM",
                 "to": "DMS",
-                "payload": "Esito due diligence"
+                "payload": "Due diligence outcome"
               }
             ],
             "criticality": {
@@ -468,18 +468,18 @@ const SEED = {
             "extra_system_steps": [],
             "verified": true,
             "controls": [
-              "Documentare motivazione, condizioni e budget proposto"
+              "Document the rationale, conditions, and proposed budget"
             ],
             "rules": [
-              "La decisione umana resta distinta dagli esiti delle policy."
+              "Record the human decision separately from policy results."
             ],
-            "volumes": "Scenario sintetico: un asset, nessuna operazione reale."
+            "volumes": "Synthetic scenario for one example asset."
           },
           {
             "id": "1.6",
-            "name": "Negozia condizioni e finanziamento",
+            "name": "Negotiate terms and funding",
             "type": "C",
-            "trigger": "Mandato negoziale definito",
+            "trigger": "Negotiation mandate agreed",
             "systems": [
               "ERP",
               "DMS"
@@ -493,14 +493,14 @@ const SEED = {
             "data_owner": "FIN",
             "entities_in": [
               {
-                "name": "Delibera investimento",
+                "name": "Investment decision",
                 "source": "DMS"
               }
             ],
             "entities_out": [
               {
-                "name": "Piano finanziario",
-                "canonical": "Piano finanziario",
+                "name": "Financial plan",
+                "canonical": "Financial plan",
                 "system": "ERP"
               }
             ],
@@ -508,7 +508,7 @@ const SEED = {
               {
                 "from": "DMS",
                 "to": "ERP",
-                "payload": "Delibera investimento"
+                "payload": "Investment decision"
               }
             ],
             "criticality": {
@@ -519,18 +519,18 @@ const SEED = {
             "extra_system_steps": [],
             "verified": true,
             "controls": [
-              "Riconciliare offerta, risorse disponibili e condizioni"
+              "Reconcile the offer, funding, and terms"
             ],
             "rules": [
-              "La copertura economica è un dato da attestare, non una previsione automatica."
+              "Record evidence of available funding."
             ],
-            "volumes": "Scenario sintetico: un asset, nessuna operazione reale."
+            "volumes": "Synthetic scenario for one example asset."
           },
           {
             "id": "1.7",
-            "name": "Formalizza acquisizione e closing",
+            "name": "Finalize acquisition and closing",
             "type": "C",
-            "trigger": "Condizioni e autorizzazioni confermate",
+            "trigger": "Terms and approvals confirmed",
             "systems": [
               "DMS",
               "ERP"
@@ -544,14 +544,14 @@ const SEED = {
             "data_owner": "LEG",
             "entities_in": [
               {
-                "name": "Piano finanziario",
+                "name": "Financial plan",
                 "source": "ERP"
               }
             ],
             "entities_out": [
               {
-                "name": "Atto acquisizione",
-                "canonical": "Atto acquisizione",
+                "name": "Acquisition deed",
+                "canonical": "Acquisition deed",
                 "system": "DMS"
               }
             ],
@@ -559,7 +559,7 @@ const SEED = {
               {
                 "from": "ERP",
                 "to": "DMS",
-                "payload": "Piano finanziario"
+                "payload": "Financial plan"
               }
             ],
             "criticality": {
@@ -570,18 +570,18 @@ const SEED = {
             "extra_system_steps": [],
             "verified": true,
             "controls": [
-              "Associare documenti firmati e verbale di completamento"
+              "Link the signed documents and closing record"
             ],
             "rules": [
-              "I professionisti competenti verificano il caso concreto."
+              "Qualified personnel verify the case."
             ],
-            "volumes": "Scenario sintetico: un asset, nessuna operazione reale."
+            "volumes": "Synthetic scenario for one example asset."
           },
           {
             "id": "1.8",
-            "name": "Attiva anagrafica e responsabilità asset",
+            "name": "Create the asset record and assign owners",
             "type": "C",
-            "trigger": "Acquisizione formalizzata",
+            "trigger": "Acquisition finalized",
             "systems": [
               "PMS",
               "DMS"
@@ -595,14 +595,14 @@ const SEED = {
             "data_owner": "AM",
             "entities_in": [
               {
-                "name": "Atto acquisizione",
+                "name": "Acquisition deed",
                 "source": "DMS"
               }
             ],
             "entities_out": [
               {
-                "name": "Anagrafica asset",
-                "canonical": "Anagrafica asset",
+                "name": "Asset record",
+                "canonical": "Asset record",
                 "system": "PMS"
               }
             ],
@@ -610,7 +610,7 @@ const SEED = {
               {
                 "from": "DMS",
                 "to": "PMS",
-                "payload": "Atto acquisizione"
+                "payload": "Acquisition deed"
               }
             ],
             "criticality": {
@@ -621,18 +621,18 @@ const SEED = {
             "extra_system_steps": [],
             "verified": true,
             "controls": [
-              "Assegnare ID asset, owner, scadenze e sistemi di riferimento"
+              "Assign the asset ID, owners, deadlines, and systems of record"
             ],
             "rules": [
-              "Aurora 21 è un asset fittizio creato soltanto per la dimostrazione."
+              "Aurora 21 is a fictional asset created for this demo."
             ],
-            "volumes": "Scenario sintetico: un asset, nessuna operazione reale."
+            "volumes": "Synthetic scenario for one example asset."
           },
           {
             "id": "1.9",
-            "name": "Pianifica interventi e valorizzazione",
+            "name": "Plan asset improvements",
             "type": "C",
-            "trigger": "Intervento richiesto dalla strategia asset",
+            "trigger": "Asset strategy calls for improvements",
             "systems": [
               "BIM",
               "PMS"
@@ -646,14 +646,14 @@ const SEED = {
             "data_owner": "TEC",
             "entities_in": [
               {
-                "name": "Anagrafica asset",
+                "name": "Asset record",
                 "source": "PMS"
               }
             ],
             "entities_out": [
               {
-                "name": "Piano valorizzazione",
-                "canonical": "Piano valorizzazione",
+                "name": "Asset improvement plan",
+                "canonical": "Asset improvement plan",
                 "system": "BIM"
               }
             ],
@@ -661,7 +661,7 @@ const SEED = {
               {
                 "from": "PMS",
                 "to": "BIM",
-                "payload": "Anagrafica asset"
+                "payload": "Asset record"
               }
             ],
             "criticality": {
@@ -672,18 +672,18 @@ const SEED = {
             "extra_system_steps": [],
             "verified": true,
             "controls": [
-              "Definire ambito, budget, tempi e criteri di accettazione"
+              "Define scope, budget, schedule, and acceptance criteria"
             ],
             "rules": [
-              "Un piano approvato rende tracciabili le successive variazioni."
+              "Track later changes against the approved plan."
             ],
-            "volumes": "Scenario sintetico: un asset, nessuna operazione reale."
+            "volumes": "Synthetic scenario for one example asset."
           },
           {
             "id": "1.10",
-            "name": "Gestisci lavori e accettazione",
+            "name": "Manage works and acceptance",
             "type": "C",
-            "trigger": "Piano di valorizzazione disponibile",
+            "trigger": "Asset improvement plan available",
             "systems": [
               "CMMS",
               "BIM"
@@ -697,14 +697,14 @@ const SEED = {
             "data_owner": "TEC",
             "entities_in": [
               {
-                "name": "Piano valorizzazione",
+                "name": "Asset improvement plan",
                 "source": "BIM"
               }
             ],
             "entities_out": [
               {
-                "name": "Verbale accettazione lavori",
-                "canonical": "Verbale accettazione lavori",
+                "name": "Works acceptance record",
+                "canonical": "Works acceptance record",
                 "system": "CMMS"
               }
             ],
@@ -712,7 +712,7 @@ const SEED = {
               {
                 "from": "BIM",
                 "to": "CMMS",
-                "payload": "Piano valorizzazione"
+                "payload": "Asset improvement plan"
               }
             ],
             "criticality": {
@@ -723,18 +723,18 @@ const SEED = {
             "extra_system_steps": [],
             "verified": true,
             "controls": [
-              "Registrare avanzamento, evidenze di controllo e scostamenti"
+              "Record progress, inspection evidence, and deviations"
             ],
             "rules": [
-              "Un esito non accettato ritorna alla pianificazione degli interventi."
+              "Rejected works return to planning."
             ],
-            "volumes": "Scenario sintetico: un asset, nessuna operazione reale."
+            "volumes": "Synthetic scenario for one example asset."
           },
           {
             "id": "1.11",
-            "name": "Seleziona il conduttore",
+            "name": "Select a tenant",
             "type": "C",
-            "trigger": "Immobile pronto per commercializzazione",
+            "trigger": "Property ready for marketing",
             "systems": [
               "CRM",
               "CMMS"
@@ -748,14 +748,14 @@ const SEED = {
             "data_owner": "AM",
             "entities_in": [
               {
-                "name": "Verbale accettazione lavori",
+                "name": "Works acceptance record",
                 "source": "CMMS"
               }
             ],
             "entities_out": [
               {
-                "name": "Profilo conduttore",
-                "canonical": "Profilo conduttore",
+                "name": "Tenant profile",
+                "canonical": "Tenant profile",
                 "system": "CRM"
               }
             ],
@@ -763,7 +763,7 @@ const SEED = {
               {
                 "from": "CMMS",
                 "to": "CRM",
-                "payload": "Verbale accettazione lavori"
+                "payload": "Works acceptance record"
               }
             ],
             "criticality": {
@@ -776,18 +776,18 @@ const SEED = {
             "extra_system_steps": [],
             "verified": false,
             "controls": [
-              "Registrare criteri, proposta e verifiche documentali"
+              "Record criteria, the proposal, and document checks"
             ],
             "rules": [
-              "La valutazione è svolta dai referenti; nessun scoring personale automatico."
+              "Assigned reviewers carry out the assessment."
             ],
-            "volumes": "Scenario sintetico: un asset, nessuna operazione reale."
+            "volumes": "Synthetic scenario for one example asset."
           },
           {
             "id": "1.12",
-            "name": "Formalizza locazione e garanzie",
+            "name": "Finalize lease and guarantees",
             "type": "C",
-            "trigger": "Proposta selezionata e verificata",
+            "trigger": "Proposal selected and checked",
             "systems": [
               "DMS",
               "CRM"
@@ -801,14 +801,14 @@ const SEED = {
             "data_owner": "LEG",
             "entities_in": [
               {
-                "name": "Profilo conduttore",
+                "name": "Tenant profile",
                 "source": "CRM"
               }
             ],
             "entities_out": [
               {
-                "name": "Contratto locazione",
-                "canonical": "Contratto locazione",
+                "name": "Lease agreement",
+                "canonical": "Lease agreement",
                 "system": "DMS"
               }
             ],
@@ -816,7 +816,7 @@ const SEED = {
               {
                 "from": "CRM",
                 "to": "DMS",
-                "payload": "Profilo conduttore"
+                "payload": "Tenant profile"
               }
             ],
             "criticality": {
@@ -827,18 +827,18 @@ const SEED = {
             "extra_system_steps": [],
             "verified": true,
             "controls": [
-              "Allineare termini concordati, garanzie e scadenze"
+              "Align agreed terms, guarantees, and deadlines"
             ],
             "rules": [
-              "Firma e verifiche contrattuali sono attività esterne documentate nel modello."
+              "The model records external signing and contract checks."
             ],
-            "volumes": "Scenario sintetico: un asset, nessuna operazione reale."
+            "volumes": "Synthetic scenario for one example asset."
           },
           {
             "id": "1.13",
-            "name": "Consegna immobile e attiva servizi",
+            "name": "Hand over the property and activate services",
             "type": "C",
-            "trigger": "Contratto formalizzato",
+            "trigger": "Contract finalized",
             "systems": [
               "PMS",
               "DMS"
@@ -852,14 +852,14 @@ const SEED = {
             "data_owner": "PM",
             "entities_in": [
               {
-                "name": "Contratto locazione",
+                "name": "Lease agreement",
                 "source": "DMS"
               }
             ],
             "entities_out": [
               {
-                "name": "Verbale consegna",
-                "canonical": "Verbale consegna",
+                "name": "Handover record",
+                "canonical": "Handover record",
                 "system": "PMS"
               }
             ],
@@ -867,7 +867,7 @@ const SEED = {
               {
                 "from": "DMS",
                 "to": "PMS",
-                "payload": "Contratto locazione"
+                "payload": "Lease agreement"
               }
             ],
             "criticality": {
@@ -878,18 +878,18 @@ const SEED = {
             "extra_system_steps": [],
             "verified": true,
             "controls": [
-              "Rilevare consistenza, contatori, accessi e responsabilità operative"
+              "Record condition, meter readings, access, and operating responsibilities"
             ],
             "rules": [
-              "Il verbale alimenta l’anagrafica operativa dell’asset."
+              "The handover record feeds the asset's operational records."
             ],
-            "volumes": "Scenario sintetico: un asset, nessuna operazione reale."
+            "volumes": "Synthetic scenario for one example asset."
           },
           {
             "id": "1.14",
-            "name": "Gestisci canoni, servizi e manutenzioni",
+            "name": "Manage rent, services, and maintenance",
             "type": "C",
-            "trigger": "Avvio gestione operativa",
+            "trigger": "Operations started",
             "systems": [
               "PMS"
             ],
@@ -902,14 +902,14 @@ const SEED = {
             "data_owner": "PM",
             "entities_in": [
               {
-                "name": "Verbale consegna",
+                "name": "Handover record",
                 "source": "PMS"
               }
             ],
             "entities_out": [
               {
-                "name": "Rendiconto gestione",
-                "canonical": "Rendiconto gestione",
+                "name": "Operating statement",
+                "canonical": "Operating statement",
                 "system": "PMS"
               }
             ],
@@ -922,18 +922,18 @@ const SEED = {
             "extra_system_steps": [],
             "verified": true,
             "controls": [
-              "Riconciliare incassi, ticket, interventi e registrazioni contabili"
+              "Reconcile payments, tickets, works, and accounting records"
             ],
             "rules": [
-              "Le attività ricorrenti alimentano una versione periodica del rendiconto."
+              "Recurring activities feed the periodic operating statement."
             ],
-            "volumes": "Scenario sintetico: un asset, nessuna operazione reale."
+            "volumes": "Synthetic scenario for one example asset."
           },
           {
             "id": "1.15",
-            "name": "Riesamina performance e rischi",
+            "name": "Review performance and risks",
             "type": "C",
-            "trigger": "Chiusura del periodo di osservazione",
+            "trigger": "Observation period ended",
             "systems": [
               "BI",
               "PMS"
@@ -947,14 +947,14 @@ const SEED = {
             "data_owner": "AM",
             "entities_in": [
               {
-                "name": "Rendiconto gestione",
+                "name": "Operating statement",
                 "source": "PMS"
               }
             ],
             "entities_out": [
               {
-                "name": "Rapporto performance",
-                "canonical": "Rapporto performance",
+                "name": "Performance report",
+                "canonical": "Performance report",
                 "system": "BI"
               }
             ],
@@ -962,7 +962,7 @@ const SEED = {
               {
                 "from": "PMS",
                 "to": "BI",
-                "payload": "Rendiconto gestione"
+                "payload": "Operating statement"
               }
             ],
             "criticality": {
@@ -973,18 +973,18 @@ const SEED = {
             "extra_system_steps": [],
             "verified": true,
             "controls": [
-              "Esporre scostamenti, criticità e ipotesi aggiornate"
+              "Report deviations, open issues, and updated assumptions"
             ],
             "rules": [
-              "I KPI vanno letti insieme a fonti, periodo e limiti delle osservazioni."
+              "Interpret KPIs in light of their sources, dates, and observation limits."
             ],
-            "volumes": "Scenario sintetico: un asset, nessuna operazione reale."
+            "volumes": "Synthetic scenario for one example asset."
           },
           {
             "id": "1.16",
-            "name": "Prepara strategia e dossier di exit",
+            "name": "Prepare the exit strategy and dossier",
             "type": "C",
-            "trigger": "Decisione di procedere alla dismissione",
+            "trigger": "Disposal decision made",
             "systems": [
               "BI"
             ],
@@ -997,14 +997,14 @@ const SEED = {
             "data_owner": "COM",
             "entities_in": [
               {
-                "name": "Rapporto performance",
+                "name": "Performance report",
                 "source": "BI"
               }
             ],
             "entities_out": [
               {
-                "name": "Piano dismissione",
-                "canonical": "Piano dismissione",
+                "name": "Disposal plan",
+                "canonical": "Disposal plan",
                 "system": "BI"
               }
             ],
@@ -1017,18 +1017,18 @@ const SEED = {
             "extra_system_steps": [],
             "verified": true,
             "controls": [
-              "Motivare strategia, perimetro del dossier e condizioni obiettivo"
+              "Document the strategy, dossier scope, and target terms"
             ],
             "rules": [
-              "Il comitato può scegliere mantenimento, rinnovo o vendita."
+              "The committee may choose to retain, re-lease, or sell the asset."
             ],
-            "volumes": "Scenario sintetico: un asset, nessuna operazione reale."
+            "volumes": "Synthetic scenario for one example asset."
           },
           {
             "id": "1.17",
-            "name": "Esegui vendita e trasferimento",
+            "name": "Complete the sale and transfer",
             "type": "C",
-            "trigger": "Dossier exit e mandato disponibili",
+            "trigger": "Exit dossier and mandate available",
             "systems": [
               "DMS",
               "BI"
@@ -1042,14 +1042,14 @@ const SEED = {
             "data_owner": "INV",
             "entities_in": [
               {
-                "name": "Piano dismissione",
+                "name": "Disposal plan",
                 "source": "BI"
               }
             ],
             "entities_out": [
               {
-                "name": "Dossier trasferimento",
-                "canonical": "Dossier trasferimento",
+                "name": "Transfer dossier",
+                "canonical": "Transfer dossier",
                 "system": "DMS"
               }
             ],
@@ -1057,7 +1057,7 @@ const SEED = {
               {
                 "from": "BI",
                 "to": "DMS",
-                "payload": "Piano dismissione"
+                "payload": "Disposal plan"
               }
             ],
             "criticality": {
@@ -1068,18 +1068,18 @@ const SEED = {
             "extra_system_steps": [],
             "verified": true,
             "controls": [
-              "Tracciare negoziazione, documenti e consegne al subentrante"
+              "Track negotiation, documents, and handover to the successor"
             ],
             "rules": [
-              "L’esito della vendita è registrato solo dopo conferma dei referenti."
+              "Record the sale outcome after the owners confirm it."
             ],
-            "volumes": "Scenario sintetico: un asset, nessuna operazione reale."
+            "volumes": "Synthetic scenario for one example asset."
           },
           {
             "id": "1.18",
-            "name": "Chiudi posizioni e archivia evidenze",
+            "name": "Close accounts and archive evidence",
             "type": "C",
-            "trigger": "Trasferimento formalizzato",
+            "trigger": "Transfer finalized",
             "systems": [
               "ERP",
               "DMS"
@@ -1093,14 +1093,14 @@ const SEED = {
             "data_owner": "FIN",
             "entities_in": [
               {
-                "name": "Dossier trasferimento",
+                "name": "Transfer dossier",
                 "source": "DMS"
               }
             ],
             "entities_out": [
               {
-                "name": "Report chiusura asset",
-                "canonical": "Report chiusura asset",
+                "name": "Asset closeout report",
+                "canonical": "Asset closeout report",
                 "system": "ERP"
               }
             ],
@@ -1108,7 +1108,7 @@ const SEED = {
               {
                 "from": "DMS",
                 "to": "ERP",
-                "payload": "Dossier trasferimento"
+                "payload": "Transfer dossier"
               }
             ],
             "criticality": {
@@ -1119,12 +1119,12 @@ const SEED = {
             "extra_system_steps": [],
             "verified": true,
             "controls": [
-              "Riconciliare posizioni residue e conservazione del dossier"
+              "Reconcile remaining accounts and confirm dossier retention"
             ],
             "rules": [
-              "La chiusura preserva versioni, responsabilità e traccia delle decisioni."
+              "Closeout retains versions, ownership, and the decision record."
             ],
-            "volumes": "Scenario sintetico: un asset, nessuna operazione reale."
+            "volumes": "Synthetic scenario for one example asset."
           }
         ],
         "functional_graph": {
@@ -1133,7 +1133,7 @@ const SEED = {
             {
               "id": "start",
               "kind": "start",
-              "label": "Nuova opportunità"
+              "label": "New opportunity"
             },
             {
               "id": "t1",
@@ -1228,48 +1228,48 @@ const SEED = {
             {
               "id": "screen",
               "kind": "decision",
-              "label": "Coerente con il mandato?",
-              "description": "Decisione sulla valutazione preliminare."
+              "label": "Mandate fit?",
+              "description": "Decision on the preliminary assessment."
             },
             {
               "id": "diligence",
               "kind": "decision",
-              "label": "Evidenze sufficienti?",
-              "description": "Conferma multidisciplinare; eventuali integrazioni ritornano alla document room."
+              "label": "Sufficient evidence?",
+              "description": "Review across disciplines. Send any requests for additions back to the document room."
             },
             {
               "id": "invest",
               "kind": "decision",
-              "label": "Acquisizione autorizzata?",
-              "description": "Delibera, condizioni negoziali e copertura confermate dai referenti."
+              "label": "Acquisition authorized?",
+              "description": "Owners confirm the approval, negotiated terms, and funding."
             },
             {
               "id": "works",
               "kind": "decision",
-              "label": "Servono interventi?",
-              "description": "Scelta del percorso di valorizzazione."
+              "label": "Improvements needed?",
+              "description": "Choose how to improve the asset."
             },
             {
               "id": "accept",
               "kind": "decision",
-              "label": "Lavori accettati?",
-              "description": "Verifica delle evidenze di completamento."
+              "label": "Works accepted?",
+              "description": "Verify completion evidence."
             },
             {
               "id": "strategy",
               "kind": "decision",
-              "label": "Quale strategia asset?",
-              "description": "Mantenimento, nuova locazione o dismissione motivata."
+              "label": "Asset strategy?",
+              "description": "Document why the asset will be retained, re-leased, or sold."
             },
             {
               "id": "stop",
               "kind": "end",
-              "label": "Opportunità archiviata"
+              "label": "Opportunity archived"
             },
             {
               "id": "end",
               "kind": "end",
-              "label": "Ciclo chiuso e tracciato"
+              "label": "Lifecycle closed and recorded"
             }
           ],
           "edges": [
@@ -1372,92 +1372,92 @@ const SEED = {
               "id": "e20",
               "from": "screen",
               "to": "t3",
-              "label": "Sì",
-              "condition": "Opportunità coerente con criteri e mandato"
+              "label": "Yes",
+              "condition": "Opportunity meets the criteria and mandate"
             },
             {
               "id": "e21",
               "from": "screen",
               "to": "stop",
               "label": "No",
-              "condition": "Motivare archiviazione"
+              "condition": "Record the reason for archiving"
             },
             {
               "id": "e22",
               "from": "diligence",
               "to": "t3",
-              "label": "Integra",
-              "condition": "Documenti o analisi da completare"
+              "label": "Supplement",
+              "condition": "Documents or analysis incomplete"
             },
             {
               "id": "e23",
               "from": "diligence",
               "to": "t5",
-              "label": "Procedi",
-              "condition": "Evidenze riesaminate dai referenti"
+              "label": "Proceed",
+              "condition": "Owners reviewed the evidence"
             },
             {
               "id": "e24",
               "from": "invest",
               "to": "t7",
-              "label": "Sì",
-              "condition": "Autorizzazione interna e condizioni confermate"
+              "label": "Yes",
+              "condition": "Internal approval and terms confirmed"
             },
             {
               "id": "e25",
               "from": "invest",
               "to": "stop",
               "label": "No",
-              "condition": "Operazione non autorizzata"
+              "condition": "Transaction not authorized"
             },
             {
               "id": "e26",
               "from": "works",
               "to": "t9",
-              "label": "Sì",
-              "condition": "Interventi previsti dalla strategia"
+              "label": "Yes",
+              "condition": "Strategy includes improvements"
             },
             {
               "id": "e27",
               "from": "works",
               "to": "t11",
               "label": "No",
-              "condition": "Asset pronto per la commercializzazione"
+              "condition": "Asset ready for marketing"
             },
             {
               "id": "e28",
               "from": "accept",
               "to": "t9",
-              "label": "Rivedi",
-              "condition": "Criteri di accettazione non soddisfatti"
+              "label": "Revise",
+              "condition": "Acceptance criteria unmet"
             },
             {
               "id": "e29",
               "from": "accept",
               "to": "t11",
-              "label": "Accetta",
-              "condition": "Evidenze di completamento confermate"
+              "label": "Accept",
+              "condition": "Completion evidence confirmed"
             },
             {
               "id": "e30",
               "from": "strategy",
               "to": "t14",
-              "label": "Mantieni",
-              "condition": "Proseguire gestione corrente"
+              "label": "Retain",
+              "condition": "Continue current operations"
             },
             {
               "id": "e31",
               "from": "strategy",
               "to": "t11",
-              "label": "Rinnova",
-              "condition": "Avviare nuova commercializzazione"
+              "label": "Re-lease",
+              "condition": "Launch new marketing"
             },
             {
               "id": "e32",
               "from": "strategy",
               "to": "t16",
-              "label": "Dismetti",
-              "condition": "Mandato di vendita deliberato"
+              "label": "Sell",
+              "condition": "Sale mandate approved"
             }
           ],
           "layout": {
@@ -1581,119 +1581,119 @@ const SEED = {
       "severity": "ERROR",
       "enforcement": "approve",
       "category": "ownership",
-      "title": "Master candidato assente",
+      "title": "Missing lead system candidate",
       "enabled": true
     },
     "DG-OWN-002": {
       "severity": "ERROR",
       "enforcement": "approve",
       "category": "ownership",
-      "title": "Data Owner non attribuito",
+      "title": "Missing data owner",
       "enabled": true
     },
     "DG-OWN-003": {
       "severity": "WARNING",
       "enforcement": "advise",
       "category": "ownership",
-      "title": "Multi-master senza ruolo distinto",
+      "title": "Overlapping lead system roles",
       "enabled": true
     },
     "DG-SEM-001": {
       "severity": "ERROR",
       "enforcement": "approve",
       "category": "semantics",
-      "title": "Nodo [C] senza entità in output",
+      "title": "Create step without output entity",
       "enabled": true
     },
     "DG-SEM-002": {
       "severity": "ERROR",
       "enforcement": "approve",
       "category": "semantics",
-      "title": "Entità senza sistema di residenza",
+      "title": "Entity without host system",
       "enabled": true
     },
     "DG-SEM-003": {
       "severity": "INFO",
       "enforcement": "observe",
       "category": "semantics",
-      "title": "Termine canonico provvisorio",
+      "title": "Provisional canonical term",
       "enabled": true
     },
     "DG-SEM-004": {
       "severity": "WARNING",
       "enforcement": "advise",
       "category": "semantics",
-      "title": "Entità replicata su più sistemi",
+      "title": "Entity replicated across systems",
       "enabled": true
     },
     "DG-MAP-001": {
       "severity": "CRITICAL",
       "enforcement": "block",
       "category": "mapping",
-      "title": "Flusso verso sistema non catalogato",
+      "title": "Flow references unrecorded system",
       "enabled": true
     },
     "DG-MAP-002": {
       "severity": "ERROR",
       "enforcement": "approve",
       "category": "mapping",
-      "title": "Flusso senza payload",
+      "title": "Flow without payload",
       "enabled": true
     },
     "DG-MAP-003": {
       "severity": "CRITICAL",
       "enforcement": "block",
       "category": "mapping",
-      "title": "Master non tra i sistemi del nodo",
+      "title": "Lead system missing from the step",
       "enabled": true
     },
     "DG-SYS-001": {
       "severity": "WARNING",
       "enforcement": "advise",
       "category": "systems",
-      "title": "Sistema con adozione parziale",
+      "title": "Partial system adoption",
       "enabled": true
     },
     "DG-SYS-002": {
       "severity": "WARNING",
       "enforcement": "advise",
       "category": "systems",
-      "title": "Sistema in implementazione",
+      "title": "System implementation underway",
       "enabled": true
     },
     "DG-SCOPE-001": {
       "severity": "WARNING",
       "enforcement": "advise",
       "category": "scope",
-      "title": "Perimetro non deciso",
+      "title": "Scope undecided",
       "enabled": true
     },
     "DG-ACT-001": {
       "severity": "WARNING",
       "enforcement": "advise",
       "category": "actions",
-      "title": "Open point da chiudere",
+      "title": "Open issue to resolve",
       "enabled": true
     },
     "DG-ACT-002": {
       "severity": "WARNING",
       "enforcement": "advise",
       "category": "actions",
-      "title": "Criticità non tracciata",
+      "title": "Critical issue untracked",
       "enabled": true
     },
     "DG-ACT-003": {
       "severity": "ERROR",
       "enforcement": "approve",
       "category": "actions",
-      "title": "Non validato dal referente",
+      "title": "Pending process owner validation",
       "enabled": true
     },
     "DG-ACT-004": {
       "severity": "WARNING",
       "enforcement": "advise",
       "category": "actions",
-      "title": "Step extra-sistema non approvato",
+      "title": "External step awaiting approval",
       "enabled": true
     }
   }

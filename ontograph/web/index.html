@@ -1,30 +1,31 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
-  <title>OntoGraph · Studio semantico</title>
+  <title>OnToGraPh · Semantic Studio</title>
+  <link rel="icon" href="./brand.png" type="image/png">
   <link rel="stylesheet" href="./studio.css">
   <script src="./studio.js" type="module"></script>
 </head>
 <body>
-  <a class="skip-link" href="#workspace">Vai all’area di lavoro</a>
+  <a class="skip-link" href="#workspace">Skip to workspace</a>
   <header class="app-header">
     <div class="app-identity">
       <div class="brand">
-        <img src="./brand.png" alt="" width="36" height="36">
-        <span>OntoGraph <span class="brand-studio">Studio semantico</span></span>
+        <img src="./brand-wordmark.png" alt="OnToGraPh" width="116" height="28">
+        <span class="brand-studio">Semantic Studio</span>
       </div>
-      <a class="button workspace-link" href="./processi/">Modellatore processi</a>
+      <a class="button workspace-link" href="./processi/">Process Modeler</a>
     </div>
-    <div class="file-actions" role="group" aria-label="File del modello">
+    <div class="file-actions" role="group" aria-label="Model files">
       <label class="button file-button" for="import-input">
-        Importa
-        <input id="import-input" type="file" accept=".json,.xlsx,application/json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" aria-label="Importa modello JSON o XLSX">
+        Import
+        <input id="import-input" type="file" accept=".json,.xlsx,application/json,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" aria-label="Import JSON or XLSX model">
       </label>
       <div class="export-group">
-        <select id="export-format" aria-label="Formato di esportazione">
+        <select id="export-format" aria-label="Export format">
           <option value="json">JSON</option>
           <option value="jsonld">JSON-LD</option>
           <option value="xlsx">Excel</option>
@@ -33,7 +34,7 @@
           <option value="plantuml">PlantUML</option>
           <option value="svg">SVG</option>
         </select>
-        <button id="export-button" type="button">Esporta</button>
+        <button id="export-button" type="button">Export</button>
       </div>
     </div>
   </header>
@@ -41,88 +42,88 @@
   <main class="workspace" id="workspace">
     <div class="model-header">
       <div>
-        <h1 id="model-title">Modello semantico</h1>
+        <h1 id="model-title">Semantic model</h1>
         <p id="model-scope"></p>
       </div>
-      <div id="summary-strip" class="summary-strip" aria-label="Sintesi del modello"></div>
+      <div id="summary-strip" class="summary-strip" aria-label="Model summary"></div>
     </div>
 
     <div class="workspace-controls">
-      <nav id="view-select" class="view-select" aria-label="Viste del modello">
-        <button type="button" data-view="graph" aria-pressed="true" aria-controls="panel-graph">Grafo</button>
-        <button type="button" data-view="studio" aria-pressed="false" aria-controls="panel-studio">Struttura</button>
+      <nav id="view-select" class="view-select" aria-label="Model views">
+        <button type="button" data-view="graph" aria-pressed="true" aria-controls="panel-graph">Graph</button>
+        <button type="button" data-view="studio" aria-pressed="false" aria-controls="panel-studio">Structure</button>
         <button type="button" data-view="code" aria-pressed="false" aria-controls="panel-code">JSON</button>
-        <button type="button" data-view="versions" aria-pressed="false" aria-controls="panel-versions">Versioni</button>
-        <button type="button" data-view="evidence" aria-pressed="false" aria-controls="panel-evidence">Evidenze</button>
+        <button type="button" data-view="versions" aria-pressed="false" aria-controls="panel-versions">Versions</button>
+        <button type="button" data-view="evidence" aria-pressed="false" aria-controls="panel-evidence">Evidence</button>
       </nav>
-      <div class="review-actions" role="group" aria-label="Modifiche del modello">
+      <div class="review-actions" role="group" aria-label="Model changes">
         <div class="change-actions">
-          <button id="undo" type="button">Annulla</button>
-          <button id="redo" type="button">Ripeti</button>
+          <button id="undo" type="button">Undo</button>
+          <button id="redo" type="button">Redo</button>
         </div>
-        <button id="validate" class="validate-button" type="button">Valida</button>
+        <button id="validate" class="validate-button" type="button">Validate</button>
         <label class="save-actions">
-          <span class="visually-hidden">Nota di versione</span>
-          <input id="version-note" type="text" maxlength="240" placeholder="Nota di versione">
+          <span class="visually-hidden">Version note</span>
+          <input id="version-note" type="text" maxlength="240" placeholder="Version note">
         </label>
-        <button id="save-version" class="primary-button" type="button">Salva versione</button>
+        <button id="save-version" class="primary-button" type="button">Save version</button>
       </div>
     </div>
 
-    <div id="status" class="status" role="status" aria-live="polite" aria-atomic="true">Caricamento del modello…</div>
+    <div id="status" class="status" role="status" aria-live="polite" aria-atomic="true">Loading model…</div>
 
-    <section id="panel-graph" class="graph-workspace" data-panel="graph" aria-label="Grafo del modello">
+    <section id="panel-graph" class="graph-workspace" data-panel="graph" aria-label="Model graph">
       <aside class="navigator" aria-labelledby="navigator-title">
         <div class="pane-heading">
-          <h2 id="navigator-title">Oggetti</h2>
-          <button id="add-object" class="accent-button" type="button">+ Oggetto</button>
+          <h2 id="navigator-title">Objects</h2>
+          <button id="add-object" class="accent-button" type="button">+ Object</button>
         </div>
         <div class="navigator-filters">
-          <label class="visually-hidden" for="search">Cerca oggetti</label>
-          <input id="search" type="search" placeholder="Cerca oggetti" autocomplete="off">
-          <label class="visually-hidden" for="kind-filter">Tipo di oggetto</label>
+          <label class="visually-hidden" for="search">Search objects</label>
+          <input id="search" type="search" placeholder="Search objects" autocomplete="off">
+          <label class="visually-hidden" for="kind-filter">Object type</label>
           <select id="kind-filter">
-            <option value="all">Tutti i tipi</option>
+            <option value="all">All types</option>
           </select>
         </div>
-        <div id="nav-list" class="nav-list" aria-label="Oggetti del modello"></div>
+        <div id="nav-list" class="nav-list" aria-label="Model objects"></div>
       </aside>
 
       <div class="canvas-pane">
         <div class="canvas-heading">
-          <h2>Grafo semantico</h2>
-          <button id="add-relation" class="accent-button" type="button">+ Relazione</button>
+          <h2>Semantic graph</h2>
+          <button id="add-relation" class="accent-button" type="button">+ Relationship</button>
         </div>
-        <div class="graph-tools" role="group" aria-label="Controlli del grafo">
-          <label class="visually-hidden" for="graph-mode">Contesto del grafo</label>
+        <div class="graph-tools" role="group" aria-label="Graph controls">
+          <label class="visually-hidden" for="graph-mode">Graph scope</label>
           <select id="graph-mode">
-            <option value="focus">Oggetto e relazioni</option>
-            <option value="all">Intero modello</option>
+            <option value="focus">Object and relationships</option>
+            <option value="all">Entire model</option>
           </select>
           <div class="zoom-controls">
-            <button id="graph-zoom-out" class="icon-button" type="button" aria-label="Riduci zoom" title="Riduci zoom">−</button>
-            <output id="graph-zoom" for="graph-zoom-out graph-zoom-in graph-reset" aria-label="Livello di zoom">100%</output>
-            <button id="graph-zoom-in" class="icon-button" type="button" aria-label="Aumenta zoom" title="Aumenta zoom">+</button>
+            <button id="graph-zoom-out" class="icon-button" type="button" aria-label="Zoom out" title="Zoom out">−</button>
+            <output id="graph-zoom" for="graph-zoom-out graph-zoom-in graph-reset" aria-label="Zoom level">100%</output>
+            <button id="graph-zoom-in" class="icon-button" type="button" aria-label="Zoom in" title="Zoom in">+</button>
           </div>
-          <button id="graph-fit" type="button">Adatta</button>
-          <button id="graph-reset" type="button" aria-label="Ripristina zoom al 100%">1:1</button>
+          <button id="graph-fit" type="button">Fit</button>
+          <button id="graph-reset" type="button" aria-label="Reset zoom to 100%">1:1</button>
         </div>
-        <div id="graph" class="graph-canvas" tabindex="0" aria-label="Canvas del grafo semantico"></div>
+        <div id="graph" class="graph-canvas" tabindex="0" aria-label="Semantic graph canvas"></div>
       </div>
 
       <aside class="inspector-pane" aria-labelledby="inspector-title">
         <div class="pane-heading">
-          <h2 id="inspector-title">Proprietà</h2>
+          <h2 id="inspector-title">Properties</h2>
         </div>
         <div id="inspector" class="inspector">
-          <p class="empty-state">Seleziona un oggetto o una relazione.</p>
+          <p class="empty-state">Select an object or relationship.</p>
         </div>
       </aside>
     </section>
 
     <section id="panel-studio" class="content-panel" data-panel="studio" aria-labelledby="studio-title" hidden>
       <div class="section-heading">
-        <h2 id="studio-title">Struttura del modello</h2>
+        <h2 id="studio-title">Model structure</h2>
       </div>
       <div id="bridge-panel" class="bridge-panel" hidden></div>
       <div id="studio-list" class="studio-list"></div>
@@ -130,27 +131,27 @@
 
     <section id="panel-code" class="content-panel" data-panel="code" aria-labelledby="code-title" hidden>
       <div class="section-heading">
-        <h2 id="code-title">Sorgente del modello</h2>
+        <h2 id="code-title">Model source</h2>
         <div class="change-actions">
-          <button id="discard-code" type="button">Scarta modifiche JSON</button>
-          <button id="apply-code" class="accent-button" type="button">Applica JSON</button>
+          <button id="discard-code" type="button">Discard JSON edits</button>
+          <button id="apply-code" class="accent-button" type="button">Apply JSON</button>
         </div>
       </div>
-      <label class="visually-hidden" for="code-editor">Sorgente JSON del modello</label>
+      <label class="visually-hidden" for="code-editor">Model JSON source</label>
       <textarea id="code-editor" class="code-editor" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
     </section>
 
     <section id="panel-versions" class="content-panel" data-panel="versions" aria-labelledby="versions-title" hidden>
       <div class="section-heading">
-        <h2 id="versions-title">Versioni salvate</h2>
+        <h2 id="versions-title">Saved versions</h2>
       </div>
       <div class="versions-layout">
         <div id="versions-list" class="versions-list"></div>
         <section class="comparison" aria-labelledby="comparison-title">
-          <h3 id="comparison-title">Confronto con la bozza</h3>
-          <label for="compare-base">Versione di riferimento</label>
+          <h3 id="comparison-title">Compare with draft</h3>
+          <label for="compare-base">Reference version</label>
           <select id="compare-base">
-            <option value="">Seleziona una versione</option>
+            <option value="">Select a version</option>
           </select>
           <div id="compare-result" class="compare-result"></div>
         </section>
@@ -160,10 +161,10 @@
     <section id="panel-evidence" class="content-panel evidence-panel" data-panel="evidence" aria-labelledby="evidence-title" hidden>
       <div class="section-heading">
         <div>
-          <h2 id="evidence-title">Evidenze di Aurora 21</h2>
-          <p class="section-description">Esercizio sintetico con due applicazioni simulate.</p>
+          <h2 id="evidence-title">Aurora 21 evidence</h2>
+          <p class="section-description">Synthetic exercise with two simulated applications.</p>
         </div>
-        <button id="demo-button" type="button" class="accent-button">Carica evidenze demo</button>
+        <button id="demo-button" type="button" class="accent-button">Load demo evidence</button>
       </div>
       <div id="evidence-result" class="evidence-result"></div>
       <div id="registry-panel" class="registry-panel" hidden></div>
@@ -172,9 +173,9 @@
 
   <dialog id="edit-dialog" aria-labelledby="edit-dialog-title">
     <div class="dialog-heading">
-      <h2 id="edit-dialog-title">Modifica modello</h2>
+      <h2 id="edit-dialog-title">Edit model</h2>
       <form method="dialog">
-        <button type="submit" class="icon-button" value="cancel" aria-label="Chiudi finestra">×</button>
+        <button type="submit" class="icon-button" value="cancel" aria-label="Close dialog">×</button>
       </form>
     </div>
     <div id="edit-dialog-content"></div>

@@ -1,12 +1,19 @@
-<img src="assets/brand/ontograph-avatar.png" alt="OntoGraph logo" width="104">
+<img src="assets/brand/ontograph-wordmark.png" alt="OnToGraPh logo" width="420">
 
-# OntoGraph
+# OnToGraPh
 
 **Govern semantic changes and verify how applications behave after release.**
 
 Two applications can report the same release and still make different decisions. OntoGraph helps governance and risk teams find that divergence, trace it to the approved rule and check what happens after a withdrawal. It links source evidence, semantic impact, approval, per-application delivery and observed behavior. The offline reference implementation includes a reproducible synthetic case for buyer evaluation.
 
-[Project website](https://www.fabriziodegni.com/OnToGraPh/) · [Wiki](docs/wiki/README.md) · [Why OntoGraph](docs/wiki/PERCHE-ONTOGRAPH.md) · [Market and standards](docs/wiki/OCEANO-BLU.md) · [Transparent logo](assets/brand/ontograph-mark.png)
+[English website](https://www.fabriziodegni.com/OnToGraPh/) · [Simplified Chinese website](https://www.fabriziodegni.com/OnToGraPh/zh/) · [GitHub Wiki](https://github.com/sev7enITA/OntoGraph/wiki) · [Versioned documentation](docs/wiki/README.md) · [Brand assets](assets/brand)
+
+| | Value proposition |
+| --- | --- |
+| **O** | **Operational Ontology.** Connect shared definitions to the rules and applications that use them. |
+| **T** | **Traceability to Every Field.** Follow a property to its source, the rules it changes and the applications that depend on it. |
+| **G** | **Governance with Human Authority.** Review a release, monitor adoption and observations, and withdraw a version when needed. |
+| **P** | **Proof of Behavior.** Compare each application's declared version with the outcome of an independent, scoped test. |
 
 ## Open the visual workspace
 
@@ -14,7 +21,7 @@ Two applications can report the same release and still make different decisions.
 python3 -m ontograph studio
 ```
 
-Open [OntoGraph Studio](http://127.0.0.1:8765/). The workspace starts in the original PolicyAsCode-derived process modeler, with visual editing, Excel census, live properties and diagram export. Open **Studio semantico** to link a process to a control, inspect and edit nested properties, compare local drafts, and work with the governance model. [Studio guide](docs/wiki/STUDIO.md) · [Process modeler preview](assets/studio/modellatore-processi.png) · [Semantic Studio preview](assets/studio/studio-semantico.png)
+Open [OnToGraPh Studio](http://127.0.0.1:8765/). The workspace starts in the original PolicyAsCode-derived process modeler, with visual editing, an Excel process inventory, live properties and diagram export. Open **Semantic Studio** to link a process to a control, inspect and edit nested properties, and compare local drafts. [Studio guide](docs/wiki/STUDIO.md) · [Process modeler preview](assets/studio/process-modeler.png) · [Semantic Studio preview](assets/studio/semantic-studio.png)
 
 ## Run Aurora 21
 
@@ -29,7 +36,7 @@ python3 -m unittest discover -s tests -v
 
 Open `out/aurora.html` to inspect the observations. GitHub Actions publishes the HTML and JSON together as the `ontograph-aurora-demo` workflow artifact. A run produces fresh output files. Choose new output paths for subsequent runs.
 
-The project website serves the synthetic report from `site/demo/`. To refresh it, generate new HTML and JSON files using the command above, then replace `site/demo/index.html` and `site/demo/report.json` together.
+The project website serves the synthetic report in English and Simplified Chinese. To refresh it, generate new HTML and JSON files using the command above, and generate the second HTML file with `python3 -m ontograph demo --language zh-Hans --html out/aurora-zh.html`. Update `site/demo/index.html`, `site/demo/zh/index.html` and the shared `site/demo/report.json` together.
 
 | Step | CRM | PMS |
 | --- | --- | --- |

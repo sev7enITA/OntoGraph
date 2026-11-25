@@ -93,7 +93,7 @@ button:active:not(:disabled) { transform: translateY(1px); }
   letter-spacing: -.045em;
   white-space: nowrap;
 }
-.brand img { object-fit: contain; }
+.brand img { width: 116px; height: auto; }
 .brand-studio { margin-inline-start: .2rem; color: var(--accent); font-size: .79rem; font-weight: 650; letter-spacing: .01em; }
 .file-actions, .export-group, .review-actions, .change-actions, .graph-tools, .zoom-controls {
   display: flex;
@@ -413,7 +413,7 @@ dialog::backdrop { background: rgb(4 10 16 / .76); }
 }
 @media (max-width: 34rem) {
   .app-header { flex-wrap: wrap; justify-content: flex-start; gap: .45rem .8rem; }
-  .brand img { width: 30px; height: 30px; }
+  .brand img { width: 102px; }
   .file-actions { margin-inline-start: 0; }
   .file-actions button, .file-actions .button { padding-inline: .45rem; }
   .export-group select { inline-size: 4.75rem; }

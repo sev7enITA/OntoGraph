@@ -2,7 +2,7 @@ let draft = null;
 try { draft = JSON.parse(localStorage.getItem(PROCESS_DRAFT_KEY) || "null"); } catch (_) {}
 if (draft && Array.isArray(draft.model?.processes) && draft.rules && draft.model.systems && draft.model.owners) {
   load(draft.model, draft.rules, { errors: [], warnings: [] });
-  toast("Ripreso il tuo censimento in bozza");
+  toast("Restored your inventory draft");
 } else {
   load(SEED.model, SEED.rules, { errors: [], warnings: [] });
 }

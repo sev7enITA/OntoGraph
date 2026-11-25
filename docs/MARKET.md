@@ -1,40 +1,40 @@
-# OntoGraph | Proposta di mercato
+# OnToGraPh market proposal
 
-## Perché esiste
+## Why it exists
 
-Una modifica può risultare approvata nel catalogo e pubblicata in CI mentre due applicazioni continuano a prendere decisioni diverse. Il costo emerge quando qualcuno deve ricostruire la fonte, capire chi è ancora esposto al vecchio comportamento e provare che il ritiro abbia avuto effetto. [Le domande a cui risponde OntoGraph](wiki/PERCHE-ONTOGRAPH.md)
+A catalog can show an approved change and CI can report a successful deployment while two applications keep making different decisions. Someone must then recover the source, work out who is still exposed to the prior behavior and verify that a withdrawal took effect. [Questions OnToGraPh answers](wiki/WHY-ONTOGRAPH.md)
 
-## Una promessa verificabile
+## A verifiable promise
 
-**Quando cambia una definizione o una policy, OntoGraph verifica come reagiscono le applicazioni coinvolte.**
+**When a shared definition or policy changes, verify what each affected application does.**
 
-Un responsabile Data Governance o AI Governance può ricostruire chi ha approvato il cambiamento, su quale fonte, quali applicazioni hanno dichiarato il nuovo pacchetto e come si sono comportate sui casi concordati. Se il supervisore lo ritira, il sistema distingue la richiesta di ritiro dalla prova sul singolo consumatore.
+A data governance or AI governance owner can reconstruct who approved the change, the source that supports it, which applications declared the new package and how they responded on the agreed cases. If a supervisor withdraws the release, the registry records the request and the per-consumer evidence as separate events.
 
-### Primo mercato
+### First market
 
-Team con due o più applicazioni a responsabilità distinte. Il primo problema commerciale è un cambio di policy, di criterio di ammissione o di contratto dati che attraversa reparti. L'acquirente plausibile è il responsabile Data Governance o Operational Risk. Il lavoro quotidiano è di data steward, owner e team di integrazione. Un primo pilot copre una fonte, un controllo, un contratto, due consumatori e un owner per app.
+The first customer is a team with two or more independently owned applications. A policy change, eligibility rule or data contract crosses department boundaries. A plausible buyer is the Head of Data Governance or Operational Risk. Stewards, application owners and integration teams do the day-to-day work. A first pilot covers one source, one control, one contract, two consumers and an owner for each application.
 
-### Le scelte best of breed
+### Design influences
 
-| Riferimento | Principio riusato | Integrazione e limite |
+| Reference | Principle reused | Integration and scope |
 | --- | --- | --- |
-| PALO e PolicyWatcher | Ciclo decisionale, distinzione tra autorizzazione ed effetto provato, provenienza del cambiamento | Mappatura dei sei gate e adattatore offline per pacchetti di evidenza. Il canale di acquisizione live si qualifica in un cliente. |
-| NVIDIA Auto Ontology e Databricks Genie | Discovery da dati e uso, proposte, distinzione tra contesto appreso e semantica curata | Fonti facoltative di proposte future. Il primo adattatore NVIDIA deve tradurre mapping e concetti da Ossie, preservare gli ID e far validare granularità e condizioni di join dallo steward. |
-| VocBench, TopBraid EDG e OntoBricks | Curatela, revisione e versioni semantiche | Workflow locale su candidato congelato. Un cliente con queste piattaforme può continuare a usarle per l'authoring e valutare OntoGraph per la prova applicativa. |
-| Stardog, GraphDB, Jena e RDF4J | Knowledge graph interrogabile, validazione e interoperabilità | Proiezione JSON-LD del dominio con termini SKOS, OWL e PROV-O. Federation, reasoning e query SPARQL native appartengono agli eventuali motori collegati. |
-| Git e CI | Test ripetibili, change control e audit | Baseline del confronto. OntoGraph aggiunge un modello sorgente → controllo → app e raccoglie osservazioni indipendenti per release e consumatore. |
+| PALO and PolicyWatcher | Decision lifecycle, authorization and evidence of effect, change provenance | Six mapped gates and an offline evidence packet adapter. Live capture requires customer qualification. |
+| NVIDIA Auto Ontology and Databricks Genie | Discovery from data and usage, proposals, learned and curated context | Potential proposal sources. An NVIDIA adapter would map Ossie concepts, preserve IDs and let a steward verify granularity and join conditions. |
+| VocBench, TopBraid EDG and OntoBricks | Curation, review and semantic versions | A local workflow reviews a frozen candidate. Customers using these platforms can keep authoring there and evaluate OnToGraPh for application-level evidence. |
+| Stardog, GraphDB, Jena and RDF4J | Queryable graphs, validation and interchange | The JSON-LD projection uses SKOS, OWL and PROV-O vocabulary. A connected engine can provide federation, reasoning and SPARQL. |
+| Git and CI | Repeatable tests, change control and audit | The baseline for comparison. The OnToGraPh model links sources to controls and applications and records observations by release and consumer. |
 
-Fonti: [PALO](https://paloframework.org/) · [PolicyWatcher](https://github.com/sev7enITA/policywatcher) · [NVIDIA](https://github.com/NVIDIA/auto-ontology) · [Genie](https://docs.databricks.com/aws/en/genie/genie-ontology/) · [TopBraid](https://docs.topquadrant.com/classic/latest/user_guide/workflows/index.html) · [OntoBricks](https://www.ontobricks.org/documentation/features.html) · [VocBench](https://vocbench.uniroma2.it/doc/user/history_and_validation.jsf) · [Stardog](https://docs.stardog.com/virtual-graphs/) · [GraphDB](https://graphwise.ai/components/graphdb/) · [Jena](https://jena.apache.org/documentation/shacl/) · [RDF4J](https://rdf4j.org/documentation/programming/shacl/)
+[PALO](https://paloframework.org/) · [PolicyWatcher](https://github.com/sev7enITA/policywatcher) · [NVIDIA](https://github.com/NVIDIA/auto-ontology) · [Genie](https://docs.databricks.com/aws/en/genie/genie-ontology/) · [TopBraid](https://docs.topquadrant.com/classic/latest/user_guide/workflows/index.html) · [OntoBricks](https://www.ontobricks.org/documentation/features.html) · [VocBench](https://vocbench.uniroma2.it/doc/user/history_and_validation.jsf) · [Stardog](https://docs.stardog.com/virtual-graphs/) · [GraphDB](https://graphwise.ai/components/graphdb/) · [Jena](https://jena.apache.org/documentation/shacl/) · [RDF4J](https://rdf4j.org/documentation/programming/shacl/)
 
-### L'ipotesi di oceano blu
+### Market hypothesis
 
-Automatizzare la discovery è già un mercato affollato. L'ipotesi è che un responsabile paghi per **verificare l'effetto di un cambiamento semantico tra app che possiede già**, mantenendo il catalogo e i motori utilizzati oggi. La verifica indipendente delle eccezioni, della mancata adozione e del ritiro è il criterio di acquisto. Un cambio sintetico prova la fattibilità del meccanismo. Il confronto con il processo del cliente deve mostrare un costo o un tempo inferiore per ottenere la stessa prova, oppure una divergenza importante che oggi rimane invisibile. [Confronto con piattaforme e standard](wiki/OCEANO-BLU.md)
+A governance owner may pay to verify the effect of a semantic change across applications the team already owns, while keeping its catalog and engines. The buying criterion is independent evidence of exceptions, missed adoption and withdrawal. The synthetic case demonstrates the mechanism. A customer comparison must establish a lower cost or shorter time to obtain equivalent evidence, or find a material divergence the current process misses. [Platforms and standards](wiki/MARKET-AND-STANDARDS.md)
 
-### Pilota con diritto di smentita
+### Pilot decision criteria
 
-1. Concordare fixture, decisioni attese e versione di partenza con due owner. Misurare ore di integrazione e configurazione, tempo per revisione e documenti prodotti.
-2. Fornire a Git/CI e OntoGraph lo stesso requisito, le stesse prove e la medesima topologia. Simulare una versione obsoleta dietro un digest corretto, un'eccezione e un consumatore irraggiungibile.
-3. Verificare che il test distingua le versioni e che la fonte della decisione si possa ritrovare. Rilevare tempi fino a scoperta, risposta del supervisore e ritiro provato. Nessun timeout deve apparire come ritiro verificato.
-4. Verificare costo del primo e del secondo adattatore e disponibilità a pagare. Se la baseline produce le stesse evidenze con lavoro comparabile, il prodotto non ha ancora un vantaggio dimostrato. Se l'acquirente chiede soprattutto un editor ontologico, TopBraid, OntoBricks o VocBench sono comparatori più adatti.
+1. Agree on fixtures, expected decisions and the starting release with two application owners. Record integration and configuration hours, time spent in review and evidence produced.
+2. Give both Git/CI and OnToGraPh the same requirement, cases and topology. Include an old decision behind a matching receipt, an exception and an unreachable consumer.
+3. Confirm that the tests distinguish the releases and that a reviewer can recover the source. Measure time to discovery, supervisor response and verified withdrawal. Record timeouts as unproven.
+4. Measure the cost of the first and second adapters and willingness to pay. A comparable result with comparable effort leaves the advantage unproven. If ontology editing is the main need, compare dedicated authoring tools.
 
-La demo racconta Aurora 21 in meno di cinque minuti: fonte e regola cambiano, due app dichiarano v2, il PMS restituisce l'esito v1 nel caso discriminante, il supervisore ritira e un secondo controllo verifica il recupero. I dati sono sintetici. Prima della presentazione pubblica serve un controllo sul nome OntoGraph, il cui uso da parte di altri progetti è documentabile.
+Aurora 21 follows a source and rule change, two applications declaring v2, a PMS returning the v1 result, withdrawal and a later check of recovery. All case data is synthetic. Other projects use the OntoGraph name, so confirm name availability before a commercial launch.

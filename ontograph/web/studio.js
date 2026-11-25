@@ -6,10 +6,10 @@ const own = (object, key) => object != null && Object.hasOwn(object, key);
 const clone = value => structuredClone(value);
 const show = value => JSON.stringify(value, null, 2);
 const labels = {
-  concept: "Concetto", class: "Classe", field: "Campo", process: "Processo", control: "Controllo",
-  contract: "Contratto", application: "Applicazione", evidence: "Evidenza", rules: "Regole",
-  probes: "Casi", edges: "Relazioni", model: "Progetto", broader: "Più generale", subClassOf: "Sottoclasse",
-  mapsTo: "Mappa a", dependsOn: "Dipende da", implements: "Implementa", consumes: "Consuma",
+  concept: "Concept", class: "Class", field: "Field", process: "Process", control: "Control",
+  contract: "Contract", application: "Application", evidence: "Evidence", rules: "Rules",
+  probes: "Cases", edges: "Relationships", model: "Project", broader: "Broader", subClassOf: "Subclass",
+  mapsTo: "Maps to", dependsOn: "Depends on", implements: "Implements", consumes: "Consumes",
 };
 const groups = ["nodes", "edges", "evidence", "rules", "probes"];
 const identifier = /^[a-z][a-z0-9_-]{0,63}$/;
@@ -40,7 +40,7 @@ function selectInput(name, pairs) {
 }
 function describe(item, group) {
   if (group === "edges") return [item.source, item.predicate, item.target].join(" → ");
-  return item.label || item.id || "Senza nome";
+  return item.label || item.id || "Untitled";
 }
 function look(object, path) {
   return path.reduce((value, key) => own(value, key) ? value[key] : undefined, object);
@@ -101,7 +101,7 @@ function persist() {
   try {
     localStorage.setItem(storageKey, JSON.stringify({model, versions}));
   } catch {
-    tell("Spazio del browser esaurito. Esporta la bozza per conservarla.", "warn");
+    tell("Browser storage is full. Export the draft to keep it.", "warn");
   }
 }
 function bind(boot) {
@@ -155,13 +155,13 @@ function undoRedo(redo) {
   if (!from.length || sourceDirty) return;
   (redo ? past : future).push(model);
   replace(from.pop());
-  tell(redo ? "Modifica ripristinata." : "Modifica annullata.");
+  tell(redo ? "Change redone." : "Change undone.");
 }
 function canChange() {
-  if (sourceDirty) throw new Error("Applica il JSON in modifica prima di aggiornare la bozza visuale.");
+  if (sourceDirty) throw new Error("Apply your JSON edits before updating the visual draft.");
 }
 function confirmDiscard() {
-  return !sourceDirty || window.confirm("Sostituire il JSON in modifica con la nuova bozza?");
+  return !sourceDirty || window.confirm("Replace the current JSON edits with the new draft?");
 }
 function renameReferences(draft, group, old, next) {
   if (group === "nodes") {
@@ -197,18 +197,18 @@ async function update(path, value) {
     const active = model;
     const draft = clone(model);
     if (!path.length) {
-      if (!entryShape(value) || value.domain !== model.domain) return "Usa Importa per un documento di un altro dominio.";
+      if (!entryShape(value) || value.domain !== model.domain) return "Use Import to open a document from another domain.";
       changed(clone(value));
       return;
     }
     const owner = look(draft, path.slice(0, -1));
     const key = path.at(-1);
-    if (!owner || typeof owner !== "object") return "Il percorso non è presente.";
-    if (path.length === 1 && ["format", "domain"].includes(key)) return "Questo campo identifica il workspace.";
+    if (!owner || typeof owner !== "object") return "This path does not exist.";
+    if (path.length === 1 && ["format", "domain"].includes(key)) return "This field identifies the workspace.";
     const isId = path.length === 3 && key === "id";
     if (isId) {
       if (typeof value !== "string" || !identifier.test(value) || draft[path[0]].some((entry, i) => i !== path[1] && entry.id === value)) {
-        return "Scegli un ID valido e univoco.";
+        return "Choose a valid, unique ID.";
       }
       renameReferences(draft, path[0], owner.id, value);
     }
@@ -216,9 +216,9 @@ async function update(path, value) {
     if (path[0] === "evidence" && path.length === 3 && key === "excerpt" && typeof value === "string") {
       owner.sha256 = await checksum(value);
       owner.status = "insufficient";
-      if (model !== active) return "La bozza è cambiata durante il calcolo del digest. Riprova.";
+      if (model !== active) return "The draft changed while calculating the digest. Try again.";
     }
-    if (!entryShape(draft)) return "Mantieni le collezioni del modello come elenchi di oggetti.";
+    if (!entryShape(draft)) return "Keep model collections as lists of objects.";
     changed(draft);
   } catch (error) {
     return error.message;
@@ -227,11 +227,11 @@ async function update(path, value) {
 function remove(path) {
   try {
     canChange();
-    if (path.length < 2 || (path.length === 3 && path[2] === "id")) return "Il campo è obbligatorio.";
+    if (path.length < 2 || (path.length === 3 && path[2] === "id")) return "This field is required.";
     const draft = clone(model);
     const owner = look(draft, path.slice(0, -1));
     const key = path.at(-1);
-    if (!own(owner, key)) return "Il percorso non è presente.";
+    if (!own(owner, key)) return "This path does not exist.";
     if (path.length === 2 && path[0] !== "edges") {
       const entry = owner[key];
       const id = entry.id;
@@ -242,12 +242,12 @@ function remove(path) {
       );
       if (linked || (path[0] === "rules" && draft.probes.some(probe => probe.rule === id))
           || (path[0] === "evidence" && draft.rules.some(rule => rule.evidence === id))) {
-        return "Rimuovi prima i riferimenti a questo oggetto.";
+        return "Remove references to this object first.";
       }
     }
     if (Array.isArray(owner)) owner.splice(Number(key), 1);
     else delete owner[key];
-    if (!entryShape(draft)) return "Il modello richiede tutte le collezioni principali.";
+    if (!entryShape(draft)) return "The model requires all top-level collections.";
     const location = path.length === 2 && selection[0] === path[0] ? [] : selection;
     changed(draft, location);
   } catch (error) {
@@ -270,7 +270,7 @@ function renderNavigator() {
   const find = $("search").value.trim().toLocaleLowerCase();
   const filter = $("kind-filter").value;
   const objects = [
-    button("Proprietà del progetto", () => select([]), {class: "object-row",
+    button("Project properties", () => select([]), {class: "object-row",
       ...(!selection.length ? {"aria-current": "true"} : {})}),
   ];
   if (find || filter !== "all") objects.length = 0;
@@ -282,13 +282,13 @@ function renderNavigator() {
       objects.push(itemButton(item, group, index));
     });
   }
-  $("nav-list").replaceChildren(...(objects.length ? objects : [el("p", "Nessun oggetto corrisponde alla ricerca.")]));
+  $("nav-list").replaceChildren(...(objects.length ? objects : [el("p", "No objects match your search.")]));
 }
 function renderStudio() {
   const rows = el("div", null, {class: "item-list"});
   for (const group of groups) {
     const section = el("details", null, group === "nodes" ? {open: ""} : {});
-    section.append(el("summary", `${labels[group] || "Oggetti"} · ${model[group].length}`));
+    section.append(el("summary", `${labels[group] || "Objects"} · ${model[group].length}`));
     model[group].forEach((item, index) => section.append(itemButton(item, group, index)));
     rows.append(section);
   }
@@ -299,8 +299,8 @@ function render() {
   $("model-title").textContent = model.domain === "aurora-21" ? "Aurora 21" : model.domain;
   $("model-scope").textContent = typeof model.scope === "string" ? model.scope : "";
   const count = [
-    [model.nodes.length, "oggetto", "oggetti"], [model.edges.length, "relazione", "relazioni"],
-    [model.rules.length, "regola", "regole"], [model.probes.length, "caso", "casi"],
+    [model.nodes.length, "object", "objects"], [model.edges.length, "relationship", "relationships"],
+    [model.rules.length, "rule", "rules"], [model.probes.length, "case", "cases"],
   ];
   $("summary-strip").replaceChildren(...count.map(([value, singular, plural]) => {
     const span = el("span", null, {class: "summary-chip"});
@@ -328,24 +328,24 @@ function compareModel() {
   return compareIndex === "seed" ? base : versions.find(item => item.id === compareIndex)?.model || base;
 }
 function renderVersions() {
-  $("compare-base").replaceChildren(option("seed", base.domain === model.domain ? "Baseline iniziale" : "Baseline"),
+  $("compare-base").replaceChildren(option("seed", base.domain === model.domain ? "Initial baseline" : "Baseline"),
     ...versions.map(item => option(item.id, item.note)));
   $("compare-base").value = compareIndex;
   const history = el("div", null, {class: "item-list"});
   for (const version of versions) {
     const row = el("div", null, {class: "diff-row"});
     row.append(el("strong", version.note), el("time", version.date.slice(0, 16).replace("T", " ")),
-      button("Carica come bozza", () => {
+      button("Load as draft", () => {
         if (!confirmDiscard()) return;
         sourceDirty = false;
         changed(clone(version.model), []);
         render();
-        tell("Versione caricata come bozza.");
+        tell("Version loaded as a draft.");
         void validateCurrent(false);
       }));
     history.append(row);
   }
-  if (!versions.length) history.append(el("p", "Nessuna versione locale salvata."));
+  if (!versions.length) history.append(el("p", "No local versions saved."));
   $("versions-list").replaceChildren(history);
   renderComparison();
 }
@@ -353,10 +353,10 @@ function renderComparison() {
   const root = $("compare-result");
   root.replaceChildren();
   if (!checked) {
-    root.append(el("p", "Valida la bozza per visualizzare il confronto."));
+    root.append(el("p", "Validate the draft to view the comparison."));
     return;
   }
-  root.append(el("p", `${checked.diff.total} modifiche · ${checked.impact.length} ID potenzialmente interessati`));
+  root.append(el("p", `${checked.diff.total} changes · ${checked.impact.length} potentially affected IDs`));
   if (checked.impact.length) root.append(el("p", checked.impact.join(", "), {class: "diff-path"}));
   if (checked.blockers.length) root.append(...checked.blockers.map(item => el("p", item, {class: "status-warning"})));
   for (const row of checked.diff.items) {
@@ -369,15 +369,15 @@ function renderComparison() {
 async function validateCurrent(announce = true) {
   const epoch = ++activeCheck;
   try {
-    if (sourceDirty) throw new Error("Applica il JSON in modifica prima di validare la bozza.");
+    if (sourceDirty) throw new Error("Apply your JSON edits before validating the draft.");
     const result = await call("./api/validate", {model, base: compareModel()});
     if (activeCheck !== epoch) return null;
     checked = result;
     if (view === "versions") renderComparison();
     if (announce) {
       tell(result.blockers.length
-        ? `Modello valido. ${result.blockers.length} punti da riesaminare per il rilascio.`
-        : `Modello valido · ${result.probes.length} casi coerenti con le regole.`, result.blockers.length ? "warn" : "ok");
+        ? `Model is valid. ${result.blockers.length} issues need review before release.`
+        : `Model is valid · ${result.probes.length} cases match their rules.`, result.blockers.length ? "warn" : "ok");
     }
     return result;
   } catch (error) {
@@ -392,7 +392,7 @@ async function saveVersion() {
   const note = $("version-note").value.trim();
   if (!note) {
     $("version-note").focus();
-    tell("Descrivi la modifica prima di salvare la versione.", "warn");
+    tell("Describe the change before saving the version.", "warn");
     return;
   }
   if (!(await validateCurrent(false))) return;
@@ -401,11 +401,11 @@ async function saveVersion() {
   $("version-note").value = "";
   persist();
   render();
-  tell("Versione salvata in questo browser.", "ok");
+  tell("Version saved in this browser.", "ok");
 }
 async function importFile(file) {
   if (!file || !confirmDiscard()) return;
-  if (file.size > 8_000_000) throw new Error("Il file supera il limite di 8 MB.");
+  if (file.size > 8_000_000) throw new Error("The file exceeds the 8 MB limit.");
   const parsed = /\.xlsx$/i.test(file.name)
     ? (await call("./api/import-workbook", file, {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"})).model
     : JSON.parse(await file.text());
@@ -425,7 +425,7 @@ async function importFile(file) {
     changed(parsed, []);
     render();
   }
-  tell("Importazione valida. Il documento è ora una bozza.", "ok");
+  tell("Import validated. The document is now a draft.", "ok");
 }
 function comparisonReset() {
   compareIndex = "seed";
@@ -433,33 +433,33 @@ function comparisonReset() {
 }
 async function applyCode() {
   const draft = JSON.parse($("code-editor").value);
-  if (draft?.domain !== model.domain) throw new Error("Usa Importa per aprire un altro workspace.");
+  if (draft?.domain !== model.domain) throw new Error("Use Import to open another workspace.");
   await call("./api/validate", {model: draft});
   sourceDirty = false;
   changed(draft, []);
   render();
-  tell("JSON validato e applicato alla bozza.", "ok");
+  tell("JSON validated and applied to the draft.", "ok");
 }
 async function exportFile() {
   canChange();
   const format = $("export-format").value;
   if (format === "svg") {
     const markup = graph.toSvg();
-    if (!markup) throw new Error("Apri il grafo prima di esportare SVG.");
+    if (!markup) throw new Error("Open the graph before exporting SVG.");
     download(markup, "ontograph-graph.svg", "image/svg+xml");
   } else {
     const suffixes = {json: "json", jsonld: "jsonld", xlsx: "xlsx", zip: "zip", mermaid: "mmd", plantuml: "puml"};
     const file = await call("./api/export", {format, model}, {binary: true});
     download(file, model.domain + "." + suffixes[format]);
   }
-  tell("Esportazione pronta.");
+  tell("Export ready.");
 }
 function openDialog(title, build) {
   canChange();
   const dialog = $("edit-dialog"), body = $("edit-dialog-content");
   const form = el("form", null, {class: "form-stack"});
   const error = el("p", "", {role: "status"});
-  const action = el("button", "Aggiungi", {type: "submit", class: "button primary"});
+  const action = el("button", "Add", {type: "submit", class: "button primary"});
   $("edit-dialog-title").textContent = title;
   body.replaceChildren(form);
   const task = build(form);
@@ -480,26 +480,26 @@ function openDialog(title, build) {
   form.querySelector("input,select")?.focus();
 }
 function createObject() {
-  openDialog("Aggiungi oggetto", form => {
+  openDialog("Add object", form => {
     const types = [...capabilities.kinds, "evidence", "rules", "probes"];
     const kind = selectInput("kind", types.map(key => [key, labels[key] || key]));
     const id = el("input", null, {name: "id", pattern: identifier.source.slice(1, -1), required: "", maxlength: "64"});
     const label = el("input", null, {name: "label", required: "", maxlength: "500"});
     const definition = el("textarea", null, {name: "definition", required: "", rows: "3"});
     const owner = el("input", null, {name: "owner", required: "", value: model.owner || ""});
-    form.append(field("Tipo", kind), field("Identificativo", id), field("Nome", label),
-      field("Definizione o testo dell’evidenza", definition), field("Responsabile", owner));
+    form.append(field("Type", kind), field("ID", id), field("Name", label),
+      field("Definition or evidence text", definition), field("Owner", owner));
     return async data => {
       const type = data.get("kind");
       const group = ["evidence", "rules", "probes"].includes(type) ? type : "nodes";
       const key = data.get("id").trim();
-      if (!identifier.test(key) || model[group].some(item => item.id === key)) throw new Error("ID non valido o già presente.");
+      if (!identifier.test(key) || model[group].some(item => item.id === key)) throw new Error("The ID is invalid or already exists.");
       const draft = clone(model);
       const text = data.get("definition").trim();
       let item = {id: key, kind: type, label: data.get("label").trim(), definition: text, owner: data.get("owner").trim()};
       if (group === "evidence") {
         item = {id: key, excerpt: text, uri: `urn:ontograph:${model.domain}:${key}`, sha256: await checksum(text),
-          observed_at: new Date().toISOString().replace(/\.\d+Z$/, "Z"), status: "insufficient", applicability: "Da riesaminare"};
+          observed_at: new Date().toISOString().replace(/\.\d+Z$/, "Z"), status: "insufficient", applicability: "Needs review"};
       } else if (group === "rules") {
         item = {id: key, control: draft.nodes.find(node => node.kind === "control")?.id || "",
           evidence: draft.evidence[0]?.id || "", applies: {}, requires: {}};
@@ -510,13 +510,13 @@ function createObject() {
       draft[group].push(item);
       changed(draft, [group, draft[group].length - 1]);
       switchView("graph");
-      tell("Oggetto aggiunto alla bozza.");
+      tell("Object added to the draft.");
     };
   });
 }
 function createRelation() {
-  if (model.nodes.length < 2) throw new Error("Aggiungi almeno due nodi.");
-  openDialog("Collega due oggetti", form => {
+  if (model.nodes.length < 2) throw new Error("Add at least two nodes.");
+  openDialog("Connect two objects", form => {
     const choices = model.nodes.map(node => [node.id, node.label || node.id]);
     const from = selectInput("source", choices);
     const to = selectInput("target", choices);
@@ -524,34 +524,34 @@ function createRelation() {
     predicate.value = "dependsOn";
     if (selection[0] === "nodes") from.value = model.nodes[selection[1]].id;
     to.selectedIndex = choices.findIndex(([key]) => key !== from.value);
-    form.append(field("Da", from), field("Relazione", predicate), field("A", to));
+    form.append(field("From", from), field("Relationship", predicate), field("To", to));
     return data => {
       const edge = Object.fromEntries(data);
       if (edge.source === edge.target || model.edges.some(other => other.source === edge.source
-          && other.predicate === edge.predicate && other.target === edge.target)) throw new Error("Relazione ripetuta o autoreferenziale.");
+          && other.predicate === edge.predicate && other.target === edge.target)) throw new Error("The relationship is a duplicate or points to itself.");
       const draft = clone(model);
       draft.edges.push(edge);
       changed(draft, ["edges", draft.edges.length - 1]);
       $("graph-mode").value = "all";
       switchView("graph");
-      tell("Relazione aggiunta alla bozza.");
+      tell("Relationship added to the draft.");
     };
   });
 }
 const evidenceLabels = {
-  verified: "Verificato sui casi", mismatch: "Divergenza", unproven: "Da verificare",
-  withdrawal_verified: "Ritiro verificato", allow: "Consenti", hold: "Sospendi",
-  out_of_scope: "Fuori ambito", unobservable: "Irraggiungibile", inactive: "Inattivo",
+  verified: "Verified on test cases", mismatch: "Mismatch", unproven: "Unproven",
+  withdrawal_verified: "Withdrawal verified", allow: "Allow", hold: "Hold",
+  out_of_scope: "Out of scope", unobservable: "Unreachable", inactive: "Inactive",
 };
 async function showDemo() {
   const root = $("evidence-result");
-  root.replaceChildren(el("p", "Caricamento della simulazione…", {role: "status"}));
+  root.replaceChildren(el("p", "Loading simulation…", {role: "status"}));
   try {
     evidence ||= await call("./api/demo");
     const rows = el("div", null, {class: "item-list"});
     const phases = [
-      ["baseline", "Baseline"], ["drift", "Nuova regola"], ["unreachable", "Ritiro richiesto"],
-      ["withdrawn", "Ritiro verificato"], ["restored", "Ripristino"],
+      ["baseline", "Baseline"], ["drift", "New rule"], ["unreachable", "Withdrawal requested"],
+      ["withdrawn", "Withdrawal verified"], ["restored", "Recovery"],
     ];
     for (const [key, title] of phases) {
       const section = el("details", null, key === "drift" ? {open: ""} : {});
@@ -562,14 +562,14 @@ async function showDemo() {
           el("span", evidenceLabels[application.state] || application.state, {class: "state-badge", "data-state": application.state}));
         for (const probe of application.probes) {
           const observation = probe.observation?.actual_outcome;
-          row.append(el("p", `${probe.probe} · atteso ${evidenceLabels[probe.expected] || probe.expected} · osservato ${evidenceLabels[observation] || observation || "in attesa"}`));
+          row.append(el("p", `${probe.probe} · expected ${evidenceLabels[probe.expected] || probe.expected} · observed ${evidenceLabels[observation] || observation || "pending"}`));
         }
         section.append(row);
       }
       rows.append(section);
     }
-    root.replaceChildren(el("p", "Aurora 21 · CRM e PMS simulati. Le modifiche alla tua bozza non alimentano questo report."),
-      rows, el("a", "Apri il report offline", {href: "./evidence-report", target: "_blank", rel: "noopener"}));
+    root.replaceChildren(el("p", "Aurora 21 uses simulated CRM and PMS systems. This report uses the included demo model."),
+      rows, el("a", "Open offline report", {href: "./evidence-report", target: "_blank", rel: "noopener"}));
   } catch (error) {
     root.replaceChildren(el("p", error.message, {role: "status"}));
   }
@@ -590,10 +590,10 @@ function renderBridge() {
     .map(node => [node.id, node.label || node.id]));
   const process = selectInput("process", processes.map((item, index) => [String(index), item.name || item.id]));
   const feedback = el("p", "", {role: "status"});
-  form.append(field("Processo dal modellatore", process), field("Controllo da collegare", control),
-    el("button", "Collega come nodo alla bozza", {type: "submit", class: "button"}), feedback);
-  container.replaceChildren(el("h3", "Dal modellatore al grafo semantico"),
-    el("p", "Collega esplicitamente un processo a un controllo. I dettagli operativi restano nel Modellatore processi."), form);
+  form.append(field("Process from the modeler", process), field("Control to link", control),
+    el("button", "Link as a node in the draft", {type: "submit", class: "button"}), feedback);
+  container.replaceChildren(el("h3", "From the modeler to the semantic graph"),
+    el("p", "Link a process to a control. View the operational details in the Process Modeler."), form);
   form.addEventListener("submit", event => {
     event.preventDefault();
     try {
@@ -601,27 +601,27 @@ function renderBridge() {
       const item = processes[Number(process.value)];
       const target = control.value;
       if (!item || !model.nodes.some(node => node.id === target && node.kind === "control")) {
-        throw new Error("Seleziona un processo e un controllo.");
+        throw new Error("Select a process and a control.");
       }
       const slug = String(item.id).toLowerCase().replace(/[^a-z0-9_-]+/g, "-").replace(/^-+|-+$/g, "");
-      if (!slug) throw new Error("Il processo deve avere un identificativo.");
+      if (!slug) throw new Error("The process must have an ID.");
       const id = "process-" + slug.slice(0, 55);
       const draft = clone(model);
       let index = draft.nodes.findIndex(node => node.id === id);
-      if (index !== -1 && draft.nodes[index].kind !== "process") throw new Error("ID già usato da un altro tipo di nodo.");
+      if (index !== -1 && draft.nodes[index].kind !== "process") throw new Error("Another node type already uses this ID.");
       if (index === -1) {
         index = draft.nodes.length;
         draft.nodes.push({id, kind: "process", label: String(item.name || item.id).slice(0, 500),
-          definition: `Processo ${item.id} del Modellatore processi. ${item.subprocesses?.length || 0} attività censite.`,
-          owner: String(item.owner || model.owner || "Da assegnare").slice(0, 500)});
+          definition: `Process ${item.id} from the Process Modeler. ${item.subprocesses?.length || 0} activities in the inventory.`,
+          owner: String(item.owner || model.owner || "Unassigned").slice(0, 500)});
       }
       if (draft.edges.some(edge => edge.source === id && edge.predicate === "dependsOn" && edge.target === target)) {
-        feedback.textContent = "Il collegamento è già presente.";
+        feedback.textContent = "The link already exists.";
         return;
       }
       draft.edges.push({source: id, predicate: "dependsOn", target});
       changed(draft, ["nodes", index]);
-      tell("Processo collegato al controllo nella bozza semantica.", "ok");
+      tell("Process linked to the control in the semantic draft.", "ok");
       switchView("graph");
     } catch (error) {
       feedback.textContent = error.message;
@@ -636,17 +636,17 @@ function renderRegistry() {
   const form = el("form", null, {class: "form-stack"});
   const token = el("input", null, {type: "password", autocomplete: "off", required: "", name: "token"});
   const action = selectInput("action", [
-    ["status", "Stato attivazione"], ["propose", "Prepara candidata"], ["review", "Registra voto"],
-    ["publish", "Pubblica candidata"], ["withdraw", "Avvia ritiro"], ["export", "Esporta candidata"], ["events", "Audit"],
+    ["status", "Activation status"], ["propose", "Prepare candidate"], ["review", "Record vote"],
+    ["publish", "Publish candidate"], ["withdraw", "Withdraw release"], ["export", "Export candidate"], ["events", "Audit"],
   ]);
   const parameters = el("div", null, {class: "form-stack"});
   const result = el("pre", "", {tabindex: "0", role: "status"});
   let knownHead = 0;
   let knownRelease = "";
-  const send = el("button", "Esegui operazione", {type: "submit", class: "button"});
-  form.append(field("Token del tuo ruolo", token), field("Operazione", action), parameters, send);
-  root.replaceChildren(el("h3", "Registro locale"),
-    el("p", "Il token resta in questa pagina. Le operazioni rispettano i ruoli e il quorum del registro."), form, result);
+  const send = el("button", "Run operation", {type: "submit", class: "button"});
+  form.append(field("Role token", token), field("Operation", action), parameters, send);
+  root.replaceChildren(el("h3", "Local registry"),
+    el("p", "The token stays on this page. The registry enforces roles and quorum."), form, result);
   const param = (key, label, attributes = {}) => {
     const input = el("input", null, {name: key, required: "", ...attributes});
     parameters.append(field(label, input));
@@ -654,20 +654,20 @@ function renderRegistry() {
   function renderParameters() {
     parameters.replaceChildren();
     if (["review", "publish", "export"].includes(action.value)) {
-      param("release_id", "Digest candidata", {value: knownRelease, pattern: "[0-9a-f]{64}"});
+      param("release_id", "Candidate digest", {value: knownRelease, pattern: "[0-9a-f]{64}"});
     }
     if (action.value === "propose") {
-      param("base", "Attivazione di base", {type: "number", min: "0", value: String(knownHead)});
-      param("reviewers", "ID revisori, separati da virgola");
+      param("base", "Baseline activation", {type: "number", min: "0", value: String(knownHead)});
+      param("reviewers", "Reviewer IDs, comma-separated");
       param("quorum", "Quorum", {type: "number", min: "1", value: "1"});
     }
-    if (action.value === "review") parameters.append(field("Voto", selectInput("choice", [
-      ["approve", "Approva"], ["object", "Obiezione"],
+    if (action.value === "review") parameters.append(field("Vote", selectInput("choice", [
+      ["approve", "Approve"], ["object", "Object"],
     ])));
-    if (["publish", "withdraw"].includes(action.value)) param("expected_head", "Attivazione corrente attesa",
+    if (["publish", "withdraw"].includes(action.value)) param("expected_head", "Expected current activation",
       {type: "number", min: "0", value: String(knownHead)});
-    if (["propose", "withdraw"].includes(action.value)) param("reason", "Motivazione");
-    if (action.value === "review") param("rationale", "Motivazione del voto");
+    if (["propose", "withdraw"].includes(action.value)) param("reason", "Reason");
+    if (action.value === "review") param("rationale", "Reason for vote");
   }
   action.addEventListener("change", renderParameters);
   renderParameters();
@@ -685,7 +685,7 @@ function renderRegistry() {
       const response = (await call("./api/registry", {action: key, arguments: args}, {
         headers: {Authorization: "Bearer " + secret},
       })).result;
-      result.textContent = show(response) ?? "Operazione registrata.";
+      result.textContent = show(response) ?? "Operation recorded.";
       if (key === "propose") knownRelease = response;
       if (key === "status") knownHead = response.activation;
       if (key === "publish") knownHead = response;
@@ -718,7 +718,7 @@ action("apply-code", applyCode);
 action("discard-code", () => {
   sourceDirty = false;
   render();
-  tell("Sorgente ripristinata dalla bozza visuale.");
+  tell("JSON source restored from the visual draft.");
 });
 action("export-button", exportFile);
 action("demo-button", () => switchView("evidence"));
@@ -751,7 +751,7 @@ $("code-editor").addEventListener("input", () => {
   $("discard-code").disabled = !sourceDirty;
   $("undo").disabled = !past.length || sourceDirty;
   $("redo").disabled = !future.length || sourceDirty;
-  if (sourceDirty) tell("JSON modificato. Applica per sincronizzarlo con il grafo.", "warn");
+  if (sourceDirty) tell("Apply your JSON edits to update the graph.", "warn");
 });
 window.addEventListener("beforeunload", event => {
   if (sourceDirty) event.preventDefault();

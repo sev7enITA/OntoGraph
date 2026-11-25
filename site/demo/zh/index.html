@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'">
+<title>Aurora 21（模拟案例） | OnToGraPh</title>
+<style>
+:root {
+  color-scheme: light;
+  --paper: #f0eee9;
+  --panel: #fbfaf7;
+  --ink: #14242c;
+  --muted: #4d5d62;
+  --line: #c9d1cc;
+  --navy: #0d2731;
+  --cyan: #a0e3de;
+  --ok: #165447;
+  --ok-bg: #e1f0e9;
+  --warn: #704509;
+  --warn-bg: #f9eacb;
+  --bad: #8b3029;
+  --bad-bg: #f9e5df;
+  font: 16px/1.5 system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); }
+main { width: min(100% - 2rem, 70rem); margin: 0 auto 3rem; }
+header {
+  padding: clamp(1.6rem, 5vw, 3.4rem);
+  margin: 0 0 2rem;
+  color: #f8faf7;
+  background: var(--navy);
+  border-bottom: 5px solid var(--cyan);
+}
+header p { color: #dae7e4; max-width: 46rem; }
+header .product { color: var(--cyan); letter-spacing: .08em; font-weight: 700; }
+h1, h2 { margin: 0; line-height: 1.06; }
+h1 { font-size: clamp(2.5rem, 8vw, 5rem); letter-spacing: -.065em; }
+h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); letter-spacing: -.04em; }
+h3 { margin: 0; font-size: 1.05rem; }
+p { margin: .7rem 0 0; }
+.finding {
+  background: #dceceb;
+  border-left: .36rem solid #237970;
+  padding: 1.25rem clamp(1rem, 3vw, 2rem);
+  margin-bottom: 2.4rem;
+}
+.finding p { max-width: 46rem; }
+.finding dl { display: flex; flex-wrap: wrap; gap: .75rem 2.4rem; margin: 1rem 0 0; }
+dt, caption, th { color: var(--muted); font-size: .85rem; text-align: left; }
+dd { margin: .14rem 0 0; font-weight: 750; }
+.trace { margin-top: 1rem; border-top: 1px solid var(--line); }
+.phase {
+  display: grid; grid-template-columns: minmax(13rem, 1fr) minmax(0, 2fr);
+  gap: 1.15rem; padding: 1.25rem 0; border-bottom: 1px solid var(--line);
+}
+.phase p, footer p { color: var(--muted); font-size: .9rem; }
+.applications { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+details { border: 1px solid var(--line); background: var(--panel); align-self: start; min-width: 0; }
+summary { cursor: pointer; padding: .85rem; }
+summary:hover { background: #eaf0eb; }
+summary:focus-visible { outline: .18rem solid #16746b; outline-offset: .14rem; }
+.state { font-size: .78rem; font-weight: 700; display: inline-block; padding: .16rem .48rem; }
+summary .state { margin: .25rem 0 0 .35rem; vertical-align: .07em; }
+.good { color: var(--ok); background: var(--ok-bg); }
+.warn { color: var(--warn); background: var(--warn-bg); }
+.bad { color: var(--bad); background: var(--bad-bg); }
+.detail { border-top: 1px solid var(--line); padding: .8rem; }
+.detail p { margin: 0 0 .65rem; overflow-wrap: anywhere; }
+.checks { width: 100%; border-collapse: collapse; font-size: .83rem; }
+caption { font-weight: 650; margin-bottom: .35rem; }
+th, td { padding: .38rem .22rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+th:first-child, td:first-child { overflow-wrap: anywhere; }
+th:last-child, td:last-child { white-space: nowrap; }
+.finding code { display: block; overflow-wrap: anywhere; font-size: .8rem; }
+tr:last-child td { border-bottom: 0; }
+tr.bad td { border-color: #deb9b2; font-weight: 650; }
+footer { margin-top: 2rem; padding: 1.2rem 0; }
+footer code { display: block; margin-top: .3rem; overflow-wrap: anywhere; font: .88rem/1.5 ui-monospace, monospace; }
+@media (max-width: 55rem) {
+  .phase { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 32rem) {
+  .applications { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+</head>
+<body><main>
+<header>
+<p class="product">OnToGraPh</p>
+<h1>Aurora 21（模拟案例）</h1>
+<p>楼宇档案的尽职调查规则发生变化。本报告记录各模拟应用申报的版本，以及模拟环境中由独立观察角色记录的实际结果。</p>
+</header>
+<section class="finding" aria-labelledby="finding-title"><h2 id="finding-title">版本回执相符，实际结果有差异</h2><p>PMS 申报了预期的 v2 版本摘要，但实际观测结果与发布时公布的预期不符。</p><dl><div><dt>验证用例</dt><dd>pms-negative</dd></div><div><dt>v2 预期结果</dt><dd>暂缓</dd></div><div><dt>实际观测</dt><dd>放行</dd></div></dl><details><summary>比较回执摘要与预期摘要</summary><div class="detail">预期 <code>2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc</code>已申报 <code>2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc</code></div></details></section>
+<section aria-labelledby="trace-title">
+<h2 id="trace-title">应用证据</h2>
+<p>展开应用条目，可对比应用申报信息与用例观测结果。验证结论适用于所列用例。</p>
+<div class="trace"><section class="phase"><div><h3>基线</h3><p>两个应用均通过基线验证。</p><p>激活记录 14</p></div><div class="applications"><details><summary><strong>CRM</strong><span class="state good">已验证</span></summary><div class="detail"><p>应用回执 <code title="9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d">9792dadaeaac…</code></p><table class="checks"><caption>行为观测结果</caption><thead><tr><th scope="col">验证用例</th><th scope="col">预期</th><th scope="col">实际观测</th><th scope="col">判定</th></tr></thead><tbody><tr class="good"><td>crm-exception</td><td>超出适用范围</td><td>超出适用范围</td><td>已验证</td></tr><tr class="good"><td>crm-incomplete</td><td>暂缓</td><td>暂缓</td><td>已验证</td></tr><tr class="good"><td>crm-negative</td><td>放行</td><td>放行</td><td>已验证</td></tr><tr class="good"><td>crm-positive</td><td>放行</td><td>放行</td><td>已验证</td></tr></tbody></table></div></details><details><summary><strong>PMS</strong><span class="state good">已验证</span></summary><div class="detail"><p>应用回执 <code title="bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341">bc05f6cca88b…</code></p><table class="checks"><caption>行为观测结果</caption><thead><tr><th scope="col">验证用例</th><th scope="col">预期</th><th scope="col">实际观测</th><th scope="col">判定</th></tr></thead><tbody><tr class="good"><td>pms-exception</td><td>超出适用范围</td><td>超出适用范围</td><td>已验证</td></tr><tr class="good"><td>pms-incomplete</td><td>暂缓</td><td>暂缓</td><td>已验证</td></tr><tr class="good"><td>pms-negative</td><td>放行</td><td>放行</td><td>已验证</td></tr><tr class="good"><td>pms-positive</td><td>放行</td><td>放行</td><td>已验证</td></tr></tbody></table></div></details></div></section><section class="phase"><div><h3>规则变更</h3><p>新规则要求楼宇尽职调查档案附有检查报告。</p><p>激活记录 33</p></div><div class="applications"><details open><summary><strong>CRM</strong><span class="state good">已验证</span></summary><div class="detail"><p>应用回执 <code title="1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4">1565fc8e3bb1…</code></p><table class="checks"><caption>行为观测结果</caption><thead><tr><th scope="col">验证用例</th><th scope="col">预期</th><th scope="col">实际观测</th><th scope="col">判定</th></tr></thead><tbody><tr class="good"><td>crm-exception</td><td>超出适用范围</td><td>超出适用范围</td><td>已验证</td></tr><tr class="good"><td>crm-incomplete</td><td>暂缓</td><td>暂缓</td><td>已验证</td></tr><tr class="good"><td>crm-negative</td><td>暂缓</td><td>暂缓</td><td>已验证</td></tr><tr class="good"><td>crm-positive</td><td>放行</td><td>放行</td><td>已验证</td></tr></tbody></table></div></details><details open><summary><strong>PMS</strong><span class="state bad">不一致</span></summary><div class="detail"><p>应用回执 <code title="2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc">2f1753fcd0be…</code></p><table class="checks"><caption>行为观测结果</caption><thead><tr><th scope="col">验证用例</th><th scope="col">预期</th><th scope="col">实际观测</th><th scope="col">判定</th></tr></thead><tbody><tr class="good"><td>pms-exception</td><td>超出适用范围</td><td>超出适用范围</td><td>已验证</td></tr><tr class="good"><td>pms-incomplete</td><td>暂缓</td><td>暂缓</td><td>已验证</td></tr><tr class="bad"><td>pms-negative</td><td>暂缓</td><td>放行</td><td>不一致</td></tr><tr class="good"><td>pms-positive</td><td>放行</td><td>放行</td><td>已验证</td></tr></tbody></table></div></details></div></section><section class="phase"><div><h3>已请求撤回</h3><p>PMS 无法连接，撤回效果尚未证实。</p><p>激活记录 33</p></div><div class="applications"><details><summary><strong>CRM</strong><span class="state good">撤回效果已验证</span></summary><div class="detail"><p>应用回执 未申报正在生效的版本</p><table class="checks"><caption>行为观测结果</caption><thead><tr><th scope="col">验证用例</th><th scope="col">预期</th><th scope="col">实际观测</th><th scope="col">判定</th></tr></thead><tbody><tr class="good"><td>withdrawal</td><td>未生效</td><td>未生效</td><td>已验证</td></tr></tbody></table></div></details><details><summary><strong>PMS</strong><span class="state warn">尚未证实</span></summary><div class="detail"><p>应用回执 等待回执</p><table class="checks"><caption>行为观测结果</caption><thead><tr><th scope="col">验证用例</th><th scope="col">预期</th><th scope="col">实际观测</th><th scope="col">判定</th></tr></thead><tbody><tr class="warn"><td>withdrawal</td><td>未生效</td><td>无法观测</td><td>无法得出结论</td></tr></tbody></table></div></details></div></section><section class="phase"><div><h3>已核验撤回效果</h3><p>观察人员确认该版本已在两个应用中停止生效。</p><p>激活记录 33</p></div><div class="applications"><details><summary><strong>CRM</strong><span class="state good">撤回效果已验证</span></summary><div class="detail"><p>应用回执 未申报正在生效的版本</p><table class="checks"><caption>行为观测结果</caption><thead><tr><th scope="col">验证用例</th><th scope="col">预期</th><th scope="col">实际观测</th><th scope="col">判定</th></tr></thead><tbody><tr class="good"><td>withdrawal</td><td>未生效</td><td>未生效</td><td>已验证</td></tr></tbody></table></div></details><details><summary><strong>PMS</strong><span class="state good">撤回效果已验证</span></summary><div class="detail"><p>应用回执 未申报正在生效的版本</p><table class="checks"><caption>行为观测结果</caption><thead><tr><th scope="col">验证用例</th><th scope="col">预期</th><th scope="col">实际观测</th><th scope="col">判定</th></tr></thead><tbody><tr class="good"><td>withdrawal</td><td>未生效</td><td>未生效</td><td>已验证</td></tr></tbody></table></div></details></div></section><section class="phase"><div><h3>已恢复基线</h3><p>新获批准的版本恢复了原规则。</p><p>激活记录 53</p></div><div class="applications"><details><summary><strong>CRM</strong><span class="state good">已验证</span></summary><div class="detail"><p>应用回执 <code title="9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d">9792dadaeaac…</code></p><table class="checks"><caption>行为观测结果</caption><thead><tr><th scope="col">验证用例</th><th scope="col">预期</th><th scope="col">实际观测</th><th scope="col">判定</th></tr></thead><tbody><tr class="good"><td>crm-exception</td><td>超出适用范围</td><td>超出适用范围</td><td>已验证</td></tr><tr class="good"><td>crm-incomplete</td><td>暂缓</td><td>暂缓</td><td>已验证</td></tr><tr class="good"><td>crm-negative</td><td>放行</td><td>放行</td><td>已验证</td></tr><tr class="good"><td>crm-positive</td><td>放行</td><td>放行</td><td>已验证</td></tr></tbody></table></div></details><details><summary><strong>PMS</strong><span class="state good">已验证</span></summary><div class="detail"><p>应用回执 <code title="bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341">bc05f6cca88b…</code></p><table class="checks"><caption>行为观测结果</caption><thead><tr><th scope="col">验证用例</th><th scope="col">预期</th><th scope="col">实际观测</th><th scope="col">判定</th></tr></thead><tbody><tr class="good"><td>pms-exception</td><td>超出适用范围</td><td>超出适用范围</td><td>已验证</td></tr><tr class="good"><td>pms-incomplete</td><td>暂缓</td><td>暂缓</td><td>已验证</td></tr><tr class="good"><td>pms-negative</td><td>放行</td><td>放行</td><td>已验证</td></tr><tr class="good"><td>pms-positive</td><td>放行</td><td>放行</td><td>已验证</td></tr></tbody></table></div></details></div></section></div>
+</section>
+<footer>
+<h2>审计链最新摘要</h2>
+<code>db6e1bc4faf02f806617db7d0b3f2d05d46e7796dc53d96f6bdc2c3b6b42d78e</code>
+<p>场景时间 <time datetime="2026-11-25T16:00:00Z">2026-11-25T16:00:00Z</time>.
+证据涵盖所列模拟用例。业务成效尚未评估。</p>
+</footer>
+</main></body></html>
