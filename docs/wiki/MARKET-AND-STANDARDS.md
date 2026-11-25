@@ -2,7 +2,7 @@
 
 # Market position and standards
 
-**OnToGraPh verifies what each application does after a shared rule changes.** The first buyer is a data governance, AI governance or operational risk lead accountable for one control used by two applications with distinct owners. The buyer can keep the existing catalog, graph engine and deployment pipeline. [Interactive competitive landscape](https://www.fabriziodegni.com/OnToGraPh/#market)
+**OnToGraPh verifies what each application does after a shared rule changes.** The first buyer is a data governance, AI governance or operational risk lead accountable for one control used by two applications with distinct owners. The buyer can keep the existing catalog, graph engine and deployment pipeline. [Interactive competitive landscape](https://openontograph.org/#market)
 
 ## How the quadrant works
 

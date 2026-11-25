@@ -37,4 +37,4 @@ A live PolicyWatcher packet passed through a local OnToGraPh release into PALO�
 
 Version 0.1 is an offline reference implementation. Aurora 21 demonstrates release and verification with two simulated applications. Validation with real consumers and willingness to pay are goals for a customer pilot.
 
-[Public project site](https://www.fabriziodegni.com/OnToGraPh/) · [Repository quick start](../../README.md)
+[Public project site](https://openontograph.org/) · [Repository quick start](../../README.md)

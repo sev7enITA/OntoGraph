@@ -6,7 +6,7 @@
 
 Two applications can report the same release and still make different decisions. OntoGraph helps governance and risk teams find that divergence, trace it to the approved rule and check what happens after a withdrawal. It links source evidence, semantic impact, approval, per-application delivery and observed behavior. Start locally with Python and SQLite, then bring your own model and sources. The workspace includes a process modeler, graph and atomic inspector, release versions, and a reproducible synthetic case.
 
-[English website](https://www.fabriziodegni.com/OnToGraPh/) · [Simplified Chinese website](https://www.fabriziodegni.com/OnToGraPh/zh/) · [GitHub Wiki](https://github.com/sev7enITA/OntoGraph/wiki) · [Versioned documentation](docs/wiki/README.md) · [Competitive landscape](https://www.fabriziodegni.com/OnToGraPh/#market) · [Brand assets](assets/brand)
+[English website](https://openontograph.org/) · [Simplified Chinese website](https://openontograph.org/zh/) · [GitHub Wiki](https://github.com/sev7enITA/OntoGraph/wiki) · [Versioned documentation](docs/wiki/README.md) · [Competitive landscape](https://openontograph.org/#market) · [Brand assets](assets/brand)
 
 | | Value proposition |
 | --- | --- |

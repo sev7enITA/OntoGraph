@@ -33,4 +33,4 @@ Open OnToGraPh Studio and edit the included model or import your own release JSO
 - **OnToGraPh → PALO.** An optional pilot adapter admitted a source-bound signal and imported its release evidence into PALO’s local Assessment Path. PALO reopened Measure and Prove and kept the decision pending human review. A signal carrying a different change ID was held.
 - **OnToGraPh → PolicyWatcher.** The pilot resolved a frozen rule’s upstream change through PolicyWatcher’s public read-only endpoint. Writing an observation or a decision into a production PolicyWatcher record remains outside the tested path. [Pilot method and results](https://github.com/sev7enITA/OntoGraph/tree/main/examples/hub_pilot)
 
-[Governance hub](https://www.fabriziodegni.com/OnToGraPh/#ecosystem) · [Open the Studio](STUDIO.md) · [Synthetic Aurora 21](AURORA-21.md)
+[Governance hub](https://openontograph.org/#ecosystem) · [Open the Studio](STUDIO.md) · [Synthetic Aurora 21](AURORA-21.md)

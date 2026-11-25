@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://openontograph.org/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://openontograph.org/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://openontograph.org/"/>
+  </url>
+  <url>
+    <loc>https://openontograph.org/zh/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://openontograph.org/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://openontograph.org/"/>
+  </url>
+  <url>
+    <loc>https://openontograph.org/demo/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://openontograph.org/demo/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/demo/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://openontograph.org/demo/"/>
+  </url>
+  <url>
+    <loc>https://openontograph.org/demo/zh/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://openontograph.org/demo/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/demo/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://openontograph.org/demo/"/>
+  </url>
+  <url>
+    <loc>https://openontograph.org/film/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://openontograph.org/film/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/film/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://openontograph.org/film/"/>
+  </url>
+  <url>
+    <loc>https://openontograph.org/film/zh/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://openontograph.org/film/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/film/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://openontograph.org/film/"/>
+  </url>
+  <url>
+    <loc>https://openontograph.org/pilot/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://openontograph.org/pilot/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/pilot/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://openontograph.org/pilot/"/>
+  </url>
+  <url>
+    <loc>https://openontograph.org/pilot/zh/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://openontograph.org/pilot/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/pilot/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://openontograph.org/pilot/"/>
+  </url>
+</urlset>

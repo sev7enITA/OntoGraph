@@ -21,7 +21,7 @@ On 25 November 2026, we challenged the positioning against the buyer's incumbent
 | **GLM-5.4 Max**, ZCode | A correct result is only as reliable as the identity of the consumer instance and the custody of the observation. A well-configured Git/CI pipeline may match the whole workflow. | Require results bound to the exact app instance and activation and retain evidence under accountable custody. Compare both stacks on the same blinded cases. Equivalent assurance can still justify adoption if the buyer observes materially lower total effort. |
 | **Inkling 2 Mini Uncensored**, LM Studio (local inference) | A buyer with governed Git/CI can reasonably decline a second governance layer until a real-instance test establishes receipt, decision and withdrawal under auditable custody. Compare stale-decision detection, false withdrawal confirmations and reviewer verification time. | Publish the counterargument alongside the offer. Account for maintenance, evidence custody and the people responsible for each adapter when comparing the costs. |
 
-These model reviews challenged the proposed claims and pilot design. The project’s observed evidence remains the Aurora 21 simulation. [Counterargument for buyers](https://www.fabriziodegni.com/OnToGraPh/#skeptics)
+These model reviews challenged the proposed claims and pilot design. The project’s observed evidence remains the Aurora 21 simulation. [Counterargument for buyers](https://openontograph.org/#skeptics)
 
 ## Studio implementation
 

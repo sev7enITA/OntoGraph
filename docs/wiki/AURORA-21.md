@@ -28,4 +28,4 @@ Open `out/aurora.html` to inspect results and digests. Choose fresh output paths
 
 The report identifies the simulated releases and packages, shows the cases observed and keeps uncertainty visible when a timeout occurs. An operational deployment requires qualified observers and adapters for the customer's applications.
 
-[Open the public report](https://www.fabriziodegni.com/OnToGraPh/demo/) · [Full protocol](../PROTOCOL.md) · [Pilot criteria](MARKET-AND-STANDARDS.md#how-to-decide-whether-to-pay)
+[Open the public report](https://openontograph.org/demo/) · [Full protocol](../PROTOCOL.md) · [Pilot criteria](MARKET-AND-STANDARDS.md#how-to-decide-whether-to-pay)

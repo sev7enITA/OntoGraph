@@ -1,0 +1,14 @@
+# OnToGraPh
+
+> OnToGraPh is a standalone semantic governance framework by Fabrizio Degni. It connects dictionaries, taxonomies, controls and application observations to a frozen release. It runs locally with Python and SQLite.
+
+## Project and evidence
+
+- [English overview](https://openontograph.org/) and [简体中文](https://openontograph.org/zh/).
+- [Governance hub](https://openontograph.org/#ecosystem): PolicyWatcher supplies source evidence. PALO Framework defines review gates. The standalone engine can also use an adopter’s own sources and vocabulary.
+- [Interactive pilot](https://openontograph.org/pilot/) and [中文试点](https://openontograph.org/pilot/zh/). In the recorded pilot, PolicyWatcher was read-only and PALO was local. The case remained pending human review.
+- [Pilot evidence](https://openontograph.org/pilot/evidence.json): measured outcomes, release digest and receiving case.
+- [Narrated film and transcript](https://openontograph.org/film/) and [中文影片与文字稿](https://openontograph.org/film/zh/).
+- [Aurora 21](https://openontograph.org/demo/) and [中文模拟案例](https://openontograph.org/demo/zh/): a separate synthetic CRM/PMS example.
+- [Source code](https://github.com/sev7enITA/OntoGraph) and [reproduction instructions](https://github.com/sev7enITA/OntoGraph/tree/main/examples/hub_pilot).
+- [PolicyWatcher](https://policywatcher.online/) and [PALO Framework](https://paloframework.org/PALO_PlatformMap.html).
