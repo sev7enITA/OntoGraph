@@ -53,14 +53,6 @@ The assessor checks consistency of the submitted bindings and calculates outcome
 | Process modeler | OnToGraPh Excel workbooks, including earlier inventories based on the modeler's template. JSON, Mermaid, PlantUML, SVG and ZIP exports. |
 | Semantic Studio | Release JSON and the `OntoGraph Release` workbook with individual paths, types and values. JSON-LD, XLSX, Mermaid, PlantUML, SVG and ZIP exports. |
 
-## Deliver a reviewed rule through CI
-
-Start the standalone Studio with `--registry` and open **Semantic Studio → Release → Registry & CI**. Choose whether a candidate requires CI evidence to activate. After the required reviews, export its deterministic OPA package. The package ties the Rego policy, scoped data and tests to the frozen release digest.
-
-GitHub Actions and Azure Pipelines use the same verification command. An auditor can record the resulting evidence before activation. The release status then shows its commit, run and artifact alongside each application's separate observations.
-
-[DevOps quickstart and reproducible pilot](../../examples/devops/README.md)
-
 Keep the **Path**, **Type** and **Value** columns in the semantic workbook. Edit values in their declared type. Workbook import uses the same validator as JSON import.
 
 Start with your own semantic document:
@@ -78,3 +70,11 @@ python3 -m ontograph studio --registry path/to/registry.sqlite
 The **Local registry** panel in **Evidence** uses a role token to prepare a candidate, record a vote, publish, withdraw and inspect the audit trail. The registry enforces identity, quorum and operation validity. Enter tokens in the panel at the time of use. The panel is available on the configured local server.
 
 [Release protocol](../PROTOCOL.md) · [Aurora 21](AURORA-21.md)
+
+## Deliver a reviewed rule through CI
+
+Start the standalone Studio with `--registry` and open **Semantic Studio → Release → Registry & CI**. Choose whether a candidate requires CI evidence to activate. After the required reviews, export its deterministic OPA package. The package ties the Rego policy, scoped data and tests to the frozen release digest.
+
+GitHub Actions and Azure Pipelines use the same verification command. An auditor can record the resulting evidence before activation. The release status then shows its commit, run and artifact alongside each application's separate observations.
+
+[DevOps quickstart and reproducible pilot](../../examples/devops/README.md)
