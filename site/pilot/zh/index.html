@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101419" />
+    <title>证据回放 | OnToGraPh</title>
+    <meta
+      name="description"
+      content="从 PolicyWatcher 来源追踪至 PALO 人工复核，检验证据，或试用独立的校准实验室案例。"
+    />
+    <link rel="canonical" href="https://www.fabriziodegni.com/OnToGraPh/pilot/zh/" />
+    <link rel="alternate" hreflang="en" href="https://www.fabriziodegni.com/OnToGraPh/pilot/" />
+    <link rel="alternate" hreflang="zh-Hans" href="https://www.fabriziodegni.com/OnToGraPh/pilot/zh/" />
+    <link rel="icon" href="../../assets/icon.png" />
+    <link rel="stylesheet" href="../../assets/site.css" />
+    <link rel="stylesheet" href="../pilot.css" />
+    <script defer src="../pilot.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到正文</a>
+    <header class="pilot-head">
+      <div class="inner">
+        <a href="../../zh/" aria-label="OnToGraPh 项目"
+          ><img src="../../assets/on-tograph-logo.png" width="126" height="30" alt="OnToGraPh"
+        /></a>
+        <nav aria-label="语言">
+          <a href="../" lang="en" hreflang="en">English</a
+          ><a href="./" lang="zh-Hans" hreflang="zh-Hans" aria-current="page">简体中文</a>
+        </nav>
+      </div>
+    </header>
+    <main class="inner" id="main">
+      <div class="intro-area">
+        <div>
+          <p class="tag">
+            <i></i> 治理试点 <span>/</span> <time datetime="2026-11-25">2026 年 11 月 25 日</time>
+          </p>
+          <h1>追踪<em>信号。</em></h1>
+          <p class="lede">从政策变更的来源一路追踪到人工复核，再改变证据，看看信号会在哪一步停下。</p>
+        </div>
+        <a class="film-jump" href="#film"
+          ><span aria-hidden="true">▷</span><span>观看短片<small>01:30</small></span></a
+        >
+      </div>
+      <section id="console" class="console" aria-labelledby="console-title" hidden>
+        <div class="console-head">
+          <h2 id="console-title">证据回放</h2>
+          <div class="routes" role="tablist" aria-label="试点路径">
+            <button type="button" id="hub-tab" role="tab" aria-controls="workspace" aria-selected="true">
+              框架协作</button
+            ><button
+              type="button"
+              id="standalone-tab"
+              role="tab"
+              aria-controls="workspace"
+              aria-selected="false"
+              tabindex="-1"
+            >
+              独立运行
+            </button>
+          </div>
+        </div>
+        <div id="workspace" role="tabpanel" aria-labelledby="hub-tab">
+          <div class="instrument">
+            <div class="scope">
+              <p class="tag" id="trace-kind"></p>
+              <div class="board">
+                <svg class="traces" viewBox="0 0 800 55" preserveAspectRatio="none" aria-hidden="true">
+                  <path class="route-line" d="M0 27H800" />
+                  <path
+                    class="secondary"
+                    d="M0 5H42L70 27H100 M100 27h47l19 16h61l19-16h54 M500 27h60l15-14h46l17 14h62 M700 27h48l16 15h36"
+                  />
+                  <path class="sweep" d="M0 27H800" />
+                </svg>
+                <div class="nodes">
+                  <button type="button" class="node" data-step="0">
+                    <span class="node-glyph" aria-hidden="true"
+                      ><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M6 8h15l5 5v12H6z M20 8v6h6 M10 17h11 M10 21h7" /></svg></span
+                    ><span class="node-label"></span></button
+                  ><button type="button" class="node" data-step="1">
+                    <span class="node-glyph" aria-hidden="true"
+                      ><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M16 5l11 6-11 6-11-6z M5 16l11 6 11-6 M5 21l11 6 11-6" /></svg></span
+                    ><span class="node-label"></span></button
+                  ><button type="button" class="node" data-step="2">
+                    <span class="node-glyph" aria-hidden="true"
+                      ><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M6 8h5l5 8 5-8h5 M6 25h5l5-9 5 9h5 M3 8h3 M26 25h3" /></svg></span
+                    ><span class="node-label"></span></button
+                  ><button type="button" class="node" data-step="3">
+                    <span class="node-glyph" aria-hidden="true"
+                      ><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path
+                          d="M16 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10z M6 27v-3a10 8 0 0 1 20 0v3z"
+                        /></svg></span
+                    ><span class="node-label"></span>
+                  </button>
+                </div>
+              </div>
+              <div class="transport">
+                <button id="play" type="button"></button>
+                <div class="steps">
+                  <button id="prev" type="button" aria-label="上一步">←</button
+                  ><output id="counter"></output
+                  ><button id="next" type="button" aria-label="下一步">→</button>
+                </div>
+              </div>
+            </div>
+            <div class="reading" aria-live="polite" aria-atomic="true">
+              <p class="tag" id="phase"></p>
+              <h3 id="stage-title"></h3>
+              <p id="stage-copy"></p>
+              <a id="chapter" class="chapter" href="#film"></a>
+              <div class="fingerprint">
+                <small id="evidence-key"></small><code id="evidence-value"></code>
+              </div>
+            </div>
+          </div>
+          <div class="challenge" id="challenge">
+            <div class="challenge-heading">
+              <p class="tag">本地试验</p>
+              <h3 id="challenge-title"></h3>
+              <p id="challenge-copy"></p>
+            </div>
+            <div class="testbench">
+              <div id="hub-form">
+                <label
+                  >变更编号<select id="change-id">
+                    <option value="match">已记录编号</option>
+                    <option value="wrong">其他编号</option>
+                  </select></label
+                ><label
+                  >信号权限<select id="authority">
+                    <option value="monitor">仅作监测</option>
+                    <option value="approve">自称获批</option>
+                  </select></label
+                ><label
+                  >摘要文本<select id="summary">
+                    <option value="original">原文</option>
+                    <option value="altered">观测后改写</option>
+                  </select></label
+                >
+              </div>
+              <div id="stand-form" hidden>
+                <label
+                  >证书阶段<select id="certificate-stage">
+                    <option value="final">最终证书</option>
+                    <option value="working">草稿</option>
+                  </select></label
+                ><label
+                  >测量不确定度预算<select id="budget">
+                    <option value="recorded">已记录</option>
+                    <option value="missing">缺失</option>
+                  </select></label
+                ><label
+                  >生命周期事件<select id="withdrawal">
+                    <option value="active">已激活版本</option>
+                    <option value="receipt">仅收到撤回回执</option>
+                    <option value="observed">已观测到停用</option>
+                  </select></label
+                >
+              </div>
+              <div id="result" aria-live="polite" aria-atomic="true">
+                <strong id="verdict"></strong><span id="reason"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="film" class="film">
+        <div>
+          <p class="tag">01:30 <span>/</span> 试点短片</p>
+          <h2>走进试点。</h2>
+          <p>跟随证据交接过程，查看哪些检查会暂缓信号，以及哪项决定仍由人工复核。</p>
+        </div>
+        <div class="film-media">
+          <video
+            controls
+            playsinline
+            preload="none"
+            poster="../media/poster-zh.jpg"
+            aria-label="90 秒试点短片"
+          >
+            <source src="../media/pilot-zh.mp4" type="video/mp4" />
+            <track kind="captions" src="../media/pilot-zh.vtt" srclang="zh-Hans" label="简体中文" />
+            <a href="../media/pilot-zh.mp4">下载短片</a></video
+          ><a class="transcript" href="../media/transcript-zh.txt">阅读文字稿 ↗</a>
+        </div>
+      </section>
+      <section class="notes">
+        <h2>试点记录</h2>
+        <p>来源取自公开服务。注册表、消费端和 PALO 客户端均在本地运行。适用性仍待人工复核。</p>
+        <details>
+          <summary>从 PolicyWatcher 到 PALO</summary>
+          <ol id="hub-record" class="record">
+            <li data-node="PolicyWatcher">
+              <h3>收到监测信号</h3>
+              <p>
+                PolicyWatcher 发布了 Google Gemini
+                应用工作和学校账号的变更证据包。试点以只读方式获取证据，并重新计算了证据包摘要。
+              </p>
+              <small>变更编号</small> <code>429e2afa-3202-4708-97b6-1797cf3fca26</code>
+            </li>
+            <li data-node="OnToGraPh">
+              <h3>冻结规则</h3>
+              <p>
+                字典将变更编号、来源网址和监测权限绑定到一条规则。证据不足或审批人数未达要求均会阻止发布。试点角色按脚本激活了完整版本。
+              </p>
+              <small>发布清单</small>
+              <code>4de3a9de98da7885934b3d46c3507a4729234caf909782a3de2174185fc9e22c</code>
+            </li>
+            <li data-node="准入检查">
+              <h3>观测准入结果</h3>
+              <p>
+                独立消费端接纳了匹配的信号。替换变更编号后，信号仍符合原生格式，但语义规则将其暂缓。自称具有审批权限的监测信号也被暂缓。
+              </p>
+              <small>应用</small> <code>review-intake</code>
+            </li>
+            <li data-node="PALO">
+              <h3>等待人工复核</h3>
+              <p>
+                本地 Assessment Path 重新打开 Measure（衡量）和
+                Prove（验证）。重新加载后，案例和证据仍被保留。原生回执对应这次重开的案例；生产部署和政策适用性仍待决定。
+              </p>
+              <small>案例状态</small> <code>pending-human-review</code>
+            </li>
+          </ol>
+        </details>
+        <details>
+          <summary>独立实验室</summary>
+          <ol id="standalone-record" class="record">
+            <li data-node="实验室">
+              <h3>本地工作区</h3>
+              <p>模拟校准实验室从空注册表开始。操作系统禁止联网，运行环境仅使用 Python 和 SQLite。</p>
+              <small>工作区</small> <code>north-quay-calibration</code>
+            </li>
+            <li data-node="字典">
+              <h3>证书规则</h3>
+              <p>
+                实验室在自己的分类体系中将最终证书归入证书类。其规则要求先记录测量不确定度预算，再发出最终证书。
+              </p>
+              <small>控制项</small> <code>certificate-check</code>
+            </li>
+            <li data-node="工作台">
+              <h3>观测工作台</h3>
+              <p>
+                完整证书获准，缺少预算的证书被暂缓，草稿不在适用范围内。仅有回执时激活尚未证实，之后通过观测工作台完成了验证。
+              </p>
+              <small>应用</small> <code>bench</code>
+            </li>
+            <li data-node="撤回">
+              <h3>确认已停用</h3>
+              <p>
+                收到撤回回执后，实际效果仍待验证。独立观测记录了工作台已停用，才确认该模拟消费端的撤回已生效。
+              </p>
+              <small>观测状态</small> <code>withdrawal_verified</code>
+            </li>
+          </ol>
+        </details>
+        <div class="refs">
+          <a href="../evidence.json" download>试点证据（JSON） ↓</a
+          ><a href="https://policywatcher.online/change/429e2afa-3202-4708-97b6-1797cf3fca26"
+            >原始变更 ↗</a
+          ><a
+            href="https://github.com/sev7enITA/OntoGraph/tree/2a92a923518588eaa465eab08022e7afad70f956/examples/hub_pilot"
+            >复现试点 ↗</a
+          >
+        </div>
+      </section>
+    </main>
+    <footer class="inner">
+      <a href="../../zh/">项目首页 <span aria-hidden="true">↗</span></a
+      ><span>OnToGraPh</span>
+    </footer>
+  </body>
+</html>

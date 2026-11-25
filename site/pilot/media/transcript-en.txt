@@ -1,0 +1,19 @@
+Follow the signal.
+OnToGraPh governance pilot | 90 seconds
+English narration produced with MakeMyVoice.
+
+00:00  This signal looks valid. It points to the wrong change. Would your review process catch it before someone acts?
+
+00:10  PolicyWatcher published a change about Google Gemini Apps for work and school accounts. We read the public evidence packet and verified its fingerprint.
+
+00:22  OntoGraph binds three fields to one rule: the change identifier, its source link, and its authority. Publication requires a reviewer vote. A delivery receipt alone proves little.
+
+00:35  Change the identifier. The format still passes, but the rule puts the signal on hold. Edit just the summary, and the full signal fingerprint catches that too.
+
+00:48  The original signal reached PALO. Its local client reopened Measure and Prove. The case is waiting for a human. Nobody approved a production change.
+
+01:01  Now try OntoGraph on its own. A calibration lab ran offline with its own dictionary. Its complete certificate passed. Missing data put another on hold. A draft was outside scope.
+
+01:15  The lab withdrew the release. Its receipt left the outcome open. Only an observation that the rule had stopped running confirmed withdrawal.
+
+01:25  Which piece of evidence would you trust? Try the case.

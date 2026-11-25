@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101419" />
+    <title>Evidence replay | OnToGraPh</title>
+    <meta
+      name="description"
+      content="Replay a PolicyWatcher change from source to human review in PALO. Challenge its evidence, or run the standalone calibration case."
+    />
+    <link rel="canonical" href="https://www.fabriziodegni.com/OnToGraPh/pilot/" />
+    <link rel="alternate" hreflang="en" href="https://www.fabriziodegni.com/OnToGraPh/pilot/" />
+    <link rel="alternate" hreflang="zh-Hans" href="https://www.fabriziodegni.com/OnToGraPh/pilot/zh/" />
+    <link rel="icon" href="../assets/icon.png" />
+    <link rel="stylesheet" href="../assets/site.css" />
+    <link rel="stylesheet" href="pilot.css" />
+    <script defer src="pilot.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="pilot-head">
+      <div class="inner">
+        <a href="../" aria-label="OnToGraPh project"
+          ><img src="../assets/on-tograph-logo.png" width="126" height="30" alt="OnToGraPh"
+        /></a>
+        <nav aria-label="Language">
+          <a href="./" lang="en" hreflang="en" aria-current="page">English</a
+          ><a href="zh/" lang="zh-Hans" hreflang="zh-Hans">简体中文</a>
+        </nav>
+      </div>
+    </header>
+    <main class="inner" id="main">
+      <div class="intro-area">
+        <div>
+          <p class="tag">
+            <i></i> Governance pilot <span>/</span> <time datetime="2026-11-25">25 NOV 2026</time>
+          </p>
+          <h1>Follow the <em>signal.</em></h1>
+          <p class="lede">
+            Trace a policy change from source to human review. Then change the evidence and see where it
+            stops.
+          </p>
+        </div>
+        <a class="film-jump" href="#film"
+          ><span aria-hidden="true">▷</span><span>Watch the film<small>01:30</small></span></a
+        >
+      </div>
+      <section id="console" class="console" aria-labelledby="console-title" hidden>
+        <div class="console-head">
+          <h2 id="console-title">Evidence replay</h2>
+          <div class="routes" role="tablist" aria-label="Pilot route">
+            <button type="button" id="hub-tab" role="tab" aria-controls="workspace" aria-selected="true">
+              Framework hub</button
+            ><button
+              type="button"
+              id="standalone-tab"
+              role="tab"
+              aria-controls="workspace"
+              aria-selected="false"
+              tabindex="-1"
+            >
+              Standalone
+            </button>
+          </div>
+        </div>
+        <div id="workspace" role="tabpanel" aria-labelledby="hub-tab">
+          <div class="instrument">
+            <div class="scope">
+              <p class="tag" id="trace-kind"></p>
+              <div class="board">
+                <svg class="traces" viewBox="0 0 800 55" preserveAspectRatio="none" aria-hidden="true">
+                  <path class="route-line" d="M0 27H800" />
+                  <path
+                    class="secondary"
+                    d="M0 5H42L70 27H100 M100 27h47l19 16h61l19-16h54 M500 27h60l15-14h46l17 14h62 M700 27h48l16 15h36"
+                  />
+                  <path class="sweep" d="M0 27H800" />
+                </svg>
+                <div class="nodes">
+                  <button type="button" class="node" data-step="0">
+                    <span class="node-glyph" aria-hidden="true"
+                      ><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M6 8h15l5 5v12H6z M20 8v6h6 M10 17h11 M10 21h7" /></svg></span
+                    ><span class="node-label"></span></button
+                  ><button type="button" class="node" data-step="1">
+                    <span class="node-glyph" aria-hidden="true"
+                      ><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M16 5l11 6-11 6-11-6z M5 16l11 6 11-6 M5 21l11 6 11-6" /></svg></span
+                    ><span class="node-label"></span></button
+                  ><button type="button" class="node" data-step="2">
+                    <span class="node-glyph" aria-hidden="true"
+                      ><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M6 8h5l5 8 5-8h5 M6 25h5l5-9 5 9h5 M3 8h3 M26 25h3" /></svg></span
+                    ><span class="node-label"></span></button
+                  ><button type="button" class="node" data-step="3">
+                    <span class="node-glyph" aria-hidden="true"
+                      ><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path
+                          d="M16 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10z M6 27v-3a10 8 0 0 1 20 0v3z"
+                        /></svg></span
+                    ><span class="node-label"></span>
+                  </button>
+                </div>
+              </div>
+              <div class="transport">
+                <button id="play" type="button"></button>
+                <div class="steps">
+                  <button id="prev" type="button" aria-label="Previous stage">←</button
+                  ><output id="counter"></output
+                  ><button id="next" type="button" aria-label="Next stage">→</button>
+                </div>
+              </div>
+            </div>
+            <div class="reading" aria-live="polite" aria-atomic="true">
+              <p class="tag" id="phase"></p>
+              <h3 id="stage-title"></h3>
+              <p id="stage-copy"></p>
+              <a id="chapter" class="chapter" href="#film"></a>
+              <div class="fingerprint">
+                <small id="evidence-key"></small><code id="evidence-value"></code>
+              </div>
+            </div>
+          </div>
+          <div class="challenge" id="challenge">
+            <div class="challenge-heading">
+              <p class="tag">Local experiment</p>
+              <h3 id="challenge-title"></h3>
+              <p id="challenge-copy"></p>
+            </div>
+            <div class="testbench">
+              <div id="hub-form">
+                <label
+                  >Change ID<select id="change-id">
+                    <option value="match">Recorded ID</option>
+                    <option value="wrong">Different ID</option>
+                  </select></label
+                ><label
+                  >Signal authority<select id="authority">
+                    <option value="monitor">Monitoring</option>
+                    <option value="approve">Claims approval</option>
+                  </select></label
+                ><label
+                  >Summary text<select id="summary">
+                    <option value="original">Original</option>
+                    <option value="altered">Edited after observation</option>
+                  </select></label
+                >
+              </div>
+              <div id="stand-form" hidden>
+                <label
+                  >Certificate stage<select id="certificate-stage">
+                    <option value="final">Final certificate</option>
+                    <option value="working">Working copy</option>
+                  </select></label
+                ><label
+                  >Uncertainty budget<select id="budget">
+                    <option value="recorded">Recorded</option>
+                    <option value="missing">Missing</option>
+                  </select></label
+                ><label
+                  >Lifecycle event<select id="withdrawal">
+                    <option value="active">Active release</option>
+                    <option value="receipt">Withdrawal receipt only</option>
+                    <option value="observed">Inactivity observed</option>
+                  </select></label
+                >
+              </div>
+              <div id="result" aria-live="polite" aria-atomic="true">
+                <strong id="verdict"></strong><span id="reason"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="film" class="film">
+        <div>
+          <p class="tag">01:30 <span>/</span> Pilot film</p>
+          <h2>Inside the pilot.</h2>
+          <p>
+            Follow the evidence handoff, the tests that held a signal, and the decision left to a human
+            reviewer.
+          </p>
+        </div>
+        <div class="film-media">
+          <video
+            controls
+            playsinline
+            preload="none"
+            poster="media/poster-en.jpg"
+            aria-label="90-second pilot film"
+          >
+            <source src="media/pilot-en.mp4" type="video/mp4" />
+            <track kind="captions" src="media/pilot-en.vtt" srclang="en" label="English" />
+            <a href="media/pilot-en.mp4">Download the film</a></video
+          ><a class="transcript" href="media/transcript-en.txt">Read the transcript ↗</a>
+        </div>
+      </section>
+      <section class="notes">
+        <h2>Pilot record</h2>
+        <p>
+          The public service supplied the source. The registry, consumer and PALO client ran locally.
+          Human applicability review remains open.
+        </p>
+        <details>
+          <summary>PolicyWatcher to PALO</summary>
+          <ol id="hub-record" class="record">
+            <li data-node="PolicyWatcher">
+              <h3>Signal captured</h3>
+              <p>
+                The published Google Gemini Apps change for work and school accounts supplied a public
+                evidence packet. The pilot verified the packet digest and used read-only access.
+              </p>
+              <small>Change ID</small> <code>429e2afa-3202-4708-97b6-1797cf3fca26</code>
+            </li>
+            <li data-node="OnToGraPh">
+              <h3>Rule frozen</h3>
+              <p>
+                The dictionary bound the change ID, source URL and monitoring authority to one rule.
+                Insufficient evidence and missing approval quorum each blocked release. Scripted pilot
+                roles activated the complete release.
+              </p>
+              <small>Release</small>
+              <code>4de3a9de98da7885934b3d46c3507a4729234caf909782a3de2174185fc9e22c</code>
+            </li>
+            <li data-node="Intake">
+              <h3>Admission observed</h3>
+              <p>
+                A separate consumer admitted the matched signal. A different change ID passed the native
+                format check and was held by the semantic rule. A monitoring signal claiming approval was
+                also held.
+              </p>
+              <small>Application</small> <code>review-intake</code>
+            </li>
+            <li data-node="PALO">
+              <h3>Human review pending</h3>
+              <p>
+                The local Assessment Path reopened Measure and Prove. The case and its evidence survived
+                a reload. The native receipt covers the reopened case. Production deployment and policy
+                applicability remained undecided.
+              </p>
+              <small>Case state</small> <code>pending-human-review</code>
+            </li>
+          </ol>
+        </details>
+        <details>
+          <summary>Standalone laboratory</summary>
+          <ol id="standalone-record" class="record">
+            <li data-node="Laboratory">
+              <h3>Local workspace</h3>
+              <p>
+                A synthetic calibration laboratory started with an empty registry. Python and SQLite ran
+                while the operating system denied network access.
+              </p>
+              <small>Workspace</small> <code>north-quay-calibration</code>
+            </li>
+            <li data-node="Dictionary">
+              <h3>Certificate rule</h3>
+              <p>
+                The lab’s own taxonomy placed a final certificate under certificate. Its rule requires
+                the measurement uncertainty budget before a final certificate can be dispatched.
+              </p>
+              <small>Control</small> <code>certificate-check</code>
+            </li>
+            <li data-node="Bench">
+              <h3>Bench observed</h3>
+              <p>
+                A complete certificate was allowed, a missing budget was held and a working copy was
+                outside scope. A receipt alone left activation unproven until the bench was observed.
+              </p>
+              <small>Application</small> <code>bench</code>
+            </li>
+            <li data-node="Withdrawal">
+              <h3>Inactivity confirmed</h3>
+              <p>
+                A withdrawal receipt left the effect unproven. The separate observation recorded the
+                bench inactive, which verified withdrawal for this synthetic consumer.
+              </p>
+              <small>Observed state</small> <code>withdrawal_verified</code>
+            </li>
+          </ol>
+        </details>
+        <div class="refs">
+          <a href="evidence.json" download>Pilot evidence (JSON) ↓</a
+          ><a href="https://policywatcher.online/change/429e2afa-3202-4708-97b6-1797cf3fca26"
+            >Original change ↗</a
+          ><a
+            href="https://github.com/sev7enITA/OntoGraph/tree/2a92a923518588eaa465eab08022e7afad70f956/examples/hub_pilot"
+            >Reproduce the pilot ↗</a
+          >
+        </div>
+      </section>
+    </main>
+    <footer class="inner">
+      <a href="../">Project home <span aria-hidden="true">↗</span></a
+      ><span>OnToGraPh</span>
+    </footer>
+  </body>
+</html>

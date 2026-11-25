@@ -1,0 +1,104 @@
+{
+  "format": "ontograph.public-pilot-summary/1",
+  "observed_at": "2026-11-25T19:24:35Z",
+  "method": "https://github.com/sev7enITA/OntoGraph/tree/2a92a923518588eaa465eab08022e7afad70f956/examples/hub_pilot",
+  "hub": {
+    "source": {
+      "provider": "PolicyWatcher",
+      "company": "Google",
+      "policy_title": "Gemini Apps – Work and school accounts",
+      "public_record": "https://policywatcher.online/change/429e2afa-3202-4708-97b6-1797cf3fca26",
+      "snapshot_captured_at": "2026-11-24T14:42:40.555Z",
+      "packet_sha256_recomputed": "cb732bd3fe0f388908c0375faf447b6ffffb193ee7123a8aae23ff033265f4b9",
+      "upstream_snapshot_sha256_reported": "d1fc6937aaaec1deadc31e1af93e9b717693317f4b420fc654d2185d9c6fefcc"
+    },
+    "release": "4de3a9de98da7885934b3d46c3507a4729234caf909782a3de2174185fc9e22c",
+    "activation": 12,
+    "ledger_tip": "4a3920735778712b0b76475bb128b6bf8783755448258903eeb6ba692467158e",
+    "event_count": 16,
+    "release_gate_rejections": [
+      "Disputed or insufficient evidence blocks publication",
+      "Approval quorum not met"
+    ],
+    "receipt_only": "unproven",
+    "probe_results": {
+      "matched": {
+        "outcome": "allow",
+        "native_signal_valid": true
+      },
+      "wrong-case": {
+        "outcome": "hold",
+        "native_signal_valid": true
+      },
+      "false-authority": {
+        "outcome": "hold",
+        "native_signal_valid": false
+      }
+    },
+    "reverse_lookup": {
+      "valid_http_status": 200,
+      "duplicate_id_http_status": 400,
+      "route_access": "read-only",
+      "receipt_issuer": "OnToGraPh local operator pilot"
+    },
+    "palo": {
+      "release_revision": "8cce101a653572cc9ec7f888a2422806536a93d1",
+      "case_id": "case-ontograph-4de3a9de98da7885934b3d46",
+      "case_status": "reopened",
+      "review_status": "pending-human-review",
+      "reopened_gates": [
+        "measure",
+        "prove"
+      ],
+      "native_case_digest": "sha256:38c8daf36e755c086c6b1d32476c50ffcf061fb0d4fd4396eb7ed4e1b79472bc",
+      "retained_after_reload": true,
+      "altered_summary_before_import": "rejected",
+      "authority_escalation_in_saved_case": "rejected",
+      "retained_on_rejection": true
+    },
+    "environment": "Public PolicyWatcher API, local registry, local PALO Assessment Path, scripted role principals.",
+    "business_outcome": "not_assessed"
+  },
+  "standalone": {
+    "domain": "north-quay-calibration",
+    "scope": "synthetic local bench, scripted role principals",
+    "runtime": "Python and SQLite",
+    "network_access": "denied by host operating system",
+    "release": "239e126b601f1901b10dd39335b76141f389dcc32b25d41cf5d317c34e3c57ff",
+    "activation": 11,
+    "decisions": {
+      "complete": "allow",
+      "budget-missing": "hold",
+      "working-copy": "out_of_scope"
+    },
+    "activation_receipt_only": "unproven",
+    "observed_activation": "verified",
+    "withdrawal_receipt_only": "unproven",
+    "observed_withdrawal": "withdrawal_verified",
+    "ledger_tip": "8cc9e58a3fe4681031f85fd4e7f6c18f82fb71338d681f84863c2d9ffb70cfa3"
+  },
+  "film": {
+    "duration_seconds": 90,
+    "narration_provider": "MakeMyVoice",
+    "voice_design": "Original synthetic female narration",
+    "inference": "local",
+    "languages": [
+      "en",
+      "zh-Hans"
+    ],
+    "model": "mlx-community/Qwen3-TTS-12Hz-1.7B-VoiceDesign-8bit",
+    "model_revision": "f90d617701d9f7f4ca499291e0b57f2b3c2fd2ee",
+    "editions": {
+      "en": {
+        "file": "media/pilot-en.mp4",
+        "video_sha256": "fcb32da16a0d0861cae76fc4205538fb1441a4196df965ac1127a6e0a23529e8",
+        "captions": "media/pilot-en.vtt"
+      },
+      "zh": {
+        "file": "media/pilot-zh.mp4",
+        "video_sha256": "d88b5d81631ada72f229dd606295de31071cd007eb8ffa4d87c3bbff7e5b1cfb",
+        "captions": "media/pilot-zh.vtt"
+      }
+    }
+  }
+}
