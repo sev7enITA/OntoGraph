@@ -57,6 +57,11 @@ All of Aurora 21 is synthetic. The two applications are simulators. Verification
 - Per-app rule delivery. Consumer assertions remain separate from independent, expiring behavioral observations. A withdrawal stops delivery immediately. Observation confirms whether behavior at each consumer stopped.
 - Offline JSON package and JSON-LD graph projection using SKOS, OWL/RDFS and PROV-O terms. Release and audit hashes can be checked against independently retained checkpoints.
 
+## How PolicyWatcher and PALO benefit
+
+- PolicyWatcher can carry a detected change forward into a traceable control update. The offline adapter imports a locally supplied evidence packet and authorized excerpt into a draft for human review. Teams can map the change to controls and verify application behavior after release. [PolicyWatcher](https://policywatcher.online/) · [Evidence exchange](docs/PROTOCOL.md#inputs-and-optional-adapters)
+- PALO Framework adopters get a working example of how to produce evidence at governance gates for semantic changes. The local registry records review, approval, independent observations and withdrawal for the applications and cases in scope. [PALO Framework](https://paloframework.org/) · [Lifecycle and controls](docs/FRAMEWORK.md#the-six-gates)
+
 ## Operator guide
 
 [Framework and controls](docs/FRAMEWORK.md) · [Protocol and CLI](docs/PROTOCOL.md) · [Market proposal and pilot](docs/MARKET.md) · [Cross-model reviews](docs/REVIEWS.md)

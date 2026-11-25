@@ -488,6 +488,16 @@ code {
 .proof-sequence dt { font-weight: 760; letter-spacing: -.02em; }
 .proof-sequence dd { max-width: 32rem; margin-top: .12rem; color: #344740; }
 
+.ecosystem-grid { margin-top: clamp(1.5rem, 3vw, 2.6rem); }
+
+.ecosystem-grid article {
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+}
+
+.ecosystem-grid h3 a { font-size: clamp(1.25rem, 2vw, 1.65rem); }
+.ecosystem-grid p { max-width: 42rem; margin-top: .65rem; color: var(--muted); }
+
 .explore {
   display: flex;
   align-items: center;

@@ -23,6 +23,11 @@ OnToGraPh links the source excerpt, the affected control, the approval and the d
 | [Protocol and CLI](../PROTOCOL.md) | Formats, operations, PolicyWatcher exchange, observation and withdrawal |
 | [Market proposal](../MARKET.md) | Buyer, first pilot and decision criteria |
 
+## How PolicyWatcher and PALO benefit
+
+- PolicyWatcher monitors policy changes. The OnToGraPh offline adapter carries a locally supplied evidence packet and an authorized excerpt into a draft for human review. Stewards can map the change to affected controls and test its effect in each application. [PolicyWatcher](https://policywatcher.online/) · [Evidence exchange](../PROTOCOL.md#inputs-and-optional-adapters)
+- Teams applying PALO Framework can use OnToGraPh as a reference for evidence at governance gates. A semantic change has a source, a recorded decision on a frozen release, observations on specific cases and an auditable withdrawal when needed. [PALO Framework](https://paloframework.org/) · [Lifecycle and controls](../FRAMEWORK.md#the-six-gates)
+
 Version 0.1 is an offline reference implementation. Aurora 21 demonstrates release and verification with two simulated applications. Validation with real consumers and willingness to pay are goals for a customer pilot.
 
 [Public project site](https://www.fabriziodegni.com/OnToGraPh/) · [Repository quick start](../../README.md)
