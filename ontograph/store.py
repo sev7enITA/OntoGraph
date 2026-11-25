@@ -282,14 +282,15 @@ class Registry:
 
     def record_ci(self, token, release_id, receipt):
         """An auditor records evidence checked against the actual provider run."""
-        from .policy import build_bundle
+        from .policy import build_bundle, generated_test_names
         from .policy_ci import validate_receipt
 
         with self.transaction(write=True) as db:
             actor = self._authenticate(db, token, {"auditor"})
             _, manifest, payload = self._candidate(db, release_id)
             bundle = build_bundle(self._release_export(release_id, manifest, payload))
-            validate_receipt(receipt, release_id, bundle["bundle_sha256"])
+            validate_receipt(receipt, release_id, bundle["bundle_sha256"],
+                             expected_test_count=len(generated_test_names(bundle)))
             for evidence in self._ci_evidence(db, release_id):
                 prior = evidence["receipt"]
                 if prior == receipt:

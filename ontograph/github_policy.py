@@ -9,7 +9,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from .model import Rejected, require
-from .policy import verify_bundle
+from .policy import generated_test_names, verify_bundle
 from .policy_ci import validate_receipt
 
 
@@ -45,7 +45,8 @@ def fetch_receipt(bundle, repository, run_id, attempt=1, branch="main"):
                "--name", f"ontograph-verified-policy-{attempt}", "--dir", scratch)
         folder = Path(scratch)
         receipt = json.loads((folder / "receipt.json").read_bytes())
-        validate_receipt(receipt, bundle["release"], bundle_sha)
+        validate_receipt(receipt, bundle["release"], bundle_sha,
+                         expected_test_count=len(generated_test_names(bundle)))
         require(receipt["provider"] == "github-actions"
                 and receipt["repository"].casefold() == f"https://github.com/{repository}".casefold()
                 and receipt["commit"] == run.get("head_sha")

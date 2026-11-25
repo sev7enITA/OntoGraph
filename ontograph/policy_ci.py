@@ -12,7 +12,7 @@ import tempfile
 from pathlib import Path
 
 from .model import Rejected, canonical, require
-from .policy import verify_bundle
+from .policy import generated_test_names, verify_bundle
 
 RECEIPT_FORMAT = "ontograph.ci-receipt/1"
 VALIDATION_FIELDS = {"release", "bundle_sha256", "artifact_sha256", "opa_version", "test_count"}
@@ -80,7 +80,7 @@ def run_checks(bundle, opa, output, *, expected_release=None):
         inputs = ["production/policy.rego", "production/data.json", "policy_test.rego"]
         _run([opa, "check", "--strict", *inputs], cwd=work)
         results = json.loads(_run([opa, "test", "--format=json", *inputs], cwd=work))
-        test_names = re.findall(r"^(test_[a-z0-9_]+) if \{", files[tests.name], re.M)
+        test_names = generated_test_names(bundle)
         require(type(results) is list and len(test_names) == len(results) >= len(probes) > 0
                 and all(type(case) is dict and isinstance(case.get("name"), str)
                         and not any(case.get(key) for key in ("fail", "skip", "error")) for case in results)
@@ -108,7 +108,7 @@ def run_checks(bundle, opa, output, *, expected_release=None):
     return validation
 
 
-def validate_receipt(receipt, release_id, bundle_sha256):
+def validate_receipt(receipt, release_id, bundle_sha256, *, expected_test_count=None):
     """Check receipt shape and bindings. This does not authenticate a CI provider."""
     require(type(receipt) is dict and set(receipt) == RECEIPT_FIELDS, "Invalid CI receipt fields")
     require(receipt["format"] == RECEIPT_FORMAT, "Unsupported CI receipt format")
@@ -120,6 +120,8 @@ def validate_receipt(receipt, release_id, bundle_sha256):
     require(_matches(r"\d+\.\d+\.\d+", receipt["opa_version"]), "Invalid CI receipt OPA version")
     for field in ("test_count", "run_attempt"):
         require(type(receipt[field]) is int and receipt[field] > 0, f"Invalid CI receipt {field}")
+    require(expected_test_count is None or receipt["test_count"] == expected_test_count,
+            "CI receipt does not cover every generated policy test")
     repository, run_url = receipt["repository"], receipt["run_url"]
     if receipt["provider"] == "github-actions":
         require(_matches(GITHUB_REPOSITORY, repository)

@@ -43,6 +43,8 @@ class DevOpsReleaseTests(unittest.TestCase):
             self.registry.record_ci(self.tokens["publisher"], release, receipt)
         with self.assertRaisesRegex(Rejected, "does not match"):
             self.registry.record_ci(self.tokens["auditor"], release, {**receipt, "bundle_sha256": "0" * 64})
+        with self.assertRaisesRegex(Rejected, "every generated"):
+            self.registry.record_ci(self.tokens["auditor"], release, {**receipt, "test_count": 1})
 
         evidence = self.registry.record_ci(self.tokens["auditor"], release, receipt)
         self.assertEqual(self.registry.record_ci(self.tokens["auditor"], release, copy.deepcopy(receipt)), evidence)

@@ -1,6 +1,7 @@
 """Build a reproducible OPA source bundle from a frozen release."""
 
 import json
+import re
 
 from .exchange import verify_release
 from .model import canonical, consumer_bundle, digest, record, require
@@ -87,6 +88,10 @@ def _decision_test(name, inputs, expected):
     return (f"{name} if {{\n"
             f"    data.ontograph.decision == {canonical(expected)} with input as {canonical(inputs)}\n"
             "}\n")
+
+
+def generated_test_names(bundle):
+    return re.findall(r"^(test_[a-z0-9_]+) if \{", bundle["files"]["policy_test.rego"], re.M)
 
 
 def _test_source(payload):
