@@ -25,8 +25,14 @@ OnToGraPh links the source excerpt, the affected control, the approval and the d
 
 ## How PolicyWatcher and PALO benefit
 
-- PolicyWatcher monitors policy changes. The OnToGraPh offline adapter carries a locally supplied evidence packet and an authorized excerpt into a draft for human review. Stewards can map the change to affected controls and test its effect in each application. [PolicyWatcher](https://policywatcher.online/) · [Evidence exchange](../PROTOCOL.md#inputs-and-optional-adapters)
-- Teams applying PALO Framework can use OnToGraPh as a reference for evidence at governance gates. A semantic change has a source, a recorded decision on a frozen release, observations on specific cases and an auditable withdrawal when needed. [PALO Framework](https://paloframework.org/) · [Lifecycle and controls](../FRAMEWORK.md#the-six-gates)
+OnToGraPh derives its approach to sources from PolicyWatcher, its accountable roles and review gates from PALO Framework, and its visual workspace from PolicyAsCode. It provides a shared semantic foundation for linking those sources and decisions to a specific version, control, application and observed outcome.
+
+| Project | What it contributes | What OnToGraPh can return |
+| --- | --- | --- |
+| **PolicyWatcher** | A change record, evidence packet and authorized excerpt to import offline for human review. [PolicyWatcher](https://policywatcher.online/) · [Evidence exchange](../PROTOCOL.md#inputs-and-optional-adapters) | A trace from the source change to affected fields, the approved release and the outcome observed in each application. A future feedback adapter could attach those results to the policy change record. |
+| **PALO Framework** | Governance roles, lifecycle gates and evidence requirements. [PALO Framework](https://paloframework.org/) · [Lifecycle and controls](../FRAMEWORK.md#the-six-gates) | An executable semantic-release workflow and exportable records of approval, observation and withdrawal that can support a PALO review. |
+
+The reference supports offline evidence intake and export. Automated feedback to PolicyWatcher and live integration with PALO are pilot work.
 
 Version 0.1 is an offline reference implementation. Aurora 21 demonstrates release and verification with two simulated applications. Validation with real consumers and willingness to pay are goals for a customer pilot.
 

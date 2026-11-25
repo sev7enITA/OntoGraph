@@ -34,6 +34,7 @@
         <a href="#paradigm">Paradigm</a>
         <a href="#studio">Studio</a>
         <a href="#aurora">Aurora 21</a>
+        <a href="#market">Market</a>
       </nav>
       <div class="masthead-actions">
         <nav class="language-nav" aria-label="Language">
@@ -172,20 +173,144 @@
       </div>
     </section>
 
+    <section class="market section" id="market" aria-labelledby="market-title">
+      <div class="wrap">
+        <div class="section-heading market-heading">
+          <div>
+            <h2 id="market-title">Competitive landscape</h2>
+            <p>Use this quadrant to shortlist tools by the job you need done and the evidence you need after a change.</p>
+          </div>
+          <div class="market-heading-links">
+            <a class="text-link" href="https://github.com/sev7enITA/OntoGraph/wiki/Market-and-Standards#how-the-quadrant-works">Assessment method <span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="#skeptics">When to keep your stack <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+
+        <figure class="market-map" aria-labelledby="market-map-caption">
+          <figcaption id="market-map-caption">
+            <p>OnToGraPh assessment · Selected documented workflows · <time datetime="2026-11-25">25 Nov 2026</time></p>
+            <p class="market-map-note">Rows show the verification scope of the documented workflows. Assess production maturity separately.</p>
+          </figcaption>
+          <div class="market-map-vertical">Scope of verification <span aria-hidden="true">↑</span></div>
+          <div class="market-quadrant">
+            <div class="market-row-label">Consumer behavior after release</div>
+            <div class="market-cell market-cell-focus">
+              <p class="market-coordinate">Consumer behavior after release · Focused workflow</p>
+              <a class="market-featured" href="#market-ontograph">OnToGraPh <span aria-hidden="true">↘</span></a>
+              <p>Verify downstream decisions and confirm the effect of withdrawal.</p>
+              <span class="market-evidence">Offline reference · synthetic case</span>
+            </div>
+            <div class="market-cell market-cell-option">
+              <p class="market-coordinate">Consumer behavior after release · Dedicated semantic tooling</p>
+              <a class="market-featured" href="#market-pilot">Combined-stack pilot&nbsp;<span aria-hidden="true">↘</span></a>
+              <p>Keep a dedicated semantic platform and pilot a separate layer for behavioral verification.</p>
+            </div>
+            <div class="market-row-label">Model and platform checks</div>
+            <div class="market-cell">
+              <p class="market-coordinate">Model and platform checks · Focused workflow</p>
+              <a class="market-marker" href="#market-ninepts">NinePts/<wbr>OntoGraph</a>
+              <p>Explore an OWL ontology visually.</p>
+            </div>
+            <div class="market-cell">
+              <p class="market-coordinate">Model and platform checks · Dedicated semantic tooling</p>
+              <ul class="market-markers" aria-label="Tools for semantics, authoring and graphs">
+                <li><a class="market-marker" href="#market-genie">Databricks Genie</a></li>
+                <li><a class="market-marker" href="#market-nvidia">NVIDIA Auto Ontology</a></li>
+                <li><a class="market-marker" href="#market-authoring">OntoBricks</a></li>
+                <li><a class="market-marker" href="#market-authoring">TopBraid EDG</a></li>
+                <li><a class="market-marker" href="#market-graphs">Stardog</a></li>
+                <li><a class="market-marker" href="#market-graphs">GraphDB</a></li>
+              </ul>
+            </div>
+            <div class="market-column-label market-column-focused">Focused workflow</div>
+            <div class="market-column-label market-column-dedicated">Dedicated semantic tooling</div>
+          </div>
+          <p class="market-map-horizontal">Scope of semantic tooling <span aria-hidden="true">→</span></p>
+        </figure>
+
+        <div class="market-alternatives">
+          <h3>When to choose each option</h3>
+          <dl class="market-comparisons">
+            <div id="market-ontograph" tabindex="-1">
+              <dt>OnToGraPh</dt>
+              <dd>For a shared rule that can drift across applications. Link the approved version to per-application delivery, a receipt, a distinct observed decision and withdrawal evidence. Aurora 21 shows a mismatch after a matching receipt and a withdrawal that remains unverified while an application is unreachable. A customer pilot requires application adapters and evidence custody. <a href="#aurora">See Aurora 21</a></dd>
+            </div>
+            <div id="market-genie" tabindex="-1">
+              <dt>Databricks Genie</dt>
+              <dd>For governed business context and analytics. Genie combines context curated in Unity Catalog with learned snippets for Genie One and Genie Code. Other agents can use it via Genie One MCP. Genie Agent benchmarks compare responses with expected answers. <a href="https://docs.databricks.com/aws/en/genie/genie-ontology/">Ontology docs</a> · <a href="https://docs.databricks.com/gcp/en/genie-agents/monitor">Benchmarks</a></dd>
+            </div>
+            <div id="market-nvidia" tabindex="-1">
+              <dt>NVIDIA Auto Ontology</dt>
+              <dd>For deriving analytical semantics and managing their publication. The documented workflow includes read-back verification, positive and negative answer checks, and rollback verification where supported. <a href="https://github.com/NVIDIA/auto-ontology/blob/main/docs/architecture.md">Architecture</a> · <a href="https://github.com/NVIDIA/auto-ontology/blob/main/skills/nvidia-ontology-management/references/publication.md">Publication workflow</a></dd>
+            </div>
+            <div id="market-authoring" tabindex="-1">
+              <dt>OntoBricks and TopBraid EDG</dt>
+              <dd>For ontology design and stewardship. OntoBricks covers design, data mapping, graph sync and domain versions on Databricks. TopBraid EDG reviews and approves working copies before committing to a production collection. <a href="https://www.ontobricks.org/documentation/user-guide.html">OntoBricks guide</a> · <a href="https://docs.topquadrant.com/classic/latest/user_guide/workflows/index.html">TopBraid workflows</a></dd>
+            </div>
+            <div id="market-graphs" tabindex="-1">
+              <dt>Stardog and GraphDB</dt>
+              <dd>For graph and query infrastructure. Stardog virtual graphs connect and query data sources. GraphDB provides RDF storage, SPARQL queries and inference. <a href="https://docs.stardog.com/virtual-graphs/">Stardog virtual graphs</a> · <a href="https://graphwise.ai/components/graphdb/">GraphDB overview</a></dd>
+            </div>
+            <div id="market-ninepts" tabindex="-1">
+              <dt>NinePts/OntoGraph</dt>
+              <dd>For visual exploration of OWL ontologies. This independent project shares a similar name. <a href="https://github.com/NinePts/OntoGraph">Project repository</a></dd>
+            </div>
+            <div id="market-git" tabindex="-1">
+              <dt>Git/CI and application tests</dt>
+              <dd>The baseline for a buying decision. Teams can combine review and deployment gates with independent application tests. Scope and cost depend on the implementation. Keep the existing process if it already delivers equivalent evidence at comparable cost. <a href="https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments">Deployment gates</a></dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="market-blue" aria-labelledby="market-blue-title">
+          <div class="market-blue-intro">
+            <p class="eyebrow">Blue Ocean hypothesis</p>
+            <h3 id="market-blue-title">A verified semantic change across systems</h3>
+            <p>Start with a data governance, AI governance or operational risk team that owns a shared control across two applications with different owners. Keep the existing catalog, graph engine and delivery pipeline in place.</p>
+            <a class="text-link" href="#ecosystem">See how the projects build on each other <span aria-hidden="true">↓</span></a>
+          </div>
+          <dl class="market-actions">
+            <div><dt>Eliminate</dt><dd>The assumption that a matching receipt proves a change took effect.</dd></div>
+            <div><dt>Reduce</dt><dd>The work of reconciling evidence across teams and the need to replace existing tools.</dd></div>
+            <div><dt>Raise</dt><dd>Human authority and traceability from the changed field to the observed decision.</dd></div>
+            <div><dt>Create</dt><dd>Release-linked evidence of behavior and withdrawal for each application.</dd></div>
+          </dl>
+          <p class="market-attribution"><a href="https://www.blueoceanstrategy.com/tools/four-actions-framework/">Four Actions Framework by Kim and Mauborgne</a></p>
+        </div>
+
+        <div class="market-pilot" id="market-pilot" tabindex="-1">
+          <h3>Test the business case</h3>
+          <p>Run the existing process and OnToGraPh on the same rule, exception and two applications. Include an old decision behind a matching receipt and an unreachable application during withdrawal. Bind every observation to the exact application instance and activation. Any false confirmation of withdrawal fails the pilot. Measure detection time, time to verify withdrawal, evidence coverage and steward and integration hours, especially for the second adapter. Continue if the pilot surfaces a material divergence the current process misses or produces equivalent evidence at measurably lower cost.</p>
+          <a class="text-link" href="https://github.com/sev7enITA/OntoGraph/wiki/Market-and-Standards#how-to-decide-whether-to-pay">Pilot economics and decision criteria <span aria-hidden="true">↗</span></a>
+        </div>
+
+        <section class="market-skeptics" id="skeptics" aria-labelledby="skeptics-title" tabindex="-1">
+          <h3 id="skeptics-title">When to keep your stack</h3>
+          <div class="market-skeptics-copy">
+            <p>Keep Git/CI and your catalog if they already tie an approved release to observed decisions and verified withdrawal by application. A second governance layer adds adapter maintenance, ownership and evidence custody.</p>
+            <p>Reconsider after a paired test on real application instances. Use the same release and cases in both stacks. Require auditable evidence, then compare stale-decision detection, false withdrawal confirmations and reviewer time.</p>
+            <p class="market-skeptics-source"><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/REVIEWS.md#market-challenge">Counterargument from Inkling 2 Mini Uncensored in LM Studio, edited for clarity <span aria-hidden="true">↗</span></a></p>
+          </div>
+        </section>
+      </div>
+    </section>
+
     <section class="wrap section" id="ecosystem" aria-labelledby="ecosystem-title">
       <div class="section-heading">
-        <h2 id="ecosystem-title">From policy monitoring to governance evidence.</h2>
+        <h2 id="ecosystem-title">How the projects build on each other</h2>
+        <p class="ecosystem-overview">OnToGraPh builds on PolicyWatcher’s evidence capture, PALO Framework’s governance lifecycle and the PolicyAsCode modeler. Its versioned semantics and per-application evidence can serve as a shared foundation for PolicyWatcher and PALO Framework.</p>
       </div>
       <div class="studio-grid ecosystem-grid">
         <article>
           <h3><a class="text-link" href="https://policywatcher.online/">PolicyWatcher <span aria-hidden="true">↗</span></a></h3>
-          <p>A detected policy change can become a traceable control update. OnToGraPh imports a PolicyWatcher evidence packet and an authorized excerpt into a local draft for human review. The team can then map the change to affected rules and check how each application responds.</p>
+          <p>OnToGraPh imports a PolicyWatcher evidence packet and an authorized excerpt into a local draft for human review. In a future pilot, the observed downstream decisions could inform PolicyWatcher’s follow-up on the change.</p>
         </article>
         <article>
           <h3><a class="text-link" href="https://paloframework.org/">PALO Framework <span aria-hidden="true">↗</span></a></h3>
-          <p>Teams using PALO get a working example of how to collect evidence at its governance gates. OnToGraPh records who reviewed, approved, or withdrew a release and what was observed in each application on the tested cases.</p>
+          <p>PALO Framework supplies the governance roles and review gates. Teams using PALO can use exported OnToGraPh release and evidence records as inputs to their reviews.</p>
         </article>
       </div>
+      <p class="ecosystem-scope">The offline import and evidence export are available in the reference. Automated feedback and live integration are pilot work.</p>
     </section>
 
     <section class="wrap section explore" aria-labelledby="explore-title">

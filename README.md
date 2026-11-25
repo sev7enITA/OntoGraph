@@ -6,7 +6,7 @@
 
 Two applications can report the same release and still make different decisions. OntoGraph helps governance and risk teams find that divergence, trace it to the approved rule and check what happens after a withdrawal. It links source evidence, semantic impact, approval, per-application delivery and observed behavior. The offline reference implementation includes a reproducible synthetic case for buyer evaluation.
 
-[English website](https://www.fabriziodegni.com/OnToGraPh/) · [Simplified Chinese website](https://www.fabriziodegni.com/OnToGraPh/zh/) · [GitHub Wiki](https://github.com/sev7enITA/OntoGraph/wiki) · [Versioned documentation](docs/wiki/README.md) · [Brand assets](assets/brand)
+[English website](https://www.fabriziodegni.com/OnToGraPh/) · [Simplified Chinese website](https://www.fabriziodegni.com/OnToGraPh/zh/) · [GitHub Wiki](https://github.com/sev7enITA/OntoGraph/wiki) · [Versioned documentation](docs/wiki/README.md) · [Competitive landscape](https://www.fabriziodegni.com/OnToGraPh/#market) · [Brand assets](assets/brand)
 
 | | Value proposition |
 | --- | --- |
@@ -59,8 +59,12 @@ All of Aurora 21 is synthetic. The two applications are simulators. Verification
 
 ## How PolicyWatcher and PALO benefit
 
-- PolicyWatcher can carry a detected change forward into a traceable control update. The offline adapter imports a locally supplied evidence packet and authorized excerpt into a draft for human review. Teams can map the change to controls and verify application behavior after release. [PolicyWatcher](https://policywatcher.online/) · [Evidence exchange](docs/PROTOCOL.md#inputs-and-optional-adapters)
-- PALO Framework adopters get a working example of how to produce evidence at governance gates for semantic changes. The local registry records review, approval, independent observations and withdrawal for the applications and cases in scope. [PALO Framework](https://paloframework.org/) · [Lifecycle and controls](docs/FRAMEWORK.md#the-six-gates)
+OnToGraPh builds on PolicyWatcher’s evidence capture, the PALO governance lifecycle and the PolicyAsCode modeler. Its versioned semantic models and application-level evidence can serve as a shared foundation for both projects.
+
+- **PolicyWatcher** supplies the source evidence. The offline adapter turns a locally supplied packet and authorized excerpt into a draft for human review. The recorded link from change to rule, release and observed decision can support follow-up on a detected policy change. [PolicyWatcher](https://policywatcher.online/) · [Evidence exchange](docs/PROTOCOL.md#inputs-and-optional-adapters)
+- **PALO Framework** supplies governance roles, gates and evidence requirements. OnToGraPh implements a concrete lifecycle for semantic changes and exports release and audit records that can inform a PALO review. [PALO Framework](https://paloframework.org/) · [Lifecycle and controls](docs/FRAMEWORK.md#the-six-gates)
+
+The reference supports offline intake and evidence export. Automated feedback to PolicyWatcher and live integration with PALO are pilot work.
 
 ## Operator guide
 

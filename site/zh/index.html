@@ -34,6 +34,7 @@
         <a href="#paradigm">治理框架</a>
         <a href="#studio">工作台</a>
         <a href="#aurora">Aurora 21</a>
+        <a href="#market">竞争格局</a>
       </nav>
       <div class="masthead-actions">
         <nav class="language-nav" aria-label="语言">
@@ -172,20 +173,144 @@
       </div>
     </section>
 
+    <section class="market section" id="market" aria-labelledby="market-title">
+      <div class="wrap">
+        <div class="section-heading market-heading">
+          <div>
+            <h2 id="market-title">竞争格局</h2>
+            <p>根据实际任务和变更后所需的证据，用这张象限图筛选工具。</p>
+          </div>
+          <div class="market-heading-links">
+            <a class="text-link" href="https://github.com/sev7enITA/OntoGraph/wiki/Market-and-Standards#how-the-quadrant-works" hreflang="en">评估方法（英文）<span aria-hidden="true">↗</span></a>
+            <a class="text-link" href="#skeptics">何时保留现有方案 <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+
+        <figure class="market-map" aria-labelledby="market-map-caption">
+          <figcaption id="market-map-caption">
+            <p>OnToGraPh 评估 · 选取公开文档中的工作流 · <time datetime="2026-11-25">2026 年 11 月 25 日</time></p>
+            <p class="market-map-note">各行展示所述工作流的验证范围。生产环境成熟度需单独评估。</p>
+          </figcaption>
+          <div class="market-map-vertical">验证范围 <span aria-hidden="true">↑</span></div>
+          <div class="market-quadrant">
+            <div class="market-row-label">发布后下游应用行为</div>
+            <div class="market-cell market-cell-focus">
+              <p class="market-coordinate">发布后下游应用行为 · 专项工作流</p>
+              <a class="market-featured" href="#market-ontograph">OnToGraPh <span aria-hidden="true">↘</span></a>
+              <p>核查下游应用的决策，并确认撤回是否生效。</p>
+              <span class="market-evidence">离线参考实现 · 模拟案例</span>
+            </div>
+            <div class="market-cell market-cell-option">
+              <p class="market-coordinate">发布后下游应用行为 · 专用语义工具</p>
+              <a class="market-featured" href="#market-pilot">组合方案试点&nbsp;<span aria-hidden="true">↘</span></a>
+              <p>保留专用语义平台，并试用一个独立的行为验证层。</p>
+            </div>
+            <div class="market-row-label">模型与平台内的验证</div>
+            <div class="market-cell">
+              <p class="market-coordinate">模型与平台内的验证 · 专项工作流</p>
+              <a class="market-marker" href="#market-ninepts">NinePts/<wbr>OntoGraph</a>
+              <p>以可视化方式探索 OWL 本体。</p>
+            </div>
+            <div class="market-cell">
+              <p class="market-coordinate">模型与平台内的验证 · 专用语义工具</p>
+              <ul class="market-markers" aria-label="语义、建模及图谱工具">
+                <li><a class="market-marker" href="#market-genie">Databricks Genie</a></li>
+                <li><a class="market-marker" href="#market-nvidia">NVIDIA Auto Ontology</a></li>
+                <li><a class="market-marker" href="#market-authoring">OntoBricks</a></li>
+                <li><a class="market-marker" href="#market-authoring">TopBraid EDG</a></li>
+                <li><a class="market-marker" href="#market-graphs">Stardog</a></li>
+                <li><a class="market-marker" href="#market-graphs">GraphDB</a></li>
+              </ul>
+            </div>
+            <div class="market-column-label market-column-focused">专项工作流</div>
+            <div class="market-column-label market-column-dedicated">专用语义工具</div>
+          </div>
+          <p class="market-map-horizontal">语义工具覆盖范围 <span aria-hidden="true">→</span></p>
+        </figure>
+
+        <div class="market-alternatives">
+          <h3>如何选择合适的方案</h3>
+          <dl class="market-comparisons">
+            <div id="market-ontograph" tabindex="-1">
+              <dt>OnToGraPh</dt>
+              <dd>适合核查同一条规则在不同应用中的执行偏差。它将已批准版本与各应用的交付记录、回执、独立观察到的决策和撤回证据关联起来。Aurora 21 演示了回执一致但决策不一致的情况，也展示了应用不可达时撤回仍未得到验证的情况。客户试点需要应用适配器和证据保管机制。<a href="#aurora">查看 Aurora 21</a></dd>
+            </div>
+            <div id="market-genie" tabindex="-1">
+              <dt>Databricks Genie</dt>
+              <dd>适合治理业务语义并支持数据分析。Genie 将 Unity Catalog 中人工维护的业务语义与自动学习的知识片段结合，供 Genie One 和 Genie Code 使用，其他智能体可以通过 Genie One MCP 使用这些语义。Genie Agent 可通过基准测试将回答与预期答案比较。<a href="https://docs.databricks.com/aws/en/genie/genie-ontology/" hreflang="en">本体文档</a> · <a href="https://docs.databricks.com/gcp/en/genie-agents/monitor" hreflang="en">基准测试</a></dd>
+            </div>
+            <div id="market-nvidia" tabindex="-1">
+              <dt>NVIDIA Auto Ontology</dt>
+              <dd>适合提取分析语义并管理其发布。文档所述工作流包括回读核验、正反两类答案测试，以及在支持的情况下核验回滚。<a href="https://github.com/NVIDIA/auto-ontology/blob/main/docs/architecture.md" hreflang="en">架构</a> · <a href="https://github.com/NVIDIA/auto-ontology/blob/main/skills/nvidia-ontology-management/references/publication.md" hreflang="en">发布流程</a></dd>
+            </div>
+            <div id="market-authoring" tabindex="-1">
+              <dt>OntoBricks 与 TopBraid EDG</dt>
+              <dd>适合本体建模和治理。OntoBricks 在 Databricks 上支持本体设计、数据映射、图谱同步和领域版本管理。TopBraid EDG 对工作副本进行审核和批准，再提交到生产资产集合。<a href="https://www.ontobricks.org/documentation/user-guide.html" hreflang="en">OntoBricks 指南</a> · <a href="https://docs.topquadrant.com/classic/latest/user_guide/workflows/index.html" hreflang="en">TopBraid 工作流</a></dd>
+            </div>
+            <div id="market-graphs" tabindex="-1">
+              <dt>Stardog 与 GraphDB</dt>
+              <dd>适合作为图谱与查询基础设施。Stardog 通过虚拟图谱连接并查询数据源。GraphDB 提供 RDF 存储、SPARQL 查询和推理。<a href="https://docs.stardog.com/virtual-graphs/" hreflang="en">Stardog 虚拟图谱</a> · <a href="https://graphwise.ai/components/graphdb/" hreflang="en">GraphDB 概览</a></dd>
+            </div>
+            <div id="market-ninepts" tabindex="-1">
+              <dt>NinePts/OntoGraph</dt>
+              <dd>适合以可视化方式探索 OWL 本体。这是一个名称相近的独立项目。<a href="https://github.com/NinePts/OntoGraph" hreflang="en">项目仓库</a></dd>
+            </div>
+            <div id="market-git" tabindex="-1">
+              <dt>Git/CI 与应用测试</dt>
+              <dd>这是采购评估的对照方案。团队可将代码与部署审批和独立的应用测试结合起来。覆盖范围和成本取决于具体实现。如果现有流程已经能以相近成本提供等效证据，继续使用即可。<a href="https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments" hreflang="en">部署审批</a></dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="market-blue" aria-labelledby="market-blue-title">
+          <div class="market-blue-intro">
+            <p class="eyebrow">蓝海战略假设</p>
+            <h3 id="market-blue-title">跨系统验证语义变更</h3>
+            <p>从数据治理、AI 治理或运营风险团队切入，选择一个由两位应用负责人共同落实的控制项。保留现有数据目录、图谱引擎和交付流水线。</p>
+            <a class="text-link" href="#ecosystem">了解各项目如何相互支撑 <span aria-hidden="true">↓</span></a>
+          </div>
+          <dl class="market-actions">
+            <div><dt>剔除</dt><dd>剔除“回执一致即代表变更已生效”的假设。</dd></div>
+            <div><dt>减少</dt><dd>减少跨团队核对证据的工作量，以及替换现有工具的需求。</dd></div>
+            <div><dt>提升</dt><dd>强化人工决策权，并提升从字段变更到决策结果的可追溯性。</dd></div>
+            <div><dt>创造</dt><dd>为每个应用提供与发布版本关联的行为及撤回证据。</dd></div>
+          </dl>
+          <p class="market-attribution"><a href="https://www.blueoceanstrategy.com/tools/four-actions-framework/" hreflang="en">Kim 和 Mauborgne 的四项行动框架（英文）</a></p>
+        </div>
+
+        <div class="market-pilot" id="market-pilot" tabindex="-1">
+          <h3>验证商业价值</h3>
+          <p>让现有流程和 OnToGraPh 处理同一条规则、同一个例外及两个应用。测试回执一致却仍按旧规则决策的情况，以及撤回时应用不可达的情况。将每项观察结果与具体的应用实例和激活记录关联。若试点误判撤回已生效，则不予通过。衡量发现偏差和验证撤回所需时间、证据覆盖率，以及治理人员与集成人员的工时，尤其是接入第二个应用的成本。如果试点能发现现有流程无法发现的重大偏差，或以明显更低的成本提供等效证据，再推进采购。</p>
+          <a class="text-link" href="https://github.com/sev7enITA/OntoGraph/wiki/Market-and-Standards#how-to-decide-whether-to-pay" hreflang="en">试点成本与决策标准（英文）<span aria-hidden="true">↗</span></a>
+        </div>
+
+        <section class="market-skeptics" id="skeptics" aria-labelledby="skeptics-title" tabindex="-1">
+          <h3 id="skeptics-title">何时保留现有方案</h3>
+          <div class="market-skeptics-copy">
+            <p>如果现有 Git/CI 和数据目录已能将获批版本与每个应用的实际决策及撤回验证结果关联起来，就继续使用。增加一层治理意味着要额外维护适配器、明确责任归属和管理证据。</p>
+            <p>在真实应用实例上做对照测试之后，再重新评估。两套方案使用相同的版本和用例，并提供可审计的证据。比较能否识别按旧规则做出的决策、误判撤回成功的次数，以及审核人员投入的时间。</p>
+            <p class="market-skeptics-source"><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/REVIEWS.md#market-challenge" hreflang="en">反方观点由 LM Studio 中的 Inkling 2 Mini Uncensored 提出，经编辑整理（英文）<span aria-hidden="true">↗</span></a></p>
+          </div>
+        </section>
+      </div>
+    </section>
+
     <section class="wrap section" id="ecosystem" aria-labelledby="ecosystem-title">
       <div class="section-heading">
-        <h2 id="ecosystem-title">从政策监测到治理证据。</h2>
+        <h2 id="ecosystem-title">各项目如何相互支撑</h2>
+        <p class="ecosystem-overview">OnToGraPh 建立在 PolicyWatcher 的证据采集、PALO Framework 的治理生命周期以及 PolicyAsCode 的建模器之上。它的版本化语义和逐应用证据可以成为 PolicyWatcher 与 PALO Framework 的共同基础。</p>
       </div>
       <div class="studio-grid ecosystem-grid">
         <article>
           <h3><a class="text-link" href="https://policywatcher.online/" hreflang="en">PolicyWatcher <span aria-hidden="true">↗</span></a></h3>
-          <p>团队可以把监测到的政策变化转化为可追溯的控制措施更新。OnToGraPh 可将 PolicyWatcher 的证据包和经授权的原文摘录导入本地草稿，交由人员审核。团队随后可以找出受影响的规则，并验证各应用的实际响应。</p>
+          <p>OnToGraPh 将 PolicyWatcher 的证据包和经授权的原文摘录导入本地草稿，交由人工审核。未来可在试点中使用所观察到的下游应用决策，为 PolicyWatcher 跟进变更提供依据。</p>
         </article>
         <article>
           <h3><a class="text-link" href="https://paloframework.org/" hreflang="en">PALO Framework <span aria-hidden="true">↗</span></a></h3>
-          <p>采用 PALO 的团队可以参考 OnToGraPh 在各治理审批环节收集证据的做法。OnToGraPh 记录谁审查、批准或撤回了版本，以及各应用在验证用例中的实际表现。</p>
+          <p>PALO Framework 提供治理角色和审核关卡。采用 PALO 的团队可以将 OnToGraPh 导出的发布记录和证据作为审核依据。</p>
         </article>
       </div>
+      <p class="ecosystem-scope">参考实现已支持离线导入和证据导出。自动反馈和实时集成留待试点验证。</p>
     </section>
 
     <section class="wrap section explore" aria-labelledby="explore-title">
