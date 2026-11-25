@@ -1,8 +1,12 @@
+<img src="assets/brand/ontograph-avatar.png" alt="OntoGraph logo" width="104">
+
 # OntoGraph
 
 **Govern semantic changes and verify how applications behave after release.**
 
-A change to a policy or business definition can leave two applications making different decisions while both report the same version. OntoGraph ties together source evidence, semantic impact, independent approval, per-application delivery and behavioral observations. It is a standalone governance framework with an executable reference implementation and a synthetic case for buyer evaluation.
+Two applications can report the same release and still make different decisions. OntoGraph helps governance and risk teams find that divergence, trace it to the approved rule and check what happens after a withdrawal. It links source evidence, semantic impact, approval, per-application delivery and observed behavior. The offline reference implementation includes a reproducible synthetic case for buyer evaluation.
+
+[Wiki](docs/wiki/README.md) · [Why OntoGraph](docs/wiki/PERCHE-ONTOGRAPH.md) · [Market and standards](docs/wiki/OCEANO-BLU.md) · [Transparent logo](assets/brand/ontograph-mark.png)
 
 ## Run Aurora 21
 

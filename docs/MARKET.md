@@ -1,5 +1,9 @@
 # OntoGraph | Proposta di mercato
 
+## Perché esiste
+
+Una modifica può risultare approvata nel catalogo e pubblicata in CI mentre due applicazioni continuano a prendere decisioni diverse. Il costo emerge quando qualcuno deve ricostruire la fonte, capire chi è ancora esposto al vecchio comportamento e provare che il ritiro abbia avuto effetto. [Le domande a cui risponde OntoGraph](wiki/PERCHE-ONTOGRAPH.md)
+
 ## Una promessa verificabile
 
 **Quando cambia una definizione o una policy, OntoGraph verifica come reagiscono le applicazioni coinvolte.**
@@ -24,7 +28,7 @@ Fonti: [PALO](https://paloframework.org/) · [PolicyWatcher](https://github.com/
 
 ### L'ipotesi di oceano blu
 
-Automatizzare la discovery è già un mercato affollato. L'ipotesi è che un responsabile paghi per **verificare l'effetto di un cambiamento semantico tra app che possiede già**, mantenendo il catalogo e i motori utilizzati oggi. La verifica indipendente delle eccezioni, della mancata adozione e del ritiro è il criterio di acquisto. Un cambio sintetico prova la fattibilità del meccanismo. Un cliente e la sua baseline sono necessari per dimostrare valore.
+Automatizzare la discovery è già un mercato affollato. L'ipotesi è che un responsabile paghi per **verificare l'effetto di un cambiamento semantico tra app che possiede già**, mantenendo il catalogo e i motori utilizzati oggi. La verifica indipendente delle eccezioni, della mancata adozione e del ritiro è il criterio di acquisto. Un cambio sintetico prova la fattibilità del meccanismo. Il confronto con il processo del cliente deve mostrare un costo o un tempo inferiore per ottenere la stessa prova, oppure una divergenza importante che oggi rimane invisibile. [Confronto con piattaforme e standard](wiki/OCEANO-BLU.md)
 
 ### Pilota con diritto di smentita
 
