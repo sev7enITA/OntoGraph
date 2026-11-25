@@ -1,0 +1,3835 @@
+{
+  "scenario": "Aurora 21 (synthetic)",
+  "baseline": {
+    "activation": 14,
+    "release": "b330b734cbc6b019edd857994007d082f0a6d1be1d5358d3b6d566faa29ade5c",
+    "phase": "activate",
+    "manifest": {
+      "author": "author",
+      "base": 0,
+      "created_at": "2026-11-25T16:00:00Z",
+      "deliveries": {
+        "crm": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "pms": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341"
+      },
+      "format": "ontograph.manifest/1",
+      "impact": [
+        "asset",
+        "asset-record",
+        "asset-type",
+        "building",
+        "building-record",
+        "crm",
+        "crm-property",
+        "declaration",
+        "diligence",
+        "dossier-check",
+        "dossier-contract",
+        "inspection",
+        "pms",
+        "pms-unit",
+        "unit"
+      ],
+      "observation_max_age_seconds": 3600,
+      "payload_sha256": "4836f560f799b5fd394fbaf83bca3453cf7793d6c7ecc5fdf2f4782c39e2ff79",
+      "quorum": 2,
+      "reason": "Baseline evidence requirement",
+      "reviewers": [
+        "owner",
+        "steward"
+      ],
+      "workspace": "aurora-21"
+    },
+    "activation_state": "published",
+    "applications": [
+      {
+        "application": "crm",
+        "state": "verified",
+        "phase": "activate",
+        "receipt": {
+          "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+          "seq": 15,
+          "observed_at": "2026-11-25T16:00:00Z"
+        },
+        "probes": [
+          {
+            "probe": "crm-exception",
+            "expected": "out_of_scope",
+            "result": "verified",
+            "observation": {
+              "seq": 19,
+              "activation": 14,
+              "application": "crm",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "crm-exception",
+              "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+              "actual_outcome": "out_of_scope",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:aff5cd2ac7fc513351094a7391e805b6c38f895ab57cd7b054dbde51e653bb74",
+              "artifact_sha256": "aff5cd2ac7fc513351094a7391e805b6c38f895ab57cd7b054dbde51e653bb74"
+            }
+          },
+          {
+            "probe": "crm-incomplete",
+            "expected": "hold",
+            "result": "verified",
+            "observation": {
+              "seq": 18,
+              "activation": 14,
+              "application": "crm",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "crm-incomplete",
+              "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+              "actual_outcome": "hold",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:35ec6262fddac0310784a00e259746abfdbf6169baa7ec80b2eb98f7ce970f0c",
+              "artifact_sha256": "35ec6262fddac0310784a00e259746abfdbf6169baa7ec80b2eb98f7ce970f0c"
+            }
+          },
+          {
+            "probe": "crm-negative",
+            "expected": "allow",
+            "result": "verified",
+            "observation": {
+              "seq": 17,
+              "activation": 14,
+              "application": "crm",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "crm-negative",
+              "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+              "actual_outcome": "allow",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:b34a80131697f04d23f5f3a3c1fcea762e45df3538093a46b0a1cd416147388a",
+              "artifact_sha256": "b34a80131697f04d23f5f3a3c1fcea762e45df3538093a46b0a1cd416147388a"
+            }
+          },
+          {
+            "probe": "crm-positive",
+            "expected": "allow",
+            "result": "verified",
+            "observation": {
+              "seq": 16,
+              "activation": 14,
+              "application": "crm",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "crm-positive",
+              "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+              "actual_outcome": "allow",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:14b7b5c210acf28ae955f476e1986ee2db0041548ec0b03224552ecab8475419",
+              "artifact_sha256": "14b7b5c210acf28ae955f476e1986ee2db0041548ec0b03224552ecab8475419"
+            }
+          }
+        ]
+      },
+      {
+        "application": "pms",
+        "state": "verified",
+        "phase": "activate",
+        "receipt": {
+          "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+          "seq": 20,
+          "observed_at": "2026-11-25T16:00:00Z"
+        },
+        "probes": [
+          {
+            "probe": "pms-exception",
+            "expected": "out_of_scope",
+            "result": "verified",
+            "observation": {
+              "seq": 24,
+              "activation": 14,
+              "application": "pms",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "pms-exception",
+              "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+              "actual_outcome": "out_of_scope",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:4ef6f6cbe6a9c360a5b34487d5e74f957651b8a9054f9037c441559786d985d5",
+              "artifact_sha256": "4ef6f6cbe6a9c360a5b34487d5e74f957651b8a9054f9037c441559786d985d5"
+            }
+          },
+          {
+            "probe": "pms-incomplete",
+            "expected": "hold",
+            "result": "verified",
+            "observation": {
+              "seq": 23,
+              "activation": 14,
+              "application": "pms",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "pms-incomplete",
+              "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+              "actual_outcome": "hold",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:8db8be2cf2edf2a196a85b82fec4a17d3e6aabedf34dbd06ed84aa4a5502283f",
+              "artifact_sha256": "8db8be2cf2edf2a196a85b82fec4a17d3e6aabedf34dbd06ed84aa4a5502283f"
+            }
+          },
+          {
+            "probe": "pms-negative",
+            "expected": "allow",
+            "result": "verified",
+            "observation": {
+              "seq": 22,
+              "activation": 14,
+              "application": "pms",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "pms-negative",
+              "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+              "actual_outcome": "allow",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:0027ce53e5535b13c1d5b74bc0a69f5895b6cd5d29e8339becf1c32ebcdddb28",
+              "artifact_sha256": "0027ce53e5535b13c1d5b74bc0a69f5895b6cd5d29e8339becf1c32ebcdddb28"
+            }
+          },
+          {
+            "probe": "pms-positive",
+            "expected": "allow",
+            "result": "verified",
+            "observation": {
+              "seq": 21,
+              "activation": 14,
+              "application": "pms",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "pms-positive",
+              "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+              "actual_outcome": "allow",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:c73f7f9793cb8723502405bc98ec87c5cb70287f4861856118895f88b376d3fc",
+              "artifact_sha256": "c73f7f9793cb8723502405bc98ec87c5cb70287f4861856118895f88b376d3fc"
+            }
+          }
+        ]
+      }
+    ],
+    "as_of": "2026-11-25T16:00:00Z",
+    "business_outcome": "not_assessed"
+  },
+  "drift": {
+    "activation": 33,
+    "release": "bb4608e953e84b222a09e669fca66fd823a48a373a000e12eb55f57d420be570",
+    "phase": "activate",
+    "manifest": {
+      "author": "author",
+      "base": 14,
+      "created_at": "2026-11-25T16:00:00Z",
+      "deliveries": {
+        "crm": "1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4",
+        "pms": "2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc"
+      },
+      "format": "ontograph.manifest/1",
+      "impact": [
+        "crm",
+        "diligence",
+        "dossier-check",
+        "dossier-contract",
+        "pms"
+      ],
+      "observation_max_age_seconds": 3600,
+      "payload_sha256": "d3a8250451fc6baf6e74600b226d06a8160880c729c148b45e54b50c6e6ea658",
+      "quorum": 2,
+      "reason": "Add inspection report for buildings",
+      "reviewers": [
+        "owner",
+        "steward"
+      ],
+      "workspace": "aurora-21"
+    },
+    "activation_state": "published",
+    "applications": [
+      {
+        "application": "crm",
+        "state": "verified",
+        "phase": "activate",
+        "receipt": {
+          "actual_digest": "1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4",
+          "seq": 34,
+          "observed_at": "2026-11-25T16:00:00Z"
+        },
+        "probes": [
+          {
+            "probe": "crm-exception",
+            "expected": "out_of_scope",
+            "result": "verified",
+            "observation": {
+              "seq": 38,
+              "activation": 33,
+              "application": "crm",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "crm-exception",
+              "actual_digest": "1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4",
+              "actual_outcome": "out_of_scope",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:fc7d3422fac5351f66dcb5a0abcd017cbfccdcb2b1c573e9d61511cdbf37ae01",
+              "artifact_sha256": "fc7d3422fac5351f66dcb5a0abcd017cbfccdcb2b1c573e9d61511cdbf37ae01"
+            }
+          },
+          {
+            "probe": "crm-incomplete",
+            "expected": "hold",
+            "result": "verified",
+            "observation": {
+              "seq": 37,
+              "activation": 33,
+              "application": "crm",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "crm-incomplete",
+              "actual_digest": "1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4",
+              "actual_outcome": "hold",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:434d34cb66e9208c007c00e7613d62b277ced7f40e20fe69d1721fb432cab422",
+              "artifact_sha256": "434d34cb66e9208c007c00e7613d62b277ced7f40e20fe69d1721fb432cab422"
+            }
+          },
+          {
+            "probe": "crm-negative",
+            "expected": "hold",
+            "result": "verified",
+            "observation": {
+              "seq": 36,
+              "activation": 33,
+              "application": "crm",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "crm-negative",
+              "actual_digest": "1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4",
+              "actual_outcome": "hold",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:24ada53a17e164ce629c4010a4b2d2b707d7d7659ab9667efb6dc128c3e2d353",
+              "artifact_sha256": "24ada53a17e164ce629c4010a4b2d2b707d7d7659ab9667efb6dc128c3e2d353"
+            }
+          },
+          {
+            "probe": "crm-positive",
+            "expected": "allow",
+            "result": "verified",
+            "observation": {
+              "seq": 35,
+              "activation": 33,
+              "application": "crm",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "crm-positive",
+              "actual_digest": "1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4",
+              "actual_outcome": "allow",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:5d58f525106990112e6fcf64fb06991db4451a155c7ca377549db9e4a8fbfd99",
+              "artifact_sha256": "5d58f525106990112e6fcf64fb06991db4451a155c7ca377549db9e4a8fbfd99"
+            }
+          }
+        ]
+      },
+      {
+        "application": "pms",
+        "state": "mismatch",
+        "phase": "activate",
+        "receipt": {
+          "actual_digest": "2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc",
+          "seq": 39,
+          "observed_at": "2026-11-25T16:00:00Z"
+        },
+        "probes": [
+          {
+            "probe": "pms-exception",
+            "expected": "out_of_scope",
+            "result": "verified",
+            "observation": {
+              "seq": 43,
+              "activation": 33,
+              "application": "pms",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "pms-exception",
+              "actual_digest": "2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc",
+              "actual_outcome": "out_of_scope",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:e4d8df82b21be6d1c1dc2316d10c0cfdc852b02f67c3e32005821ac3c51151da",
+              "artifact_sha256": "e4d8df82b21be6d1c1dc2316d10c0cfdc852b02f67c3e32005821ac3c51151da"
+            }
+          },
+          {
+            "probe": "pms-incomplete",
+            "expected": "hold",
+            "result": "verified",
+            "observation": {
+              "seq": 42,
+              "activation": 33,
+              "application": "pms",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "pms-incomplete",
+              "actual_digest": "2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc",
+              "actual_outcome": "hold",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:3c029b46463a0e660b09b9281a2a5fc823ed68da3aafcd1b21fb8d2785425006",
+              "artifact_sha256": "3c029b46463a0e660b09b9281a2a5fc823ed68da3aafcd1b21fb8d2785425006"
+            }
+          },
+          {
+            "probe": "pms-negative",
+            "expected": "hold",
+            "result": "mismatch",
+            "observation": {
+              "seq": 41,
+              "activation": 33,
+              "application": "pms",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "pms-negative",
+              "actual_digest": "2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc",
+              "actual_outcome": "allow",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:b5cd1e9d707e7c4a55135977a7d4e381572d92319c3e34f5e12956e9c3bb7d04",
+              "artifact_sha256": "b5cd1e9d707e7c4a55135977a7d4e381572d92319c3e34f5e12956e9c3bb7d04"
+            }
+          },
+          {
+            "probe": "pms-positive",
+            "expected": "allow",
+            "result": "verified",
+            "observation": {
+              "seq": 40,
+              "activation": 33,
+              "application": "pms",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "pms-positive",
+              "actual_digest": "2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc",
+              "actual_outcome": "allow",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:060239fd14fe693bf720d81c1f553cbd57346977b3a7dd7dd474108d168babdc",
+              "artifact_sha256": "060239fd14fe693bf720d81c1f553cbd57346977b3a7dd7dd474108d168babdc"
+            }
+          }
+        ]
+      }
+    ],
+    "as_of": "2026-11-25T16:00:00Z",
+    "business_outcome": "not_assessed"
+  },
+  "unreachable": {
+    "activation": 33,
+    "release": "bb4608e953e84b222a09e669fca66fd823a48a373a000e12eb55f57d420be570",
+    "phase": "withdraw",
+    "manifest": {
+      "author": "author",
+      "base": 14,
+      "created_at": "2026-11-25T16:00:00Z",
+      "deliveries": {
+        "crm": "1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4",
+        "pms": "2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc"
+      },
+      "format": "ontograph.manifest/1",
+      "impact": [
+        "crm",
+        "diligence",
+        "dossier-check",
+        "dossier-contract",
+        "pms"
+      ],
+      "observation_max_age_seconds": 3600,
+      "payload_sha256": "d3a8250451fc6baf6e74600b226d06a8160880c729c148b45e54b50c6e6ea658",
+      "quorum": 2,
+      "reason": "Add inspection report for buildings",
+      "reviewers": [
+        "owner",
+        "steward"
+      ],
+      "workspace": "aurora-21"
+    },
+    "activation_state": "withdrawn",
+    "applications": [
+      {
+        "application": "crm",
+        "state": "withdrawal_verified",
+        "phase": "withdraw",
+        "receipt": {
+          "actual_digest": null,
+          "seq": 45,
+          "observed_at": "2026-11-25T16:00:00Z"
+        },
+        "probes": [
+          {
+            "probe": "withdrawal",
+            "expected": "inactive",
+            "result": "verified",
+            "observation": {
+              "seq": 46,
+              "activation": 33,
+              "application": "crm",
+              "observer": "observer",
+              "phase": "withdraw",
+              "probe": "withdrawal",
+              "actual_digest": null,
+              "actual_outcome": "inactive",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:ad7370f3e6111fb55d3c9491da1ef292a63eb5fa72437389a0cdc3a5f9d75659",
+              "artifact_sha256": "ad7370f3e6111fb55d3c9491da1ef292a63eb5fa72437389a0cdc3a5f9d75659"
+            }
+          }
+        ]
+      },
+      {
+        "application": "pms",
+        "state": "unproven",
+        "phase": "withdraw",
+        "receipt": null,
+        "probes": [
+          {
+            "probe": "withdrawal",
+            "expected": "inactive",
+            "result": "inconclusive",
+            "observation": {
+              "seq": 47,
+              "activation": 33,
+              "application": "pms",
+              "observer": "observer",
+              "phase": "withdraw",
+              "probe": "withdrawal",
+              "actual_digest": null,
+              "actual_outcome": "unobservable",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:df1f59b1d36f11fa5ce648ff9171a3c466fc82cbc623135bd65940740e19a43e",
+              "artifact_sha256": "df1f59b1d36f11fa5ce648ff9171a3c466fc82cbc623135bd65940740e19a43e"
+            }
+          }
+        ]
+      }
+    ],
+    "as_of": "2026-11-25T16:00:00Z",
+    "business_outcome": "not_assessed"
+  },
+  "withdrawn": {
+    "activation": 33,
+    "release": "bb4608e953e84b222a09e669fca66fd823a48a373a000e12eb55f57d420be570",
+    "phase": "withdraw",
+    "manifest": {
+      "author": "author",
+      "base": 14,
+      "created_at": "2026-11-25T16:00:00Z",
+      "deliveries": {
+        "crm": "1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4",
+        "pms": "2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc"
+      },
+      "format": "ontograph.manifest/1",
+      "impact": [
+        "crm",
+        "diligence",
+        "dossier-check",
+        "dossier-contract",
+        "pms"
+      ],
+      "observation_max_age_seconds": 3600,
+      "payload_sha256": "d3a8250451fc6baf6e74600b226d06a8160880c729c148b45e54b50c6e6ea658",
+      "quorum": 2,
+      "reason": "Add inspection report for buildings",
+      "reviewers": [
+        "owner",
+        "steward"
+      ],
+      "workspace": "aurora-21"
+    },
+    "activation_state": "withdrawn",
+    "applications": [
+      {
+        "application": "crm",
+        "state": "withdrawal_verified",
+        "phase": "withdraw",
+        "receipt": {
+          "actual_digest": null,
+          "seq": 45,
+          "observed_at": "2026-11-25T16:00:00Z"
+        },
+        "probes": [
+          {
+            "probe": "withdrawal",
+            "expected": "inactive",
+            "result": "verified",
+            "observation": {
+              "seq": 46,
+              "activation": 33,
+              "application": "crm",
+              "observer": "observer",
+              "phase": "withdraw",
+              "probe": "withdrawal",
+              "actual_digest": null,
+              "actual_outcome": "inactive",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:ad7370f3e6111fb55d3c9491da1ef292a63eb5fa72437389a0cdc3a5f9d75659",
+              "artifact_sha256": "ad7370f3e6111fb55d3c9491da1ef292a63eb5fa72437389a0cdc3a5f9d75659"
+            }
+          }
+        ]
+      },
+      {
+        "application": "pms",
+        "state": "withdrawal_verified",
+        "phase": "withdraw",
+        "receipt": {
+          "actual_digest": null,
+          "seq": 48,
+          "observed_at": "2026-11-25T16:00:00Z"
+        },
+        "probes": [
+          {
+            "probe": "withdrawal",
+            "expected": "inactive",
+            "result": "verified",
+            "observation": {
+              "seq": 49,
+              "activation": 33,
+              "application": "pms",
+              "observer": "observer",
+              "phase": "withdraw",
+              "probe": "withdrawal",
+              "actual_digest": null,
+              "actual_outcome": "inactive",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:3aaa315983753c3a6dc98ff2109fb6961dcd3e6ecec76b7501805becd246158b",
+              "artifact_sha256": "3aaa315983753c3a6dc98ff2109fb6961dcd3e6ecec76b7501805becd246158b"
+            }
+          }
+        ]
+      }
+    ],
+    "as_of": "2026-11-25T16:00:00Z",
+    "business_outcome": "not_assessed"
+  },
+  "restored": {
+    "activation": 53,
+    "release": "eafe42045a041dca29be038bc7e8e06d941ddea283dd6cf34a995efe9cfd73d5",
+    "phase": "activate",
+    "manifest": {
+      "author": "author",
+      "base": 33,
+      "created_at": "2026-11-25T16:00:00Z",
+      "deliveries": {
+        "crm": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "pms": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341"
+      },
+      "format": "ontograph.manifest/1",
+      "impact": [
+        "crm",
+        "diligence",
+        "dossier-check",
+        "dossier-contract",
+        "pms"
+      ],
+      "observation_max_age_seconds": 3600,
+      "payload_sha256": "4836f560f799b5fd394fbaf83bca3453cf7793d6c7ecc5fdf2f4782c39e2ff79",
+      "quorum": 2,
+      "reason": "Restore the approved baseline after review of the mismatch",
+      "reviewers": [
+        "owner",
+        "steward"
+      ],
+      "workspace": "aurora-21"
+    },
+    "activation_state": "published",
+    "applications": [
+      {
+        "application": "crm",
+        "state": "verified",
+        "phase": "activate",
+        "receipt": {
+          "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+          "seq": 54,
+          "observed_at": "2026-11-25T16:00:00Z"
+        },
+        "probes": [
+          {
+            "probe": "crm-exception",
+            "expected": "out_of_scope",
+            "result": "verified",
+            "observation": {
+              "seq": 58,
+              "activation": 53,
+              "application": "crm",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "crm-exception",
+              "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+              "actual_outcome": "out_of_scope",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:64f40f1cb36d71b120cb9b53440eb3e3fc6909baa7ac82dc194c3d459aa778a0",
+              "artifact_sha256": "64f40f1cb36d71b120cb9b53440eb3e3fc6909baa7ac82dc194c3d459aa778a0"
+            }
+          },
+          {
+            "probe": "crm-incomplete",
+            "expected": "hold",
+            "result": "verified",
+            "observation": {
+              "seq": 57,
+              "activation": 53,
+              "application": "crm",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "crm-incomplete",
+              "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+              "actual_outcome": "hold",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:229f8f4cf9093e0664ccd44d0cefd2ce7a8d8bdf142f25cde73d0a96db188f9d",
+              "artifact_sha256": "229f8f4cf9093e0664ccd44d0cefd2ce7a8d8bdf142f25cde73d0a96db188f9d"
+            }
+          },
+          {
+            "probe": "crm-negative",
+            "expected": "allow",
+            "result": "verified",
+            "observation": {
+              "seq": 56,
+              "activation": 53,
+              "application": "crm",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "crm-negative",
+              "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+              "actual_outcome": "allow",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:ad5cce767d79558d34aecdaead7d4f8b3f836d2a313500314344494626725739",
+              "artifact_sha256": "ad5cce767d79558d34aecdaead7d4f8b3f836d2a313500314344494626725739"
+            }
+          },
+          {
+            "probe": "crm-positive",
+            "expected": "allow",
+            "result": "verified",
+            "observation": {
+              "seq": 55,
+              "activation": 53,
+              "application": "crm",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "crm-positive",
+              "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+              "actual_outcome": "allow",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:03a09bd238451a5a7585243dcdf145a92fc2a73a08539b88e1f727708da2527f",
+              "artifact_sha256": "03a09bd238451a5a7585243dcdf145a92fc2a73a08539b88e1f727708da2527f"
+            }
+          }
+        ]
+      },
+      {
+        "application": "pms",
+        "state": "verified",
+        "phase": "activate",
+        "receipt": {
+          "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+          "seq": 59,
+          "observed_at": "2026-11-25T16:00:00Z"
+        },
+        "probes": [
+          {
+            "probe": "pms-exception",
+            "expected": "out_of_scope",
+            "result": "verified",
+            "observation": {
+              "seq": 63,
+              "activation": 53,
+              "application": "pms",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "pms-exception",
+              "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+              "actual_outcome": "out_of_scope",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:9c14a988cbfd46155a57c0a7b4fb713e69fd59643d650eb3eb788a8582b63c08",
+              "artifact_sha256": "9c14a988cbfd46155a57c0a7b4fb713e69fd59643d650eb3eb788a8582b63c08"
+            }
+          },
+          {
+            "probe": "pms-incomplete",
+            "expected": "hold",
+            "result": "verified",
+            "observation": {
+              "seq": 62,
+              "activation": 53,
+              "application": "pms",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "pms-incomplete",
+              "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+              "actual_outcome": "hold",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:e92063a8c82a8b6ed54944c6f5c64ed29df270a3dcedec17450f52e66c251be9",
+              "artifact_sha256": "e92063a8c82a8b6ed54944c6f5c64ed29df270a3dcedec17450f52e66c251be9"
+            }
+          },
+          {
+            "probe": "pms-negative",
+            "expected": "allow",
+            "result": "verified",
+            "observation": {
+              "seq": 61,
+              "activation": 53,
+              "application": "pms",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "pms-negative",
+              "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+              "actual_outcome": "allow",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:769f01cf5b719c0ad2618e2166aba8fdb2c4331ee536a6f31ce6af838a1ef6a8",
+              "artifact_sha256": "769f01cf5b719c0ad2618e2166aba8fdb2c4331ee536a6f31ce6af838a1ef6a8"
+            }
+          },
+          {
+            "probe": "pms-positive",
+            "expected": "allow",
+            "result": "verified",
+            "observation": {
+              "seq": 60,
+              "activation": 53,
+              "application": "pms",
+              "observer": "observer",
+              "phase": "activate",
+              "probe": "pms-positive",
+              "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+              "actual_outcome": "allow",
+              "captured_at": "2026-11-25T16:00:00Z",
+              "artifact_ref": "urn:aurora-21:fixture:d53dc0af84ab36a90495889befc36f52826f102c083c8788b89200aa57ba54c5",
+              "artifact_sha256": "d53dc0af84ab36a90495889befc36f52826f102c083c8788b89200aa57ba54c5"
+            }
+          }
+        ]
+      }
+    ],
+    "as_of": "2026-11-25T16:00:00Z",
+    "business_outcome": "not_assessed"
+  },
+  "releases": [
+    {
+      "release": "b330b734cbc6b019edd857994007d082f0a6d1be1d5358d3b6d566faa29ade5c",
+      "manifest": {
+        "author": "author",
+        "base": 0,
+        "created_at": "2026-11-25T16:00:00Z",
+        "deliveries": {
+          "crm": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+          "pms": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341"
+        },
+        "format": "ontograph.manifest/1",
+        "impact": [
+          "asset",
+          "asset-record",
+          "asset-type",
+          "building",
+          "building-record",
+          "crm",
+          "crm-property",
+          "declaration",
+          "diligence",
+          "dossier-check",
+          "dossier-contract",
+          "inspection",
+          "pms",
+          "pms-unit",
+          "unit"
+        ],
+        "observation_max_age_seconds": 3600,
+        "payload_sha256": "4836f560f799b5fd394fbaf83bca3453cf7793d6c7ecc5fdf2f4782c39e2ff79",
+        "quorum": 2,
+        "reason": "Baseline evidence requirement",
+        "reviewers": [
+          "owner",
+          "steward"
+        ],
+        "workspace": "aurora-21"
+      },
+      "payload": {
+        "domain": "aurora-21",
+        "edges": [
+          {
+            "predicate": "broader",
+            "source": "building",
+            "target": "asset"
+          },
+          {
+            "predicate": "broader",
+            "source": "unit",
+            "target": "asset"
+          },
+          {
+            "predicate": "subClassOf",
+            "source": "building-record",
+            "target": "asset-record"
+          },
+          {
+            "predicate": "mapsTo",
+            "source": "crm-property",
+            "target": "building"
+          },
+          {
+            "predicate": "mapsTo",
+            "source": "pms-unit",
+            "target": "unit"
+          },
+          {
+            "predicate": "dependsOn",
+            "source": "dossier-check",
+            "target": "building"
+          },
+          {
+            "predicate": "dependsOn",
+            "source": "dossier-check",
+            "target": "inspection"
+          },
+          {
+            "predicate": "dependsOn",
+            "source": "diligence",
+            "target": "dossier-check"
+          },
+          {
+            "predicate": "implements",
+            "source": "dossier-check",
+            "target": "dossier-contract"
+          },
+          {
+            "predicate": "consumes",
+            "source": "crm",
+            "target": "dossier-contract"
+          },
+          {
+            "predicate": "consumes",
+            "source": "pms",
+            "target": "dossier-contract"
+          }
+        ],
+        "effective_at": "2026-11-25T15:00:00Z",
+        "evidence": [
+          {
+            "applicability": "Applies to buildings within the synthetic domain",
+            "excerpt": "A technical declaration is sufficient for a building dossier.",
+            "id": "diligence-rule",
+            "observed_at": "2026-11-25T12:00:00Z",
+            "sha256": "d90943dc6b5905f54df9cc6266ec0fd4d020a064ab6a79fc3316a3145714052e",
+            "status": "confirmed",
+            "uri": "urn:aurora-21:policy:diligence:v1"
+          }
+        ],
+        "format": "ontograph.release/1",
+        "nodes": [
+          {
+            "definition": "Umbrella concept for property assets",
+            "id": "asset",
+            "kind": "concept",
+            "label": "Property asset",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "A complete physical building",
+            "id": "building",
+            "kind": "concept",
+            "label": "Building",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "A distinct occupiable unit",
+            "id": "unit",
+            "kind": "concept",
+            "label": "Property unit",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Class of asset records",
+            "id": "asset-record",
+            "kind": "class",
+            "label": "Asset record",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Class of building dossier records",
+            "id": "building-record",
+            "kind": "class",
+            "label": "Building record",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Classification of the dossier subject",
+            "id": "asset-type",
+            "kind": "field",
+            "label": "Asset type",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Identifier in CRM that denotes a building",
+            "id": "crm-property",
+            "kind": "field",
+            "label": "CRM.property",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Identifier in PMS that denotes a unit",
+            "id": "pms-unit",
+            "kind": "field",
+            "label": "PMS.unit",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Boolean presence of declaration",
+            "id": "declaration",
+            "kind": "field",
+            "label": "Technical declaration",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Boolean presence of inspection report",
+            "id": "inspection",
+            "kind": "field",
+            "label": "Inspection report",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Assess an evidence dossier",
+            "id": "diligence",
+            "kind": "process",
+            "label": "Due diligence",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Evaluates the dossier under the selected scope",
+            "id": "dossier-check",
+            "kind": "control",
+            "label": "Evidence completeness",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "allow, hold or out_of_scope",
+            "id": "dossier-contract",
+            "kind": "contract",
+            "label": "Dossier decision",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Consumes the dossier decision",
+            "id": "crm",
+            "kind": "application",
+            "label": "CRM",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Consumes the dossier decision",
+            "id": "pms",
+            "kind": "application",
+            "label": "PMS",
+            "owner": "Technical due diligence"
+          }
+        ],
+        "owner": "Technical due diligence",
+        "probes": [
+          {
+            "application": "crm",
+            "expected": "allow",
+            "facts": {
+              "asset-type": "building",
+              "declaration": true,
+              "inspection": true
+            },
+            "id": "crm-positive",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "crm",
+            "expected": "allow",
+            "facts": {
+              "asset-type": "building",
+              "declaration": true,
+              "inspection": false
+            },
+            "id": "crm-negative",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "crm",
+            "expected": "hold",
+            "facts": {
+              "asset-type": "building",
+              "declaration": false,
+              "inspection": false
+            },
+            "id": "crm-incomplete",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "crm",
+            "expected": "out_of_scope",
+            "facts": {
+              "asset-type": "unit",
+              "declaration": true,
+              "inspection": false
+            },
+            "id": "crm-exception",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "pms",
+            "expected": "allow",
+            "facts": {
+              "asset-type": "building",
+              "declaration": true,
+              "inspection": true
+            },
+            "id": "pms-positive",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "pms",
+            "expected": "allow",
+            "facts": {
+              "asset-type": "building",
+              "declaration": true,
+              "inspection": false
+            },
+            "id": "pms-negative",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "pms",
+            "expected": "hold",
+            "facts": {
+              "asset-type": "building",
+              "declaration": false,
+              "inspection": false
+            },
+            "id": "pms-incomplete",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "pms",
+            "expected": "out_of_scope",
+            "facts": {
+              "asset-type": "unit",
+              "declaration": true,
+              "inspection": false
+            },
+            "id": "pms-exception",
+            "rule": "evidence-present"
+          }
+        ],
+        "purpose": "Check evidence completeness for building dossiers",
+        "rules": [
+          {
+            "applies": {
+              "asset-type": "building"
+            },
+            "control": "dossier-check",
+            "evidence": "diligence-rule",
+            "id": "evidence-present",
+            "requires": {
+              "declaration": true
+            }
+          }
+        ],
+        "scope": "Synthetic dataset. Building due diligence."
+      },
+      "graph": {
+        "@context": {
+          "og": "https://github.com/sev7enITA/OntoGraph#",
+          "skos": "http://www.w3.org/2004/02/skos/core#",
+          "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+          "owl": "http://www.w3.org/2002/07/owl#",
+          "prov": "http://www.w3.org/ns/prov#",
+          "dct": "http://purl.org/dc/terms/"
+        },
+        "@graph": [
+          {
+            "@id": "urn:ontograph:aurora-21:release:b330b734cbc6b019edd857994007d082f0a6d1be1d5358d3b6d566faa29ade5c",
+            "@type": "prov:Entity",
+            "prov:wasDerivedFrom": [
+              {
+                "@id": "urn:ontograph:aurora-21:evidence:1ae3566381e2f0d5ab76a95e7ced3bc3f3b2892cf82407fc307fc06d93d757da"
+              }
+            ],
+            "og:sha256": "b330b734cbc6b019edd857994007d082f0a6d1be1d5358d3b6d566faa29ade5c"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:scheme",
+            "@type": "skos:ConceptScheme",
+            "dct:title": "aurora-21"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:asset",
+            "@type": "skos:Concept",
+            "skos:prefLabel": "Property asset",
+            "skos:definition": "Umbrella concept for property assets",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "skos:inScheme": {
+              "@id": "urn:ontograph:aurora-21:scheme"
+            }
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:building",
+            "@type": "skos:Concept",
+            "skos:prefLabel": "Building",
+            "skos:definition": "A complete physical building",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "skos:inScheme": {
+              "@id": "urn:ontograph:aurora-21:scheme"
+            },
+            "skos:broader": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:asset"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:unit",
+            "@type": "skos:Concept",
+            "skos:prefLabel": "Property unit",
+            "skos:definition": "A distinct occupiable unit",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "skos:inScheme": {
+              "@id": "urn:ontograph:aurora-21:scheme"
+            },
+            "skos:broader": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:asset"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:asset-record",
+            "@type": "owl:Class",
+            "skos:prefLabel": "Asset record",
+            "skos:definition": "Class of asset records",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:building-record",
+            "@type": "owl:Class",
+            "skos:prefLabel": "Building record",
+            "skos:definition": "Class of building dossier records",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "rdfs:subClassOf": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:asset-record"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:asset-type",
+            "@type": "og:Field",
+            "skos:prefLabel": "Asset type",
+            "skos:definition": "Classification of the dossier subject",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:crm-property",
+            "@type": "og:Field",
+            "skos:prefLabel": "CRM.property",
+            "skos:definition": "Identifier in CRM that denotes a building",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "og:mapsTo": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:building"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:pms-unit",
+            "@type": "og:Field",
+            "skos:prefLabel": "PMS.unit",
+            "skos:definition": "Identifier in PMS that denotes a unit",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "og:mapsTo": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:unit"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:declaration",
+            "@type": "og:Field",
+            "skos:prefLabel": "Technical declaration",
+            "skos:definition": "Boolean presence of declaration",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:inspection",
+            "@type": "og:Field",
+            "skos:prefLabel": "Inspection report",
+            "skos:definition": "Boolean presence of inspection report",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:diligence",
+            "@type": "og:Process",
+            "skos:prefLabel": "Due diligence",
+            "skos:definition": "Assess an evidence dossier",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "og:dependsOn": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:dossier-check"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:dossier-check",
+            "@type": "og:Control",
+            "skos:prefLabel": "Evidence completeness",
+            "skos:definition": "Evaluates the dossier under the selected scope",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "og:dependsOn": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:building"
+              },
+              {
+                "@id": "urn:ontograph:aurora-21:node:inspection"
+              }
+            ],
+            "og:implements": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:dossier-contract"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:dossier-contract",
+            "@type": "og:Contract",
+            "skos:prefLabel": "Dossier decision",
+            "skos:definition": "allow, hold or out_of_scope",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:crm",
+            "@type": "og:Application",
+            "skos:prefLabel": "CRM",
+            "skos:definition": "Consumes the dossier decision",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "og:consumes": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:dossier-contract"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:pms",
+            "@type": "og:Application",
+            "skos:prefLabel": "PMS",
+            "skos:definition": "Consumes the dossier decision",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "og:consumes": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:dossier-contract"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:evidence:1ae3566381e2f0d5ab76a95e7ced3bc3f3b2892cf82407fc307fc06d93d757da",
+            "@type": "prov:Entity",
+            "dct:source": {
+              "@id": "urn:aurora-21:policy:diligence:v1"
+            },
+            "og:sha256": "d90943dc6b5905f54df9cc6266ec0fd4d020a064ab6a79fc3316a3145714052e",
+            "og:status": "confirmed"
+          }
+        ]
+      }
+    },
+    {
+      "release": "bb4608e953e84b222a09e669fca66fd823a48a373a000e12eb55f57d420be570",
+      "manifest": {
+        "author": "author",
+        "base": 14,
+        "created_at": "2026-11-25T16:00:00Z",
+        "deliveries": {
+          "crm": "1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4",
+          "pms": "2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc"
+        },
+        "format": "ontograph.manifest/1",
+        "impact": [
+          "crm",
+          "diligence",
+          "dossier-check",
+          "dossier-contract",
+          "pms"
+        ],
+        "observation_max_age_seconds": 3600,
+        "payload_sha256": "d3a8250451fc6baf6e74600b226d06a8160880c729c148b45e54b50c6e6ea658",
+        "quorum": 2,
+        "reason": "Add inspection report for buildings",
+        "reviewers": [
+          "owner",
+          "steward"
+        ],
+        "workspace": "aurora-21"
+      },
+      "payload": {
+        "domain": "aurora-21",
+        "edges": [
+          {
+            "predicate": "broader",
+            "source": "building",
+            "target": "asset"
+          },
+          {
+            "predicate": "broader",
+            "source": "unit",
+            "target": "asset"
+          },
+          {
+            "predicate": "subClassOf",
+            "source": "building-record",
+            "target": "asset-record"
+          },
+          {
+            "predicate": "mapsTo",
+            "source": "crm-property",
+            "target": "building"
+          },
+          {
+            "predicate": "mapsTo",
+            "source": "pms-unit",
+            "target": "unit"
+          },
+          {
+            "predicate": "dependsOn",
+            "source": "dossier-check",
+            "target": "building"
+          },
+          {
+            "predicate": "dependsOn",
+            "source": "dossier-check",
+            "target": "inspection"
+          },
+          {
+            "predicate": "dependsOn",
+            "source": "diligence",
+            "target": "dossier-check"
+          },
+          {
+            "predicate": "implements",
+            "source": "dossier-check",
+            "target": "dossier-contract"
+          },
+          {
+            "predicate": "consumes",
+            "source": "crm",
+            "target": "dossier-contract"
+          },
+          {
+            "predicate": "consumes",
+            "source": "pms",
+            "target": "dossier-contract"
+          }
+        ],
+        "effective_at": "2026-11-25T15:00:00Z",
+        "evidence": [
+          {
+            "applicability": "Applies to buildings within the synthetic domain",
+            "excerpt": "A building dossier requires both a technical declaration and an inspection report.",
+            "id": "diligence-rule",
+            "observed_at": "2026-11-25T12:00:00Z",
+            "sha256": "a036f66aa6a7cb87bfdaf709cf31c5480548ca048bfe595ac77020412345485a",
+            "status": "confirmed",
+            "uri": "urn:aurora-21:policy:diligence:v2"
+          }
+        ],
+        "format": "ontograph.release/1",
+        "nodes": [
+          {
+            "definition": "Umbrella concept for property assets",
+            "id": "asset",
+            "kind": "concept",
+            "label": "Property asset",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "A complete physical building",
+            "id": "building",
+            "kind": "concept",
+            "label": "Building",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "A distinct occupiable unit",
+            "id": "unit",
+            "kind": "concept",
+            "label": "Property unit",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Class of asset records",
+            "id": "asset-record",
+            "kind": "class",
+            "label": "Asset record",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Class of building dossier records",
+            "id": "building-record",
+            "kind": "class",
+            "label": "Building record",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Classification of the dossier subject",
+            "id": "asset-type",
+            "kind": "field",
+            "label": "Asset type",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Identifier in CRM that denotes a building",
+            "id": "crm-property",
+            "kind": "field",
+            "label": "CRM.property",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Identifier in PMS that denotes a unit",
+            "id": "pms-unit",
+            "kind": "field",
+            "label": "PMS.unit",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Boolean presence of declaration",
+            "id": "declaration",
+            "kind": "field",
+            "label": "Technical declaration",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Boolean presence of inspection report",
+            "id": "inspection",
+            "kind": "field",
+            "label": "Inspection report",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Assess an evidence dossier",
+            "id": "diligence",
+            "kind": "process",
+            "label": "Due diligence",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Evaluates the dossier under the selected scope",
+            "id": "dossier-check",
+            "kind": "control",
+            "label": "Evidence completeness",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "allow, hold or out_of_scope",
+            "id": "dossier-contract",
+            "kind": "contract",
+            "label": "Dossier decision",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Consumes the dossier decision",
+            "id": "crm",
+            "kind": "application",
+            "label": "CRM",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Consumes the dossier decision",
+            "id": "pms",
+            "kind": "application",
+            "label": "PMS",
+            "owner": "Technical due diligence"
+          }
+        ],
+        "owner": "Technical due diligence",
+        "probes": [
+          {
+            "application": "crm",
+            "expected": "allow",
+            "facts": {
+              "asset-type": "building",
+              "declaration": true,
+              "inspection": true
+            },
+            "id": "crm-positive",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "crm",
+            "expected": "hold",
+            "facts": {
+              "asset-type": "building",
+              "declaration": true,
+              "inspection": false
+            },
+            "id": "crm-negative",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "crm",
+            "expected": "hold",
+            "facts": {
+              "asset-type": "building",
+              "declaration": false,
+              "inspection": false
+            },
+            "id": "crm-incomplete",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "crm",
+            "expected": "out_of_scope",
+            "facts": {
+              "asset-type": "unit",
+              "declaration": true,
+              "inspection": false
+            },
+            "id": "crm-exception",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "pms",
+            "expected": "allow",
+            "facts": {
+              "asset-type": "building",
+              "declaration": true,
+              "inspection": true
+            },
+            "id": "pms-positive",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "pms",
+            "expected": "hold",
+            "facts": {
+              "asset-type": "building",
+              "declaration": true,
+              "inspection": false
+            },
+            "id": "pms-negative",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "pms",
+            "expected": "hold",
+            "facts": {
+              "asset-type": "building",
+              "declaration": false,
+              "inspection": false
+            },
+            "id": "pms-incomplete",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "pms",
+            "expected": "out_of_scope",
+            "facts": {
+              "asset-type": "unit",
+              "declaration": true,
+              "inspection": false
+            },
+            "id": "pms-exception",
+            "rule": "evidence-present"
+          }
+        ],
+        "purpose": "Check evidence completeness for building dossiers",
+        "rules": [
+          {
+            "applies": {
+              "asset-type": "building"
+            },
+            "control": "dossier-check",
+            "evidence": "diligence-rule",
+            "id": "evidence-present",
+            "requires": {
+              "declaration": true,
+              "inspection": true
+            }
+          }
+        ],
+        "scope": "Synthetic dataset. Building due diligence."
+      },
+      "graph": {
+        "@context": {
+          "og": "https://github.com/sev7enITA/OntoGraph#",
+          "skos": "http://www.w3.org/2004/02/skos/core#",
+          "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+          "owl": "http://www.w3.org/2002/07/owl#",
+          "prov": "http://www.w3.org/ns/prov#",
+          "dct": "http://purl.org/dc/terms/"
+        },
+        "@graph": [
+          {
+            "@id": "urn:ontograph:aurora-21:release:bb4608e953e84b222a09e669fca66fd823a48a373a000e12eb55f57d420be570",
+            "@type": "prov:Entity",
+            "prov:wasDerivedFrom": [
+              {
+                "@id": "urn:ontograph:aurora-21:evidence:ce84bd9890252960ce5e0e5fd5e86ac6d0b8284bc0b912454d1b75efd143943c"
+              }
+            ],
+            "og:sha256": "bb4608e953e84b222a09e669fca66fd823a48a373a000e12eb55f57d420be570"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:scheme",
+            "@type": "skos:ConceptScheme",
+            "dct:title": "aurora-21"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:asset",
+            "@type": "skos:Concept",
+            "skos:prefLabel": "Property asset",
+            "skos:definition": "Umbrella concept for property assets",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "skos:inScheme": {
+              "@id": "urn:ontograph:aurora-21:scheme"
+            }
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:building",
+            "@type": "skos:Concept",
+            "skos:prefLabel": "Building",
+            "skos:definition": "A complete physical building",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "skos:inScheme": {
+              "@id": "urn:ontograph:aurora-21:scheme"
+            },
+            "skos:broader": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:asset"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:unit",
+            "@type": "skos:Concept",
+            "skos:prefLabel": "Property unit",
+            "skos:definition": "A distinct occupiable unit",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "skos:inScheme": {
+              "@id": "urn:ontograph:aurora-21:scheme"
+            },
+            "skos:broader": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:asset"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:asset-record",
+            "@type": "owl:Class",
+            "skos:prefLabel": "Asset record",
+            "skos:definition": "Class of asset records",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:building-record",
+            "@type": "owl:Class",
+            "skos:prefLabel": "Building record",
+            "skos:definition": "Class of building dossier records",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "rdfs:subClassOf": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:asset-record"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:asset-type",
+            "@type": "og:Field",
+            "skos:prefLabel": "Asset type",
+            "skos:definition": "Classification of the dossier subject",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:crm-property",
+            "@type": "og:Field",
+            "skos:prefLabel": "CRM.property",
+            "skos:definition": "Identifier in CRM that denotes a building",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "og:mapsTo": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:building"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:pms-unit",
+            "@type": "og:Field",
+            "skos:prefLabel": "PMS.unit",
+            "skos:definition": "Identifier in PMS that denotes a unit",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "og:mapsTo": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:unit"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:declaration",
+            "@type": "og:Field",
+            "skos:prefLabel": "Technical declaration",
+            "skos:definition": "Boolean presence of declaration",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:inspection",
+            "@type": "og:Field",
+            "skos:prefLabel": "Inspection report",
+            "skos:definition": "Boolean presence of inspection report",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:diligence",
+            "@type": "og:Process",
+            "skos:prefLabel": "Due diligence",
+            "skos:definition": "Assess an evidence dossier",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "og:dependsOn": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:dossier-check"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:dossier-check",
+            "@type": "og:Control",
+            "skos:prefLabel": "Evidence completeness",
+            "skos:definition": "Evaluates the dossier under the selected scope",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "og:dependsOn": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:building"
+              },
+              {
+                "@id": "urn:ontograph:aurora-21:node:inspection"
+              }
+            ],
+            "og:implements": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:dossier-contract"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:dossier-contract",
+            "@type": "og:Contract",
+            "skos:prefLabel": "Dossier decision",
+            "skos:definition": "allow, hold or out_of_scope",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:crm",
+            "@type": "og:Application",
+            "skos:prefLabel": "CRM",
+            "skos:definition": "Consumes the dossier decision",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "og:consumes": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:dossier-contract"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:pms",
+            "@type": "og:Application",
+            "skos:prefLabel": "PMS",
+            "skos:definition": "Consumes the dossier decision",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "og:consumes": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:dossier-contract"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:evidence:ce84bd9890252960ce5e0e5fd5e86ac6d0b8284bc0b912454d1b75efd143943c",
+            "@type": "prov:Entity",
+            "dct:source": {
+              "@id": "urn:aurora-21:policy:diligence:v2"
+            },
+            "og:sha256": "a036f66aa6a7cb87bfdaf709cf31c5480548ca048bfe595ac77020412345485a",
+            "og:status": "confirmed"
+          }
+        ]
+      }
+    },
+    {
+      "release": "eafe42045a041dca29be038bc7e8e06d941ddea283dd6cf34a995efe9cfd73d5",
+      "manifest": {
+        "author": "author",
+        "base": 33,
+        "created_at": "2026-11-25T16:00:00Z",
+        "deliveries": {
+          "crm": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+          "pms": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341"
+        },
+        "format": "ontograph.manifest/1",
+        "impact": [
+          "crm",
+          "diligence",
+          "dossier-check",
+          "dossier-contract",
+          "pms"
+        ],
+        "observation_max_age_seconds": 3600,
+        "payload_sha256": "4836f560f799b5fd394fbaf83bca3453cf7793d6c7ecc5fdf2f4782c39e2ff79",
+        "quorum": 2,
+        "reason": "Restore the approved baseline after review of the mismatch",
+        "reviewers": [
+          "owner",
+          "steward"
+        ],
+        "workspace": "aurora-21"
+      },
+      "payload": {
+        "domain": "aurora-21",
+        "edges": [
+          {
+            "predicate": "broader",
+            "source": "building",
+            "target": "asset"
+          },
+          {
+            "predicate": "broader",
+            "source": "unit",
+            "target": "asset"
+          },
+          {
+            "predicate": "subClassOf",
+            "source": "building-record",
+            "target": "asset-record"
+          },
+          {
+            "predicate": "mapsTo",
+            "source": "crm-property",
+            "target": "building"
+          },
+          {
+            "predicate": "mapsTo",
+            "source": "pms-unit",
+            "target": "unit"
+          },
+          {
+            "predicate": "dependsOn",
+            "source": "dossier-check",
+            "target": "building"
+          },
+          {
+            "predicate": "dependsOn",
+            "source": "dossier-check",
+            "target": "inspection"
+          },
+          {
+            "predicate": "dependsOn",
+            "source": "diligence",
+            "target": "dossier-check"
+          },
+          {
+            "predicate": "implements",
+            "source": "dossier-check",
+            "target": "dossier-contract"
+          },
+          {
+            "predicate": "consumes",
+            "source": "crm",
+            "target": "dossier-contract"
+          },
+          {
+            "predicate": "consumes",
+            "source": "pms",
+            "target": "dossier-contract"
+          }
+        ],
+        "effective_at": "2026-11-25T15:00:00Z",
+        "evidence": [
+          {
+            "applicability": "Applies to buildings within the synthetic domain",
+            "excerpt": "A technical declaration is sufficient for a building dossier.",
+            "id": "diligence-rule",
+            "observed_at": "2026-11-25T12:00:00Z",
+            "sha256": "d90943dc6b5905f54df9cc6266ec0fd4d020a064ab6a79fc3316a3145714052e",
+            "status": "confirmed",
+            "uri": "urn:aurora-21:policy:diligence:v1"
+          }
+        ],
+        "format": "ontograph.release/1",
+        "nodes": [
+          {
+            "definition": "Umbrella concept for property assets",
+            "id": "asset",
+            "kind": "concept",
+            "label": "Property asset",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "A complete physical building",
+            "id": "building",
+            "kind": "concept",
+            "label": "Building",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "A distinct occupiable unit",
+            "id": "unit",
+            "kind": "concept",
+            "label": "Property unit",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Class of asset records",
+            "id": "asset-record",
+            "kind": "class",
+            "label": "Asset record",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Class of building dossier records",
+            "id": "building-record",
+            "kind": "class",
+            "label": "Building record",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Classification of the dossier subject",
+            "id": "asset-type",
+            "kind": "field",
+            "label": "Asset type",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Identifier in CRM that denotes a building",
+            "id": "crm-property",
+            "kind": "field",
+            "label": "CRM.property",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Identifier in PMS that denotes a unit",
+            "id": "pms-unit",
+            "kind": "field",
+            "label": "PMS.unit",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Boolean presence of declaration",
+            "id": "declaration",
+            "kind": "field",
+            "label": "Technical declaration",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Boolean presence of inspection report",
+            "id": "inspection",
+            "kind": "field",
+            "label": "Inspection report",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Assess an evidence dossier",
+            "id": "diligence",
+            "kind": "process",
+            "label": "Due diligence",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Evaluates the dossier under the selected scope",
+            "id": "dossier-check",
+            "kind": "control",
+            "label": "Evidence completeness",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "allow, hold or out_of_scope",
+            "id": "dossier-contract",
+            "kind": "contract",
+            "label": "Dossier decision",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Consumes the dossier decision",
+            "id": "crm",
+            "kind": "application",
+            "label": "CRM",
+            "owner": "Technical due diligence"
+          },
+          {
+            "definition": "Consumes the dossier decision",
+            "id": "pms",
+            "kind": "application",
+            "label": "PMS",
+            "owner": "Technical due diligence"
+          }
+        ],
+        "owner": "Technical due diligence",
+        "probes": [
+          {
+            "application": "crm",
+            "expected": "allow",
+            "facts": {
+              "asset-type": "building",
+              "declaration": true,
+              "inspection": true
+            },
+            "id": "crm-positive",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "crm",
+            "expected": "allow",
+            "facts": {
+              "asset-type": "building",
+              "declaration": true,
+              "inspection": false
+            },
+            "id": "crm-negative",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "crm",
+            "expected": "hold",
+            "facts": {
+              "asset-type": "building",
+              "declaration": false,
+              "inspection": false
+            },
+            "id": "crm-incomplete",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "crm",
+            "expected": "out_of_scope",
+            "facts": {
+              "asset-type": "unit",
+              "declaration": true,
+              "inspection": false
+            },
+            "id": "crm-exception",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "pms",
+            "expected": "allow",
+            "facts": {
+              "asset-type": "building",
+              "declaration": true,
+              "inspection": true
+            },
+            "id": "pms-positive",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "pms",
+            "expected": "allow",
+            "facts": {
+              "asset-type": "building",
+              "declaration": true,
+              "inspection": false
+            },
+            "id": "pms-negative",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "pms",
+            "expected": "hold",
+            "facts": {
+              "asset-type": "building",
+              "declaration": false,
+              "inspection": false
+            },
+            "id": "pms-incomplete",
+            "rule": "evidence-present"
+          },
+          {
+            "application": "pms",
+            "expected": "out_of_scope",
+            "facts": {
+              "asset-type": "unit",
+              "declaration": true,
+              "inspection": false
+            },
+            "id": "pms-exception",
+            "rule": "evidence-present"
+          }
+        ],
+        "purpose": "Check evidence completeness for building dossiers",
+        "rules": [
+          {
+            "applies": {
+              "asset-type": "building"
+            },
+            "control": "dossier-check",
+            "evidence": "diligence-rule",
+            "id": "evidence-present",
+            "requires": {
+              "declaration": true
+            }
+          }
+        ],
+        "scope": "Synthetic dataset. Building due diligence."
+      },
+      "graph": {
+        "@context": {
+          "og": "https://github.com/sev7enITA/OntoGraph#",
+          "skos": "http://www.w3.org/2004/02/skos/core#",
+          "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+          "owl": "http://www.w3.org/2002/07/owl#",
+          "prov": "http://www.w3.org/ns/prov#",
+          "dct": "http://purl.org/dc/terms/"
+        },
+        "@graph": [
+          {
+            "@id": "urn:ontograph:aurora-21:release:eafe42045a041dca29be038bc7e8e06d941ddea283dd6cf34a995efe9cfd73d5",
+            "@type": "prov:Entity",
+            "prov:wasDerivedFrom": [
+              {
+                "@id": "urn:ontograph:aurora-21:evidence:1ae3566381e2f0d5ab76a95e7ced3bc3f3b2892cf82407fc307fc06d93d757da"
+              }
+            ],
+            "og:sha256": "eafe42045a041dca29be038bc7e8e06d941ddea283dd6cf34a995efe9cfd73d5"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:scheme",
+            "@type": "skos:ConceptScheme",
+            "dct:title": "aurora-21"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:asset",
+            "@type": "skos:Concept",
+            "skos:prefLabel": "Property asset",
+            "skos:definition": "Umbrella concept for property assets",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "skos:inScheme": {
+              "@id": "urn:ontograph:aurora-21:scheme"
+            }
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:building",
+            "@type": "skos:Concept",
+            "skos:prefLabel": "Building",
+            "skos:definition": "A complete physical building",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "skos:inScheme": {
+              "@id": "urn:ontograph:aurora-21:scheme"
+            },
+            "skos:broader": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:asset"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:unit",
+            "@type": "skos:Concept",
+            "skos:prefLabel": "Property unit",
+            "skos:definition": "A distinct occupiable unit",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "skos:inScheme": {
+              "@id": "urn:ontograph:aurora-21:scheme"
+            },
+            "skos:broader": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:asset"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:asset-record",
+            "@type": "owl:Class",
+            "skos:prefLabel": "Asset record",
+            "skos:definition": "Class of asset records",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:building-record",
+            "@type": "owl:Class",
+            "skos:prefLabel": "Building record",
+            "skos:definition": "Class of building dossier records",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "rdfs:subClassOf": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:asset-record"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:asset-type",
+            "@type": "og:Field",
+            "skos:prefLabel": "Asset type",
+            "skos:definition": "Classification of the dossier subject",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:crm-property",
+            "@type": "og:Field",
+            "skos:prefLabel": "CRM.property",
+            "skos:definition": "Identifier in CRM that denotes a building",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "og:mapsTo": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:building"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:pms-unit",
+            "@type": "og:Field",
+            "skos:prefLabel": "PMS.unit",
+            "skos:definition": "Identifier in PMS that denotes a unit",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "og:mapsTo": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:unit"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:declaration",
+            "@type": "og:Field",
+            "skos:prefLabel": "Technical declaration",
+            "skos:definition": "Boolean presence of declaration",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:inspection",
+            "@type": "og:Field",
+            "skos:prefLabel": "Inspection report",
+            "skos:definition": "Boolean presence of inspection report",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:diligence",
+            "@type": "og:Process",
+            "skos:prefLabel": "Due diligence",
+            "skos:definition": "Assess an evidence dossier",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "og:dependsOn": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:dossier-check"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:dossier-check",
+            "@type": "og:Control",
+            "skos:prefLabel": "Evidence completeness",
+            "skos:definition": "Evaluates the dossier under the selected scope",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "og:dependsOn": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:building"
+              },
+              {
+                "@id": "urn:ontograph:aurora-21:node:inspection"
+              }
+            ],
+            "og:implements": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:dossier-contract"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:dossier-contract",
+            "@type": "og:Contract",
+            "skos:prefLabel": "Dossier decision",
+            "skos:definition": "allow, hold or out_of_scope",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence"
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:crm",
+            "@type": "og:Application",
+            "skos:prefLabel": "CRM",
+            "skos:definition": "Consumes the dossier decision",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "og:consumes": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:dossier-contract"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:node:pms",
+            "@type": "og:Application",
+            "skos:prefLabel": "PMS",
+            "skos:definition": "Consumes the dossier decision",
+            "skos:altLabel": [],
+            "og:owner": "Technical due diligence",
+            "og:consumes": [
+              {
+                "@id": "urn:ontograph:aurora-21:node:dossier-contract"
+              }
+            ]
+          },
+          {
+            "@id": "urn:ontograph:aurora-21:evidence:1ae3566381e2f0d5ab76a95e7ced3bc3f3b2892cf82407fc307fc06d93d757da",
+            "@type": "prov:Entity",
+            "dct:source": {
+              "@id": "urn:aurora-21:policy:diligence:v1"
+            },
+            "og:sha256": "d90943dc6b5905f54df9cc6266ec0fd4d020a064ab6a79fc3316a3145714052e",
+            "og:status": "confirmed"
+          }
+        ]
+      }
+    }
+  ],
+  "observations": [
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 14,
+        "application": "crm",
+        "phase": "activate",
+        "probe": "crm-positive",
+        "reported": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "outcome": "allow"
+      },
+      "sha256": "14b7b5c210acf28ae955f476e1986ee2db0041548ec0b03224552ecab8475419"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 14,
+        "application": "crm",
+        "phase": "activate",
+        "probe": "crm-negative",
+        "reported": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "outcome": "allow"
+      },
+      "sha256": "b34a80131697f04d23f5f3a3c1fcea762e45df3538093a46b0a1cd416147388a"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 14,
+        "application": "crm",
+        "phase": "activate",
+        "probe": "crm-incomplete",
+        "reported": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "outcome": "hold"
+      },
+      "sha256": "35ec6262fddac0310784a00e259746abfdbf6169baa7ec80b2eb98f7ce970f0c"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 14,
+        "application": "crm",
+        "phase": "activate",
+        "probe": "crm-exception",
+        "reported": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "outcome": "out_of_scope"
+      },
+      "sha256": "aff5cd2ac7fc513351094a7391e805b6c38f895ab57cd7b054dbde51e653bb74"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 14,
+        "application": "pms",
+        "phase": "activate",
+        "probe": "pms-positive",
+        "reported": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+        "outcome": "allow"
+      },
+      "sha256": "c73f7f9793cb8723502405bc98ec87c5cb70287f4861856118895f88b376d3fc"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 14,
+        "application": "pms",
+        "phase": "activate",
+        "probe": "pms-negative",
+        "reported": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+        "outcome": "allow"
+      },
+      "sha256": "0027ce53e5535b13c1d5b74bc0a69f5895b6cd5d29e8339becf1c32ebcdddb28"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 14,
+        "application": "pms",
+        "phase": "activate",
+        "probe": "pms-incomplete",
+        "reported": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+        "outcome": "hold"
+      },
+      "sha256": "8db8be2cf2edf2a196a85b82fec4a17d3e6aabedf34dbd06ed84aa4a5502283f"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 14,
+        "application": "pms",
+        "phase": "activate",
+        "probe": "pms-exception",
+        "reported": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+        "outcome": "out_of_scope"
+      },
+      "sha256": "4ef6f6cbe6a9c360a5b34487d5e74f957651b8a9054f9037c441559786d985d5"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 14,
+        "application": "crm",
+        "phase": "withdraw",
+        "probe": "withdrawal",
+        "reported": null,
+        "outcome": "inactive"
+      },
+      "sha256": "662c839efe088da0b3748203fcda8d1c975852013558b6fdb166fb6d14a81d0f"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 14,
+        "application": "pms",
+        "phase": "withdraw",
+        "probe": "withdrawal",
+        "reported": null,
+        "outcome": "inactive"
+      },
+      "sha256": "3369a9f5f8ca01f50f509a1ddd09b7f6e0ae6e795969f2ad168600abec0357f1"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 33,
+        "application": "crm",
+        "phase": "activate",
+        "probe": "crm-positive",
+        "reported": "1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4",
+        "outcome": "allow"
+      },
+      "sha256": "5d58f525106990112e6fcf64fb06991db4451a155c7ca377549db9e4a8fbfd99"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 33,
+        "application": "crm",
+        "phase": "activate",
+        "probe": "crm-negative",
+        "reported": "1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4",
+        "outcome": "hold"
+      },
+      "sha256": "24ada53a17e164ce629c4010a4b2d2b707d7d7659ab9667efb6dc128c3e2d353"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 33,
+        "application": "crm",
+        "phase": "activate",
+        "probe": "crm-incomplete",
+        "reported": "1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4",
+        "outcome": "hold"
+      },
+      "sha256": "434d34cb66e9208c007c00e7613d62b277ced7f40e20fe69d1721fb432cab422"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 33,
+        "application": "crm",
+        "phase": "activate",
+        "probe": "crm-exception",
+        "reported": "1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4",
+        "outcome": "out_of_scope"
+      },
+      "sha256": "fc7d3422fac5351f66dcb5a0abcd017cbfccdcb2b1c573e9d61511cdbf37ae01"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 33,
+        "application": "pms",
+        "phase": "activate",
+        "probe": "pms-positive",
+        "reported": "2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc",
+        "outcome": "allow"
+      },
+      "sha256": "060239fd14fe693bf720d81c1f553cbd57346977b3a7dd7dd474108d168babdc"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 33,
+        "application": "pms",
+        "phase": "activate",
+        "probe": "pms-negative",
+        "reported": "2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc",
+        "outcome": "allow"
+      },
+      "sha256": "b5cd1e9d707e7c4a55135977a7d4e381572d92319c3e34f5e12956e9c3bb7d04"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 33,
+        "application": "pms",
+        "phase": "activate",
+        "probe": "pms-incomplete",
+        "reported": "2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc",
+        "outcome": "hold"
+      },
+      "sha256": "3c029b46463a0e660b09b9281a2a5fc823ed68da3aafcd1b21fb8d2785425006"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 33,
+        "application": "pms",
+        "phase": "activate",
+        "probe": "pms-exception",
+        "reported": "2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc",
+        "outcome": "out_of_scope"
+      },
+      "sha256": "e4d8df82b21be6d1c1dc2316d10c0cfdc852b02f67c3e32005821ac3c51151da"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 33,
+        "application": "crm",
+        "phase": "withdraw",
+        "probe": "withdrawal",
+        "reported": null,
+        "outcome": "inactive"
+      },
+      "sha256": "ad7370f3e6111fb55d3c9491da1ef292a63eb5fa72437389a0cdc3a5f9d75659"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 33,
+        "application": "pms",
+        "phase": "withdraw",
+        "probe": "withdrawal",
+        "reported": null,
+        "outcome": "unobservable"
+      },
+      "sha256": "df1f59b1d36f11fa5ce648ff9171a3c466fc82cbc623135bd65940740e19a43e"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 33,
+        "application": "pms",
+        "phase": "withdraw",
+        "probe": "withdrawal",
+        "reported": null,
+        "outcome": "inactive"
+      },
+      "sha256": "3aaa315983753c3a6dc98ff2109fb6961dcd3e6ecec76b7501805becd246158b"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 53,
+        "application": "crm",
+        "phase": "activate",
+        "probe": "crm-positive",
+        "reported": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "outcome": "allow"
+      },
+      "sha256": "03a09bd238451a5a7585243dcdf145a92fc2a73a08539b88e1f727708da2527f"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 53,
+        "application": "crm",
+        "phase": "activate",
+        "probe": "crm-negative",
+        "reported": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "outcome": "allow"
+      },
+      "sha256": "ad5cce767d79558d34aecdaead7d4f8b3f836d2a313500314344494626725739"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 53,
+        "application": "crm",
+        "phase": "activate",
+        "probe": "crm-incomplete",
+        "reported": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "outcome": "hold"
+      },
+      "sha256": "229f8f4cf9093e0664ccd44d0cefd2ce7a8d8bdf142f25cde73d0a96db188f9d"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 53,
+        "application": "crm",
+        "phase": "activate",
+        "probe": "crm-exception",
+        "reported": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "outcome": "out_of_scope"
+      },
+      "sha256": "64f40f1cb36d71b120cb9b53440eb3e3fc6909baa7ac82dc194c3d459aa778a0"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 53,
+        "application": "pms",
+        "phase": "activate",
+        "probe": "pms-positive",
+        "reported": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+        "outcome": "allow"
+      },
+      "sha256": "d53dc0af84ab36a90495889befc36f52826f102c083c8788b89200aa57ba54c5"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 53,
+        "application": "pms",
+        "phase": "activate",
+        "probe": "pms-negative",
+        "reported": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+        "outcome": "allow"
+      },
+      "sha256": "769f01cf5b719c0ad2618e2166aba8fdb2c4331ee536a6f31ce6af838a1ef6a8"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 53,
+        "application": "pms",
+        "phase": "activate",
+        "probe": "pms-incomplete",
+        "reported": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+        "outcome": "hold"
+      },
+      "sha256": "e92063a8c82a8b6ed54944c6f5c64ed29df270a3dcedec17450f52e66c251be9"
+    },
+    {
+      "event": "observation",
+      "artifact": {
+        "scenario": "synthetic",
+        "activation": 53,
+        "application": "pms",
+        "phase": "activate",
+        "probe": "pms-exception",
+        "reported": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+        "outcome": "out_of_scope"
+      },
+      "sha256": "9c14a988cbfd46155a57c0a7b4fb713e69fd59643d650eb3eb788a8582b63c08"
+    }
+  ],
+  "audit": [
+    {
+      "seq": 1,
+      "actor": "local-admin",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "registry.initialized",
+      "payload": {
+        "workspace": "aurora-21"
+      },
+      "previous": null,
+      "hash": "8e7bacb65a71d1b1cb80fda0912444d75ddfdc8fb47eb307031687088dde1256"
+    },
+    {
+      "seq": 2,
+      "actor": "local-admin",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "principal.added",
+      "payload": {
+        "application": null,
+        "id": "author",
+        "role": "author"
+      },
+      "previous": "8e7bacb65a71d1b1cb80fda0912444d75ddfdc8fb47eb307031687088dde1256",
+      "hash": "8c05ae62bed05b232a49cf9c9611954f97b1db504cf9ed1ffc64f35ae35410f3"
+    },
+    {
+      "seq": 3,
+      "actor": "local-admin",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "principal.added",
+      "payload": {
+        "application": null,
+        "id": "steward",
+        "role": "reviewer"
+      },
+      "previous": "8c05ae62bed05b232a49cf9c9611954f97b1db504cf9ed1ffc64f35ae35410f3",
+      "hash": "088a59a245c14d8156facd7569856943d3a18adf30e8ba332edc0f5c54b141fd"
+    },
+    {
+      "seq": 4,
+      "actor": "local-admin",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "principal.added",
+      "payload": {
+        "application": null,
+        "id": "owner",
+        "role": "reviewer"
+      },
+      "previous": "088a59a245c14d8156facd7569856943d3a18adf30e8ba332edc0f5c54b141fd",
+      "hash": "916fee5a89ed1c3bc2c09232adfc9b164d82dc65ad72f8afd64c6f16531a4e2d"
+    },
+    {
+      "seq": 5,
+      "actor": "local-admin",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "principal.added",
+      "payload": {
+        "application": null,
+        "id": "publisher",
+        "role": "publisher"
+      },
+      "previous": "916fee5a89ed1c3bc2c09232adfc9b164d82dc65ad72f8afd64c6f16531a4e2d",
+      "hash": "b46cf3d2ce9b0900cb59b15b60dcdc2352cc6a353b7b8aa9db9375e7e70372ae"
+    },
+    {
+      "seq": 6,
+      "actor": "local-admin",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "principal.added",
+      "payload": {
+        "application": null,
+        "id": "observer",
+        "role": "observer"
+      },
+      "previous": "b46cf3d2ce9b0900cb59b15b60dcdc2352cc6a353b7b8aa9db9375e7e70372ae",
+      "hash": "dff3c52e373daf05ac291194783dc11d6fc973040ea63780b38d1d9583bfb228"
+    },
+    {
+      "seq": 7,
+      "actor": "local-admin",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "principal.added",
+      "payload": {
+        "application": null,
+        "id": "supervisor",
+        "role": "supervisor"
+      },
+      "previous": "dff3c52e373daf05ac291194783dc11d6fc973040ea63780b38d1d9583bfb228",
+      "hash": "0bdff4c8c1e1b141b4f35851080014b01680f5b83ea64576b95783592cfd2f20"
+    },
+    {
+      "seq": 8,
+      "actor": "local-admin",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "principal.added",
+      "payload": {
+        "application": null,
+        "id": "auditor",
+        "role": "auditor"
+      },
+      "previous": "0bdff4c8c1e1b141b4f35851080014b01680f5b83ea64576b95783592cfd2f20",
+      "hash": "c25728ad9d2c7f395e755d70542d8c5053c872b1139e8e69942b2eea3c871c2f"
+    },
+    {
+      "seq": 9,
+      "actor": "local-admin",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "principal.added",
+      "payload": {
+        "application": "crm",
+        "id": "crm",
+        "role": "consumer"
+      },
+      "previous": "c25728ad9d2c7f395e755d70542d8c5053c872b1139e8e69942b2eea3c871c2f",
+      "hash": "066575840d3232a6795214d80d556f4d8fa452e7c9655fb6a1a4aa1f29531ce2"
+    },
+    {
+      "seq": 10,
+      "actor": "local-admin",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "principal.added",
+      "payload": {
+        "application": "pms",
+        "id": "pms",
+        "role": "consumer"
+      },
+      "previous": "066575840d3232a6795214d80d556f4d8fa452e7c9655fb6a1a4aa1f29531ce2",
+      "hash": "d8e0a0bcb24ad71d191f77130465ac3d597d68abae3e07e0c2c997c269e81eb6"
+    },
+    {
+      "seq": 11,
+      "actor": "author",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "release.proposed",
+      "payload": {
+        "base": 0,
+        "impact": [
+          "asset",
+          "asset-record",
+          "asset-type",
+          "building",
+          "building-record",
+          "crm",
+          "crm-property",
+          "declaration",
+          "diligence",
+          "dossier-check",
+          "dossier-contract",
+          "inspection",
+          "pms",
+          "pms-unit",
+          "unit"
+        ],
+        "release": "b330b734cbc6b019edd857994007d082f0a6d1be1d5358d3b6d566faa29ade5c"
+      },
+      "previous": "d8e0a0bcb24ad71d191f77130465ac3d597d68abae3e07e0c2c997c269e81eb6",
+      "hash": "57cb8483db3ef469f72d23575971b6bd0cb7dda96663a33627c4cd197f93a4fb"
+    },
+    {
+      "seq": 12,
+      "actor": "steward",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "release.reviewed",
+      "payload": {
+        "choice": "approve",
+        "rationale": "Approved for this synthetic scenario",
+        "release": "b330b734cbc6b019edd857994007d082f0a6d1be1d5358d3b6d566faa29ade5c"
+      },
+      "previous": "57cb8483db3ef469f72d23575971b6bd0cb7dda96663a33627c4cd197f93a4fb",
+      "hash": "98887d3b775977e0639308efd187408deb3fd366aa76aac7546232d84bf73197"
+    },
+    {
+      "seq": 13,
+      "actor": "owner",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "release.reviewed",
+      "payload": {
+        "choice": "approve",
+        "rationale": "Approved for this synthetic scenario",
+        "release": "b330b734cbc6b019edd857994007d082f0a6d1be1d5358d3b6d566faa29ade5c"
+      },
+      "previous": "98887d3b775977e0639308efd187408deb3fd366aa76aac7546232d84bf73197",
+      "hash": "7d37adcbafd3835e7d077bb2641d73da5c3b3cb792b5e0dcc1f5efab2ccd79bf"
+    },
+    {
+      "seq": 14,
+      "actor": "publisher",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "release.published",
+      "payload": {
+        "base": 0,
+        "release": "b330b734cbc6b019edd857994007d082f0a6d1be1d5358d3b6d566faa29ade5c"
+      },
+      "previous": "7d37adcbafd3835e7d077bb2641d73da5c3b3cb792b5e0dcc1f5efab2ccd79bf",
+      "hash": "8d86d2a9d38e3fcd670c17f9b9a49edaa343f3300e8abacf9734dfad9db4d0e5"
+    },
+    {
+      "seq": 15,
+      "actor": "crm",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.acknowledged",
+      "payload": {
+        "activation": 14,
+        "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "application": "crm",
+        "phase": "activate"
+      },
+      "previous": "8d86d2a9d38e3fcd670c17f9b9a49edaa343f3300e8abacf9734dfad9db4d0e5",
+      "hash": "09c3e0da287f625a48abb94b3d00acc63977d8b70bf9b29567e11771a7125f3e"
+    },
+    {
+      "seq": 16,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 14,
+        "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "actual_outcome": "allow",
+        "application": "crm",
+        "artifact_ref": "urn:aurora-21:fixture:14b7b5c210acf28ae955f476e1986ee2db0041548ec0b03224552ecab8475419",
+        "artifact_sha256": "14b7b5c210acf28ae955f476e1986ee2db0041548ec0b03224552ecab8475419",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "crm-positive"
+      },
+      "previous": "09c3e0da287f625a48abb94b3d00acc63977d8b70bf9b29567e11771a7125f3e",
+      "hash": "1780a4aa843aea74eedc1b5376707ca1a2bbf9f8aefd35c7baa71bf32557a281"
+    },
+    {
+      "seq": 17,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 14,
+        "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "actual_outcome": "allow",
+        "application": "crm",
+        "artifact_ref": "urn:aurora-21:fixture:b34a80131697f04d23f5f3a3c1fcea762e45df3538093a46b0a1cd416147388a",
+        "artifact_sha256": "b34a80131697f04d23f5f3a3c1fcea762e45df3538093a46b0a1cd416147388a",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "crm-negative"
+      },
+      "previous": "1780a4aa843aea74eedc1b5376707ca1a2bbf9f8aefd35c7baa71bf32557a281",
+      "hash": "63e0ff79d3c6c30e8caa627ae1e302c00d8487cba5752934de69bbda1233df05"
+    },
+    {
+      "seq": 18,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 14,
+        "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "actual_outcome": "hold",
+        "application": "crm",
+        "artifact_ref": "urn:aurora-21:fixture:35ec6262fddac0310784a00e259746abfdbf6169baa7ec80b2eb98f7ce970f0c",
+        "artifact_sha256": "35ec6262fddac0310784a00e259746abfdbf6169baa7ec80b2eb98f7ce970f0c",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "crm-incomplete"
+      },
+      "previous": "63e0ff79d3c6c30e8caa627ae1e302c00d8487cba5752934de69bbda1233df05",
+      "hash": "86714c79561d8af8b27774b7819e5739ee7cf2d339cd51a138cedb1b64f32aff"
+    },
+    {
+      "seq": 19,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 14,
+        "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "actual_outcome": "out_of_scope",
+        "application": "crm",
+        "artifact_ref": "urn:aurora-21:fixture:aff5cd2ac7fc513351094a7391e805b6c38f895ab57cd7b054dbde51e653bb74",
+        "artifact_sha256": "aff5cd2ac7fc513351094a7391e805b6c38f895ab57cd7b054dbde51e653bb74",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "crm-exception"
+      },
+      "previous": "86714c79561d8af8b27774b7819e5739ee7cf2d339cd51a138cedb1b64f32aff",
+      "hash": "53ca6f4e6f4a6a79d9d7cd354afd243ba766406adeda84e15b228b1654f0fc2a"
+    },
+    {
+      "seq": 20,
+      "actor": "pms",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.acknowledged",
+      "payload": {
+        "activation": 14,
+        "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+        "application": "pms",
+        "phase": "activate"
+      },
+      "previous": "53ca6f4e6f4a6a79d9d7cd354afd243ba766406adeda84e15b228b1654f0fc2a",
+      "hash": "3e89c398918b45ef50dbd8177fac739799e5ad02a4e954c71686deaea607f20c"
+    },
+    {
+      "seq": 21,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 14,
+        "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+        "actual_outcome": "allow",
+        "application": "pms",
+        "artifact_ref": "urn:aurora-21:fixture:c73f7f9793cb8723502405bc98ec87c5cb70287f4861856118895f88b376d3fc",
+        "artifact_sha256": "c73f7f9793cb8723502405bc98ec87c5cb70287f4861856118895f88b376d3fc",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "pms-positive"
+      },
+      "previous": "3e89c398918b45ef50dbd8177fac739799e5ad02a4e954c71686deaea607f20c",
+      "hash": "655d2013a8474a42b03d597d1370656f6b95a3ef7dcd4d906bc7f2fd736da333"
+    },
+    {
+      "seq": 22,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 14,
+        "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+        "actual_outcome": "allow",
+        "application": "pms",
+        "artifact_ref": "urn:aurora-21:fixture:0027ce53e5535b13c1d5b74bc0a69f5895b6cd5d29e8339becf1c32ebcdddb28",
+        "artifact_sha256": "0027ce53e5535b13c1d5b74bc0a69f5895b6cd5d29e8339becf1c32ebcdddb28",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "pms-negative"
+      },
+      "previous": "655d2013a8474a42b03d597d1370656f6b95a3ef7dcd4d906bc7f2fd736da333",
+      "hash": "c7896aa81c243736f9ee7d5383f32aec8bc25a64d2b712b8d703944651d6c55d"
+    },
+    {
+      "seq": 23,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 14,
+        "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+        "actual_outcome": "hold",
+        "application": "pms",
+        "artifact_ref": "urn:aurora-21:fixture:8db8be2cf2edf2a196a85b82fec4a17d3e6aabedf34dbd06ed84aa4a5502283f",
+        "artifact_sha256": "8db8be2cf2edf2a196a85b82fec4a17d3e6aabedf34dbd06ed84aa4a5502283f",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "pms-incomplete"
+      },
+      "previous": "c7896aa81c243736f9ee7d5383f32aec8bc25a64d2b712b8d703944651d6c55d",
+      "hash": "fe08d176c5adbc96f01576a0eed5c35a6c17ee4e6606e9b83996e48c13ac4671"
+    },
+    {
+      "seq": 24,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 14,
+        "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+        "actual_outcome": "out_of_scope",
+        "application": "pms",
+        "artifact_ref": "urn:aurora-21:fixture:4ef6f6cbe6a9c360a5b34487d5e74f957651b8a9054f9037c441559786d985d5",
+        "artifact_sha256": "4ef6f6cbe6a9c360a5b34487d5e74f957651b8a9054f9037c441559786d985d5",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "pms-exception"
+      },
+      "previous": "fe08d176c5adbc96f01576a0eed5c35a6c17ee4e6606e9b83996e48c13ac4671",
+      "hash": "b44604dd1262c1d753e4a8edc9e3e203b2e86190fa9e0d5358ba3b2b550e2bfb"
+    },
+    {
+      "seq": 25,
+      "actor": "supervisor",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "release.withdrawn",
+      "payload": {
+        "activation": 14,
+        "at": "2026-11-25T16:00:00Z",
+        "reason": "Reconcile active version before the next release",
+        "release": "b330b734cbc6b019edd857994007d082f0a6d1be1d5358d3b6d566faa29ade5c"
+      },
+      "previous": "b44604dd1262c1d753e4a8edc9e3e203b2e86190fa9e0d5358ba3b2b550e2bfb",
+      "hash": "9b8acf2082db0301ea3e56bb14cbda6f613688ccc70b613b68986dc71820c0d3"
+    },
+    {
+      "seq": 26,
+      "actor": "crm",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.acknowledged",
+      "payload": {
+        "activation": 14,
+        "actual_digest": null,
+        "application": "crm",
+        "phase": "withdraw"
+      },
+      "previous": "9b8acf2082db0301ea3e56bb14cbda6f613688ccc70b613b68986dc71820c0d3",
+      "hash": "698d6682b382555bd95f11841df9677abdc4f04f7a3eecc8c7a4a05a1753d883"
+    },
+    {
+      "seq": 27,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 14,
+        "actual_digest": null,
+        "actual_outcome": "inactive",
+        "application": "crm",
+        "artifact_ref": "urn:aurora-21:fixture:662c839efe088da0b3748203fcda8d1c975852013558b6fdb166fb6d14a81d0f",
+        "artifact_sha256": "662c839efe088da0b3748203fcda8d1c975852013558b6fdb166fb6d14a81d0f",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "withdraw",
+        "probe": "withdrawal"
+      },
+      "previous": "698d6682b382555bd95f11841df9677abdc4f04f7a3eecc8c7a4a05a1753d883",
+      "hash": "5a55dd41e35cfa064fd8d5971e6a3ae5ae29551e3b17a388af4e80958546db33"
+    },
+    {
+      "seq": 28,
+      "actor": "pms",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.acknowledged",
+      "payload": {
+        "activation": 14,
+        "actual_digest": null,
+        "application": "pms",
+        "phase": "withdraw"
+      },
+      "previous": "5a55dd41e35cfa064fd8d5971e6a3ae5ae29551e3b17a388af4e80958546db33",
+      "hash": "a1182c57dd7354d631b246a6eca4a5746daf2f8610d20a85a6a81b4b7c4e4a4f"
+    },
+    {
+      "seq": 29,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 14,
+        "actual_digest": null,
+        "actual_outcome": "inactive",
+        "application": "pms",
+        "artifact_ref": "urn:aurora-21:fixture:3369a9f5f8ca01f50f509a1ddd09b7f6e0ae6e795969f2ad168600abec0357f1",
+        "artifact_sha256": "3369a9f5f8ca01f50f509a1ddd09b7f6e0ae6e795969f2ad168600abec0357f1",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "withdraw",
+        "probe": "withdrawal"
+      },
+      "previous": "a1182c57dd7354d631b246a6eca4a5746daf2f8610d20a85a6a81b4b7c4e4a4f",
+      "hash": "4265042d0cc5a99c576189eec41ca79239a40cfecebf4264a3ccc02c025e9ec5"
+    },
+    {
+      "seq": 30,
+      "actor": "author",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "release.proposed",
+      "payload": {
+        "base": 14,
+        "impact": [
+          "crm",
+          "diligence",
+          "dossier-check",
+          "dossier-contract",
+          "pms"
+        ],
+        "release": "bb4608e953e84b222a09e669fca66fd823a48a373a000e12eb55f57d420be570"
+      },
+      "previous": "4265042d0cc5a99c576189eec41ca79239a40cfecebf4264a3ccc02c025e9ec5",
+      "hash": "0f5145735d811fee9dcf5e7c0fe804a1acf95be4eb9bcd9af3f776e09e233962"
+    },
+    {
+      "seq": 31,
+      "actor": "steward",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "release.reviewed",
+      "payload": {
+        "choice": "approve",
+        "rationale": "Approved for this synthetic scenario",
+        "release": "bb4608e953e84b222a09e669fca66fd823a48a373a000e12eb55f57d420be570"
+      },
+      "previous": "0f5145735d811fee9dcf5e7c0fe804a1acf95be4eb9bcd9af3f776e09e233962",
+      "hash": "ff019050e807fb31b73215797d6e5ede1d01a4ec74fbb7219291a7212a9ed0f1"
+    },
+    {
+      "seq": 32,
+      "actor": "owner",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "release.reviewed",
+      "payload": {
+        "choice": "approve",
+        "rationale": "Approved for this synthetic scenario",
+        "release": "bb4608e953e84b222a09e669fca66fd823a48a373a000e12eb55f57d420be570"
+      },
+      "previous": "ff019050e807fb31b73215797d6e5ede1d01a4ec74fbb7219291a7212a9ed0f1",
+      "hash": "e79448172e02f0f3a1df6d892cfe4e9d62fc204f17c8bde09e2df0d0ea6c838b"
+    },
+    {
+      "seq": 33,
+      "actor": "publisher",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "release.published",
+      "payload": {
+        "base": 14,
+        "release": "bb4608e953e84b222a09e669fca66fd823a48a373a000e12eb55f57d420be570"
+      },
+      "previous": "e79448172e02f0f3a1df6d892cfe4e9d62fc204f17c8bde09e2df0d0ea6c838b",
+      "hash": "1a6a37ae576916f3bbd4c4d42b5666fd15424f95878e90cc73d3d593c53fce90"
+    },
+    {
+      "seq": 34,
+      "actor": "crm",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.acknowledged",
+      "payload": {
+        "activation": 33,
+        "actual_digest": "1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4",
+        "application": "crm",
+        "phase": "activate"
+      },
+      "previous": "1a6a37ae576916f3bbd4c4d42b5666fd15424f95878e90cc73d3d593c53fce90",
+      "hash": "707be17902e972b2bf40465c1b136e5c029b4555a7885302e4b2bb6929291963"
+    },
+    {
+      "seq": 35,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 33,
+        "actual_digest": "1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4",
+        "actual_outcome": "allow",
+        "application": "crm",
+        "artifact_ref": "urn:aurora-21:fixture:5d58f525106990112e6fcf64fb06991db4451a155c7ca377549db9e4a8fbfd99",
+        "artifact_sha256": "5d58f525106990112e6fcf64fb06991db4451a155c7ca377549db9e4a8fbfd99",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "crm-positive"
+      },
+      "previous": "707be17902e972b2bf40465c1b136e5c029b4555a7885302e4b2bb6929291963",
+      "hash": "073943b579fa79c8278cb343dd2034a7b69dc24c37f09f4d32a0495428b72d6f"
+    },
+    {
+      "seq": 36,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 33,
+        "actual_digest": "1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4",
+        "actual_outcome": "hold",
+        "application": "crm",
+        "artifact_ref": "urn:aurora-21:fixture:24ada53a17e164ce629c4010a4b2d2b707d7d7659ab9667efb6dc128c3e2d353",
+        "artifact_sha256": "24ada53a17e164ce629c4010a4b2d2b707d7d7659ab9667efb6dc128c3e2d353",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "crm-negative"
+      },
+      "previous": "073943b579fa79c8278cb343dd2034a7b69dc24c37f09f4d32a0495428b72d6f",
+      "hash": "00f22fd66958691abf52147c80a2dc12eb977284632f4b2707ae770c740fc666"
+    },
+    {
+      "seq": 37,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 33,
+        "actual_digest": "1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4",
+        "actual_outcome": "hold",
+        "application": "crm",
+        "artifact_ref": "urn:aurora-21:fixture:434d34cb66e9208c007c00e7613d62b277ced7f40e20fe69d1721fb432cab422",
+        "artifact_sha256": "434d34cb66e9208c007c00e7613d62b277ced7f40e20fe69d1721fb432cab422",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "crm-incomplete"
+      },
+      "previous": "00f22fd66958691abf52147c80a2dc12eb977284632f4b2707ae770c740fc666",
+      "hash": "d11cac4dd43ac0f7bbf8b8921a1a2e82bbf2465aa13e8fda34ec2f82a6836006"
+    },
+    {
+      "seq": 38,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 33,
+        "actual_digest": "1565fc8e3bb1bebf728fbf0a5c6e84b88c664ed5f9336150851d73b9c7bfc1c4",
+        "actual_outcome": "out_of_scope",
+        "application": "crm",
+        "artifact_ref": "urn:aurora-21:fixture:fc7d3422fac5351f66dcb5a0abcd017cbfccdcb2b1c573e9d61511cdbf37ae01",
+        "artifact_sha256": "fc7d3422fac5351f66dcb5a0abcd017cbfccdcb2b1c573e9d61511cdbf37ae01",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "crm-exception"
+      },
+      "previous": "d11cac4dd43ac0f7bbf8b8921a1a2e82bbf2465aa13e8fda34ec2f82a6836006",
+      "hash": "0879f91317819a5ed91cd03f41145fc16783fc3b7b05153d9352a8af056a67f2"
+    },
+    {
+      "seq": 39,
+      "actor": "pms",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.acknowledged",
+      "payload": {
+        "activation": 33,
+        "actual_digest": "2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc",
+        "application": "pms",
+        "phase": "activate"
+      },
+      "previous": "0879f91317819a5ed91cd03f41145fc16783fc3b7b05153d9352a8af056a67f2",
+      "hash": "f85ff0a98bbe1a3fb9e061973de150c5e465df795cbe94c783955cd4dda31ec0"
+    },
+    {
+      "seq": 40,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 33,
+        "actual_digest": "2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc",
+        "actual_outcome": "allow",
+        "application": "pms",
+        "artifact_ref": "urn:aurora-21:fixture:060239fd14fe693bf720d81c1f553cbd57346977b3a7dd7dd474108d168babdc",
+        "artifact_sha256": "060239fd14fe693bf720d81c1f553cbd57346977b3a7dd7dd474108d168babdc",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "pms-positive"
+      },
+      "previous": "f85ff0a98bbe1a3fb9e061973de150c5e465df795cbe94c783955cd4dda31ec0",
+      "hash": "0ead5844b7d06e16619e37a66d0922b5b918148aac59b998a1ce8613ee43d791"
+    },
+    {
+      "seq": 41,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 33,
+        "actual_digest": "2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc",
+        "actual_outcome": "allow",
+        "application": "pms",
+        "artifact_ref": "urn:aurora-21:fixture:b5cd1e9d707e7c4a55135977a7d4e381572d92319c3e34f5e12956e9c3bb7d04",
+        "artifact_sha256": "b5cd1e9d707e7c4a55135977a7d4e381572d92319c3e34f5e12956e9c3bb7d04",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "pms-negative"
+      },
+      "previous": "0ead5844b7d06e16619e37a66d0922b5b918148aac59b998a1ce8613ee43d791",
+      "hash": "c43e75f0fdb820fe6c818b4114516f1b6559cf292d21a091340f4300b45bcc90"
+    },
+    {
+      "seq": 42,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 33,
+        "actual_digest": "2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc",
+        "actual_outcome": "hold",
+        "application": "pms",
+        "artifact_ref": "urn:aurora-21:fixture:3c029b46463a0e660b09b9281a2a5fc823ed68da3aafcd1b21fb8d2785425006",
+        "artifact_sha256": "3c029b46463a0e660b09b9281a2a5fc823ed68da3aafcd1b21fb8d2785425006",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "pms-incomplete"
+      },
+      "previous": "c43e75f0fdb820fe6c818b4114516f1b6559cf292d21a091340f4300b45bcc90",
+      "hash": "d17db1bad25a18dcb33c3cbd46b1f2e2fd1737262e599aaacb00688e91ff7670"
+    },
+    {
+      "seq": 43,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 33,
+        "actual_digest": "2f1753fcd0be807df53c4a3532707afc3d29a4c1f25db1c9e16ebfe582b765bc",
+        "actual_outcome": "out_of_scope",
+        "application": "pms",
+        "artifact_ref": "urn:aurora-21:fixture:e4d8df82b21be6d1c1dc2316d10c0cfdc852b02f67c3e32005821ac3c51151da",
+        "artifact_sha256": "e4d8df82b21be6d1c1dc2316d10c0cfdc852b02f67c3e32005821ac3c51151da",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "pms-exception"
+      },
+      "previous": "d17db1bad25a18dcb33c3cbd46b1f2e2fd1737262e599aaacb00688e91ff7670",
+      "hash": "fa9219da21824ec6ace09a4014173756c4e3666a031f5ad5afc0434bfa32ffb8"
+    },
+    {
+      "seq": 44,
+      "actor": "supervisor",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "release.withdrawn",
+      "payload": {
+        "activation": 33,
+        "at": "2026-11-25T16:00:00Z",
+        "reason": "Reconcile active version before the next release",
+        "release": "bb4608e953e84b222a09e669fca66fd823a48a373a000e12eb55f57d420be570"
+      },
+      "previous": "fa9219da21824ec6ace09a4014173756c4e3666a031f5ad5afc0434bfa32ffb8",
+      "hash": "624664f88b11b93f68778b397e8c49f7afcbe537ab20385b0ea1d1ea6415df13"
+    },
+    {
+      "seq": 45,
+      "actor": "crm",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.acknowledged",
+      "payload": {
+        "activation": 33,
+        "actual_digest": null,
+        "application": "crm",
+        "phase": "withdraw"
+      },
+      "previous": "624664f88b11b93f68778b397e8c49f7afcbe537ab20385b0ea1d1ea6415df13",
+      "hash": "3c1c39e274666444b9a658284ae6eed3e278d7571f977751bec6bfbf170339e2"
+    },
+    {
+      "seq": 46,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 33,
+        "actual_digest": null,
+        "actual_outcome": "inactive",
+        "application": "crm",
+        "artifact_ref": "urn:aurora-21:fixture:ad7370f3e6111fb55d3c9491da1ef292a63eb5fa72437389a0cdc3a5f9d75659",
+        "artifact_sha256": "ad7370f3e6111fb55d3c9491da1ef292a63eb5fa72437389a0cdc3a5f9d75659",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "withdraw",
+        "probe": "withdrawal"
+      },
+      "previous": "3c1c39e274666444b9a658284ae6eed3e278d7571f977751bec6bfbf170339e2",
+      "hash": "89290c0f005a8a72a8734f8c313bc832385b79e1e25fa1a5d8381ff8cb67b415"
+    },
+    {
+      "seq": 47,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 33,
+        "actual_digest": null,
+        "actual_outcome": "unobservable",
+        "application": "pms",
+        "artifact_ref": "urn:aurora-21:fixture:df1f59b1d36f11fa5ce648ff9171a3c466fc82cbc623135bd65940740e19a43e",
+        "artifact_sha256": "df1f59b1d36f11fa5ce648ff9171a3c466fc82cbc623135bd65940740e19a43e",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "withdraw",
+        "probe": "withdrawal"
+      },
+      "previous": "89290c0f005a8a72a8734f8c313bc832385b79e1e25fa1a5d8381ff8cb67b415",
+      "hash": "f8a0b26400312efcd8e82fbe58dc4a16c1644c82ac8ebbe1fef830bfde7729d2"
+    },
+    {
+      "seq": 48,
+      "actor": "pms",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.acknowledged",
+      "payload": {
+        "activation": 33,
+        "actual_digest": null,
+        "application": "pms",
+        "phase": "withdraw"
+      },
+      "previous": "f8a0b26400312efcd8e82fbe58dc4a16c1644c82ac8ebbe1fef830bfde7729d2",
+      "hash": "03d7de1b8b02d99f13782b3374c9a9f6048bbbd8bbc5ef0846075732bdb0c2d0"
+    },
+    {
+      "seq": 49,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 33,
+        "actual_digest": null,
+        "actual_outcome": "inactive",
+        "application": "pms",
+        "artifact_ref": "urn:aurora-21:fixture:3aaa315983753c3a6dc98ff2109fb6961dcd3e6ecec76b7501805becd246158b",
+        "artifact_sha256": "3aaa315983753c3a6dc98ff2109fb6961dcd3e6ecec76b7501805becd246158b",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "withdraw",
+        "probe": "withdrawal"
+      },
+      "previous": "03d7de1b8b02d99f13782b3374c9a9f6048bbbd8bbc5ef0846075732bdb0c2d0",
+      "hash": "ce83a41417e231c805c48adc70eed48d61956f4376bc42399ccd1fb964652417"
+    },
+    {
+      "seq": 50,
+      "actor": "author",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "release.proposed",
+      "payload": {
+        "base": 33,
+        "impact": [
+          "crm",
+          "diligence",
+          "dossier-check",
+          "dossier-contract",
+          "pms"
+        ],
+        "release": "eafe42045a041dca29be038bc7e8e06d941ddea283dd6cf34a995efe9cfd73d5"
+      },
+      "previous": "ce83a41417e231c805c48adc70eed48d61956f4376bc42399ccd1fb964652417",
+      "hash": "80425e745bd05e966c2f5f7425fd5b13c574f3d8056c26ebee0c8e22639935fc"
+    },
+    {
+      "seq": 51,
+      "actor": "steward",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "release.reviewed",
+      "payload": {
+        "choice": "approve",
+        "rationale": "Approved for this synthetic scenario",
+        "release": "eafe42045a041dca29be038bc7e8e06d941ddea283dd6cf34a995efe9cfd73d5"
+      },
+      "previous": "80425e745bd05e966c2f5f7425fd5b13c574f3d8056c26ebee0c8e22639935fc",
+      "hash": "f351d8f7e2cfcc51f95b415ec0041bd1ed2f81bf3ee2e19c218ddaebfd98ecfd"
+    },
+    {
+      "seq": 52,
+      "actor": "owner",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "release.reviewed",
+      "payload": {
+        "choice": "approve",
+        "rationale": "Approved for this synthetic scenario",
+        "release": "eafe42045a041dca29be038bc7e8e06d941ddea283dd6cf34a995efe9cfd73d5"
+      },
+      "previous": "f351d8f7e2cfcc51f95b415ec0041bd1ed2f81bf3ee2e19c218ddaebfd98ecfd",
+      "hash": "eccab32e7a5f0edc803d29cbf9b474cf3cf9a3dde4421cf2f0f0ae4392e868ef"
+    },
+    {
+      "seq": 53,
+      "actor": "publisher",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "release.published",
+      "payload": {
+        "base": 33,
+        "release": "eafe42045a041dca29be038bc7e8e06d941ddea283dd6cf34a995efe9cfd73d5"
+      },
+      "previous": "eccab32e7a5f0edc803d29cbf9b474cf3cf9a3dde4421cf2f0f0ae4392e868ef",
+      "hash": "fa781a7a342f1a977552a928ccca827d6bfd517092544516b28d3c2255d8b896"
+    },
+    {
+      "seq": 54,
+      "actor": "crm",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.acknowledged",
+      "payload": {
+        "activation": 53,
+        "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "application": "crm",
+        "phase": "activate"
+      },
+      "previous": "fa781a7a342f1a977552a928ccca827d6bfd517092544516b28d3c2255d8b896",
+      "hash": "459933c1688f69f7a207662396cea9aae5ec37402c19daf26a1b616c08821656"
+    },
+    {
+      "seq": 55,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 53,
+        "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "actual_outcome": "allow",
+        "application": "crm",
+        "artifact_ref": "urn:aurora-21:fixture:03a09bd238451a5a7585243dcdf145a92fc2a73a08539b88e1f727708da2527f",
+        "artifact_sha256": "03a09bd238451a5a7585243dcdf145a92fc2a73a08539b88e1f727708da2527f",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "crm-positive"
+      },
+      "previous": "459933c1688f69f7a207662396cea9aae5ec37402c19daf26a1b616c08821656",
+      "hash": "b79c184bc1caacf29950cd2c01f2cf7ee577feb94dd10307b995eb3b4ed20176"
+    },
+    {
+      "seq": 56,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 53,
+        "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "actual_outcome": "allow",
+        "application": "crm",
+        "artifact_ref": "urn:aurora-21:fixture:ad5cce767d79558d34aecdaead7d4f8b3f836d2a313500314344494626725739",
+        "artifact_sha256": "ad5cce767d79558d34aecdaead7d4f8b3f836d2a313500314344494626725739",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "crm-negative"
+      },
+      "previous": "b79c184bc1caacf29950cd2c01f2cf7ee577feb94dd10307b995eb3b4ed20176",
+      "hash": "f5eea80961fc5d649344f774cdfc67012da232bf8f71fa455e6a1ae27aa094b9"
+    },
+    {
+      "seq": 57,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 53,
+        "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "actual_outcome": "hold",
+        "application": "crm",
+        "artifact_ref": "urn:aurora-21:fixture:229f8f4cf9093e0664ccd44d0cefd2ce7a8d8bdf142f25cde73d0a96db188f9d",
+        "artifact_sha256": "229f8f4cf9093e0664ccd44d0cefd2ce7a8d8bdf142f25cde73d0a96db188f9d",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "crm-incomplete"
+      },
+      "previous": "f5eea80961fc5d649344f774cdfc67012da232bf8f71fa455e6a1ae27aa094b9",
+      "hash": "2c3a8ce0c42dd278ee4a0ca077c0d5766eb5d9f34aa5c5e8e2812fc4549cb3f8"
+    },
+    {
+      "seq": 58,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 53,
+        "actual_digest": "9792dadaeaacf358332e553bc6672d29960103802e3ed52ba60698d91129c94d",
+        "actual_outcome": "out_of_scope",
+        "application": "crm",
+        "artifact_ref": "urn:aurora-21:fixture:64f40f1cb36d71b120cb9b53440eb3e3fc6909baa7ac82dc194c3d459aa778a0",
+        "artifact_sha256": "64f40f1cb36d71b120cb9b53440eb3e3fc6909baa7ac82dc194c3d459aa778a0",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "crm-exception"
+      },
+      "previous": "2c3a8ce0c42dd278ee4a0ca077c0d5766eb5d9f34aa5c5e8e2812fc4549cb3f8",
+      "hash": "6fd72f640afd88dd94e18b2729f68a7d2bf0aa92b9ae4abab7346eadd19462b3"
+    },
+    {
+      "seq": 59,
+      "actor": "pms",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.acknowledged",
+      "payload": {
+        "activation": 53,
+        "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+        "application": "pms",
+        "phase": "activate"
+      },
+      "previous": "6fd72f640afd88dd94e18b2729f68a7d2bf0aa92b9ae4abab7346eadd19462b3",
+      "hash": "806e1b7e19bddf0bb128961ba5e2f1014c8d4210122105fc9f416e75fddd7aa7"
+    },
+    {
+      "seq": 60,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 53,
+        "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+        "actual_outcome": "allow",
+        "application": "pms",
+        "artifact_ref": "urn:aurora-21:fixture:d53dc0af84ab36a90495889befc36f52826f102c083c8788b89200aa57ba54c5",
+        "artifact_sha256": "d53dc0af84ab36a90495889befc36f52826f102c083c8788b89200aa57ba54c5",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "pms-positive"
+      },
+      "previous": "806e1b7e19bddf0bb128961ba5e2f1014c8d4210122105fc9f416e75fddd7aa7",
+      "hash": "cf215b0c738e44c7c917e6dc955bc9b0a541f81e6c2baff0c0f939ac59cbd1d8"
+    },
+    {
+      "seq": 61,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 53,
+        "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+        "actual_outcome": "allow",
+        "application": "pms",
+        "artifact_ref": "urn:aurora-21:fixture:769f01cf5b719c0ad2618e2166aba8fdb2c4331ee536a6f31ce6af838a1ef6a8",
+        "artifact_sha256": "769f01cf5b719c0ad2618e2166aba8fdb2c4331ee536a6f31ce6af838a1ef6a8",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "pms-negative"
+      },
+      "previous": "cf215b0c738e44c7c917e6dc955bc9b0a541f81e6c2baff0c0f939ac59cbd1d8",
+      "hash": "def5fb9fcb6055488f8fbebbc18298d1b802e159c7125a1f1155151abeb38a61"
+    },
+    {
+      "seq": 62,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 53,
+        "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+        "actual_outcome": "hold",
+        "application": "pms",
+        "artifact_ref": "urn:aurora-21:fixture:e92063a8c82a8b6ed54944c6f5c64ed29df270a3dcedec17450f52e66c251be9",
+        "artifact_sha256": "e92063a8c82a8b6ed54944c6f5c64ed29df270a3dcedec17450f52e66c251be9",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "pms-incomplete"
+      },
+      "previous": "def5fb9fcb6055488f8fbebbc18298d1b802e159c7125a1f1155151abeb38a61",
+      "hash": "22fdeebd4433e14e3847fe5d70e6ecd54893d20987f6bb8444376677fe83387f"
+    },
+    {
+      "seq": 63,
+      "actor": "observer",
+      "at": "2026-11-25T16:00:00Z",
+      "kind": "application.observed",
+      "payload": {
+        "activation": 53,
+        "actual_digest": "bc05f6cca88b3bf4f5f3538ef53e4349bd4fc93c26c61d01d4f7fb364abd5341",
+        "actual_outcome": "out_of_scope",
+        "application": "pms",
+        "artifact_ref": "urn:aurora-21:fixture:9c14a988cbfd46155a57c0a7b4fb713e69fd59643d650eb3eb788a8582b63c08",
+        "artifact_sha256": "9c14a988cbfd46155a57c0a7b4fb713e69fd59643d650eb3eb788a8582b63c08",
+        "captured_at": "2026-11-25T16:00:00Z",
+        "phase": "activate",
+        "probe": "pms-exception"
+      },
+      "previous": "22fdeebd4433e14e3847fe5d70e6ecd54893d20987f6bb8444376677fe83387f",
+      "hash": "db6e1bc4faf02f806617db7d0b3f2d05d46e7796dc53d96f6bdc2c3b6b42d78e"
+    }
+  ],
+  "ledger_tip": "db6e1bc4faf02f806617db7d0b3f2d05d46e7796dc53d96f6bdc2c3b6b42d78e"
+}

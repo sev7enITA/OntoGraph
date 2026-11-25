@@ -6,7 +6,7 @@
 
 Two applications can report the same release and still make different decisions. OntoGraph helps governance and risk teams find that divergence, trace it to the approved rule and check what happens after a withdrawal. It links source evidence, semantic impact, approval, per-application delivery and observed behavior. The offline reference implementation includes a reproducible synthetic case for buyer evaluation.
 
-[Wiki](docs/wiki/README.md) · [Why OntoGraph](docs/wiki/PERCHE-ONTOGRAPH.md) · [Market and standards](docs/wiki/OCEANO-BLU.md) · [Transparent logo](assets/brand/ontograph-mark.png)
+[Project website](https://www.fabriziodegni.com/OnToGraPh/) · [Wiki](docs/wiki/README.md) · [Why OntoGraph](docs/wiki/PERCHE-ONTOGRAPH.md) · [Market and standards](docs/wiki/OCEANO-BLU.md) · [Transparent logo](assets/brand/ontograph-mark.png)
 
 ## Open the visual workspace
 
@@ -28,6 +28,8 @@ python3 -m unittest discover -s tests -v
 ```
 
 Open `out/aurora.html` to inspect the observations. GitHub Actions publishes the HTML and JSON together as the `ontograph-aurora-demo` workflow artifact. A run produces fresh output files. Choose new output paths for subsequent runs.
+
+The project website serves the synthetic report from `site/demo/`. To refresh it, generate new HTML and JSON files using the command above, then replace `site/demo/index.html` and `site/demo/report.json` together.
 
 | Step | CRM | PMS |
 | --- | --- | --- |
