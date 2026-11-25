@@ -1,0 +1,287 @@
+{
+  "format": "ontograph.release/1",
+  "domain": "aurora-21",
+  "purpose": "Check evidence completeness for building dossiers",
+  "owner": "Technical due diligence",
+  "scope": "Synthetic dataset. Building due diligence.",
+  "effective_at": "2026-11-25T15:00:00Z",
+  "evidence": [
+    {
+      "id": "diligence-rule",
+      "uri": "urn:aurora-21:policy:diligence:v2",
+      "excerpt": "A building dossier requires both a technical declaration and an inspection report.",
+      "sha256": "a036f66aa6a7cb87bfdaf709cf31c5480548ca048bfe595ac77020412345485a",
+      "observed_at": "2026-11-25T12:00:00Z",
+      "status": "confirmed",
+      "applicability": "Applies to buildings within the synthetic domain"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "asset",
+      "kind": "concept",
+      "label": "Property asset",
+      "definition": "Umbrella concept for property assets",
+      "owner": "Technical due diligence"
+    },
+    {
+      "id": "building",
+      "kind": "concept",
+      "label": "Building",
+      "definition": "A complete physical building",
+      "owner": "Technical due diligence"
+    },
+    {
+      "id": "unit",
+      "kind": "concept",
+      "label": "Property unit",
+      "definition": "A distinct occupiable unit",
+      "owner": "Technical due diligence"
+    },
+    {
+      "id": "asset-record",
+      "kind": "class",
+      "label": "Asset record",
+      "definition": "Class of asset records",
+      "owner": "Technical due diligence"
+    },
+    {
+      "id": "building-record",
+      "kind": "class",
+      "label": "Building record",
+      "definition": "Class of building dossier records",
+      "owner": "Technical due diligence"
+    },
+    {
+      "id": "asset-type",
+      "kind": "field",
+      "label": "Asset type",
+      "definition": "Classification of the dossier subject",
+      "owner": "Technical due diligence"
+    },
+    {
+      "id": "crm-property",
+      "kind": "field",
+      "label": "CRM.property",
+      "definition": "Identifier in CRM that denotes a building",
+      "owner": "Technical due diligence"
+    },
+    {
+      "id": "pms-unit",
+      "kind": "field",
+      "label": "PMS.unit",
+      "definition": "Identifier in PMS that denotes a unit",
+      "owner": "Technical due diligence"
+    },
+    {
+      "id": "declaration",
+      "kind": "field",
+      "label": "Technical declaration",
+      "definition": "Boolean presence of declaration",
+      "owner": "Technical due diligence"
+    },
+    {
+      "id": "inspection",
+      "kind": "field",
+      "label": "Inspection report",
+      "definition": "Boolean presence of inspection report",
+      "owner": "Technical due diligence"
+    },
+    {
+      "id": "diligence",
+      "kind": "process",
+      "label": "Due diligence",
+      "definition": "Assess an evidence dossier",
+      "owner": "Technical due diligence"
+    },
+    {
+      "id": "dossier-check",
+      "kind": "control",
+      "label": "Evidence completeness",
+      "definition": "Evaluates the dossier under the selected scope",
+      "owner": "Technical due diligence"
+    },
+    {
+      "id": "dossier-contract",
+      "kind": "contract",
+      "label": "Dossier decision",
+      "definition": "allow, hold or out_of_scope",
+      "owner": "Technical due diligence"
+    },
+    {
+      "id": "crm",
+      "kind": "application",
+      "label": "CRM",
+      "definition": "Consumes the dossier decision",
+      "owner": "Technical due diligence"
+    },
+    {
+      "id": "pms",
+      "kind": "application",
+      "label": "PMS",
+      "definition": "Consumes the dossier decision",
+      "owner": "Technical due diligence"
+    }
+  ],
+  "edges": [
+    {
+      "source": "building",
+      "predicate": "broader",
+      "target": "asset"
+    },
+    {
+      "source": "unit",
+      "predicate": "broader",
+      "target": "asset"
+    },
+    {
+      "source": "building-record",
+      "predicate": "subClassOf",
+      "target": "asset-record"
+    },
+    {
+      "source": "crm-property",
+      "predicate": "mapsTo",
+      "target": "building"
+    },
+    {
+      "source": "pms-unit",
+      "predicate": "mapsTo",
+      "target": "unit"
+    },
+    {
+      "source": "dossier-check",
+      "predicate": "dependsOn",
+      "target": "building"
+    },
+    {
+      "source": "dossier-check",
+      "predicate": "dependsOn",
+      "target": "inspection"
+    },
+    {
+      "source": "diligence",
+      "predicate": "dependsOn",
+      "target": "dossier-check"
+    },
+    {
+      "source": "dossier-check",
+      "predicate": "implements",
+      "target": "dossier-contract"
+    },
+    {
+      "source": "crm",
+      "predicate": "consumes",
+      "target": "dossier-contract"
+    },
+    {
+      "source": "pms",
+      "predicate": "consumes",
+      "target": "dossier-contract"
+    }
+  ],
+  "rules": [
+    {
+      "id": "evidence-present",
+      "control": "dossier-check",
+      "evidence": "diligence-rule",
+      "applies": {
+        "asset-type": "building"
+      },
+      "requires": {
+        "declaration": true,
+        "inspection": true
+      }
+    }
+  ],
+  "probes": [
+    {
+      "id": "crm-positive",
+      "application": "crm",
+      "rule": "evidence-present",
+      "facts": {
+        "asset-type": "building",
+        "declaration": true,
+        "inspection": true
+      },
+      "expected": "allow"
+    },
+    {
+      "id": "crm-negative",
+      "application": "crm",
+      "rule": "evidence-present",
+      "facts": {
+        "asset-type": "building",
+        "declaration": true,
+        "inspection": false
+      },
+      "expected": "hold"
+    },
+    {
+      "id": "crm-incomplete",
+      "application": "crm",
+      "rule": "evidence-present",
+      "facts": {
+        "asset-type": "building",
+        "declaration": false,
+        "inspection": false
+      },
+      "expected": "hold"
+    },
+    {
+      "id": "crm-exception",
+      "application": "crm",
+      "rule": "evidence-present",
+      "facts": {
+        "asset-type": "unit",
+        "declaration": true,
+        "inspection": false
+      },
+      "expected": "out_of_scope"
+    },
+    {
+      "id": "pms-positive",
+      "application": "pms",
+      "rule": "evidence-present",
+      "facts": {
+        "asset-type": "building",
+        "declaration": true,
+        "inspection": true
+      },
+      "expected": "allow"
+    },
+    {
+      "id": "pms-negative",
+      "application": "pms",
+      "rule": "evidence-present",
+      "facts": {
+        "asset-type": "building",
+        "declaration": true,
+        "inspection": false
+      },
+      "expected": "hold"
+    },
+    {
+      "id": "pms-incomplete",
+      "application": "pms",
+      "rule": "evidence-present",
+      "facts": {
+        "asset-type": "building",
+        "declaration": false,
+        "inspection": false
+      },
+      "expected": "hold"
+    },
+    {
+      "id": "pms-exception",
+      "application": "pms",
+      "rule": "evidence-present",
+      "facts": {
+        "asset-type": "unit",
+        "declaration": true,
+        "inspection": false
+      },
+      "expected": "out_of_scope"
+    }
+  ]
+}
