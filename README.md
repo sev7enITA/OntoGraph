@@ -99,3 +99,7 @@ The reference implementation uses one local registry per workspace. Aurora 21 us
 | [Website](site/) and [brand assets](assets/brand/) | Source for the bilingual public site, pilot and project wordmark |
 
 OnToGraPh was created by **Fabrizio Degni**. If you find an issue or want to propose an example, include the affected version, steps and the expected result. [Open an issue](https://github.com/sev7enITA/OntoGraph/issues/new) · [Citation metadata](CITATION.cff)
+
+## Assess the impact of a relationship change
+
+Record confidence, criticality, an assessor, rationale and a source on a typed edge. Trace a changed field or concept into decision processes, inspect missing evidence and designate scopes that must be fully assessed before release. [Interactive case](https://openontograph.org/weights/) · [Research and practitioner evidence](https://github.com/sev7enITA/OntoGraph/blob/main/docs/WEIGHTED-RELATIONSHIPS-MARKET.md)

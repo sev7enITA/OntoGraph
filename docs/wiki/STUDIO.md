@@ -80,3 +80,7 @@ Start the standalone Studio with `--registry` and open **Semantic Studio → Rel
 GitHub Actions and Azure Pipelines use the same verification command. An auditor can record the resulting evidence before activation. The release status then shows its commit, run and artifact alongside each application's separate observations.
 
 [DevOps quickstart and reproducible pilot](../../examples/devops/README.md)
+
+## Assess a relationship
+
+In Graph select an explicit relationship, choose **Assess relationship**, and enter criticality, confidence, source, assessor and rationale. Open **Weighted impact** and select a changed object to inspect the path and change its release requirement. [Interactive case](https://openontograph.org/weights/)

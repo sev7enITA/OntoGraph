@@ -96,6 +96,8 @@ function render() {
   el('language').textContent = t('简体中文','English');
   el('language').lang = zh ? 'en' : 'zh-Hans';
   el('presets').setAttribute('aria-label', t('Scenarios','场景'));
+  el('weights-link').href = zh ? '../weights/zh/' : '../weights/';
+  el('weights-link').textContent = t('Explore weighted relationships','探索加权关系');
   el('guide-link').href = zh ? '../guide/zh-Hans.html' : '../guide/';
   el('guide-link').textContent = t('Practical guide','实用指南');
   el('review-link').textContent = t('Read the independent review','阅读独立评审（英文）');

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What changes when a Finance mapping is wrong? | OnToGraPh</title><meta name="description" content="Explore how OnToGraPh traces critical dependencies and the evidence supporting each relationship.">
+<link rel="canonical" href="https://openontograph.org/weights/">
+<link rel="alternate" hreflang="en" href="https://openontograph.org/weights/">
+<link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/weights/zh/">
+<link rel="alternate" hreflang="x-default" href="https://openontograph.org/weights/">
+<link rel="stylesheet" href="./lab.css"><script defer src="./lab.js"></script></head>
+<body><header><strong>OnToGraPh</strong><a href="../">Project home</a><a id="language" href="zh/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></header>
+<main><h1>What changes when a Finance mapping is wrong?</h1>
+<p class="lead">The Finance team relies on a WBS field for month-end close. A steward rates the consequence of a bad mapping at 5 out of 5, yet has only two sample rows to support the mapping. Change the evidence and follow the dependency to the process owner.</p>
+<div class="controls"><label>Evidence scenario<select id="scenario"><option value="initial">Two sample rows</option><option value="corroborated">Legacy formats reconciled</option><option value="missing">Mapping assessment missing</option><option value="disputed">Source disputed</option><option value="complete">All dependencies assessed</option></select></label>
+<label>Follow the path to<select id="endpoint"><option value="finance-close">Month-end close</option><option value="local-reconciliation">Local reconciliation</option></select></label></div>
+<p>Synthetic scenarios calculated by the released Python engine. The numbers express steward judgments. Actual posting errors, outages and losses require separate observations.</p>
+<p id="feedback" role="status"></p>
+<section class="result" id="result" aria-live="polite" hidden><h2>Dependency path</h2><ol class="route" id="path"></ol><dl class="metrics"><div><dt>Highest known criticality</dt><dd id="criticality"></dd></div><div><dt>Weakest confidence</dt><dd id="confidence"></dd></div><div><dt>Evidence status</dt><dd id="status"></dd></div></dl>
+<p id="owner"></p><p id="gate"></p><p id="explanation"></p><div id="steps"></div>
+<p class="links"><a id="model" download>Download this model</a><a id="report">Inspect the full engine output</a></p></section>
+<noscript><p>Read the baseline model and computed impact report below. Enable JavaScript to change scenarios.</p></noscript>
+<h2>How other platforms use weights</h2>
+<p>Neo4j uses relationship costs to calculate weighted paths. ServiceNow models service impact. NVIDIA Auto Ontology compares data values to score potential foreign keys. Palantir supports properties on links and reviewed ontology changes. OntoBricks supports sign-off quorums. OnToGraPh brings consequence, confidence, source and reviewer decisions together in a portable release. A team can require evidence for every dependency of a critical process and independently verify what each consuming application did after a change.</p>
+<p>The adoption test is whether a steward can identify a consequential, uncertain dependency, recover the source and route the change to the right owner more reliably than with the existing workflow. Comparative performance and customer savings still require a pilot.</p>
+<p><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/WEIGHTED-RELATIONSHIPS-MARKET.md">Vendor capabilities and practitioner reports</a></p>
+<h2>Try your own model</h2><p>Open the baseline JSON in standalone Semantic Studio. Select a relationship to edit its assessment. Choose a changed node to inspect the downstream paths. Reviewers can examine the candidate before publication.</p>
+<p class="links"><a href="./initial-model.json">Baseline release model</a><a href="./initial-report.json">Baseline analysis</a><a href="https://github.com/sev7enITA/OntoGraph/tree/main/examples/weighted">Workflow and CLI commands</a></p>
+<footer><a href="../architecture/">Explore the architecture puzzle</a></footer></main></body></html>

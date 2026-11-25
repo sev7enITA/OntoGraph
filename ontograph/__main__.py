@@ -10,7 +10,7 @@ from pathlib import Path
 from . import __version__
 from .aurora import example, run, summary
 from .exchange import policywatcher_evidence, verify_release
-from .model import Rejected, digest, require, validate
+from .model import Rejected, digest, require, validate, weighted_impact
 from .report import render_report
 from .store import Registry, verify_events
 
@@ -63,6 +63,9 @@ def main():
             sub.add_argument("--tip", help="expected hash from an independently retained checkpoint")
         if command == "verify-release":
             sub.add_argument("--release", help="expected release digest from an independent source")
+    weighted = subs.add_parser("weighted-impact", help="trace assessed change paths from a model node")
+    weighted.add_argument("file", type=Path)
+    weighted.add_argument("node_id", help="stable ID of the changed node")
     policy = subs.add_parser("verify-policy", help="verify a generated OPA policy package")
     policy.add_argument("file", type=Path)
     policy.add_argument("--release", help="expected release digest from an independent source")
@@ -101,6 +104,9 @@ def main():
             with args.file.open(encoding="utf-8") as file:
                 document = validate(load(file))
             display({"valid": True, "payload_sha256": digest(document)})
+        elif args.command == "weighted-impact":
+            with args.file.open(encoding="utf-8") as file:
+                display(weighted_impact(load(file), args.node_id))
         elif args.command == "policywatcher-draft":
             with args.packet.open(encoding="utf-8") as file:
                 packet = load(file)

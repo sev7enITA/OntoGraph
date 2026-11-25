@@ -56,3 +56,7 @@ Human **in the loop** approves or objects. Human **on the loop** inspects observ
 | Evidence retained beyond purpose | Manual scoped excerpt selection, no source crawl | Retention policy, deletion and audit retention tests for the customer deployment |
 
 Review source selection, accessibility, stakeholder notice and quality-of-service impacts as part of a customer case. The first commercial qualification measures adapter effort and failure recovery before any claim about availability, scale or reliability.
+
+## Decision impact
+
+The steward rates the consequence of a wrong dependency and confidence in its supporting evidence. The reviewer inspects dependent processes, unknowns and disputed sources. The publisher verifies the designated assessment scope, review votes and applicable CI requirements. The observer records the consumer outcome separately. [Interactive case](https://openontograph.org/weights/)

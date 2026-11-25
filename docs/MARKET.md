@@ -38,3 +38,7 @@ A governance owner may pay to verify the effect of a semantic change across appl
 4. Measure the cost of the first and second adapters and willingness to pay. A comparable result with comparable effort leaves the advantage unproven. If ontology editing is the main need, compare dedicated authoring tools.
 
 Aurora 21 follows a source and rule change, two applications declaring v2, a PMS returning the v1 result, withdrawal and a later check of recovery. All case data is synthetic. Other projects use the OntoGraph name, so confirm name availability before a commercial launch.
+
+## Weighted relationships in the market
+
+Weighted graph algorithms and governed link properties are established capabilities. The adoption hypothesis concerns how much work it takes to recover an assessment, review the affected decision and verify behavior after the change. [Interactive case](https://openontograph.org/weights/) · [Research and practitioner evidence](https://github.com/sev7enITA/OntoGraph/blob/main/docs/WEIGHTED-RELATIONSHIPS-MARKET.md)

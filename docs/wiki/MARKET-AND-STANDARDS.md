@@ -68,3 +68,7 @@ PolicyWatcher contributes change evidence and PALO Framework contributes the gov
 A skeptical buyer is right to keep Git/CI and the catalog if they already connect an approved release to observed decisions and verified withdrawal in each application. Introducing a second governance layer creates new ownership, adapter maintenance and evidence custody work. A paired test on real instances can change that decision when the evidence is auditable and OnToGraPh surfaces a material gap or reduces the cost of equivalent assurance.
 
 This counterargument is adapted from **Inkling 2 Mini Uncensored**, run locally in LM Studio after challenges from **Gemini 4 Neon High** and **GLM-5.4 Max**. [Market challenge and decisions](../REVIEWS.md#market-challenge)
+
+## Weighted graph and decision-impact alternatives
+
+See the dedicated comparison of graph weights, discovery scores, relationship properties and decision evidence. The study includes historical practitioner reports, source links and a paired buyer test. [Interactive case](https://openontograph.org/weights/) · [Research and practitioner evidence](https://github.com/sev7enITA/OntoGraph/blob/main/docs/WEIGHTED-RELATIONSHIPS-MARKET.md)

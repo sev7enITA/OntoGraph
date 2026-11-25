@@ -1,3 +1,4 @@
+import {createWeights} from "./weights.js";
 import {createGraph} from "./graph.js";
 import {renderInspector} from "./inspector.js";
 import {renderEvidence} from "./evidence.js";
@@ -91,6 +92,8 @@ let selection = [], view = "graph", checked = null, activeCheck = 0, sourceDirty
 let versions = [], past = [], future = [], compareIndex = "seed";
 let evidence = null, evidenceRequest = null, pilotReady = false;
 const graph = createGraph($("graph"), select);
+const weights = createWeights({$, el, field, option, call, openDialog, change: changed, select, render,
+  getModel: () => model, getSelection: () => selection, canChange});
 
 function safeLoad(key) {
   try {
@@ -171,6 +174,9 @@ function confirmDiscard() {
 }
 function renameReferences(draft, group, old, next) {
   if (group === "nodes") {
+    if (draft.required_assessment_origins) {
+      draft.required_assessment_origins = draft.required_assessment_origins.map(id => id === old ? next : id);
+    }
     for (const edge of draft.edges) {
       if (edge.source === old) edge.source = next;
       if (edge.target === old) edge.target = next;
@@ -192,6 +198,9 @@ function renameReferences(draft, group, old, next) {
       }
     }
   } else if (group === "evidence") {
+    for (const edge of draft.edges) {
+      if (edge.assessment?.evidence === old) edge.assessment.evidence = next;
+    }
     draft.rules.forEach(rule => { if (rule.evidence === old) rule.evidence = next; });
   } else if (group === "rules") {
     draft.probes.forEach(probe => { if (probe.rule === old) probe.rule = next; });
@@ -242,12 +251,13 @@ function remove(path) {
       const entry = owner[key];
       const id = entry.id;
       const linked = path[0] === "nodes" && (
-        draft.edges.some(edge => edge.source === id || edge.target === id)
+        draft.required_assessment_origins?.includes(id) || draft.edges.some(edge => edge.source === id || edge.target === id)
         || draft.rules.some(rule => rule.control === id || own(rule.applies, id) || own(rule.requires, id))
         || draft.probes.some(probe => probe.application === id || own(probe.facts, id))
       );
       if (linked || (path[0] === "rules" && draft.probes.some(probe => probe.rule === id))
-          || (path[0] === "evidence" && draft.rules.some(rule => rule.evidence === id))) {
+          || (path[0] === "evidence" && (draft.rules.some(rule => rule.evidence === id)
+            || draft.edges.some(edge => edge.assessment?.evidence === id)))) {
         return "Remove references to this object first.";
       }
     }
@@ -318,11 +328,15 @@ function render() {
   $("apply-code").disabled = !sourceDirty;
   $("discard-code").disabled = !sourceDirty;
   if (!sourceDirty) $("code-editor").value = show(model);
+  weights.labels();
   if (view === "graph") {
+    $("assess-edge").hidden = selection[0] !== "edges" || !model.edges[selection[1]];
     renderNavigator();
-    graph.render({document: model, selection, mode: $("graph-mode").value, layer: $("graph-layer").value});
+    graph.render({document: model, selection, mode: $("graph-mode").value, layer: $("graph-layer").value, zh: weights.isChinese()});
     renderInspector($("inspector"), {document: model, path: selection, onSelect: select, onUpdate: update, onDelete: remove});
     synchronizeZoom();
+  } else if (view === "weights") {
+    weights.panel();
   } else if (view === "studio") {
     renderStudio();
   } else if (view === "versions") {
@@ -460,12 +474,12 @@ async function exportFile() {
   }
   tell("Export ready.");
 }
-function openDialog(title, build) {
+function openDialog(title, build, submitText = "Add") {
   canChange();
   const dialog = $("edit-dialog"), body = $("edit-dialog-content");
   const form = el("form", null, {class: "form-stack"});
   const error = el("p", "", {role: "status"});
-  const action = el("button", "Add", {type: "submit", class: "button primary"});
+  const action = el("button", submitText, {type: "submit", class: "button primary"});
   $("edit-dialog-title").textContent = title;
   body.replaceChildren(form);
   const task = build(form);
@@ -772,6 +786,7 @@ action("open-registry", () => {
 action("demo-button", showDemo);
 action("add-object", createObject);
 action("add-relation", createRelation);
+action("assess-edge", weights.editEdge);
 action("import-policywatcher", importPolicyWatcherEvidence);
 action("graph-fit", () => { graph.fit(); synchronizeZoom(); });
 action("graph-reset", () => { graph.reset(); synchronizeZoom(); });

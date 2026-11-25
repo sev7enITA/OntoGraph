@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>财务字段映射出错，会影响哪些流程？ | OnToGraPh</title><meta name="description" content="了解 OnToGraPh 如何追踪关键依赖关系以及每条关系的证据。">
+<link rel="canonical" href="https://openontograph.org/weights/zh/">
+<link rel="alternate" hreflang="en" href="https://openontograph.org/weights/">
+<link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/weights/zh/">
+<link rel="alternate" hreflang="x-default" href="https://openontograph.org/weights/">
+<link rel="stylesheet" href="../lab.css"><script defer src="../lab.js"></script></head>
+<body><header><strong>OnToGraPh</strong><a href="../../zh/">项目首页</a><a id="language" href="../" hreflang="en" lang="en">English</a></header>
+<main><h1>财务字段映射出错，会影响哪些流程？</h1>
+<p class="lead">财务团队在月末结账时依赖 WBS 字段。数据负责人将映射错误的后果评为 5 级，但目前仅有两行样本支持这项映射。更改证据并追踪依赖关系，查看对下游流程的影响。</p>
+<div class="controls"><label>证据场景<select id="scenario"><option value="initial">两行样本</option><option value="corroborated">已核对历史格式</option><option value="missing">缺少映射评估</option><option value="disputed">来源有争议</option><option value="complete">全部依赖均已评估</option></select></label>
+<label>选择目标流程<select id="endpoint"><option value="finance-close">月末结账</option><option value="local-reconciliation">本地对账</option></select></label></div>
+<p>这些合成场景由发布的 Python 引擎计算。数值反映数据负责人的判断。实际过账错误、中断和损失需要单独观测。</p>
+<p id="feedback" role="status"></p>
+<section class="result" id="result" aria-live="polite" hidden><h2>依赖路径</h2><ol class="route" id="path"></ol><dl class="metrics"><div><dt>已知最高关键程度</dt><dd id="criticality"></dd></div><div><dt>最低置信度</dt><dd id="confidence"></dd></div><div><dt>证据状态</dt><dd id="status"></dd></div></dl>
+<p id="owner"></p><p id="gate"></p><p id="explanation"></p><div id="steps"></div>
+<p class="links"><a id="model" download>下载此模型</a><a id="report">查看完整引擎结果</a></p></section>
+<noscript><p>可阅读下方基线模型和分析报告。启用 JavaScript 后可切换场景。</p></noscript>
+<h2>其他平台如何使用权重</h2>
+<p>Neo4j 根据关系成本计算加权路径，ServiceNow 对服务影响进行建模，NVIDIA Auto Ontology 则通过比较数据值为候选外键评分。Palantir 支持带属性的关系和本体变更审核，OntoBricks 支持按规定人数签核。OnToGraPh 将后果严重程度、置信度、来源和审核决定纳入可移植的发布版本。团队可以要求对关键流程的每个依赖关系提供证据，并在变更后独立核验各个使用该模型的应用程序的实际行为。</p>
+<p>采用该功能时，可以检验负责人能否更可靠地发现后果重大但依据薄弱的依赖关系，找到来源并交由适当责任人复核。性能差异和客户节省的成本仍需试点验证。</p>
+<p><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/WEIGHTED-RELATIONSHIPS-MARKET.md">产品能力与用户反馈（英文）</a></p>
+<h2>分析自己的模型</h2><p>在独立版 Semantic Studio 中打开基线 JSON。选择关系并编辑评估，再选择发生变化的节点以查看下游路径。审核人可以在发布前检查候选版本。</p>
+<p class="links"><a href="../initial-model.json">基线发布模型</a><a href="../initial-report.json">基线分析</a><a href="https://github.com/sev7enITA/OntoGraph/tree/main/examples/weighted">工作流及命令行说明（英文）</a></p>
+<footer><a href="../../architecture/?lang=zh-Hans">探索架构拼图</a></footer></main></body></html>

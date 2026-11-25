@@ -30,3 +30,15 @@ These model reviews challenged the proposed claims and pilot design. The project
 - Inkling's incumbent case becomes an assessment outcome. When both arms match the preregistered cases and the incumbent's total recorded effort is equal or lower, the assessor reports the incumbent as viable.
 
 [Studio workflow](wiki/STUDIO.md) · [Shared governance hub](wiki/HUB.md)
+
+## Weighted decision impact
+
+Three independent design challenges informed the implementation. The product was tested by running its own analyzer, registry and regression suite.
+
+| Reviewer | Challenge | Decision in this release |
+| --- | --- | --- |
+| Gemini 4 Neon High, Antigravity | Existing tools already support weights and governed links. Multiplying severity by confidence or adding reconvergent paths can make the decision look more certain than it is. | Credit prior art and report source-backed severity and confidence independently on each path. Preserve original edge attributes for review. The [market study](WEIGHTED-RELATIONSHIPS-MARKET.md) identifies the sources actually checked. |
+| GLM-5.4 Max, ZCode | Cycles, truncated graphs and competing evidence can hide uncertainty. Changing an assessment after review can invalidate an explanation. | Count all reachable operational edges separately from the bounded path list, expose truncation, treat missing and disputed evidence explicitly, and require a new frozen release for edited assessments. Each release keeps one current assessment per triple; concurrent competing assessor votes on the same edge would require a richer model. |
+| Inkling 2 Mini Uncensored, LM Studio local inference | A critical Finance mapping with weak evidence could be treated as safe; adding scores across shared paths can double-count exposure. | Keep highest known severity and weakest supported confidence separate. The proposed scalar product and automatic decision thresholds were declined. A mandatory scope checks completeness and evidence status in addition to the existing independent approval workflow. |
+
+The assessor field records a declaration. Authenticated approval and independent downstream observations remain separate operations. A dated evidence record can become obsolete; the steward is responsible for reassessing its applicability. [Worked example](../examples/weighted/README.md)

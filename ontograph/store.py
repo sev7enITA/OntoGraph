@@ -7,7 +7,7 @@ import sqlite3
 from contextlib import closing, contextmanager
 
 from .model import (
-    DECISIONS, canonical, consumer_bundle, digest, identifier, impact, indexed, jsonld,
+    DECISIONS, canonical, check_required_assessments, consumer_bundle, digest, identifier, impact, indexed, jsonld,
     nonempty, require, text_digest, timestamp, utcnow, validate, verify_discrimination,
 )
 
@@ -228,6 +228,7 @@ class Registry:
 
     @staticmethod
     def _require_approval(db, release_id, manifest, payload):
+        check_required_assessments(payload)
         require(all(item["status"] == "confirmed" for item in payload["evidence"]),
                 "Disputed or insufficient evidence blocks publication")
         votes = db.execute("""SELECT r.reviewer,r.choice,p.active FROM reviews r

@@ -68,8 +68,8 @@ function modelGraph(model) {
     if (!byCollection.has(identity)) byCollection.set(identity, key);
   };
   const lookup = (collection, id) => byCollection.get(pathKey([collection, id]));
-  const link = (source, target, label, path, virtual = false) => {
-    if (source && target && source !== target) edges.push({ source, target, label, path, virtual });
+  const link = (source, target, label, path, virtual = false, assessment) => {
+    if (source && target && source !== target) edges.push({ source, target, label, path, virtual, assessment });
   };
   for (const [collection, kind] of Object.entries({
     nodes: null, evidence: "evidence", rules: "rule", probes: "probe"
@@ -84,7 +84,7 @@ function modelGraph(model) {
     model.edges.forEach((edge, index) => {
       if (!edge || typeof edge !== "object") return;
       const label = Object.hasOwn(RELATIONS, edge.predicate) ? RELATIONS[edge.predicate] : "relationship";
-      link(lookup("nodes", edge.source), lookup("nodes", edge.target), label, ["edges", index]);
+      link(lookup("nodes", edge.source), lookup("nodes", edge.target), label, ["edges", index], false, edge.assessment);
     });
   }
   if (Array.isArray(model?.rules)) {
@@ -267,7 +267,7 @@ const STYLE = `
   .og-empty { fill: #a1b0c6; font-size: 15px; }
 `;
 
-function drawGraph(graph, layout, id, focus, onSelect) {
+function drawGraph(graph, layout, id, focus, onSelect, zh) {
   const { width, height, positions, stages } = layout;
   const svg = svgElement("svg", {
     viewBox: `0 0 ${width} ${height}`, width, height, role: "group",
@@ -279,7 +279,7 @@ function drawGraph(graph, layout, id, focus, onSelect) {
   const arrowId = `og-arrow-${id}`;
   const arrow = svgElement("marker", {
     id: arrowId, viewBox: "0 0 6 6", refX: "5.5", refY: "3",
-    markerWidth: "5", markerHeight: "5", orient: "auto"
+    markerWidth: "9", markerHeight: "9", markerUnits: "userSpaceOnUse", orient: "auto"
   });
   arrow.append(svgElement("path", { d: "M 0 0 L 6 3 L 0 6 Z", fill: "#9bb1cc" }));
   defs.append(arrow);
@@ -306,9 +306,13 @@ function drawGraph(graph, layout, id, focus, onSelect) {
     const primary = focus && ["implements", "consumes", "rule for"].includes(edge.label);
     const classes = ["og-edge", edge.virtual && "og-reference", primary && "og-primary"].filter(Boolean);
     const group = svgElement("g", { class: classes.join(" "), "data-kinds": `${left.kind} ${right.kind}` });
-    interactive(group, edge.path, `${left.label} · ${edge.label} · ${right.label}`, onSelect);
+    const assessment = edge.assessment;
+    const assessed = Number.isInteger(assessment?.criticality) && assessment.criticality >= 1 && assessment.criticality <= 5;
+    const weightLabel = assessed ? (zh ? `关键性 ${assessment.criticality}/5，置信度 ${assessment.confidence}` :
+      `Criticality ${assessment.criticality}/5, confidence ${assessment.confidence}`) : "";
+    interactive(group, edge.path, [left.label, edge.label, right.label, weightLabel].filter(Boolean).join(" · "), onSelect);
     group.append(
-      svgElement("path", { class: "og-edge-line", d: pos.line, "marker-end": `url(#${arrowId})` }),
+      svgElement("path", { class: "og-edge-line", d: pos.line, ...(assessed ? {style: `stroke-width:${1 + assessment.criticality}px`} : {}), "marker-end": `url(#${arrowId})` }),
       svgElement("path", { class: "og-edge-hit", d: pos.line }),
       svgElement("text", { x: pos.x, y: pos.y, "text-anchor": "middle" }, edge.label)
     );
@@ -408,11 +412,11 @@ export function createGraph(container, onSelect) {
   });
 
   return {
-    render({ document: model, selection, mode = "focus", layer = "all" }) {
+    render({ document: model, selection, mode = "focus", layer = "all", zh = false }) {
       const path = Array.isArray(selection) ? selection : selection?.path ?? [];
       const graph = modelGraph(model);
       const visible = mode === "all" ? graph : focusGraph(graph, path, anchorKey, layer === "verification");
-      const signature = JSON.stringify([mode, visible.anchor, [...visible.nodes.values()], visible.edges]);
+      const signature = JSON.stringify([mode, zh, visible.anchor, [...visible.nodes.values()], visible.edges]);
       if (svg && drawnSignature === signature) {
         applySelection(svg, path);
         applyLayer(svg, layer);
@@ -428,7 +432,7 @@ export function createGraph(container, onSelect) {
       anchorKey = visible.anchor ?? anchorKey;
       drawnSignature = signature;
       layout = arrange(visible.nodes);
-      svg = drawGraph(visible, layout, id, mode === "focus", onSelect);
+      svg = drawGraph(visible, layout, id, mode === "focus", onSelect, zh);
       container.replaceChildren(svg);
       applySelection(svg, path);
       applyLayer(svg, layer);

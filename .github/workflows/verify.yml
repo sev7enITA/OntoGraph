@@ -25,6 +25,11 @@ jobs:
       - run: python -m unittest discover -s tests -v
       - run: python -m ontograph validate examples/aurora-21.json
       - run: python -m ontograph demo
+      - name: Verify the weighted Finance examples and public impact reports
+        run: |
+          python -m ontograph weighted-impact examples/weighted/finance-close.json posting-object
+          python -m examples.weighted.build_demo
+          git diff --exit-code -- site/weights/
       - name: Exercise standalone customer adoption
         run: python examples/hub_pilot/standalone.py "$RUNNER_TEMP/standalone-evidence"
       - name: Generate offline evidence demo

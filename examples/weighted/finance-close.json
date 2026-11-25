@@ -1,0 +1,229 @@
+{
+  "format": "ontograph.release/1",
+  "domain": "wbs-finance-impact",
+  "purpose": "Assess how changing the Finance posting-object definition could affect month-end close.",
+  "owner": "Enterprise data steward",
+  "scope": "Synthetic Finance and PMO working example. All grades and evidence excerpts are instructional.",
+  "effective_at": "2026-11-25T12:00:00Z",
+  "evidence": [
+    {
+      "id": "design-note",
+      "uri": "urn:example:department-wbs:design-note:v1",
+      "excerpt": "Admit a row to semantic staging only if the source-specific mapping has been resolved.",
+      "sha256": "e21c335e962a442f72f2009ae5e28533f3700d5cc3778dd2f84270a007abfa9c",
+      "observed_at": "2026-11-25T12:00:00Z",
+      "status": "confirmed",
+      "applicability": "Synthetic PMO, Finance and Warehouse file layouts v1. Identifiers are text."
+    },
+    {
+      "id": "finance-sample",
+      "uri": "urn:example:wbs-finance:finance-sample",
+      "excerpt": "A steward inspected two example rows. The treatment of legacy projects remains open.",
+      "sha256": "3a5997e37075402aeecf98967ce1c5a4cc3bea13661734b6b7a08bcd701aa13f",
+      "observed_at": "2026-11-25T12:00:00Z",
+      "status": "confirmed",
+      "applicability": "Synthetic Finance staging and month-end review only."
+    },
+    {
+      "id": "close-runbook",
+      "uri": "urn:example:wbs-finance:close-runbook",
+      "excerpt": "The training runbook names the validated ledger import as an input to month-end close.",
+      "sha256": "c2d689a33f8c98732d8c4687911334c30e8d9b6b031025bbc5e34d54c035c429",
+      "observed_at": "2026-11-25T12:00:00Z",
+      "status": "confirmed",
+      "applicability": "Synthetic Finance staging and month-end review only."
+    }
+  ],
+  "nodes": [
+    {
+      "id": "project-work-package",
+      "kind": "concept",
+      "label": "Work breakdown structure element",
+      "definition": "A node in the project work breakdown. In schedule.csv WBS identifies a work package. Example 0017.",
+      "owner": "PMO",
+      "aliases": [
+        "WBS"
+      ]
+    },
+    {
+      "id": "schedule-wbs",
+      "kind": "field",
+      "label": "schedule.csv.WBS",
+      "definition": "The WBS column in the approved PMO file layout v1.",
+      "owner": "PMO"
+    },
+    {
+      "id": "posting-object",
+      "kind": "concept",
+      "label": "WBS account assignment",
+      "definition": "The ERP object to which a posting is assigned. A PMO package may correspond to several posting objects. Example 0017.",
+      "owner": "Finance",
+      "aliases": [
+        "WBS"
+      ]
+    },
+    {
+      "id": "ledger-wbs",
+      "kind": "field",
+      "label": "ledger.csv.WBS",
+      "definition": "The WBS column in the approved Finance file layout v1.",
+      "owner": "Finance"
+    },
+    {
+      "id": "batch-sheet",
+      "kind": "concept",
+      "label": "Work Batch Sheet",
+      "definition": "A local name in this fictional warehouse for a picking batch document. Example 0017.",
+      "owner": "Warehouse",
+      "aliases": [
+        "WBS"
+      ]
+    },
+    {
+      "id": "batch-wbs",
+      "kind": "field",
+      "label": "batch.csv.WBS",
+      "definition": "The WBS column in the approved Warehouse file layout v1.",
+      "owner": "Warehouse"
+    },
+    {
+      "id": "resolved",
+      "kind": "field",
+      "label": "Approved mapping resolved",
+      "definition": "True only when the importer found one approved mapping for the source system, layout, department and column.",
+      "owner": "Enterprise data steward"
+    },
+    {
+      "id": "staging-import",
+      "kind": "application",
+      "label": "File staging importer",
+      "definition": "Receives daily extract files and routes unresolved rows to the steward.",
+      "owner": "Enterprise data steward"
+    },
+    {
+      "id": "decision-control",
+      "kind": "control",
+      "label": "Decision control",
+      "definition": "Admit a row to semantic staging only if the source-specific mapping has been resolved.",
+      "owner": "Enterprise data steward"
+    },
+    {
+      "id": "decision-contract",
+      "kind": "contract",
+      "label": "Decision contract",
+      "definition": "The application evaluates the declared facts for this decision.",
+      "owner": "Enterprise data steward"
+    },
+    {
+      "id": "finance-close",
+      "kind": "process",
+      "label": "Month-end close",
+      "owner": "Finance controller",
+      "definition": "Synthetic close process relying on the staged Finance posting code."
+    },
+    {
+      "id": "local-reconciliation",
+      "kind": "process",
+      "label": "Local reconciliation",
+      "owner": "Finance operations",
+      "definition": "A spreadsheet reconciliation process whose dependency has not yet been assessed."
+    }
+  ],
+  "edges": [
+    {
+      "source": "schedule-wbs",
+      "predicate": "mapsTo",
+      "target": "project-work-package"
+    },
+    {
+      "source": "ledger-wbs",
+      "predicate": "mapsTo",
+      "target": "posting-object",
+      "assessment": {
+        "confidence": 0.35,
+        "criticality": 5,
+        "evidence": "finance-sample",
+        "assessor": "Finance data steward",
+        "rationale": "A wrong posting object can affect close. Two examples leave the legacy mapping uncertain."
+      }
+    },
+    {
+      "source": "batch-wbs",
+      "predicate": "mapsTo",
+      "target": "batch-sheet"
+    },
+    {
+      "source": "decision-control",
+      "predicate": "dependsOn",
+      "target": "resolved"
+    },
+    {
+      "source": "decision-control",
+      "predicate": "implements",
+      "target": "decision-contract"
+    },
+    {
+      "source": "staging-import",
+      "predicate": "consumes",
+      "target": "decision-contract"
+    },
+    {
+      "source": "finance-close",
+      "predicate": "dependsOn",
+      "target": "ledger-wbs",
+      "assessment": {
+        "confidence": 0.9,
+        "criticality": 4,
+        "evidence": "close-runbook",
+        "assessor": "Finance controller",
+        "rationale": "The close checklist references this ledger field. A manual reconciliation is available."
+      }
+    },
+    {
+      "source": "local-reconciliation",
+      "predicate": "dependsOn",
+      "target": "ledger-wbs"
+    }
+  ],
+  "rules": [
+    {
+      "id": "admit-row",
+      "control": "decision-control",
+      "evidence": "design-note",
+      "applies": {},
+      "requires": {
+        "resolved": true
+      }
+    }
+  ],
+  "probes": [
+    {
+      "id": "staging-import-unique",
+      "application": "staging-import",
+      "rule": "admit-row",
+      "facts": {
+        "resolved": true
+      },
+      "expected": "allow"
+    },
+    {
+      "id": "staging-import-ambiguous",
+      "application": "staging-import",
+      "rule": "admit-row",
+      "facts": {
+        "resolved": false
+      },
+      "expected": "hold"
+    },
+    {
+      "id": "staging-import-missing",
+      "application": "staging-import",
+      "rule": "admit-row",
+      "facts": {},
+      "expected": "hold"
+    }
+  ],
+  "required_assessment_origins": [
+    "posting-object"
+  ]
+}

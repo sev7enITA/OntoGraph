@@ -27,3 +27,7 @@ A data governance or operational risk owner can commission the pilot. Stewards a
 The registry records **approval, declared adoption, observed effect and business outcome** separately. A digest identifies the package. An observation establishes the result for the tested scope. Assessing the business outcome requires additional evidence.
 
 [Explore Aurora 21](AURORA-21.md) · [Read the framework](../FRAMEWORK.md)
+
+## Which decisions depend on a disputed definition?
+
+A reviewer can follow a change in meaning into dependent processes and see the evidence behind each assessed relationship. Missing grades and disputed sources remain visible. [Interactive case](https://openontograph.org/weights/)

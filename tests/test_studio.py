@@ -77,6 +77,31 @@ class StudioTests(unittest.TestCase):
                 demo = json.load(response)
             self.assertEqual(demo["drift"]["applications"][1]["state"], "mismatch")
 
+    def test_weighted_impact_validates_the_draft_and_exports_the_edge_assessment(self):
+        model = example()
+        edge = next(e for e in model["edges"] if e["predicate"] == "dependsOn")
+        edge["assessment"] = {"criticality": 5, "confidence": 0, "assessor": "Steward",
+                              "evidence": model["evidence"][0]["id"], "rationale": "Synthetic dependency check."}
+        with studio() as server:
+            with request(server, "/api/weighted-impact", {"model": model, "node_id": edge["target"]}) as response:
+                report = json.load(response)
+            path = next(row for row in report["paths"] if row["nodes"] == [edge["target"], edge["source"]])
+            self.assertEqual((path["criticality"], path["confidence"]), (5, 0))
+            for format_name in ("mermaid", "plantuml"):
+                with request(server, "/api/export", {"model": model, "format": format_name}) as response:
+                    self.assertIn(b"criticality 5/5", response.read())
+            model["required_assessment_origins"] = [edge["target"]]
+            with request(server, "/api/weighted-impact", {"model": model, "node_id": edge["target"]}) as response:
+                required = json.load(response)
+            self.assertTrue(required["required"])
+            self.assertGreater(required["coverage"]["unassessed_edges"], 0)
+            with request(server, "/api/validate", {"model": model}) as response:
+                self.assertIn(required["assessment_issue"], json.load(response)["blockers"])
+            edge["assessment"]["confidence"] = 3
+            with self.assertRaises(HTTPError) as invalid:
+                request(server, "/api/weighted-impact", {"model": model, "node_id": edge["target"]})
+            self.assertEqual(invalid.exception.code, 400)
+
     def test_paired_trial_leaves_an_unmeasured_incumbent_open_and_rejects_false_withdrawal(self):
         with studio() as server:
             with request(server, "/api/pilot-example") as response:

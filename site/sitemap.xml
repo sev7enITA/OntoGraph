@@ -72,4 +72,16 @@
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/architecture/?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://openontograph.org/architecture/"/>
   </url>
+  <url>
+    <loc>https://openontograph.org/weights/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://openontograph.org/weights/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/weights/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://openontograph.org/weights/"/>
+  </url>
+  <url>
+    <loc>https://openontograph.org/weights/zh/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://openontograph.org/weights/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/weights/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://openontograph.org/weights/"/>
+  </url>
 </urlset>

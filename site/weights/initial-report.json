@@ -1,0 +1,126 @@
+{
+  "model_sha256": "4c6c91696263445f9f217530a4bf251269ef510d652cd22e6959c4e4b607c691",
+  "assessment_gate": {
+    "complete": false,
+    "reason": "Required assessment from posting-object is missing on local-reconciliation dependsOn ledger-wbs"
+  },
+  "origin": "posting-object",
+  "paths": [
+    {
+      "nodes": [
+        "posting-object",
+        "ledger-wbs",
+        "local-reconciliation"
+      ],
+      "steps": [
+        {
+          "source": "ledger-wbs",
+          "predicate": "mapsTo",
+          "target": "posting-object"
+        },
+        {
+          "source": "local-reconciliation",
+          "predicate": "dependsOn",
+          "target": "ledger-wbs"
+        }
+      ],
+      "criticality": 5,
+      "confidence": null,
+      "status": "unassessed",
+      "unassessed_edges": 1,
+      "review_evidence": []
+    },
+    {
+      "nodes": [
+        "posting-object",
+        "ledger-wbs"
+      ],
+      "steps": [
+        {
+          "source": "ledger-wbs",
+          "predicate": "mapsTo",
+          "target": "posting-object"
+        }
+      ],
+      "criticality": 5,
+      "confidence": 0.35,
+      "status": "assessed",
+      "unassessed_edges": 0,
+      "review_evidence": []
+    },
+    {
+      "nodes": [
+        "posting-object",
+        "ledger-wbs",
+        "finance-close"
+      ],
+      "steps": [
+        {
+          "source": "ledger-wbs",
+          "predicate": "mapsTo",
+          "target": "posting-object"
+        },
+        {
+          "source": "finance-close",
+          "predicate": "dependsOn",
+          "target": "ledger-wbs"
+        }
+      ],
+      "criticality": 5,
+      "confidence": 0.35,
+      "status": "assessed",
+      "unassessed_edges": 0,
+      "review_evidence": []
+    }
+  ],
+  "truncated": false,
+  "assessments": [
+    {
+      "source": "finance-close",
+      "predicate": "dependsOn",
+      "target": "ledger-wbs",
+      "assessment": {
+        "confidence": 0.9,
+        "criticality": 4,
+        "evidence": "close-runbook",
+        "assessor": "Finance controller",
+        "rationale": "The close checklist references this ledger field. A manual reconciliation is available."
+      },
+      "status": "confirmed",
+      "observed_at": "2026-11-25T12:00:00Z"
+    },
+    {
+      "source": "ledger-wbs",
+      "predicate": "mapsTo",
+      "target": "posting-object",
+      "assessment": {
+        "confidence": 0.35,
+        "criticality": 5,
+        "evidence": "finance-sample",
+        "assessor": "Finance data steward",
+        "rationale": "A wrong posting object can affect close. Two examples leave the legacy mapping uncertain."
+      },
+      "status": "confirmed",
+      "observed_at": "2026-11-25T12:00:00Z"
+    }
+  ],
+  "coverage": {
+    "reachable_nodes": 3,
+    "reachable_edges": 3,
+    "unassessed_edges": 1,
+    "review_edges": 0,
+    "max_known_criticality": 5,
+    "first_unassessed": {
+      "source": "local-reconciliation",
+      "predicate": "dependsOn",
+      "target": "ledger-wbs"
+    },
+    "first_review_required": null
+  },
+  "limits": {
+    "max_depth": 12,
+    "max_paths": 256
+  },
+  "required": true,
+  "assessment_issue": "Required assessment from posting-object is missing on local-reconciliation dependsOn ledger-wbs"
+}

@@ -72,3 +72,7 @@ A SharePoint list is one practical publication route. The steward publishes a re
 | User without access asks for the warehouse's internal definition | Provides no restricted definition or protected record content. |
 
 For a first pilot, report correct concept and citation / unambiguous questions, clarification requests / ambiguous questions, and restricted disclosures / access-denied tests. Run the same questions before and after connecting the glossary with the same user roles. The acceptance cases above are expected results; each tenant needs its own observed answers.
+
+## Assess the WBS mapping
+
+Extend the departmental exercise by assessing how a wrong Finance mapping could affect month-end close. Try a disputed source and an unassessed spreadsheet dependency. [Interactive case](https://openontograph.org/weights/)

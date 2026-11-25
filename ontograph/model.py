@@ -3,6 +3,7 @@
 import hashlib
 import json
 import re
+from collections import defaultdict, deque
 from datetime import datetime, timezone
 from urllib.parse import quote
 
@@ -16,6 +17,12 @@ RELATION_TYPES = {
     "implements": ({"control"}, {"contract"}),
     "consumes": ({"application"}, {"contract"}),
 }
+# A change propagates from the dependency to its dependent, or from a control
+# to the contract it implements. Hierarchy links do not imply runtime impact.
+IMPACT_REVERSE = {"dependsOn", "consumes", "mapsTo"}
+IMPACT_MAX_DEPTH = 12
+IMPACT_MAX_PATHS = 256
+MAX_REQUIRED_ORIGINS = 8
 EVIDENCE_STATES = {"confirmed", "disputed", "insufficient"}
 
 
@@ -112,7 +119,7 @@ def acyclic(edges, predicate):
 
 def validate(document):
     record(document, ("format", "domain", "purpose", "owner", "scope", "effective_at",
-                      "evidence", "nodes", "edges", "rules", "probes"), "release")
+                      "evidence", "nodes", "edges", "rules", "probes"), "release", ("required_assessment_origins",))
     require(document["format"] == "ontograph.release/1", "Unsupported release format")
     require(len(canonical(document).encode()) <= 2_000_000, "Release too large")
     identifier(document["domain"])
@@ -140,6 +147,12 @@ def validate(document):
                     require(isinstance(meta[field], str) and re.fullmatch(r"[0-9a-f]{64}", meta[field]),
                             "Invalid upstream digest")
     nodes = indexed(document["nodes"], "node")
+    origins = document.get("required_assessment_origins", [])
+    require(type(origins) is list and len(origins) <= MAX_REQUIRED_ORIGINS,
+            f"Required assessment origins must be a list of at most {MAX_REQUIRED_ORIGINS} node IDs")
+    for origin in origins:
+        require(identifier(origin) in nodes, "Required assessment origin must name an existing node")
+    require(len(set(origins)) == len(origins), "Duplicate required assessment origin")
     for node in nodes.values():
         record(node, ("id", "kind", "label", "definition", "owner"), "node", ("aliases",))
         require(node["kind"] in KINDS, "Unknown node kind")
@@ -153,11 +166,22 @@ def validate(document):
     require(type(edges) is list and len(edges) <= 4000, "Invalid edges list")
     triples = set()
     for edge in edges:
-        record(edge, ("source", "predicate", "target"), "edge")
+        record(edge, ("source", "predicate", "target"), "edge", ("assessment",))
         left, right, relation = identifier(edge["source"]), identifier(edge["target"]), edge["predicate"]
         require(left in nodes and right in nodes and left != right, "Dangling reference or self edge")
         require(relation in RELATIONS and (left, relation, right) not in triples, "Invalid or duplicate edge")
         triples.add((left, relation, right))
+        if "assessment" in edge:
+            assessment = record(edge["assessment"], ("confidence", "criticality", "evidence", "rationale", "assessor"),
+                                "edge assessment")
+            confidence, criticality = assessment["confidence"], assessment["criticality"]
+            require(type(confidence) in (float, int) and 0 <= confidence <= 1,
+                    "Edge confidence must be a number from 0 through 1")
+            require(type(criticality) is int and 1 <= criticality <= 5,
+                    "Edge criticality must be an integer from 1 through 5")
+            require(identifier(assessment["evidence"]) in evidence, "Edge assessment requires an evidence reference")
+            nonempty(assessment["rationale"], "edge assessment rationale")
+            nonempty(assessment["assessor"], "edge assessor")
         if relation in RELATION_TYPES:
             sources, targets = RELATION_TYPES[relation]
             require(nodes[left]["kind"] in sources and nodes[right]["kind"] in targets,
@@ -221,31 +245,183 @@ def consumer_bundle(document, application):
             "rules": [rule for rule in document["rules"] if rule["control"] in controls]}
 
 
+def edge_key(edge):
+    return edge["source"], edge["predicate"], edge["target"]
+
+
+def impact_adjacency(triples):
+    adjacency = defaultdict(list)
+    for triple in sorted(triples):
+        source, predicate, target = triple
+        if predicate in IMPACT_REVERSE:
+            adjacency[target].append((source, triple))
+        elif predicate == "implements":
+            adjacency[source].append((target, triple))
+    return adjacency
+
+
 def impact(before, after):
     left = before or {key: [] for key in ("nodes", "edges", "rules", "evidence", "probes")}
-    seeds = set()
+    seeds = set(left.get("required_assessment_origins", [])) ^ set(after.get("required_assessment_origins", []))
     for group, anchor in (("nodes", "id"), ("rules", "control"), ("probes", "application")):
         old, new = indexed(left[group], group), indexed(after[group], group)
         for key in old.keys() | new.keys():
             if old.get(key) != new.get(key):
                 seeds.update(item[anchor] for item in (old.get(key), new.get(key)) if item)
-    old_edges = {(x["source"], x["predicate"], x["target"]) for x in left["edges"]}
-    new_edges = {(x["source"], x["predicate"], x["target"]) for x in after["edges"]}
-    for source, _, target in old_edges ^ new_edges:
-        seeds.update((source, target))
+    old = {edge_key(edge): edge.get("assessment") for edge in left["edges"]}
+    new = {edge_key(edge): edge.get("assessment") for edge in after["edges"]}
+    edges = old.keys() | new.keys()
+    previous = indexed(left["evidence"], "evidence")
+    current = indexed(after["evidence"], "evidence")
+    changed_evidence = {key for key in previous.keys() | current.keys() if previous.get(key) != current.get(key)}
+    for triple in edges:
+        annotations = (old.get(triple), new.get(triple))
+        if (triple not in old or triple not in new or not equal(*annotations)
+                or any(a and a["evidence"] in changed_evidence for a in annotations)):
+            seeds.update((triple[0], triple[2]))
     if left["evidence"] != after["evidence"] or any(left.get(key) != after[key]
                                                   for key in ("purpose", "owner", "scope", "effective_at")):
         seeds.update(rule["control"] for state in (left, after) for rule in state["rules"])
     affected = set(seeds)
-    while True:
-        next_set = affected | {source for source, predicate, target in old_edges | new_edges
-                               if target in affected and predicate in {"dependsOn", "consumes", "mapsTo"}} | {
-            target for source, predicate, target in old_edges | new_edges
-            if source in affected and predicate == "implements"
-        }
-        if next_set == affected:
-            return sorted(affected)
-        affected = next_set
+    pending = list(seeds)
+    adjacency = impact_adjacency(edges)
+    while pending:
+        for target, _ in adjacency[pending.pop()]:
+            if target not in affected:
+                affected.add(target)
+                pending.append(target)
+    return sorted(affected)
+
+
+def edge_reference(triple):
+    source, predicate, target = triple
+    return {"source": source, "predicate": predicate, "target": target}
+
+
+def impact_coverage(origin, adjacency, assessments, evidence):
+    """Count unique reachable edges, including cycle closures and undrawn routes."""
+    pending, seen = [origin], {origin}
+    reachable = []
+    while pending:
+        for dependent, triple in adjacency[pending.pop()]:
+            reachable.append(triple)
+            if dependent not in seen:
+                seen.add(dependent)
+                pending.append(dependent)
+    missing, review, criticalities = [], [], []
+    for triple in sorted(reachable):
+        a = assessments[triple]
+        if a is None:
+            missing.append(triple)
+        else:
+            criticalities.append(a["criticality"])
+            if evidence[a["evidence"]]["status"] != "confirmed":
+                review.append(triple)
+    first_review = None
+    if review:
+        first_review = {**edge_reference(review[0]), "evidence": assessments[review[0]]["evidence"]}
+    return {"reachable_nodes": len(seen) - 1, "reachable_edges": len(reachable),
+            "unassessed_edges": len(missing), "review_edges": len(review),
+            "max_known_criticality": max(criticalities, default=None),
+            "first_unassessed": edge_reference(missing[0]) if missing else None,
+            "first_review_required": first_review}
+
+
+def weighted_impact(document, node_id):
+    """Explain bounded, directed dependency paths from a changed node.
+
+    Each simple path prefix reports the highest known criticality, and minimum
+    confidence only when every step was assessed. Neither is a probability of
+    loss. Steps retain the source orientation of the ontology. A disputed or
+    insufficient source overrides the path status to review_required; missing
+    annotations are counted independently. Enumeration is breadth first with
+    lexical edge tie breaks; truncated means the displayed paths are partial.
+    """
+    validate(document)
+    require(identifier(node_id) in {n["id"] for n in document["nodes"]}, "Unknown impact origin")
+    return _weighted_impact(document, node_id)
+
+
+def _weighted_impact(document, node_id):
+    assessments = {edge_key(edge): edge.get("assessment") for edge in document["edges"]}
+    evidence = indexed(document["evidence"], "evidence")
+    adjacency = impact_adjacency(assessments)
+    pending = deque([([node_id], [])])
+    paths = []
+    shown = set()
+    truncated = False
+    while pending:
+        nodes, steps = pending.popleft()
+        for target, triple in adjacency[nodes[-1]]:
+            if target in nodes:
+                continue
+            if len(steps) >= IMPACT_MAX_DEPTH:
+                truncated = True
+                break
+            if len(paths) >= IMPACT_MAX_PATHS:
+                truncated = True
+                pending.clear()
+                break
+            shown.add(triple)
+            trail = steps + [triple]
+            route = nodes + [target]
+            known = [assessments[key] for key in trail if assessments[key] is not None]
+            missing = len(trail) - len(known)
+            review = sorted({a["evidence"] for a in known if evidence[a["evidence"]]["status"] != "confirmed"})
+            status = "unassessed" if missing else "assessed"
+            paths.append({"nodes": route,
+                          "steps": [edge_reference(step) for step in trail],
+                          "criticality": max((a["criticality"] for a in known), default=None),
+                          "confidence": None if missing else min(a["confidence"] for a in known),
+                          "status": "review_required" if review else status,
+                          "unassessed_edges": missing, "review_evidence": review})
+            pending.append((route, trail))
+    # Flag the limits explicitly: sorting the returned paths cannot rank any
+    # possible omitted routes. Never impute zero confidence for a missing value.
+    paths.sort(key=lambda p: (-(p["criticality"] or 0), p["confidence"] is not None,
+                              p["confidence"] if p["confidence"] is not None else 0, p["nodes"]))
+    metadata = []
+    for triple in sorted(shown):
+        a = assessments[triple]
+        if a is not None:
+            source = evidence[a["evidence"]]
+            metadata.append({**edge_reference(triple), "assessment": dict(a),
+                             "status": source["status"], "observed_at": source["observed_at"]})
+    result = {"origin": node_id, "paths": paths, "truncated": truncated, "assessments": metadata,
+              "coverage": impact_coverage(node_id, adjacency, assessments, evidence),
+              "limits": {"max_depth": IMPACT_MAX_DEPTH, "max_paths": IMPACT_MAX_PATHS},
+              "required": node_id in document.get("required_assessment_origins", [])}
+    result["assessment_issue"] = _assessment_issue(result)
+    return result
+
+
+def _assessment_issue(result):
+    origin = result["origin"]
+    if not result["paths"]:
+        return f"Assessment origin {origin} has no operational impact path"
+    if result["truncated"]:
+        return f"Impact path limits reached at {origin}; narrow or revise the mandatory scope"
+    missing = result["coverage"]["first_unassessed"]
+    if missing:
+        return (f"Required assessment from {origin} is missing on "
+                f"{missing['source']} {missing['predicate']} {missing['target']}")
+    contested = result["coverage"]["first_review_required"]
+    if contested:
+        return (f"Required assessment from {origin} references unconfirmed evidence {contested['evidence']} "
+                f"on {contested['source']} {contested['predicate']} {contested['target']}")
+    return None
+
+
+def check_required_assessments(document):
+    """Reject incomplete mandatory impact scopes before publication or OPA export."""
+    origins = document.get("required_assessment_origins", [])
+    if origins == []:
+        return
+    validate(document)
+    for origin in sorted(origins):
+        issue = _weighted_impact(document, origin)["assessment_issue"]
+        if issue:
+            raise Rejected(issue)
 
 
 def jsonld(document, workspace, release_digest):
@@ -270,10 +446,24 @@ def jsonld(document, workspace, release_digest):
                              "skos:altLabel": node.get("aliases", []), "og:owner": node["owner"]}
         if node["kind"] == "concept":
             graph[node["id"]]["skos:inScheme"] = {"@id": scheme["@id"]}
+    assessments = []
+    evidence_ids = {item["id"]: prefix + "evidence:" + digest(item) for item in document["evidence"]}
     for edge in document["edges"]:
         property_id = predicates.get(edge["predicate"], "og:" + edge["predicate"])
-        graph[edge["source"]].setdefault(property_id, []).append({"@id": graph[edge["target"]]["@id"]})
-    sources = [{"@id": prefix + "evidence:" + digest(item), "@type": "prov:Entity",
+        subject = {"@id": graph[edge["source"]]["@id"]}
+        target = {"@id": graph[edge["target"]]["@id"]}
+        graph[edge["source"]].setdefault(property_id, []).append(target)
+        if "assessment" in edge:
+            a = edge["assessment"]
+            assessments.append({
+                "@id": prefix + "assessment:" + digest([release_digest, *edge_key(edge)]),
+                "@type": ["rdf:Statement", "og:RelationshipAssessment"],
+                "rdf:subject": subject, "rdf:predicate": {"@id": property_id}, "rdf:object": target,
+                "og:confidence": a["confidence"], "og:criticality": a["criticality"],
+                "og:rationale": a["rationale"], "og:assessor": a["assessor"],
+                "prov:wasDerivedFrom": {"@id": evidence_ids[a["evidence"]]},
+            })
+    sources = [{"@id": evidence_ids[item["id"]], "@type": "prov:Entity",
                 "dct:source": {"@id": item["uri"]}, "og:sha256": item["sha256"],
                 "og:status": item["status"],
                 **({"og:upstreamReportedSha256": item["upstream"]["reported_sha256"]}
@@ -281,4 +471,10 @@ def jsonld(document, workspace, release_digest):
     release = {"@id": prefix + "release:" + release_digest, "@type": "prov:Entity",
                "prov:wasDerivedFrom": [{"@id": source["@id"]} for source in sources],
                "og:sha256": release_digest}
-    return {"@context": context, "@graph": [release, scheme, *graph.values(), *sources]}
+    if document.get("required_assessment_origins"):
+        release["og:requiredAssessmentOrigin"] = [
+            {"@id": graph[origin]["@id"]} for origin in document["required_assessment_origins"]]
+    if assessments:
+        context["rdf"] = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        release["og:assessment"] = [{"@id": item["@id"]} for item in assessments]
+    return {"@context": context, "@graph": [release, scheme, *graph.values(), *sources, *assessments]}

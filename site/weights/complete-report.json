@@ -1,0 +1,135 @@
+{
+  "model_sha256": "0abbc52af933e5b83f34544187deb79e9beb9ff6e4f8f8d8302a91bc76f502dd",
+  "assessment_gate": {
+    "complete": true
+  },
+  "origin": "posting-object",
+  "paths": [
+    {
+      "nodes": [
+        "posting-object",
+        "ledger-wbs",
+        "local-reconciliation"
+      ],
+      "steps": [
+        {
+          "source": "ledger-wbs",
+          "predicate": "mapsTo",
+          "target": "posting-object"
+        },
+        {
+          "source": "local-reconciliation",
+          "predicate": "dependsOn",
+          "target": "ledger-wbs"
+        }
+      ],
+      "criticality": 5,
+      "confidence": 0.8,
+      "status": "assessed",
+      "unassessed_edges": 0,
+      "review_evidence": []
+    },
+    {
+      "nodes": [
+        "posting-object",
+        "ledger-wbs",
+        "finance-close"
+      ],
+      "steps": [
+        {
+          "source": "ledger-wbs",
+          "predicate": "mapsTo",
+          "target": "posting-object"
+        },
+        {
+          "source": "finance-close",
+          "predicate": "dependsOn",
+          "target": "ledger-wbs"
+        }
+      ],
+      "criticality": 5,
+      "confidence": 0.9,
+      "status": "assessed",
+      "unassessed_edges": 0,
+      "review_evidence": []
+    },
+    {
+      "nodes": [
+        "posting-object",
+        "ledger-wbs"
+      ],
+      "steps": [
+        {
+          "source": "ledger-wbs",
+          "predicate": "mapsTo",
+          "target": "posting-object"
+        }
+      ],
+      "criticality": 5,
+      "confidence": 0.95,
+      "status": "assessed",
+      "unassessed_edges": 0,
+      "review_evidence": []
+    }
+  ],
+  "truncated": false,
+  "assessments": [
+    {
+      "source": "finance-close",
+      "predicate": "dependsOn",
+      "target": "ledger-wbs",
+      "assessment": {
+        "confidence": 0.9,
+        "criticality": 4,
+        "evidence": "close-runbook",
+        "assessor": "Finance controller",
+        "rationale": "The close checklist references this ledger field. A manual reconciliation is available."
+      },
+      "status": "confirmed",
+      "observed_at": "2026-11-25T12:00:00Z"
+    },
+    {
+      "source": "ledger-wbs",
+      "predicate": "mapsTo",
+      "target": "posting-object",
+      "assessment": {
+        "confidence": 0.95,
+        "criticality": 5,
+        "evidence": "finance-reconciliation",
+        "assessor": "Finance data steward",
+        "rationale": "Legacy and current formats reconciled in the synthetic sample."
+      },
+      "status": "confirmed",
+      "observed_at": "2026-11-25T12:00:00Z"
+    },
+    {
+      "source": "local-reconciliation",
+      "predicate": "dependsOn",
+      "target": "ledger-wbs",
+      "assessment": {
+        "confidence": 0.8,
+        "criticality": 3,
+        "evidence": "worksheet-review",
+        "assessor": "Finance operations",
+        "rationale": "The reconciliation team documented its fallback."
+      },
+      "status": "confirmed",
+      "observed_at": "2026-11-25T12:00:00Z"
+    }
+  ],
+  "coverage": {
+    "reachable_nodes": 3,
+    "reachable_edges": 3,
+    "unassessed_edges": 0,
+    "review_edges": 0,
+    "max_known_criticality": 5,
+    "first_unassessed": null,
+    "first_review_required": null
+  },
+  "limits": {
+    "max_depth": 12,
+    "max_paths": 256
+  },
+  "required": true,
+  "assessment_issue": null
+}

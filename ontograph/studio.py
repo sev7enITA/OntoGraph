@@ -14,8 +14,8 @@ from zipfile import ZIP_DEFLATED, ZipFile
 from .aurora import example, run
 from .exchange import policywatcher_evidence
 from .model import (
-    DECISIONS, KINDS, RELATIONS, Rejected, canonical, digest, equal, evaluate, impact,
-    indexed, jsonld, record, require, timestamp, validate, verify_discrimination,
+    DECISIONS, KINDS, RELATIONS, Rejected, canonical, check_required_assessments, digest, equal, evaluate, impact,
+    indexed, jsonld, record, require, timestamp, validate, verify_discrimination, weighted_impact,
 )
 from .pilot import assess, example_from_report
 from .report import render_report
@@ -31,6 +31,7 @@ ASSETS = {
     "/processi/process.css": (PROCESS / "process.css", "text/css; charset=utf-8"),
     "/studio.css": (WEB / "studio.css", "text/css; charset=utf-8"),
     "/studio.js": (WEB / "studio.js", "text/javascript; charset=utf-8"),
+    "/weights.js": (WEB / "weights.js", "text/javascript; charset=utf-8"),
     "/graph.js": (WEB / "graph.js", "text/javascript; charset=utf-8"),
     "/inspector.js": (WEB / "inspector.js", "text/javascript; charset=utf-8"),
     "/evidence.js": (WEB / "evidence.js", "text/javascript; charset=utf-8"),
@@ -119,6 +120,10 @@ def inspect(payload):
     blockers = []
     if any(item["status"] != "confirmed" for item in draft["evidence"]):
         blockers.append("Evidence contains disputed or insufficient records")
+    try:
+        check_required_assessments(draft)
+    except Rejected as error:
+        blockers.append(str(error))
     if base is not None:
         try:
             verify_discrimination(base, draft)
@@ -131,15 +136,21 @@ def inspect(payload):
 def diagram(document, style):
     nodes = {node["id"]: (f"n{i}", re.sub(r'[^\w .,:()/+-]', " ", node["label"]).strip()[:96])
              for i, node in enumerate(document["nodes"])}
+    def edge_label(edge):
+        rating = edge.get("assessment")
+        if rating is None:
+            return edge["predicate"]
+        return f"{edge['predicate']} · criticality {rating['criticality']}/5 · confidence {rating['confidence']}"
+
     if style == "mermaid":
         lines = ["flowchart LR"]
         lines.extend(f'  {index}["{label}"]' for index, label in nodes.values())
-        lines.extend(f"  {nodes[e['source']][0]} -->|{e['predicate']}| {nodes[e['target']][0]}"
+        lines.extend(f"  {nodes[e['source']][0]} -->|{edge_label(e)}| {nodes[e['target']][0]}"
                      for e in document["edges"])
     else:
         lines = ["@startuml", "left to right direction"]
         lines.extend(f'rectangle "{label}" as {index}' for index, label in nodes.values())
-        lines.extend(f"{nodes[e['source']][0]} --> {nodes[e['target']][0]} : {e['predicate']}"
+        lines.extend(f"{nodes[e['source']][0]} --> {nodes[e['target']][0]} : {edge_label(e)}"
                      for e in document["edges"])
         lines.append("@enduml")
     return "\n".join(lines) + "\n"
@@ -279,6 +290,9 @@ class StudioHandler(BaseHTTPRequestHandler):
             payload = parse_json(data)
             if path == "/api/validate":
                 self._json(inspect(payload))
+            elif path == "/api/weighted-impact":
+                record(payload, ("model", "node_id"), "weighted impact request")
+                self._json(weighted_impact(payload["model"], payload["node_id"]))
             elif path == "/api/pilot/assess":
                 self._json(assess(payload))
             elif path == "/api/policywatcher-draft":
