@@ -1,0 +1,170 @@
+{
+  "format": "ontograph.release/1",
+  "domain": "department-wbs",
+  "purpose": "Admit a row to semantic staging only if the source-specific mapping has been resolved.",
+  "owner": "Enterprise data steward",
+  "scope": "Synthetic PMO, Finance and Warehouse file layouts v1. Identifiers are text.",
+  "effective_at": "2026-11-25T12:00:00Z",
+  "evidence": [
+    {
+      "id": "design-note",
+      "uri": "urn:example:department-wbs:design-note:v1",
+      "excerpt": "Admit a row to semantic staging only if the source-specific mapping has been resolved.",
+      "sha256": "e21c335e962a442f72f2009ae5e28533f3700d5cc3778dd2f84270a007abfa9c",
+      "observed_at": "2026-11-25T12:00:00Z",
+      "status": "confirmed",
+      "applicability": "Synthetic PMO, Finance and Warehouse file layouts v1. Identifiers are text."
+    }
+  ],
+  "nodes": [
+    {
+      "id": "project-work-package",
+      "kind": "concept",
+      "label": "Work breakdown structure element",
+      "definition": "A node in the project work breakdown. In schedule.csv WBS identifies a work package. Example 0017.",
+      "owner": "PMO",
+      "aliases": [
+        "WBS"
+      ]
+    },
+    {
+      "id": "schedule-wbs",
+      "kind": "field",
+      "label": "schedule.csv.WBS",
+      "definition": "The WBS column in the approved PMO file layout v1.",
+      "owner": "PMO"
+    },
+    {
+      "id": "posting-object",
+      "kind": "concept",
+      "label": "WBS account assignment",
+      "definition": "The ERP object to which a posting is assigned. A PMO package may correspond to several posting objects. Example 0017.",
+      "owner": "Finance",
+      "aliases": [
+        "WBS"
+      ]
+    },
+    {
+      "id": "ledger-wbs",
+      "kind": "field",
+      "label": "ledger.csv.WBS",
+      "definition": "The WBS column in the approved Finance file layout v1.",
+      "owner": "Finance"
+    },
+    {
+      "id": "batch-sheet",
+      "kind": "concept",
+      "label": "Work Batch Sheet",
+      "definition": "A local name in this fictional warehouse for a picking batch document. Example 0017.",
+      "owner": "Warehouse",
+      "aliases": [
+        "WBS"
+      ]
+    },
+    {
+      "id": "batch-wbs",
+      "kind": "field",
+      "label": "batch.csv.WBS",
+      "definition": "The WBS column in the approved Warehouse file layout v1.",
+      "owner": "Warehouse"
+    },
+    {
+      "id": "resolved",
+      "kind": "field",
+      "label": "Approved mapping resolved",
+      "definition": "True only when the importer found one approved mapping for the source system, layout, department and column.",
+      "owner": "Enterprise data steward"
+    },
+    {
+      "id": "staging-import",
+      "kind": "application",
+      "label": "File staging importer",
+      "definition": "Receives daily extract files and routes unresolved rows to the steward.",
+      "owner": "Enterprise data steward"
+    },
+    {
+      "id": "decision-control",
+      "kind": "control",
+      "label": "Decision control",
+      "definition": "Admit a row to semantic staging only if the source-specific mapping has been resolved.",
+      "owner": "Enterprise data steward"
+    },
+    {
+      "id": "decision-contract",
+      "kind": "contract",
+      "label": "Decision contract",
+      "definition": "The application evaluates the declared facts for this decision.",
+      "owner": "Enterprise data steward"
+    }
+  ],
+  "edges": [
+    {
+      "source": "schedule-wbs",
+      "predicate": "mapsTo",
+      "target": "project-work-package"
+    },
+    {
+      "source": "ledger-wbs",
+      "predicate": "mapsTo",
+      "target": "posting-object"
+    },
+    {
+      "source": "batch-wbs",
+      "predicate": "mapsTo",
+      "target": "batch-sheet"
+    },
+    {
+      "source": "decision-control",
+      "predicate": "dependsOn",
+      "target": "resolved"
+    },
+    {
+      "source": "decision-control",
+      "predicate": "implements",
+      "target": "decision-contract"
+    },
+    {
+      "source": "staging-import",
+      "predicate": "consumes",
+      "target": "decision-contract"
+    }
+  ],
+  "rules": [
+    {
+      "id": "admit-row",
+      "control": "decision-control",
+      "evidence": "design-note",
+      "applies": {},
+      "requires": {
+        "resolved": true
+      }
+    }
+  ],
+  "probes": [
+    {
+      "id": "staging-import-unique",
+      "application": "staging-import",
+      "rule": "admit-row",
+      "facts": {
+        "resolved": true
+      },
+      "expected": "allow"
+    },
+    {
+      "id": "staging-import-ambiguous",
+      "application": "staging-import",
+      "rule": "admit-row",
+      "facts": {
+        "resolved": false
+      },
+      "expected": "hold"
+    },
+    {
+      "id": "staging-import-missing",
+      "application": "staging-import",
+      "rule": "admit-row",
+      "facts": {},
+      "expected": "hold"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+Aurora activation 3 / 3, 2 / 2, 1 / 2, 0 / 2
+PMS probe removed 3 / 3, 1 / 2, 0 / 2, 1 / 2
+CI removed 2 / 3, 0 / 2, 0 / 2, 2 / 2
+CI restored 3 / 3, 2 / 2, 1 / 2, 0 / 2
+Withdrawal: timeout 3 / 3, 1 / 2, 0 / 2, 1 / 2
+Withdrawal: reconciliation 3 / 3, 2 / 2, 0 / 2, 0 / 2
+Qualified incumbent 3 / 3, 2 / 2, 1 / 2, 0 / 2
+Adapter removed 2 / 3, 0 / 2, 0 / 2, 2 / 2
+Procurement activation 3 / 3, 2 / 2, 0 / 2, 0 / 2
+Drools without qualified adapter 2 / 3, 0 / 2, 0 / 2, 2 / 2
+Qualified Drools 3 / 3, 2 / 2, 0 / 2, 0 / 2

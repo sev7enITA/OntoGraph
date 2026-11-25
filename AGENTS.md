@@ -15,3 +15,5 @@ The Aurora case declares synthetic scenario time by injection. The normal CLI us
 ## Documentation
 
 Update the protocol when a public argument, transition, hash boundary or role semantics changes. Document examples with their evidence scope. The market brief distinguishes executable behavior from pilot hypotheses. Keep fixture diffs focused and test changes where they affect the release or observation boundary.
+
+Product interfaces, onboarding guides, previews and downloads open in English. Provide Simplified Chinese (zh-Hans) as the second language. Apply this convention regardless of the language used in the conversation.

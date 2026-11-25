@@ -10,6 +10,8 @@ python3 -m ontograph studio
 
 Open [OnToGraPh Studio](http://127.0.0.1:8765/). The local server uses a synthetic starting dataset and runs without a language model, portal account or cloud service.
 
+[Practical guide with importable models for a personal app, departmental file exchange and a Copilot glossary](../../examples/adoption/README.md)
+
 ## Start in the process modeler
 
 The native Process Modeler is the first screen. It includes the process inventory, block, sequence and entity views, an editable canvas, shape palette, live properties, source panel and exports. The browser saves draft changes and layout. Export the modeler workbook to transfer the draft with its nodes and links, then reload it using the import control.

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>OnToGraPh practical guide</title>
+  <style>
+
+html {
+color: #1a1a1a;
+background-color: #fdfdfd;
+}
+body {
+margin: 0 auto;
+max-width: 36em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 12px;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+html {
+background-color: white;
+}
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+a {
+color: #1a1a1a;
+}
+a:visited {
+color: #1a1a1a;
+}
+img {
+max-width: 100%;
+}
+svg {
+height: auto;
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+font-size: 85%;
+margin: 0;
+hyphens: manual;
+}
+pre {
+margin: 1em 0;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+.sourceCode {
+background-color: transparent;
+overflow: visible;
+}
+hr {
+border: none;
+border-top: 1px solid #1a1a1a;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid #1a1a1a;
+border-bottom: 1px solid #1a1a1a;
+}
+th {
+border-top: 1px solid #1a1a1a;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+  <style>
+:root{color:#1a2826;background:#f6f8f2;font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{margin:0 auto;max-width:57rem;padding:2rem clamp(1rem,4vw,3rem) 6rem;background:#fff}h1,h2,h3{line-height:1.16;letter-spacing:-.035em}h1{font-size:clamp(2.35rem,5vw,4.3rem);margin-top:1rem}h2{font-size:clamp(1.55rem,3vw,2.2rem);border-top:3px solid #b3d053;padding-top:1.2rem;margin-top:2.6rem}a{color:#1c5650;text-decoration-thickness:1px;text-underline-offset:.17em}img{width:100%;height:auto}figure{margin:1.5rem 0}figcaption{font-size:.84rem;color:#4c6057}li{margin-bottom:.4rem}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#172526;color:#e9f2df;padding:1rem;border-radius:.4rem}pre code{background:transparent;color:inherit}code{background:#edf3e5;border-radius:.2rem;padding:.04em .15em;font-size:.88em}blockquote{background:#eff5e4;border-left:4px solid #728d2e;margin:1rem 0;padding:.1rem 1.1rem}table{width:100%;border-collapse:collapse;font-size:.91em}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #ccd6c8;padding:.6em;overflow-wrap:anywhere}th{background:#eef4e8}#TOC{padding:1rem;background:#f5f7f1}#TOC ul{margin:0}#TOC a{text-decoration:none}@media(max-width:600px){table{display:block;overflow-x:auto}th,td{min-width:7rem}body{padding:1rem}.sourceCode{font-size:.88rem}}@media print{body{max-width:none;padding:0;font-size:10pt}h2{break-after:avoid}tr,figure{break-inside:avoid}#TOC{display:none}}
+</style>
+
+
+
+
+<link rel="alternate" hreflang="en" href="index.html">
+<link rel="alternate" hreflang="zh-Hans" href="zh-Hans.html">
+<link rel="alternate" hreflang="x-default" href="index.html">
+<link rel="canonical" href="https://openontograph.org/guide/">
+</head>
+<body>
+<nav aria-label="Language"><p>English · <a href="zh-Hans.html" lang="zh-Hans" hreflang="zh-Hans">简体中文</a></p> · <a href="../">Project home</a> · <a href="../architecture/">Architecture puzzle</a> · <a href="OnToGraPh-practical-guide.zip" download>Download both guides and examples (ZIP)</a></nav>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#use-ontograph-for-your-app-file-exchange-or-copilot-agent" id="toc-use-ontograph-for-your-app-file-exchange-or-copilot-agent">Use
+OnToGraPh for your app, file exchange or Copilot agent</a>
+<ul>
+<li><a href="#open-a-working-example" id="toc-open-a-working-example">Open a working example</a></li>
+<li><a href="#personal-project-build-a-lending-app" id="toc-personal-project-build-a-lending-app">Personal project · build a
+lending app</a></li>
+<li><a href="#enterprise-reconcile-file-exchanges-between-silos" id="toc-enterprise-reconcile-file-exchanges-between-silos">Enterprise ·
+reconcile file exchanges between silos</a></li>
+<li><a href="#microsoft-365-copilot-ground-answers-in-the-company-dictionary" id="toc-microsoft-365-copilot-ground-answers-in-the-company-dictionary">Microsoft
+365 Copilot · ground answers in the company dictionary</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="use-ontograph-for-your-app-file-exchange-or-copilot-agent">Use
+OnToGraPh for your app, file exchange or Copilot agent</h1>
+
+<p>Start with a decision your software needs to make. Which physical
+copy can I lend? What does the WBS column in this export identify? Model
+the smallest set of terms, relationships and checks needed to answer
+that question. The architecture puzzle explores alternative stacks. You
+edit the actual model in <strong>Semantic Studio</strong>.</p>
+<h2 id="open-a-working-example">Open a working example</h2>
+<p>With Git and Python 3.10 or later installed, clone the repository
+once and start Studio. If you already have a checkout, run the last
+command from its root.</p>
+<pre class="sh"><code>git clone https://github.com/sev7enITA/OntoGraph.git
+cd OntoGraph
+python3 -m ontograph studio</code></pre>
+<p>If you downloaded the offline package, copy the two JSON files and
+the CSV file into <code>examples/adoption/</code> in your checkout.
+Create the directory if needed.</p>
+<p>Open <a href="http://127.0.0.1:8765/governance">Semantic Studio</a>.
+The root opens the Process Modeler, where <strong>Semantic
+Studio</strong> takes you to the same place. Select
+<strong>Import</strong> and choose <a href="personal-library.json">personal-library.json</a> or <a href="department-wbs.json">department-wbs.json</a>. In
+<strong>Graph</strong>, search for an object, select it and inspect its
+definition, owner, aliases and relationships. Use <strong>+
+Object</strong> to add a concept or a field and <strong>+
+Relationship</strong> to map a field to a concept with
+<code>mapsTo</code>. <strong>Validate</strong> checks model structure
+and expected test cases. <strong>Save version</strong> keeps a working
+copy in this browser. <strong>Export → JSON</strong> saves the portable
+model with rules and tests. Use <strong>Versions</strong> to compare
+edits.</p>
+<h2 id="personal-project-build-a-lending-app">Personal project · build a
+lending app</h2>
+<ol type="1">
+<li><strong>Decide what has its own identity.</strong> Two physical
+copies may share an ISBN. Create an <em>Edition</em> concept for the
+publication and a <em>Physical copy</em> concept for the item on your
+shelf. Keep a separate <code>copy_id</code> for each item. The loan
+screen selects a copy. Search for <code>copy-id</code> in the example to
+see where the loan field points.</li>
+<li><strong>Give the application one rule.</strong> In the JSON view,
+find <code>lend-copy</code>. It permits the loan when the selected
+copy’s <code>available</code> fact is true. The three probes cover an
+available copy, one already on loan, and missing availability. The last
+two return <code>hold</code>. Your application reads the availability
+from its own records.</li>
+<li><strong>Use the model in code.</strong> From the repository root,
+run the example below. It prints the concept label for the form, then
+evaluates the same rule for two copies of one edition. Change only the
+availability of COPY-02 and rerun. For a real loan, your application
+must also persist it and reserve the copy atomically to handle
+concurrent requests.</li>
+<li><strong>Change the vocabulary safely.</strong> In Graph, edit the
+display label of <code>physical-copy</code> to “Shelf copy”, keep the
+ID, validate and export JSON. Point the snippet at your exported file.
+The form label changes while the loan rule still uses
+<code>available</code>. Use JSON-LD export for a graph consumer. The
+release JSON carries the rules and probes used below.</li>
+</ol>
+<pre class="python"><code>import json
+from pathlib import Path
+from ontograph.model import evaluate, validate
+
+model = validate(json.loads(Path(&quot;examples/adoption/personal-library.json&quot;).read_text()))
+nodes = {node[&quot;id&quot;]: node for node in model[&quot;nodes&quot;]}
+print(nodes[&quot;physical-copy&quot;][&quot;label&quot;])
+rule = next(rule for rule in model[&quot;rules&quot;] if rule[&quot;id&quot;] == &quot;lend-copy&quot;)
+for copy_id, available in [(&quot;COPY-01&quot;, True), (&quot;COPY-02&quot;, False)]:
+    print(copy_id, evaluate(rule, {&quot;available&quot;: available}))</code></pre>
+<figure>
+<img role="img" aria-label="The physical copy concept in Semantic Studio" src="personal-library.png" alt="The physical copy concept in Semantic Studio" />
+<figcaption aria-hidden="true">The physical copy concept in Semantic
+Studio</figcaption>
+</figure>
+<h2 id="enterprise-reconcile-file-exchanges-between-silos">Enterprise ·
+reconcile file exchanges between silos</h2>
+<p>The same column heading and even the same value can identify
+different things. These three sample rows are fictional local
+conventions. Read <code>0017</code> as text.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Source and custodian</th>
+<th>Incoming field and value</th>
+<th>Meaning in this model</th>
+<th>Stable concept ID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PMO scheduler</td>
+<td>schedule.csv / WBS / 0017</td>
+<td>A work breakdown structure element in the project schedule</td>
+<td>project-work-package</td>
+</tr>
+<tr>
+<td>Finance ERP</td>
+<td>ledger.csv / WBS / 0017</td>
+<td>The account assignment object that receives a posting</td>
+<td>posting-object</td>
+</tr>
+<tr>
+<td>Warehouse application</td>
+<td>batch.csv / WBS / 0017</td>
+<td>A picking document called a Work Batch Sheet in this warehouse</td>
+<td>batch-sheet</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li><strong>Collect one real exchange.</strong> The sender supplies the
+file layout and sample rows. The recipient shows how it uses the value.
+Each department names a steward who can confirm the definition, grain
+and exceptions. Record the source system, layout version, department and
+column. In the example all three concepts carry the alias WBS.</li>
+<li><strong>Agree on the mapping.</strong> Open the WBS model in Studio.
+Follow each source field’s <code>mapsTo</code> relationship. Mapping a
+field to its concept answers “what does this column mean?” Matching a
+particular work package to a Finance object requires a business
+crosswalk with the project, local keys, effective dates, cardinality and
+approving owners. A package may fund several posting objects. Keep these
+two decisions separate.</li>
+<li><strong>Put a check before the receiver’s import.</strong> The
+existing integration job reads CSV or Excel, preserves original text and
+looks up the approved mapping by system, layout, department and field.
+For the declared v1 layout, <code>PMO / schedule.csv / WBS / 0017</code>
+yields <code>project-work-package / 0017</code>. A file from an unknown
+system with only <code>WBS=0017</code> goes to review. A missing or
+ambiguous business crosswalk also goes to review whenever the target
+needs an instance-level join.</li>
+<li><strong>Record the outcome.</strong> For each row keep batch ID,
+source row, original value, concept ID, mapping version, destination and
+reason. Reconcile accepted + held rows to input count and identify
+retried rows by batch and source row ID. The importer computes the
+boolean fact <code>resolved</code> for semantic staging. The sample rule
+<code>admit-row</code> returns <code>allow</code> for true and
+<code>hold</code> for false or missing. It does not parse a vendor file
+or verify a join. The receiving application’s import receipt and an
+independent readback establish which records actually arrived.</li>
+<li><strong>Hand over a controlled change.</strong> Export the validated
+model. For formal approval use a configured registry, distinct reviewers
+and a publisher. Link the approved release to its source mappings and
+the batch. Repeat a known-good, ambiguous and unknown-layout row against
+the receiving application. Track held rows / rows received and
+independently checked target rows / accepted rows. A missing readback
+stays unproven. <a href="https://github.com/sev7enITA/OntoGraph/tree/main/examples/devops">Registry
+and DevOps guide</a></li>
+</ol>
+<p><strong>File formats.</strong> The operational CSV/XLSX goes to your
+staging job. Studio imports a release JSON or an OnToGraPh semantic
+workbook. Use its <strong>Export → Excel</strong> to get the editable
+workbook with Path, Type and Value columns. <strong>Validate</strong>
+checks the model. Business data, ETL schedules, crosswalk approvals and
+receiver readbacks belong to the organization’s integration process.</p>
+<figure>
+<img role="img" aria-label="The warehouse batch sheet in the departmental model" src="department-wbs.png" alt="The warehouse batch sheet in the departmental model" />
+<figcaption aria-hidden="true">The warehouse batch sheet in the
+departmental model</figcaption>
+</figure>
+<h2 id="microsoft-365-copilot-ground-answers-in-the-company-dictionary">Microsoft
+365 Copilot · ground answers in the company dictionary</h2>
+<p>A SharePoint list is one practical publication route. The steward
+publishes a readable projection of the approved dictionary, and an
+authenticated Copilot agent uses that list as knowledge. This is a
+manual integration pattern. The supplied <a href="wbs-glossary.csv">glossary CSV</a> is a synthetic training
+projection with three rows.</p>
+<ol type="1">
+<li><strong>Prepare a list.</strong> Use the CSV to create or populate a
+SharePoint list for a test. Set ConceptID, SourceField and ExampleCode
+to text so <code>0017</code> keeps its leading zeros. Keep the three
+rows separate even though their Title is WBS. Verify definitions and all
+three codes after import. For production, add steward, approval status,
+effective date and an accessible source link. Replace training
+references with the actual approved release identifier and link. Publish
+only current approved records in the knowledge source; keep retired
+records in a separate archive. Permissions follow the intended
+audience.</li>
+<li><strong>Connect a named agent.</strong> In Microsoft Copilot Studio
+open your agent, go to <strong>Knowledge → Add knowledge →
+SharePoint</strong>, select the list, add a description such as “Current
+definitions by department, concept ID and source field”, then
+<strong>Add to agent</strong>. Use Microsoft authentication. Share the
+agent with a test group after checking its members’ access to the list
+and the tenant’s licensing and sharing settings. This configures that
+agent’s answers. Other Copilot conversations retain their own sources.
+<a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-add-sharepoint">SharePoint
+knowledge</a> · <a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/knowledge-sources">Microsoft
+365 agent knowledge and licensing</a></li>
+<li><strong>Give the agent a resolution rule.</strong> “For a business
+acronym, look up the current glossary. Use the department, source system
+or file name to select a meaning. Give the concept ID and cite the
+source. If the context fits several records, ask which department or
+file the user means. If no accessible record supports an answer, say so.
+Never infer that two records refer to the same object from the acronym
+or code alone.”</li>
+<li><strong>Test before sharing.</strong> Use the lab cases below.
+Record the prompt, user role, answer, cited source, expected concept and
+release. For the permissions test use an account with no access to the
+test list and no alternative source containing the training entry. An
+answer citing a retired release, choosing a meaning without context, or
+revealing a restricted definition fails. After an approved change,
+update the list and rerun the cases with a fresh conversation. Retain
+the old test report for comparison.</li>
+</ol>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Ask the agent</th>
+<th>Passing behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“What does WBS mean?”</td>
+<td>Asks for department, source or file before selecting one.</td>
+</tr>
+<tr>
+<td>“What does WBS 0017 in Finance’s ledger.csv identify?”</td>
+<td>Returns posting-object and cites the glossary. A definition alone
+cannot identify a specific posting in the ERP.</td>
+</tr>
+<tr>
+<td>“In the warehouse batch.csv, what is WBS?”</td>
+<td>Returns batch-sheet and cites the warehouse definition.</td>
+</tr>
+<tr>
+<td>“PMO and Finance both export 0017. Can I join the rows?”</td>
+<td>Requests the approved project-specific crosswalk.</td>
+</tr>
+<tr>
+<td>User without access asks for the warehouse’s internal
+definition</td>
+<td>Provides no restricted definition or protected record content.</td>
+</tr>
+</tbody>
+</table>
+<p>For a first pilot, report correct concept and citation / unambiguous
+questions, clarification requests / ambiguous questions, and restricted
+disclosures / access-denied tests. Run the same questions before and
+after connecting the glossary with the same user roles. The acceptance
+cases above are expected results; each tenant needs its own observed
+answers.</p>
+</body>
+</html>

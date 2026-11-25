@@ -12,3 +12,8 @@
 - [Aurora 21](https://openontograph.org/demo/) and [中文模拟案例](https://openontograph.org/demo/zh/): a separate synthetic CRM/PMS example.
 - [Source code](https://github.com/sev7enITA/OntoGraph) and [reproduction instructions](https://github.com/sev7enITA/OntoGraph/tree/main/examples/hub_pilot).
 - [PolicyWatcher](https://policywatcher.online/) and [PALO Framework](https://paloframework.org/PALO_PlatformMap.html).
+
+## Adoption and architecture
+
+- [Practical guide](https://openontograph.org/guide/) and [简体中文指南](https://openontograph.org/guide/zh-Hans.html). Import a personal library model, reconcile WBS fields across departments, and publish a read-only glossary for a Copilot agent.
+- [Architecture puzzle](https://openontograph.org/architecture/) and [架构拼图](https://openontograph.org/architecture/?lang=zh-Hans). Explore the effect of missing evidence and assumed adapters in two synthetic cases.

@@ -1,0 +1,138 @@
+{
+  "format": "ontograph.release/1",
+  "domain": "personal-library",
+  "purpose": "A physical copy can be lent only when that copy is available.",
+  "owner": "Library app author",
+  "scope": "Synthetic personal lending app. Each loan concerns one physical copy.",
+  "effective_at": "2026-11-25T12:00:00Z",
+  "evidence": [
+    {
+      "id": "design-note",
+      "uri": "urn:example:personal-library:design-note:v1",
+      "excerpt": "A physical copy can be lent only when that copy is available.",
+      "sha256": "c6cc7293395895bd2f5a94a215e7f93c4570ba384edfdd49b7e81b7e23ff253f",
+      "observed_at": "2026-11-25T12:00:00Z",
+      "status": "confirmed",
+      "applicability": "Synthetic personal lending app. Each loan concerns one physical copy."
+    }
+  ],
+  "nodes": [
+    {
+      "id": "edition",
+      "kind": "concept",
+      "label": "Edition",
+      "definition": "A published edition. Several copies may share its ISBN.",
+      "owner": "Library app author"
+    },
+    {
+      "id": "physical-copy",
+      "kind": "concept",
+      "label": "Physical copy",
+      "definition": "One item on the shelf, identified by copy_id.",
+      "owner": "Library app author",
+      "aliases": [
+        "copy"
+      ]
+    },
+    {
+      "id": "copy-id",
+      "kind": "field",
+      "label": "loans.copy_id",
+      "definition": "Identifier for the individual physical copy.",
+      "owner": "Library app author"
+    },
+    {
+      "id": "available",
+      "kind": "field",
+      "label": "Available to lend",
+      "definition": "Boolean availability of the selected copy.",
+      "owner": "Library app author"
+    },
+    {
+      "id": "library-app",
+      "kind": "application",
+      "label": "Home library",
+      "definition": "Records loans for personal physical copies.",
+      "owner": "Library app author"
+    },
+    {
+      "id": "decision-control",
+      "kind": "control",
+      "label": "Decision control",
+      "definition": "A physical copy can be lent only when that copy is available.",
+      "owner": "Library app author"
+    },
+    {
+      "id": "decision-contract",
+      "kind": "contract",
+      "label": "Decision contract",
+      "definition": "The application evaluates the declared facts for this decision.",
+      "owner": "Library app author"
+    }
+  ],
+  "edges": [
+    {
+      "source": "copy-id",
+      "predicate": "mapsTo",
+      "target": "physical-copy"
+    },
+    {
+      "source": "physical-copy",
+      "predicate": "dependsOn",
+      "target": "edition"
+    },
+    {
+      "source": "decision-control",
+      "predicate": "dependsOn",
+      "target": "available"
+    },
+    {
+      "source": "decision-control",
+      "predicate": "implements",
+      "target": "decision-contract"
+    },
+    {
+      "source": "library-app",
+      "predicate": "consumes",
+      "target": "decision-contract"
+    }
+  ],
+  "rules": [
+    {
+      "id": "lend-copy",
+      "control": "decision-control",
+      "evidence": "design-note",
+      "applies": {},
+      "requires": {
+        "available": true
+      }
+    }
+  ],
+  "probes": [
+    {
+      "id": "library-app-available",
+      "application": "library-app",
+      "rule": "lend-copy",
+      "facts": {
+        "available": true
+      },
+      "expected": "allow"
+    },
+    {
+      "id": "library-app-on-loan",
+      "application": "library-app",
+      "rule": "lend-copy",
+      "facts": {
+        "available": false
+      },
+      "expected": "hold"
+    },
+    {
+      "id": "library-app-unknown",
+      "application": "library-app",
+      "rule": "lend-copy",
+      "facts": {},
+      "expected": "hold"
+    }
+  ]
+}

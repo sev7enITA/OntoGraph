@@ -1,0 +1,4 @@
+Title,ConceptID,Department,SourceField,Definition,ExampleCode,ModelVersion,ModelSource,Status
+WBS,project-work-package,PMO,schedule.csv.WBS,A node in the project work breakdown. In schedule.csv WBS identifies a work package. Example 0017.,0017,training-v1,urn:example:department-wbs:design-note:v1,Training example
+WBS,posting-object,Finance,ledger.csv.WBS,The ERP object to which a posting is assigned. A PMO package may correspond to several posting objects. Example 0017.,0017,training-v1,urn:example:department-wbs:design-note:v1,Training example
+WBS,batch-sheet,Warehouse,batch.csv.WBS,A local name in this fictional warehouse for a picking batch document. Example 0017.,0017,training-v1,urn:example:department-wbs:design-note:v1,Training example

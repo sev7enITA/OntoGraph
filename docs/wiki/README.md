@@ -25,6 +25,7 @@ OnToGraPh links the source excerpt, the affected control, the approval and the d
 | --- | --- |
 | [Why OnToGraPh exists](WHY-ONTOGRAPH.md) | The problem, who faces it and the questions the project answers |
 | [Market position and standards](MARKET-AND-STANDARDS.md) | How the project can complement catalogs, knowledge graphs and Git/CI workflows |
+| [Practical guide](https://openontograph.org/guide/) | Importable personal and enterprise models, a Copilot glossary and the [architecture puzzle](https://openontograph.org/architecture/) |
 | [Visual Studio](STUDIO.md) | The native Process Modeler, semantic layers, field-level editing and paired pilot |
 | [Governance hub](HUB.md) | Top-down PALO authority, bottom-up PolicyWatcher evidence and the shared OnToGraPh engine |
 | [Aurora 21](AURORA-21.md) | A rule changes, the PMS declares the expected digest and produces a divergent result |

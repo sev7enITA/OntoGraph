@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>OnToGraPh 实用指南</title>
+  <style>
+
+html {
+color: #1a1a1a;
+background-color: #fdfdfd;
+}
+body {
+margin: 0 auto;
+max-width: 36em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 12px;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+html {
+background-color: white;
+}
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+a {
+color: #1a1a1a;
+}
+a:visited {
+color: #1a1a1a;
+}
+img {
+max-width: 100%;
+}
+svg {
+height: auto;
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+font-size: 85%;
+margin: 0;
+hyphens: manual;
+}
+pre {
+margin: 1em 0;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+.sourceCode {
+background-color: transparent;
+overflow: visible;
+}
+hr {
+border: none;
+border-top: 1px solid #1a1a1a;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid #1a1a1a;
+border-bottom: 1px solid #1a1a1a;
+}
+th {
+border-top: 1px solid #1a1a1a;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+  <style>
+:root{color:#1a2826;background:#f6f8f2;font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{margin:0 auto;max-width:57rem;padding:2rem clamp(1rem,4vw,3rem) 6rem;background:#fff}h1,h2,h3{line-height:1.16;letter-spacing:-.035em}h1{font-size:clamp(2.35rem,5vw,4.3rem);margin-top:1rem}h2{font-size:clamp(1.55rem,3vw,2.2rem);border-top:3px solid #b3d053;padding-top:1.2rem;margin-top:2.6rem}a{color:#1c5650;text-decoration-thickness:1px;text-underline-offset:.17em}img{width:100%;height:auto}figure{margin:1.5rem 0}figcaption{font-size:.84rem;color:#4c6057}li{margin-bottom:.4rem}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#172526;color:#e9f2df;padding:1rem;border-radius:.4rem}pre code{background:transparent;color:inherit}code{background:#edf3e5;border-radius:.2rem;padding:.04em .15em;font-size:.88em}blockquote{background:#eff5e4;border-left:4px solid #728d2e;margin:1rem 0;padding:.1rem 1.1rem}table{width:100%;border-collapse:collapse;font-size:.91em}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #ccd6c8;padding:.6em;overflow-wrap:anywhere}th{background:#eef4e8}#TOC{padding:1rem;background:#f5f7f1}#TOC ul{margin:0}#TOC a{text-decoration:none}@media(max-width:600px){table{display:block;overflow-x:auto}th,td{min-width:7rem}body{padding:1rem}.sourceCode{font-size:.88rem}}@media print{body{max-width:none;padding:0;font-size:10pt}h2{break-after:avoid}tr,figure{break-inside:avoid}#TOC{display:none}}
+</style>
+
+
+
+
+<link rel="alternate" hreflang="en" href="index.html">
+<link rel="alternate" hreflang="zh-Hans" href="zh-Hans.html">
+<link rel="alternate" hreflang="x-default" href="index.html">
+<link rel="canonical" href="https://openontograph.org/guide/zh-Hans.html">
+</head>
+<body>
+<nav aria-label="语言"><p><a href="index.html" lang="en" hreflang="en">English</a> ·
+简体中文</p> · <a href="../zh/">项目首页</a> · <a href="../architecture/?lang=zh-Hans">架构拼图</a> · <a href="OnToGraPh-practical-guide.zip" download>下载双语指南及示例（ZIP）</a></nav>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#用-ontograph-开发个人应用对接业务文件并配置-copilot-术语表" id="toc-用-ontograph-开发个人应用对接业务文件并配置-copilot-术语表">用
+OnToGraPh 开发个人应用、对接业务文件并配置 Copilot 术语表</a>
+<ul>
+<li><a href="#打开示例" id="toc-打开示例">打开示例</a></li>
+<li><a href="#个人项目做一个借书应用" id="toc-个人项目做一个借书应用">个人项目：做一个借书应用</a></li>
+<li><a href="#企业场景对接各自独立的文件交换系统" id="toc-企业场景对接各自独立的文件交换系统">企业场景：对接各自独立的文件交换系统</a></li>
+<li><a href="#microsoft-365-copilot按本公司的定义解释术语" id="toc-microsoft-365-copilot按本公司的定义解释术语">Microsoft 365
+Copilot：按本公司的定义解释术语</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="用-ontograph-开发个人应用对接业务文件并配置-copilot-术语表">用
+OnToGraPh 开发个人应用、对接业务文件并配置 Copilot 术语表</h1>
+
+<p>先选一个软件需要回答的问题。书架上哪一本书可以借出？财务导出文件里的
+WBS
+代表什么？围绕这个问题定义术语、关系和检查规则。架构拼图用于比较方案；实际模型在
+<strong>Semantic Studio</strong> 中编辑。</p>
+<h2 id="打开示例">打开示例</h2>
+<p>安装 Git 和 Python 3.10 或更高版本后，克隆仓库并启动
+Studio。已有本地仓库时，只需在仓库根目录执行最后一条命令。</p>
+<pre class="sh"><code>git clone https://github.com/sev7enITA/OntoGraph.git
+cd OntoGraph
+python3 -m ontograph studio</code></pre>
+<p>如果你解压了离线包，请先将两个 JSON 文件和 CSV
+文件复制到仓库根目录下的
+<code>examples/adoption/</code>（如有需要，请创建该目录）。</p>
+<p>打开 <a href="http://127.0.0.1:8765/governance">Semantic
+Studio</a>。如果首页显示流程建模器，选择 <strong>Semantic
+Studio</strong> 即可。在 <strong>Import（导入）</strong> 中选择 <a href="personal-library.json">personal-library.json</a> 或 <a href="department-wbs.json">department-wbs.json</a>。在
+<strong>Graph（图）</strong>
+中查找并选中对象，查看定义、负责人、别名和关系。使用 <strong>+
+Object</strong> 添加概念或字段，再使用 <strong>+ Relationship</strong>
+建立从字段到概念的 <code>mapsTo</code> 关系。<strong>Validate</strong>
+检查结构和测试样例，<strong>Save version</strong>
+将工作版本保存在当前浏览器中。通过 <strong>Export → JSON</strong>
+保存包含规则和测试的模型文件，在 <strong>Versions</strong>
+中比较修改。</p>
+<h2 id="个人项目做一个借书应用">个人项目：做一个借书应用</h2>
+<ol type="1">
+<li><strong>区分版本和单本藏书。</strong> 同一版本的两本书可以有相同的
+ISBN。在模型中，<em>Edition</em> 代表出版版本，<em>Physical copy</em>
+代表书架上的一本实体书。每本书分配单独的
+<code>copy_id</code>。在图中查找
+<code>copy-id</code>，查看借阅记录中的字段指向哪个概念。</li>
+<li><strong>定义借阅规则。</strong> 在 JSON 视图中查找
+<code>lend-copy</code>。当所选藏书的 <code>available</code>
+为真时，规则返回 <code>allow</code>。已借出或缺少可用状态时返回
+<code>hold</code>。应用从自己的借阅记录中读取可用状态。</li>
+<li><strong>在应用中使用模型。</strong> 在仓库根目录运行下面的 Python
+示例。程序先打印表单标签，再用同一条规则检查两本书。将 COPY-02
+的可用状态改为真，再次运行，观察结果。正式的借阅应用还需要保存借阅记录，并以原子操作锁定藏书，防止多人同时借出同一本书。</li>
+<li><strong>试着改名。</strong> 在图中将 <code>physical-copy</code>
+的显示名称改为“馆藏单册”，保留概念 ID，验证并导出
+JSON。让示例读取新文件。表单标签会变化，规则仍使用原来的
+<code>available</code> 字段。向图工具提供数据时可导出
+JSON-LD；下面的代码读取的是含规则和测试的发布 JSON。</li>
+</ol>
+<pre class="python"><code>import json
+from pathlib import Path
+from ontograph.model import evaluate, validate
+
+model = validate(json.loads(Path(&quot;examples/adoption/personal-library.json&quot;).read_text()))
+nodes = {node[&quot;id&quot;]: node for node in model[&quot;nodes&quot;]}
+print(nodes[&quot;physical-copy&quot;][&quot;label&quot;])
+rule = next(rule for rule in model[&quot;rules&quot;] if rule[&quot;id&quot;] == &quot;lend-copy&quot;)
+for copy_id, available in [(&quot;COPY-01&quot;, True), (&quot;COPY-02&quot;, False)]:
+    print(copy_id, evaluate(rule, {&quot;available&quot;: available}))</code></pre>
+<figure>
+<img role="img" aria-label="个人模型中的实体书概念" src="personal-library.png" alt="个人模型中的实体书概念" />
+<figcaption aria-hidden="true">个人模型中的实体书概念</figcaption>
+</figure>
+<h2 id="企业场景对接各自独立的文件交换系统">企业场景：对接各自独立的文件交换系统</h2>
+<p>即使列名和值完全相同，不同部门也可能指向不同的业务对象。以下是三个虚构部门约定的用法。将
+<code>0017</code> 作为文本读取，以保留前导零。</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>来源及负责人</th>
+<th>文件、字段和值</th>
+<th>本例中的含义</th>
+<th>稳定概念 ID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PMO 进度系统</td>
+<td>schedule.csv / WBS / 0017</td>
+<td>项目进度计划中的工作分解结构元素</td>
+<td>project-work-package</td>
+</tr>
+<tr>
+<td>财务 ERP</td>
+<td>ledger.csv / WBS / 0017</td>
+<td>用于会计过账的科目分配对象</td>
+<td>posting-object</td>
+</tr>
+<tr>
+<td>仓储系统</td>
+<td>batch.csv / WBS / 0017</td>
+<td>本例仓库称为 Work Batch Sheet 的拣货批次单</td>
+<td>batch-sheet</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li><strong>跟踪一次真实交接。</strong>
+发送方提供文件格式、版本、典型记录和例外；接收方演示如何使用该值。各部门指定能确认定义、粒度和例外的数据负责人。登记来源系统、格式版本、部门和列名。示例中三个概念均使用别名
+WBS。</li>
+<li><strong>确认字段含义。</strong> 导入 WBS 模型，沿
+<code>mapsTo</code>
+关系查看字段所指的概念。若要将具体的工作包和财务对象关联，还需要经负责人批准的业务对照表，记录项目、本地键、有效期及一对多等对应关系。一个工作包可能对应多个过账对象。</li>
+<li><strong>在导入前检查映射。</strong> 现有集成作业读取 CSV 或
+Excel，保留原始文本，按系统、格式版本、部门和字段查找已批准的映射。对已登记的
+v1 格式，PMO 的 <code>schedule.csv / WBS / 0017</code>
+可进入暂存区，标记为
+<code>project-work-package / 0017</code>。来源未知、只有 WBS
+值的记录转为人工复核。若目标需要关联具体记录，对照表缺失或存在歧义时也应暂停关联。</li>
+<li><strong>记录接收结果。</strong>
+为每行保留批次号、来源行号、原值、概念
+ID、映射版本、目的地和原因。校验“接收行数 + 待复核行数 =
+输入行数”，按批次和来源行号识别重传。导入作业计算布尔值
+<code>resolved</code>。规则 <code>admit-row</code> 对真值返回
+<code>allow</code>，对假值或缺失返回
+<code>hold</code>。文件解析和记录匹配由集成作业执行。结合导入回执和目的系统的独立回读，核实哪些行实际写入。</li>
+<li><strong>发布变更。</strong>
+导出已验证的模型。正式审批使用已配置的注册表，由独立审核人和发布人操作。把发布版本与来源映射、批次关联起来。在接收应用重测正常行、歧义行和未知格式行。跟踪待复核行数占输入行数的比例，以及经过独立回读的行数占已接收行数的比例。缺少回读时标为未证实。<a href="https://github.com/sev7enITA/OntoGraph/tree/main/examples/devops">注册表和
+DevOps 指南</a></li>
+</ol>
+<p><strong>选择文件格式。</strong> ERP 的业务 CSV 或 Excel
+交给暂存作业。Studio 导入发布 JSON 或 OnToGraPh 语义工作簿。通过
+<strong>Export → Excel</strong> 获取包含 Path、Type、Value
+三列的工作簿。Studio
+验证模型，企业集成流程负责作业调度、业务数据、对照表审批和目标系统回读。</p>
+<figure>
+<img role="img" aria-label="部门模型中的仓库批次单" src="department-wbs.png" alt="部门模型中的仓库批次单" />
+<figcaption aria-hidden="true">部门模型中的仓库批次单</figcaption>
+</figure>
+<h2 id="microsoft-365-copilot按本公司的定义解释术语">Microsoft 365
+Copilot：按本公司的定义解释术语</h2>
+<p>一种可操作的发布方式是 SharePoint
+列表。数据负责人将已批准字典的可读副本发布到列表，使用 Microsoft
+身份验证的 Copilot 智能体再将列表作为知识源。此处采用手动发布。<a href="wbs-glossary.csv">示例术语表 CSV</a> 包含三条培训记录。</p>
+<ol type="1">
+<li><strong>准备列表。</strong> 将 CSV 导入测试列表。把
+ConceptID、SourceField 和 ExampleCode 设为文本并检查 <code>0017</code>
+的前导零。即使三行的 Title 都是
+WBS，也应分别保留。在生产列表中加入负责人、审批状态、生效日期、真实发布版本及可访问的来源链接。知识源保留当前已批准的条目，停用条目单独归档，并按受众设置权限。</li>
+<li><strong>连接指定智能体。</strong> 在 Microsoft Copilot Studio
+中打开智能体，选择 <strong>Knowledge → Add knowledge →
+SharePoint</strong>，选中列表并填写说明，例如“按部门、概念 ID
+和来源字段组织的现行业务定义”。选择 <strong>Add to agent</strong>。使用
+Microsoft
+身份验证，并与管理员核实列表权限、租户许可及共享设置后向试点组开放。这项配置适用于该智能体。<a href="https://learn.microsoft.com/zh-cn/microsoft-copilot-studio/knowledge-add-sharepoint">SharePoint
+知识源</a> · <a href="https://learn.microsoft.com/zh-cn/microsoft-365/copilot/extensibility/knowledge-sources">Microsoft
+365 知识源和许可</a></li>
+<li><strong>设置回答指令。</strong>
+“解释业务缩写时查询当前术语表。用部门、来源系统或文件名选择含义，给出概念
+ID
+并引用来源。如果多条记录都合理，先询问用户指哪个部门或文件。如果没有可访问的依据，请如实说明。只有缩写或编号相同，不能据此判断两个系统中的记录是同一对象。”</li>
+<li><strong>共享前测试。</strong>
+记录提问、用户角色、回答、所引来源、预期概念和发布版本。权限测试需使用无法访问测试列表且没有其他相同来源的账户。引用停用版本、在上下文不足时猜测含义或泄露受限定义，都应记为失败。批准变更后更新列表，在新会话中重测，并保存上次测试报告以便对照。</li>
+</ol>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>向智能体提问</th>
+<th>通过标准</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“WBS 是什么意思？”</td>
+<td>先确认部门、来源或文件，再选择定义。</td>
+</tr>
+<tr>
+<td>“财务 ledger.csv 中的 WBS 0017 指什么？”</td>
+<td>返回 posting-object 并引用术语表。要定位 ERP
+中的具体过账记录还需要相应数据和权限。</td>
+</tr>
+<tr>
+<td>“仓库 batch.csv 中的 WBS 是什么？”</td>
+<td>返回 batch-sheet 并引用仓库定义。</td>
+</tr>
+<tr>
+<td>“PMO 和财务都导出了 0017，可以关联这两行吗？”</td>
+<td>要求提供经批准的项目对照表。</td>
+</tr>
+<tr>
+<td>无权限的用户询问仓库内部定义</td>
+<td>避免透露受限定义或记录内容。</td>
+</tr>
+</tbody>
+</table>
+<p>试点可分别计算：概念及引文正确的回答数占明确问题数的比例；提出澄清的问题数占歧义问题数的比例；未授权披露数占权限拒绝测试数的比例。在连接术语表之前和之后，用相同角色重测相同问题，并保留租户中实际得到的回答。</p>
+</body>
+</html>

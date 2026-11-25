@@ -42,7 +42,7 @@ python3 -m ontograph demo
 python3 -m ontograph studio
 ```
 
-Open [the local Studio](http://127.0.0.1:8765/) to start in the Process Modeler. Choose **Semantic Studio** to inspect and edit nested properties, link a process to a control, and compare local drafts. [Studio guide](docs/wiki/STUDIO.md)
+Open [the local Studio](http://127.0.0.1:8765/) to start in the Process Modeler. Choose **Semantic Studio** to inspect and edit nested properties, link a process to a control, and compare local drafts. [Practical guide](https://openontograph.org/guide/) · [Architecture puzzle](https://openontograph.org/architecture/) · [Studio guide](docs/wiki/STUDIO.md) · [Build a personal app, reconcile siloed files and ground a Copilot agent](examples/adoption/README.md)
 
 [![Semantic Studio with the Aurora 21 graph, typed objects and the property inspector.](assets/studio/semantic-studio.png)](docs/wiki/STUDIO.md)
 
