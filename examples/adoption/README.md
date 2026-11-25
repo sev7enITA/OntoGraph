@@ -76,3 +76,7 @@ For a first pilot, report correct concept and citation / unambiguous questions, 
 ## Assess the WBS mapping
 
 Extend the departmental exercise by assessing how a wrong Finance mapping could affect month-end close. Try a disputed source and an unassessed spreadsheet dependency. [Interactive case](https://openontograph.org/weights/)
+
+## Two teams, one WBS mapping
+
+Try a model with two attributed and conflicting assessments, record a decision in the authenticated Studio and verify actual application outputs through withdrawal. [Walkthrough and sample models](https://openontograph.org/wbs/)

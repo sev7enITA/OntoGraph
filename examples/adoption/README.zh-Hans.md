@@ -76,3 +76,7 @@ for copy_id, available in [("COPY-01", True), ("COPY-02", False)]:
 ## 评估 WBS 映射
 
 在部门示例的基础上，评估财务映射错误会怎样影响月末结账。试着切换有争议的证据，查看缺少评估的工作表依赖。 [交互案例](https://openontograph.org/weights/zh/)
+
+## 两个团队对同一 WBS 映射的分歧
+
+使用带两份冲突评估的模型，在需登录的 Studio 中记录裁决，并查看撤回期间两个应用的实测结果。[试点演示与模型](https://openontograph.org/wbs/zh/)
