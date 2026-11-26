@@ -4,31 +4,53 @@
 
 .homepage-routes {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+.homepage-route {
+  scroll-margin-top: 1rem;
+  padding: clamp(1.05rem, 3vw, 2.25rem);
   border: 1px solid var(--line);
   background: var(--panel);
 }
 
-.homepage-route {
-  padding: clamp(1rem, 2.15vw, 1.8rem);
-}
+.homepage-route:target { border-color: var(--accent); }
 
-.homepage-route + .homepage-route { border-inline-start: 1px solid var(--line); }
-
-.homepage-route h3 {
-  margin-bottom: .9rem;
+.homepage-route h2 {
   color: var(--accent);
-  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-size: clamp(1.6rem, 3vw, 2.45rem);
+  letter-spacing: -.035em;
 }
 
-.homepage-route ul,
+.route-intro { margin-block: .65rem 1.15rem; color: var(--muted); }
+
+.route-topic {
+  border-top: 1px solid var(--line);
+  padding-inline: .25rem .15rem;
+}
+
+.route-topic summary {
+  min-height: 48px;
+  padding-block: .72rem;
+  cursor: pointer;
+  font-weight: 680;
+}
+
+.route-topic summary::marker { color: var(--accent); }
+.route-topic summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+.route-topic summary:hover, .route-topic[open] summary { color: var(--accent); }
+.route-topic > p { margin-block: .15rem .5rem; color: var(--muted); }
+
+.route-topic ul,
 .behind-contact ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.homepage-route li + li { margin-top: .35rem; }
+.route-topic ul { margin-block: .3rem .9rem; }
 
 .homepage-route a,
 .behind-contact a,
@@ -103,19 +125,15 @@
 .behind-projects dl div { padding-block: .6rem .8rem; border-bottom: 1px solid var(--line); }
 .behind-projects dt { font-weight: 650; }
 
-@media (max-width: 900px) {
-  .homepage-routes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .homepage-route:nth-child(3) { border-inline-start: 0; }
-  .homepage-route:nth-child(n+3) { border-top: 1px solid var(--line); }
-}
-
 @media (max-width: 740px) {
   .top-nav { gap: 0 .6rem; }
   .behind-layout { grid-template-columns: 1fr; }
 }
 
+@media (max-width: 580px) {
+  .homepage-routes { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 385px) {
   .top-nav > a { font-size: .79rem; }
-  .homepage-route { padding-inline: .72rem; }
-  .homepage-route a { font-size: .92rem; }
 }

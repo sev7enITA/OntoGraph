@@ -12,7 +12,7 @@
   <link rel="alternate" hreflang="x-default" href="https://openontograph.org/">
   <link rel="icon" type="image/png" href="assets/icon.png">
   <link rel="stylesheet" href="assets/site.css">
-  <link rel="stylesheet" href="/assets/home-directory.css">
+  <link rel="stylesheet" href="/assets/home-directory.css?v=2">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
@@ -121,47 +121,182 @@
       </div>
     </section>
 
-    <nav class="wrap homepage-directory" aria-label="Explore OnToGraPh">
+    <section class="wrap homepage-directory" aria-label="Explore OnToGraPh">
       <div class="homepage-routes">
         <section class="homepage-route" id="theory" aria-labelledby="theory-title">
-          <h3 id="theory-title">The Theory</h3>
-          <ul>
-            <li><a href="#paradigm">The four commitments</a></li>
-            <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/FRAMEWORK.md">Governance lifecycle</a></li>
-            <li><a href="#governance">Human authority at each step</a></li>
-            <li><a href="/weights/">Weighted relationships</a></li>
-          </ul>
+          <h2 id="theory-title">The Theory</h2>
+          <p class="route-intro">How definitions, relationships and human judgment shape a governed decision.</p>
+          <div class="route-topics">
+            <details class="route-topic" id="operational-meaning">
+              <summary>Meaning in operational work</summary>
+              <p>A WBS code can mean a posting object in Finance and a work package in PMO. Give each meaning a scope, an owner and an application that uses it.</p>
+              <ul>
+                <li><a href="/wbs/">Inspect the recorded WBS case</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="model-building-blocks">
+              <summary>Building blocks of the model</summary>
+              <p>Dictionaries name concepts. Taxonomies organise them. Typed links connect concepts to fields, controls and applications. The model ties each rule to a decision scope.</p>
+              <ul>
+                <li><a href="#studio">See Semantic Studio</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="who-decides">
+              <summary>Who decides at each stage</summary>
+              <p>An author proposes a change. Named reviewers decide whether to approve it. Observers check what applications do. A supervisor can order withdrawal and require a fresh check.</p>
+              <ul>
+                <li><a href="#governance">Explore human authority</a></li>
+                <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/FRAMEWORK.md#the-six-gates">Read the six governance gates</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="relationship-impact">
+              <summary>How relationships carry impact</summary>
+              <p>Trace a changed field to every dependent control in scope. Compare how serious an error would be, how strong the evidence is and where assessors disagree.</p>
+              <ul>
+                <li><a href="/weights/">Explore weighted impact</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="formation-to-release">
+              <summary>Two routes from change to decision</summary>
+              <p>Start with a governance mandate in PALO or a change detected by PolicyWatcher. In both routes, connect the source to a rule someone can review and an application result someone can check.</p>
+              <ul>
+                <li><a href="/pilot/">Follow the integrated pilot</a></li>
+              </ul>
+            </details>
+          </div>
         </section>
         <section class="homepage-route" id="apply" aria-labelledby="apply-title">
-          <h3 id="apply-title">Apply It</h3>
-          <ul>
-            <li><a href="/guide/">Practical guide</a></li>
-            <li><a href="/architecture/">Architecture puzzle</a></li>
-            <li><a href="/wbs/">WBS release and withdrawal</a></li>
-            <li><a href="/pilot/">PolicyWatcher and PALO pilot</a></li>
-            <li><a href="#aurora">Aurora 21 case</a></li>
-          </ul>
+          <h2 id="apply-title">Apply It</h2>
+          <p class="route-intro">Choose a starting point, diagnose the gap and check what happened.</p>
+          <div class="route-topics">
+            <details class="route-topic" id="fit-check">
+              <summary>Is OnToGraPh a fit?</summary>
+              <p>Pick one shared definition or rule that changes a real decision. Identify an owner, records you can test and the system or systems that apply it. Begin with the personal example if you have one application.</p>
+              <ul>
+                <li><a href="/guide/">Open the practical guide</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="choose-start">
+              <summary>Choose your starting path</summary>
+              <p>Start with your current problem. Define vocabulary for a personal project, trace a rule shared across departments, ground Copilot in your company dictionary, or bring an external policy change to a human reviewer.</p>
+              <ul>
+                <li><a href="/guide/#personal-project-build-a-lending-app">Personal project · define your terms</a></li>
+                <li><a href="/guide/#enterprise-reconcile-file-exchanges-between-silos">Cross-team systems · trace a shared rule</a></li>
+                <li><a href="/pilot/">New source change · route for review</a></li>
+                <li><a href="/guide/#microsoft-365-copilot-ground-answers-in-the-company-dictionary">Microsoft 365 Copilot · clarify terminology</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="constraint-check">
+              <summary>Find the decision bottleneck</summary>
+              <p>Choose a changed concept. If its links have no assessment, collect a source. If assessors disagree, name a reviewer. If deployment is acknowledged but behaviour is still uncertain, run a test that distinguishes the versions.</p>
+              <ul>
+                <li><a href="/weights/?scenario=disputed">Try the disputed evidence scenario</a></li>
+                <li><a href="/wbs/">Inspect the recorded WBS case</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="dependency-diagnostic">
+              <summary>Diagnose a missing capability</summary>
+              <p>Toggle a component in the architecture puzzle. Watch which inputs, approval gates or observations become unavailable. Use those gaps to decide what to connect first.</p>
+              <ul>
+                <li><a href="/architecture/">Open the architecture puzzle</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="release-audit">
+              <summary>Audit a release and its withdrawal</summary>
+              <p>Check whether each application acknowledged delivery, returned the expected result and stopped applying the rule after withdrawal. In the WBS case, Calc still admitted €800 after the first withdrawal attempt.</p>
+              <ul>
+                <li><a href="/wbs/">Inspect the recorded WBS case</a></li>
+                <li><a href="#aurora">Review Aurora 21</a></li>
+              </ul>
+            </details>
+          </div>
         </section>
         <section class="homepage-route" id="work-with-us" aria-labelledby="work-with-us-title">
-          <h3 id="work-with-us-title">Work With Us</h3>
-          <ul>
-            <li><a href="#contact">Discuss an evaluation or pilot</a></li>
-            <li><a href="/OntoGraph/decisions/?lang=en">Sign in to Semantic Studio</a></li>
-            <li><a href="https://github.com/sev7enITA/OntoGraph/issues">Report an issue or suggest a change</a></li>
-            <li><a href="https://github.com/sev7enITA/OntoGraph/wiki">Project documentation</a></li>
-          </ul>
+          <h2 id="work-with-us-title">Work With Us</h2>
+          <p class="route-intro">Plan a pilot, learn the workflow or continue an existing draft.</p>
+          <div class="route-topics">
+            <details class="route-topic" id="pilot-partnership">
+              <summary>Plan a pilot together</summary>
+              <p>Bring one rule change, two applications and an accountable owner for each. Agree on what must be observed during activation and withdrawal before starting.</p>
+              <ul>
+                <li><a href="#contact">Contact Fabrizio</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="learning-path">
+              <summary>Guided learning path</summary>
+              <p>Model a small example in the practical guide, work through disagreement in the WBS case, then reproduce the recorded checks locally.</p>
+              <ul>
+                <li><a href="/guide/">Open the practical guide</a></li>
+                <li><a href="https://github.com/sev7enITA/OntoGraph/tree/main/examples/wbs_pilot">Reproduce the WBS pilot</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="practitioner-workspace">
+              <summary>Practitioner workspace</summary>
+              <p>Sign in to import a model, record dated claims and save your draft. Review and publication of a release use the registry workflow.</p>
+              <ul>
+                <li><a href="/OntoGraph/decisions/?lang=en">Sign in to the evidence workspace</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="pilot-scope">
+              <summary>Scope a pilot and estimate effort</summary>
+              <p>Describe the two systems, the data they exchange and the expected decision. Agree on who supplies test data, runs the checks and measures integration and ongoing effort.</p>
+              <ul>
+                <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/MARKET.md#pilot-decision-criteria">Read the pilot decision criteria</a></li>
+                <li><a href="#contact">Contact Fabrizio</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="contact-project">
+              <summary>Contact the project</summary>
+              <p>Contact Fabrizio by email or LinkedIn for research and pilot discussions. For a reproducible technical issue, open a GitHub issue and use synthetic examples.</p>
+              <ul>
+                <li><a href="#contact">Contact Fabrizio</a></li>
+                <li><a href="https://github.com/sev7enITA/OntoGraph/issues">Open GitHub Issues</a></li>
+              </ul>
+            </details>
+          </div>
         </section>
         <section class="homepage-route" id="company" aria-labelledby="company-title">
-          <h3 id="company-title">Company</h3>
-          <ul>
-            <li><a href="#behind">Behind OntoGraph</a></li>
-            <li><a href="#related-projects">Related projects</a></li>
-            <li><a href="#market">Market and standards</a></li>
-            <li><a href="https://www.fabriziodegni.com/research/">Research and publications</a></li>
-          </ul>
+          <h2 id="company-title">Company</h2>
+          <p class="route-intro">Meet the creator and check how to contribute, where drafts live and how to ask about reuse.</p>
+          <div class="route-topics">
+            <details class="route-topic" id="about-project">
+              <summary>About OnToGraPh</summary>
+              <p>Fabrizio Degni started OnToGraPh as the shared semantic layer for work with PALO and PolicyWatcher. The framework also runs independently with a local model and registry.</p>
+              <ul>
+                <li><a href="#behind">Behind OntoGraph</a></li>
+                <li><a href="#related-projects">Related projects</a></li>
+                <li><a href="#market">Market and standards</a></li>
+                <li><a href="https://www.fabriziodegni.com/research/">Research and publications</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="contribute">
+              <summary>Contribute to the project</summary>
+              <p>Suggest a useful case, document a repeatable check or share feedback on the model. Include your setup, expected behaviour and a small synthetic example when possible.</p>
+              <ul>
+                <li><a href="https://github.com/sev7enITA/OntoGraph/issues">Suggest a contribution on GitHub</a></li>
+                <li><a href="https://github.com/sev7enITA/OntoGraph/wiki">Read the project wiki</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="data-handling">
+              <summary>Data handling and privacy</summary>
+              <p>The standalone registry uses a local SQLite file. Online Studio requires sign-in and saves drafts under the signed-in account. The separate research room uses a password and a session cookie.</p>
+              <ul>
+                <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/deploy/hosted-decisions/README.md">Read how online drafts are stored</a></li>
+                <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/wiki/RESEARCH-ROOM-OPERATIONS.md">Read the research room access notes</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="access-and-reuse">
+              <summary>Project access and reuse</summary>
+              <p>You can browse the public repository and reproduce the published cases with synthetic data. For redistribution, commercial use or terms for a hosted deployment, contact the project owner.</p>
+              <ul>
+                <li><a href="https://github.com/sev7enITA/OntoGraph">View the repository</a></li>
+                <li><a href="#contact">Contact Fabrizio</a></li>
+              </ul>
+            </details>
+          </div>
         </section>
       </div>
-    </nav>
+    </section>
 
     <section class="wrap section" id="paradigm" aria-labelledby="paradigm-title">
       <div class="section-heading">

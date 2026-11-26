@@ -12,7 +12,7 @@
   <link rel="alternate" hreflang="x-default" href="https://openontograph.org/">
   <link rel="icon" type="image/png" href="../assets/icon.png">
   <link rel="stylesheet" href="../assets/site.css">
-  <link rel="stylesheet" href="/assets/home-directory.css">
+  <link rel="stylesheet" href="/assets/home-directory.css?v=2">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:locale:alternate" content="en_US">
@@ -121,47 +121,182 @@
       </div>
     </section>
 
-    <nav class="wrap homepage-directory" aria-label="探索 OnToGraPh">
+    <section class="wrap homepage-directory" aria-label="探索 OnToGraPh">
       <div class="homepage-routes">
         <section class="homepage-route" id="theory" aria-labelledby="theory-title">
-          <h3 id="theory-title">理论基础</h3>
-          <ul>
-            <li><a href="#paradigm">四项治理承诺</a></li>
-            <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/FRAMEWORK.md">治理生命周期（英文）</a></li>
-            <li><a href="#governance">每个环节的人工决策权</a></li>
-            <li><a href="/weights/zh/">加权关系</a></li>
-          </ul>
+          <h2 id="theory-title">理论基础</h2>
+          <p class="route-intro">了解定义、关系和人工判断如何共同支撑受治理的决策。</p>
+          <div class="route-topics">
+            <details class="route-topic" id="operational-meaning">
+              <summary>业务语义如何落地</summary>
+              <p>同一个 WBS 编码在财务部门可指过账对象，在项目管理办公室则可指工作包。为每种含义明确适用范围、负责人和使用该含义的应用。</p>
+              <ul>
+                <li><a href="/wbs/zh/">查看 WBS 实测案例</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="model-building-blocks">
+              <summary>模型的基本元素</summary>
+              <p>词典定义概念，分类体系组织概念，带类型的关系将概念与字段、控制和应用相连。模型为每项规则标明决策范围。</p>
+              <ul>
+                <li><a href="#studio">查看语义工作台</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="who-decides">
+              <summary>各阶段由谁决策</summary>
+              <p>作者提出变更，由指定审核人决定是否批准。观察者核验应用的实际行为。监督者可以下令撤回并要求重新核验。</p>
+              <ul>
+                <li><a href="#governance">了解人工决策权</a></li>
+                <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/FRAMEWORK.md#the-six-gates">阅读六个治理关口（英文）</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="relationship-impact">
+              <summary>关系如何传递影响</summary>
+              <p>沿依赖关系追踪变更字段，查明范围内受影响的控制。分别比较错误后果的严重程度、证据的支持程度和评估人之间的分歧。</p>
+              <ul>
+                <li><a href="/weights/zh/">查看加权影响</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="formation-to-release">
+              <summary>从变更到决策的两条路径</summary>
+              <p>从 PALO 的治理要求或 PolicyWatcher 发现的变更出发。两条路径都将来源连接到可由人员审核的规则及可核验的应用结果。</p>
+              <ul>
+                <li><a href="/pilot/zh/">查看联动试点</a></li>
+              </ul>
+            </details>
+          </div>
         </section>
         <section class="homepage-route" id="apply" aria-labelledby="apply-title">
-          <h3 id="apply-title">动手实践</h3>
-          <ul>
-            <li><a href="/guide/zh-Hans.html">实用指南</a></li>
-            <li><a href="/architecture/?lang=zh-Hans">架构拼图</a></li>
-            <li><a href="/wbs/zh/">WBS 发布与撤回核验</a></li>
-            <li><a href="/pilot/zh/">PolicyWatcher 与 PALO 联动试点</a></li>
-            <li><a href="#aurora">Aurora 21 案例</a></li>
-          </ul>
+          <h2 id="apply-title">动手实践</h2>
+          <p class="route-intro">选择起点、诊断缺口并核验结果。</p>
+          <div class="route-topics">
+            <details class="route-topic" id="fit-check">
+              <summary>OnToGraPh 适合我的场景吗？</summary>
+              <p>选择一项会影响实际决策的共享定义或规则，确认负责人、可测试的记录和执行该规则的应用。如果只有一个应用，可以从个人项目示例入手。</p>
+              <ul>
+                <li><a href="/guide/zh-Hans.html">打开实用指南</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="choose-start">
+              <summary>选择入门路径</summary>
+              <p>从当前问题出发：为个人项目定义术语，追踪跨部门共享的规则，为 Copilot 准备企业词典，或将外部政策变更交由人工审核。</p>
+              <ul>
+                <li><a href="/guide/zh-Hans.html#个人项目做一个借书应用">个人项目 · 定义术语</a></li>
+                <li><a href="/guide/zh-Hans.html#企业场景对接各自独立的文件交换系统">跨团队系统 · 追踪共享规则</a></li>
+                <li><a href="/pilot/zh/">来源变更 · 提交审核</a></li>
+                <li><a href="/guide/zh-Hans.html#microsoft-365-copilot按本公司的定义解释术语">Microsoft 365 Copilot · 统一业务术语</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="constraint-check">
+              <summary>定位决策瓶颈</summary>
+              <p>选择已变更的概念。若关系尚未评估，先补充来源。若评估存在分歧，指定审核人。若应用已确认收到版本而行为仍待核验，运行能区分新旧版本的测试。</p>
+              <ul>
+                <li><a href="/weights/zh/?scenario=disputed">试用证据争议场景</a></li>
+                <li><a href="/wbs/zh/">查看 WBS 实测案例</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="dependency-diagnostic">
+              <summary>诊断缺失能力</summary>
+              <p>在架构拼图中启用或停用某个组件，查看哪些输入、审批关口或实测结果随之缺失，据此确定优先接入什么。</p>
+              <ul>
+                <li><a href="/architecture/?lang=zh-Hans">打开架构拼图</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="release-audit">
+              <summary>审查发布和撤回</summary>
+              <p>核验每个应用是否确认接收、是否给出预期结果，以及是否在撤回后停止执行。WBS 试点中，Calc 在首次撤回后仍计入 800 欧元。</p>
+              <ul>
+                <li><a href="/wbs/zh/">查看 WBS 实测案例</a></li>
+                <li><a href="#aurora">查看 Aurora 21</a></li>
+              </ul>
+            </details>
+          </div>
         </section>
         <section class="homepage-route" id="work-with-us" aria-labelledby="work-with-us-title">
-          <h3 id="work-with-us-title">参与合作</h3>
-          <ul>
-            <li><a href="#contact">洽谈评估或试点</a></li>
-            <li><a href="/OntoGraph/decisions/?lang=zh-Hans">登录语义工作台</a></li>
-            <li><a href="https://github.com/sev7enITA/OntoGraph/issues">提交问题或改进建议</a></li>
-            <li><a href="https://github.com/sev7enITA/OntoGraph/wiki">项目文档（含双语试点）</a></li>
-          </ul>
+          <h2 id="work-with-us-title">参与合作</h2>
+          <p class="route-intro">规划试点、学习操作流程或继续编辑已有草稿。</p>
+          <div class="route-topics">
+            <details class="route-topic" id="pilot-partnership">
+              <summary>共同规划试点</summary>
+              <p>准备一项规则变更、两个应用以及各自的负责人。开始前共同确定发布生效和撤回时必须观察到的结果。</p>
+              <ul>
+                <li><a href="#contact">联系 Fabrizio</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="learning-path">
+              <summary>操作学习路径</summary>
+              <p>用实用指南建立一个小型模型，查看 WBS 案例中的分歧处理，再在本机复现实测核验流程。</p>
+              <ul>
+                <li><a href="/guide/zh-Hans.html">打开实用指南</a></li>
+                <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/examples/wbs_pilot/README.zh-Hans.md">复现 WBS 试点</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="practitioner-workspace">
+              <summary>实务工作区</summary>
+              <p>登录后导入模型、记录带日期的主张并保存草稿。版本审核和发布通过注册表工作流完成。</p>
+              <ul>
+                <li><a href="/OntoGraph/decisions/?lang=zh-Hans">登录证据工作区</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="pilot-scope">
+              <summary>界定试点范围并估算工作量</summary>
+              <p>说明两个系统、交换的数据以及预期决策。共同确定由谁提供测试数据、执行核验并衡量接入和日常维护工作量。</p>
+              <ul>
+                <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/MARKET.md#pilot-decision-criteria">查看试点评估标准（英文）</a></li>
+                <li><a href="#contact">联系 Fabrizio</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="contact-project">
+              <summary>联系项目</summary>
+              <p>如需讨论研究或试点，请通过电子邮件或 LinkedIn 联系 Fabrizio。可复现的技术问题可提交到 GitHub，请使用合成示例。</p>
+              <ul>
+                <li><a href="#contact">联系 Fabrizio</a></li>
+                <li><a href="https://github.com/sev7enITA/OntoGraph/issues">打开 GitHub Issues</a></li>
+              </ul>
+            </details>
+          </div>
         </section>
         <section class="homepage-route" id="company" aria-labelledby="company-title">
-          <h3 id="company-title">关于项目</h3>
-          <ul>
-            <li><a href="#behind">认识 OnToGraPh 的创作者</a></li>
-            <li><a href="#related-projects">相关项目</a></li>
-            <li><a href="#market">市场与标准</a></li>
-            <li><a href="https://www.fabriziodegni.com/research/">研究与出版物（英文）</a></li>
-          </ul>
+          <h2 id="company-title">关于项目</h2>
+          <p class="route-intro">认识创作者，了解如何参与、草稿存放在哪里，以及如何咨询复用。</p>
+          <div class="route-topics">
+            <details class="route-topic" id="about-project">
+              <summary>关于 OnToGraPh</summary>
+              <p>Fabrizio Degni 创建了 OnToGraPh，为 PALO 和 PolicyWatcher 的协同工作提供共享语义层。该框架也可以使用本地模型与注册表独立运行。</p>
+              <ul>
+                <li><a href="#behind">认识 OnToGraPh 的创作者</a></li>
+                <li><a href="#related-projects">查看相关项目</a></li>
+                <li><a href="#market">市场与标准</a></li>
+                <li><a href="https://www.fabriziodegni.com/research/">研究与出版物（英文）</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="contribute">
+              <summary>参与项目贡献</summary>
+              <p>可以建议实际使用场景、记录可重复的核验流程，或反馈模型问题。条件允许时，请附上环境、预期行为和小型合成示例。</p>
+              <ul>
+                <li><a href="https://github.com/sev7enITA/OntoGraph/issues">在 GitHub 提出贡献建议</a></li>
+                <li><a href="https://github.com/sev7enITA/OntoGraph/wiki">阅读项目 Wiki</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="data-handling">
+              <summary>数据处理与隐私</summary>
+              <p>独立版注册表使用本机 SQLite 文件。在线工作台需登录，草稿保存在登录账户下。独立的研究资料室采用密码访问并使用会话 Cookie。</p>
+              <ul>
+                <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/deploy/hosted-decisions/README.md">了解在线草稿的存放方式（英文）</a></li>
+                <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/wiki/RESEARCH-ROOM-OPERATIONS.md">了解研究资料室的访问机制（英文）</a></li>
+              </ul>
+            </details>
+            <details class="route-topic" id="access-and-reuse">
+              <summary>项目访问与复用</summary>
+              <p>您可以浏览公共代码仓库，并使用合成数据复现已发表的案例。如需了解再分发、商业使用或托管部署的适用条款，请联系项目负责人。</p>
+              <ul>
+                <li><a href="https://github.com/sev7enITA/OntoGraph">查看代码仓库</a></li>
+                <li><a href="#contact">联系 Fabrizio</a></li>
+              </ul>
+            </details>
+          </div>
         </section>
       </div>
-    </nav>
+    </section>
 
     <section class="wrap section" id="paradigm" aria-labelledby="paradigm-title">
       <div class="section-heading">
