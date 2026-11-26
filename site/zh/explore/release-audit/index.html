@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>审查发布和撤回 | OnToGraPh</title>
+  <meta name="description" content="回放已发布的 WBS 练习，检查 Beancount 和 LibreOffice Calc 分别在各自原生文件中处理合成记录时采集的应用读数。">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/zh/explore/release-audit/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/explore/release-audit/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/explore/release-audit/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/explore/release-audit/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <script defer src="/assets/topic-pages.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">跳转至正文</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/zh/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a href="/explore/release-audit/" hreflang="en" lang="en">English</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main">
+    <nav class="topic-path" aria-label="面包屑导航">
+      <a href="/zh/explore/">探索 OnToGraPh</a>
+      <span aria-hidden="true">/</span> <a href="/zh/explore/#apply">动手实践</a>
+    </nav>
+    <header class="topic-hero">
+      <h1>审查发布和撤回</h1>
+      <p>回放已发布的 WBS 练习，检查 Beancount 和 LibreOffice Calc 分别在各自原生文件中处理合成记录时采集的应用读数。</p>
+    </header>
+    <section class="topic-copy">
+      <h2>先选能揭示旧规则的测试</h2>
+      <p>审核后的 WBS 规则要求明确来源部门。使用未限定部门的编码、已注明部门的编码以及独立对照记录来测试。Beancount 计算符合条件的过账金额，Calc 计算符合条件的工作包预算。两个应用分别有各自的预期金额。</p>
+      <p>检查激活阶段 Calc 已确认收到新规则包但仍使用旧工作簿的检查点，并将该读数与新规则生效后的读数对照。</p>
+    </section>
+    <section class="topic-copy">
+      <h2>逐项核验应用是否完成撤回</h2>
+      <p>对照首次撤回读数、工作簿中断及恢复后的新读数。工作簿无法访问时，Calc 状态仍是尚未证实。只有新读数证明约定用例中的规则已停用，才能确认撤回。</p>
+      <p>将原规则作为另一个经过审核的版本重新发布。为了复现实验，请一并保留激活记录、阶段、用例、观察者、采集时间和原始证据制品。</p>
+    </section>
+    <section class="topic-lab" aria-labelledby="lab-title" data-scenarios>
+      <h2 id="lab-title">回放已保存的应用实测结果</h2>
+      <label class="scenario-picker" hidden>
+        选择场景
+        <select>
+          <option value="0">原始 WBS 规则</option>
+          <option value="1">撤回原始规则</option>
+          <option value="2">工作簿已确认新规则，仍执行旧规则</option>
+          <option value="3">两个应用均执行按部门区分的新规则</option>
+          <option value="4">财务已停止执行，PMO 仍在执行</option>
+          <option value="5">无法读取 PMO 工作簿进行核验</option>
+          <option value="6">实测确认两个应用均已停止执行</option>
+          <option value="7">重新批准后恢复原始规则</option>
+        </select>
+      </label>
+      <div class="scenario-results">
+      <section class="scenario-result" data-scenario="0"><h3>原始 WBS 规则</h3><dl class="readback"><div><dt>Beancount</dt><dd>符合条件的过账金额 <strong>€475</strong></dd><dd>已核验</dd></div><div><dt>LibreOffice Calc</dt><dd>符合条件的工作包预算 <strong>€2,000</strong></dd><dd>已核验</dd></div></dl></section>
+      <section class="scenario-result" data-scenario="1"><h3>撤回原始规则</h3><dl class="readback"><div><dt>Beancount</dt><dd>符合条件的过账金额 <strong>€0</strong></dd><dd>已核验撤回</dd></div><div><dt>LibreOffice Calc</dt><dd>符合条件的工作包预算 <strong>€0</strong></dd><dd>已核验撤回</dd></div></dl></section>
+      <section class="scenario-result" data-scenario="2"><h3>工作簿已确认新规则，仍执行旧规则</h3><dl class="readback"><div><dt>Beancount</dt><dd>符合条件的过账金额 <strong>€125</strong></dd><dd>已核验</dd></div><div><dt>LibreOffice Calc</dt><dd>符合条件的工作包预算 <strong>€2,000</strong></dd><dd>不一致</dd></div></dl></section>
+      <section class="scenario-result" data-scenario="3"><h3>两个应用均执行按部门区分的新规则</h3><dl class="readback"><div><dt>Beancount</dt><dd>符合条件的过账金额 <strong>€125</strong></dd><dd>已核验</dd></div><div><dt>LibreOffice Calc</dt><dd>符合条件的工作包预算 <strong>€800</strong></dd><dd>已核验</dd></div></dl></section>
+      <section class="scenario-result" data-scenario="4"><h3>财务已停止执行，PMO 仍在执行</h3><dl class="readback"><div><dt>Beancount</dt><dd>符合条件的过账金额 <strong>€0</strong></dd><dd>已核验撤回</dd></div><div><dt>LibreOffice Calc</dt><dd>符合条件的工作包预算 <strong>€800</strong></dd><dd>不一致</dd></div></dl></section>
+      <section class="scenario-result" data-scenario="5"><h3>无法读取 PMO 工作簿进行核验</h3><dl class="readback"><div><dt>Beancount</dt><dd>符合条件的过账金额 <strong>€0</strong></dd><dd>已核验撤回 · 最近一次实测</dd></div><div><dt>LibreOffice Calc</dt><dd>符合条件的工作包预算 <strong>不可用</strong></dd><dd>尚未证实</dd></div></dl></section>
+      <section class="scenario-result" data-scenario="6"><h3>实测确认两个应用均已停止执行</h3><dl class="readback"><div><dt>Beancount</dt><dd>符合条件的过账金额 <strong>€0</strong></dd><dd>已核验撤回</dd></div><div><dt>LibreOffice Calc</dt><dd>符合条件的工作包预算 <strong>€0</strong></dd><dd>已核验撤回</dd></div></dl></section>
+      <section class="scenario-result" data-scenario="7"><h3>重新批准后恢复原始规则</h3><dl class="readback"><div><dt>Beancount</dt><dd>符合条件的过账金额 <strong>€475</strong></dd><dd>已核验</dd></div><div><dt>LibreOffice Calc</dt><dd>符合条件的工作包预算 <strong>€2,000</strong></dd><dd>已核验</dd></div></dl></section>
+      </div>
+    </section>
+    <section class="topic-follow">
+      <h2>继续操作</h2>
+      <ul>
+        <li><a href="/wbs/zh/">查看完整 WBS 证据</a></li>
+        <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/PROTOCOL.md#evaluation-states">查看注册表如何判断证据状态（英文）</a></li>
+        <li><a href="/zh/#aurora">查看 Aurora 21 案例</a></li>
+      </ul>
+    </section>
+    <nav class="topic-neighbours" aria-labelledby="topic-related">
+      <h2 id="topic-related">本栏目其他主题</h2>
+      <ul>
+        <li><a href="/zh/explore/fit-check/">OnToGraPh 适合我的场景吗？</a></li>
+        <li><a href="/zh/explore/choose-start/">选择入门路径</a></li>
+        <li><a href="/zh/explore/constraint-check/">定位决策瓶颈</a></li>
+        <li><a href="/zh/explore/dependency-diagnostic/">诊断缺失能力</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

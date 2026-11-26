@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Meaning in operational work | OnToGraPh</title>
+  <meta name="description" content="Treat the meaning of a field as a decision someone owns. A code needs a definition, a scope and a test for the applications that act on it.">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/explore/operational-meaning/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/explore/operational-meaning/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/explore/operational-meaning/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/explore/operational-meaning/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <script defer src="/assets/topic-pages.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">Skip to content</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a href="/zh/explore/operational-meaning/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main">
+    <nav class="topic-path" aria-label="Breadcrumb">
+      <a href="/explore/">Explore OnToGraPh</a>
+      <span aria-hidden="true">/</span> <a href="/explore/#theory">The Theory</a>
+    </nav>
+    <header class="topic-hero">
+      <h1>Meaning in operational work</h1>
+      <p>Treat the meaning of a field as a decision someone owns. A code needs a definition, a scope and a test for the applications that act on it.</p>
+    </header>
+    <section class="topic-copy">
+      <h2>One code in two processes</h2>
+      <p>In the WBS pilot, Finance uses 0017 for a ledger posting object and the project management office uses it for a work package. Both use the code 0017, and each application interprets it within its own process.</p>
+    </section>
+    <section class="topic-copy">
+      <h2>Make the mapping reviewable</h2>
+      <p>Write down the business definition, the physical field, the owner, the valid context and the rows that should pass or wait. Keep the original code as text so its leading zeros survive transfer.</p>
+      <p>The reviewed pilot rule requires both a known code and a matching source department. A positive test supplies both values. A contrast test supplies a known code with the department qualifier missing.</p>
+    </section>
+    <section class="topic-copy">
+      <h2>Check the application that makes the decision</h2>
+      <p>The pilot runs Beancount on a native ledger and LibreOffice Calc on a separate workbook. Compare each result with its own approved behaviour. One total measures eligible postings and the other measures eligible planned budget.</p>
+    </section>
+    <section class="topic-lab" aria-labelledby="lab-title" data-scenarios>
+      <h2 id="lab-title">Try an input against the reviewed WBS rule</h2>
+      <label class="scenario-picker" hidden>
+        Choose a scenario
+        <select>
+          <option value="0">Known 0017 with matching department</option>
+          <option value="1">Known 0017 with no department</option>
+          <option value="2">Unknown code with matching department</option>
+        </select>
+      </label>
+      <div class="scenario-results">
+      <section class="scenario-result" data-scenario="0"><noscript><p><strong>Known 0017 with matching department</strong></p></noscript><h3>Expected decision · allow</h3><p>Both required facts are present. Use the case to check that valid entries still qualify after the change.</p></section>
+      <section class="scenario-result" data-scenario="1"><noscript><p><strong>Known 0017 with no department</strong></p></noscript><h3>Expected decision · hold</h3><p>The baseline accepted this record. The reviewed rule holds it, so the case can distinguish a current deployment from one using the previous rule.</p></section>
+      <section class="scenario-result" data-scenario="2"><noscript><p><strong>Unknown code with matching department</strong></p></noscript><h3>Expected decision · hold</h3><p>The code fails the known-code requirement even though the department matches. Use this negative control alongside the distinguishing case.</p></section>
+      </div>
+    </section>
+    <section class="topic-follow">
+      <h2>Follow the workflow</h2>
+      <ul>
+        <li><a href="/wbs/">Inspect the exercised WBS cases</a></li>
+        <li><a href="/guide/#enterprise-reconcile-file-exchanges-between-silos">Map a term across departments</a></li>
+      </ul>
+    </section>
+    <nav class="topic-neighbours" aria-labelledby="topic-related">
+      <h2 id="topic-related">More in this section</h2>
+      <ul>
+        <li><a href="/explore/model-building-blocks/">Building blocks of the model</a></li>
+        <li><a href="/explore/who-decides/">Who decides at each stage</a></li>
+        <li><a href="/explore/relationship-impact/">How relationships carry impact</a></li>
+        <li><a href="/explore/formation-to-release/">Two routes from change to decision</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

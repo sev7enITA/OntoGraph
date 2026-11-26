@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>各阶段由谁决策 | OnToGraPh</title>
+  <meta name="description" content="明确由谁审批变更、核验应用行为以及下令撤回。发布记录分别记录这些操作。">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/zh/explore/who-decides/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/explore/who-decides/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/explore/who-decides/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/explore/who-decides/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <script defer src="/assets/topic-pages.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">跳转至正文</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/zh/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a href="/explore/who-decides/" hreflang="en" lang="en">English</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main">
+    <nav class="topic-path" aria-label="面包屑导航">
+      <a href="/zh/explore/">探索 OnToGraPh</a>
+      <span aria-hidden="true">/</span> <a href="/zh/explore/#theory">理论基础</a>
+    </nav>
+    <header class="topic-hero">
+      <h1>各阶段由谁决策</h1>
+      <p>明确由谁审批变更、核验应用行为以及下令撤回。发布记录分别记录这些操作。</p>
+    </header>
+    <section class="topic-copy">
+      <h2>发布生效前</h2>
+      <p>作者提出变更，并明确适用范围和测试用例。指定审核人可批准或反对这一特定的冻结候选版本。发布人在生效前核查审核资格、审批人数要求、证据及未决异议。</p>
+    </section>
+    <section class="topic-copy">
+      <h2>发布生效后</h2>
+      <p>使用方报告收到的版本。观察者在应用中运行用例，记录实测结果、采集时间和工件摘要。应核对时间限制和确切版本，因为旧结果可能对应另一次发布。</p>
+    </section>
+    <section class="topic-copy">
+      <h2>需要撤回决策时</h2>
+      <p>监督者下令撤回。须为每个受影响应用取得新的观察记录，确认它已停止执行该规则。若恢复旧版本的内容，须重新提案并再次审批。</p>
+      <p>在 WBS 试点中，Calc 确认已收到撤回通知，但计算仍计入 800 欧元。直到随后重新读取到 0 欧元，该用例才获得所需的停止执行证据。</p>
+    </section>
+    <section class="topic-lab" aria-labelledby="lab-title" data-scenarios>
+      <h2 id="lab-title">下一步应由谁处理？</h2>
+      <label class="scenario-picker" hidden>
+        选择场景
+        <select>
+          <option value="0">映射已准备好提交审批</option>
+          <option value="1">应用报告已加载发布版本</option>
+          <option value="2">有问题的发布需要撤回</option>
+        </select>
+      </label>
+      <div class="scenario-results">
+      <section class="scenario-result" data-scenario="0"><noscript><p><strong>映射已准备好提交审批</strong></p></noscript><h3>指定审核人</h3><p>核查支持来源并处理冻结候选版本的异议，然后由发布人执行生效操作。</p></section>
+      <section class="scenario-result" data-scenario="1"><noscript><p><strong>应用报告已加载发布版本</strong></p></noscript><h3>观察者</h3><p>运行可区分新旧规则的测试，并保存该应用实际返回的结果。</p></section>
+      <section class="scenario-result" data-scenario="2"><noscript><p><strong>有问题的发布需要撤回</strong></p></noscript><h3>监督者和观察者</h3><p>由监督者授权并记录撤回决策，再由观察者从每个应用获取新的停止执行证据。</p></section>
+      </div>
+    </section>
+    <section class="topic-follow">
+      <h2>继续操作</h2>
+      <ul>
+        <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/FRAMEWORK.md#authority-and-accountability">查看角色和权限模型（英文）</a></li>
+        <li><a href="/wbs/zh/">查看 WBS 撤回实录</a></li>
+      </ul>
+    </section>
+    <nav class="topic-neighbours" aria-labelledby="topic-related">
+      <h2 id="topic-related">本栏目其他主题</h2>
+      <ul>
+        <li><a href="/zh/explore/operational-meaning/">业务语义如何落地</a></li>
+        <li><a href="/zh/explore/model-building-blocks/">模型的基本元素</a></li>
+        <li><a href="/zh/explore/relationship-impact/">关系如何传递影响</a></li>
+        <li><a href="/zh/explore/formation-to-release/">从变更到决策的两条路径</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

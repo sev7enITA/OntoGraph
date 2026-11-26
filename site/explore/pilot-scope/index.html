@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Scope a pilot and estimate effort | OnToGraPh</title>
+  <meta name="description" content="Estimate the work needed to prepare, integrate, review and verify one decision across two applications.">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/explore/pilot-scope/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/explore/pilot-scope/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/explore/pilot-scope/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/explore/pilot-scope/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <script defer src="/assets/topic-pages.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">Skip to content</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a href="/zh/explore/pilot-scope/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main">
+    <nav class="topic-path" aria-label="Breadcrumb">
+      <a href="/explore/">Explore OnToGraPh</a>
+      <span aria-hidden="true">/</span> <a href="/explore/#work-with-us">Work With Us</a>
+    </nav>
+    <header class="topic-hero">
+      <h1>Scope a pilot and estimate effort</h1>
+      <p>Estimate the work needed to prepare, integrate, review and verify one decision across two applications.</p>
+    </header>
+    <section class="topic-copy">
+      <h2>Separate shared work from application work</h2>
+      <p>Count the time to choose a rule, obtain sample records and agree on acceptance criteria. Estimate each application’s setup separately. An API and a workbook often need different access and verification work. For the calculator, use the average integration time across the applications. If one needs 5 hours and another needs 11, enter 8 hours per application.</p>
+    </section>
+    <section class="topic-copy">
+      <h2>Budget time for failure and recovery</h2>
+      <p>Include a successful release, a stale response behind a valid receipt and an application that cannot be reached. Time the same checks under your existing process and the proposed pilot.</p>
+    </section>
+    <section class="topic-copy">
+      <h2>Use the estimate to prepare a conversation</h2>
+      <p>Treat your total as an estimate of team hours. Bring the two applications, example rule and expected decisions to the scoping discussion. Set the commercial terms with the project owner after agreeing on access and responsibilities.</p>
+    </section>
+    <section class="topic-lab" aria-labelledby="lab-title">
+      <h2 id="lab-title">Estimate pilot effort</h2>
+      <p>Replace the illustrative hours with your estimates. The result covers one pilot.</p>
+      <form data-estimate data-error="Enter a valid number for each input.">
+      <label>Applications<input type="number" id="applications" name="applications" min="1" max="100" step="1" value="2" required></label>
+      <label>Average integration hours per application<input type="number" id="per-application" name="per-application" min="0" max="10000" step="0.5" value="8" required></label>
+      <label>Modelling and review hours<input type="number" id="modelling" name="modelling" min="0" max="10000" step="0.5" value="6" required></label>
+      <label>Activation and withdrawal test hours<input type="number" id="verification" name="verification" min="0" max="10000" step="0.5" value="4" required></label>
+        <output aria-live="polite" for="applications per-application modelling verification"><span>Estimated total</span> <strong data-total>26</strong> hours</output>
+      </form>
+      <noscript><p>Multiply applications by integration hours per application, then add modelling, review and test hours.</p></noscript>
+    </section>
+    <section class="topic-follow">
+      <h2>Follow the workflow</h2>
+      <ul>
+        <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/MARKET.md#pilot-decision-criteria">Read the pilot decision criteria</a></li>
+        <li><a href="mailto:io@fabriziodegni.com">Email Fabrizio</a></li>
+      </ul>
+    </section>
+    <nav class="topic-neighbours" aria-labelledby="topic-related">
+      <h2 id="topic-related">More in this section</h2>
+      <ul>
+        <li><a href="/explore/pilot-partnership/">Plan a pilot together</a></li>
+        <li><a href="/explore/learning-path/">Guided learning path</a></li>
+        <li><a href="/explore/practitioner-workspace/">Practitioner workspace</a></li>
+        <li><a href="/explore/contact-project/">Contact the project</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

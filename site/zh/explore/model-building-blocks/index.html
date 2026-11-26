@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>模型的基本元素 | OnToGraPh</title>
+  <meta name="description" content="从术语定义出发，追踪依赖该含义的字段、控制、应用和测试。">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/zh/explore/model-building-blocks/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/explore/model-building-blocks/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/explore/model-building-blocks/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/explore/model-building-blocks/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <script defer src="/assets/topic-pages.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">跳转至正文</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/zh/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a href="/explore/model-building-blocks/" hreflang="en" lang="en">English</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main">
+    <nav class="topic-path" aria-label="面包屑导航">
+      <a href="/zh/explore/">探索 OnToGraPh</a>
+      <span aria-hidden="true">/</span> <a href="/zh/explore/#theory">理论基础</a>
+    </nav>
+    <header class="topic-hero">
+      <h1>模型的基本元素</h1>
+      <p>从术语定义出发，追踪依赖该含义的字段、控制、应用和测试。</p>
+    </header>
+    <section class="topic-copy">
+      <h2>命名并组织业务含义</h2>
+      <p>词典条目为概念提供稳定的工作区 ID、定义和负责人。标签和别名帮助查找。分类体系通过上位术语组织概念，类别层级则通过子类关系组织类型。</p>
+    </section>
+    <section class="topic-copy">
+      <h2>把术语映射到系统</h2>
+      <p>在 WBS 示例中，已识别编码字段映射到 WBS 概念。资格控制依赖该字段，实现 WBS 准入契约，并在审核后的版本中额外依赖部门限定字段。</p>
+      <p>财务和项目管理应用均使用准入契约。各自的测试用例记录预期决策，注册表按照相应的应用和发布阶段核验观察记录。</p>
+    </section>
+    <section class="topic-copy">
+      <h2>保留可移植的权威记录</h2>
+      <p>发布 JSON 将映射、控制、证据和测试保存在一起。JSON-LD 投影用于交换图结构。若需要重建完整的决策记录，请保留发布 JSON。</p>
+    </section>
+    <section class="topic-lab" aria-labelledby="lab-title" data-scenarios>
+      <h2 id="lab-title">选择要建模的对象</h2>
+      <label class="scenario-picker" hidden>
+        选择场景
+        <select>
+          <option value="0">词汇表中的术语</option>
+          <option value="1">文件中的一列</option>
+          <option value="2">应用必须执行的内容</option>
+        </select>
+      </label>
+      <div class="scenario-results">
+      <section class="scenario-result" data-scenario="0"><noscript><p><strong>词汇表中的术语</strong></p></noscript><h3>定义概念</h3><p>为 WBS 标识符填写定义和责任人。可添加上位类别，便于查找相关概念。</p></section>
+      <section class="scenario-result" data-scenario="1"><noscript><p><strong>文件中的一列</strong></p></noscript><h3>映射物理字段</h3><p>创建字段节点，通过 mapsTo 将它连接到 WBS 概念。在映射证据中注明来源部门和格式。</p></section>
+      <section class="scenario-result" data-scenario="2"><noscript><p><strong>应用必须执行的内容</strong></p></noscript><h3>定义控制和预期结果</h3><p>编写准入条件，将控制连接到契约，再为应用添加可区分规则两个版本的测试用例。</p></section>
+      </div>
+    </section>
+    <section class="topic-follow">
+      <h2>继续操作</h2>
+      <ul>
+        <li><a href="/zh/#studio">查看语义工作台</a></li>
+        <li><a href="/wbs/resolved.json">下载审核后的 WBS 发布模型</a></li>
+        <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/PROTOCOL.md#files-and-identity">阅读模型和校验协议（英文）</a></li>
+      </ul>
+    </section>
+    <nav class="topic-neighbours" aria-labelledby="topic-related">
+      <h2 id="topic-related">本栏目其他主题</h2>
+      <ul>
+        <li><a href="/zh/explore/operational-meaning/">业务语义如何落地</a></li>
+        <li><a href="/zh/explore/who-decides/">各阶段由谁决策</a></li>
+        <li><a href="/zh/explore/relationship-impact/">关系如何传递影响</a></li>
+        <li><a href="/zh/explore/formation-to-release/">从变更到决策的两条路径</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

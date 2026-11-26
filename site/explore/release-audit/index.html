@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Audit a release and its withdrawal | OnToGraPh</title>
+  <meta name="description" content="Replay the published WBS exercise, using application readings captured from Beancount and LibreOffice Calc on separate native files with synthetic records.">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/explore/release-audit/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/explore/release-audit/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/explore/release-audit/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/explore/release-audit/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <script defer src="/assets/topic-pages.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">Skip to content</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a href="/zh/explore/release-audit/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main">
+    <nav class="topic-path" aria-label="Breadcrumb">
+      <a href="/explore/">Explore OnToGraPh</a>
+      <span aria-hidden="true">/</span> <a href="/explore/#apply">Apply It</a>
+    </nav>
+    <header class="topic-hero">
+      <h1>Audit a release and its withdrawal</h1>
+      <p>Replay the published WBS exercise, using application readings captured from Beancount and LibreOffice Calc on separate native files with synthetic records.</p>
+    </header>
+    <section class="topic-copy">
+      <h2>Start with a test that exposes the old rule</h2>
+      <p>The reviewed WBS rule requires the source department. Run the case with a bare code, a qualified code and a separate control. Beancount measures eligible ledger postings. Calc measures eligible work-package budget. Each application has its own expected amount.</p>
+      <p>At activation, find the checkpoint where Calc acknowledges the new package yet still uses the prior workbook. Compare that reading with the one captured after the qualified rule is applied.</p>
+    </section>
+    <section class="topic-copy">
+      <h2>Check each application&#x27;s withdrawal</h2>
+      <p>Follow the first withdrawal reading, the workbook outage and the fresh readback. When the workbook is unavailable, Calc remains unproven. Confirm withdrawal only after fresh readings show inactivity on the declared cases.</p>
+      <p>Restore the earlier rule as a new reviewed release. To reproduce the audit, keep the activation, phase, case, observer, capture time and original artifact together.</p>
+    </section>
+    <section class="topic-lab" aria-labelledby="lab-title" data-scenarios>
+      <h2 id="lab-title">Replay the captured application results</h2>
+      <label class="scenario-picker" hidden>
+        Choose a scenario
+        <select>
+          <option value="0">Original WBS rule</option>
+          <option value="1">Withdraw the original rule</option>
+          <option value="2">Workbook acknowledges the new rule but applies the old one</option>
+          <option value="3">Both applications use the department-qualified rule</option>
+          <option value="4">Finance stops using the rule, PMO still applies it</option>
+          <option value="5">PMO workbook is unavailable for verification</option>
+          <option value="6">Both applications confirm withdrawal by readback</option>
+          <option value="7">A fresh approval restores the baseline</option>
+        </select>
+      </label>
+      <div class="scenario-results">
+      <section class="scenario-result" data-scenario="0"><h3>Original WBS rule</h3><dl class="readback"><div><dt>Beancount</dt><dd>Eligible ledger postings <strong>€475</strong></dd><dd>Verified</dd></div><div><dt>LibreOffice Calc</dt><dd>Eligible work-package budget <strong>€2,000</strong></dd><dd>Verified</dd></div></dl></section>
+      <section class="scenario-result" data-scenario="1"><h3>Withdraw the original rule</h3><dl class="readback"><div><dt>Beancount</dt><dd>Eligible ledger postings <strong>€0</strong></dd><dd>Withdrawal verified</dd></div><div><dt>LibreOffice Calc</dt><dd>Eligible work-package budget <strong>€0</strong></dd><dd>Withdrawal verified</dd></div></dl></section>
+      <section class="scenario-result" data-scenario="2"><h3>Workbook acknowledges the new rule but applies the old one</h3><dl class="readback"><div><dt>Beancount</dt><dd>Eligible ledger postings <strong>€125</strong></dd><dd>Verified</dd></div><div><dt>LibreOffice Calc</dt><dd>Eligible work-package budget <strong>€2,000</strong></dd><dd>Mismatch</dd></div></dl></section>
+      <section class="scenario-result" data-scenario="3"><h3>Both applications use the department-qualified rule</h3><dl class="readback"><div><dt>Beancount</dt><dd>Eligible ledger postings <strong>€125</strong></dd><dd>Verified</dd></div><div><dt>LibreOffice Calc</dt><dd>Eligible work-package budget <strong>€800</strong></dd><dd>Verified</dd></div></dl></section>
+      <section class="scenario-result" data-scenario="4"><h3>Finance stops using the rule, PMO still applies it</h3><dl class="readback"><div><dt>Beancount</dt><dd>Eligible ledger postings <strong>€0</strong></dd><dd>Withdrawal verified</dd></div><div><dt>LibreOffice Calc</dt><dd>Eligible work-package budget <strong>€800</strong></dd><dd>Mismatch</dd></div></dl></section>
+      <section class="scenario-result" data-scenario="5"><h3>PMO workbook is unavailable for verification</h3><dl class="readback"><div><dt>Beancount</dt><dd>Eligible ledger postings <strong>€0</strong></dd><dd>Withdrawal verified · last observed</dd></div><div><dt>LibreOffice Calc</dt><dd>Eligible work-package budget <strong>Unavailable</strong></dd><dd>Unproven</dd></div></dl></section>
+      <section class="scenario-result" data-scenario="6"><h3>Both applications confirm withdrawal by readback</h3><dl class="readback"><div><dt>Beancount</dt><dd>Eligible ledger postings <strong>€0</strong></dd><dd>Withdrawal verified</dd></div><div><dt>LibreOffice Calc</dt><dd>Eligible work-package budget <strong>€0</strong></dd><dd>Withdrawal verified</dd></div></dl></section>
+      <section class="scenario-result" data-scenario="7"><h3>A fresh approval restores the baseline</h3><dl class="readback"><div><dt>Beancount</dt><dd>Eligible ledger postings <strong>€475</strong></dd><dd>Verified</dd></div><div><dt>LibreOffice Calc</dt><dd>Eligible work-package budget <strong>€2,000</strong></dd><dd>Verified</dd></div></dl></section>
+      </div>
+    </section>
+    <section class="topic-follow">
+      <h2>Follow the workflow</h2>
+      <ul>
+        <li><a href="/wbs/">Inspect the full WBS evidence</a></li>
+        <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/PROTOCOL.md#evaluation-states">Read how the registry evaluates the evidence</a></li>
+        <li><a href="/#aurora">Review the Aurora 21 case</a></li>
+      </ul>
+    </section>
+    <nav class="topic-neighbours" aria-labelledby="topic-related">
+      <h2 id="topic-related">More in this section</h2>
+      <ul>
+        <li><a href="/explore/fit-check/">Is OnToGraPh a fit?</a></li>
+        <li><a href="/explore/choose-start/">Choose your starting path</a></li>
+        <li><a href="/explore/constraint-check/">Find the decision bottleneck</a></li>
+        <li><a href="/explore/dependency-diagnostic/">Diagnose a missing capability</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

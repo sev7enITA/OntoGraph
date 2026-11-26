@@ -137,3 +137,11 @@
 @media (max-width: 385px) {
   .top-nav > a { font-size: .79rem; }
 }
+
+.route-topic .primary-route a {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.directory-link { margin-bottom: .8rem; }
+.directory-link a { color: var(--accent); font-weight: 650; }

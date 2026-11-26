@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Who decides at each stage | OnToGraPh</title>
+  <meta name="description" content="Assign people to approve changes, inspect application behaviour and order verified withdrawal. The release records these actions separately.">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/explore/who-decides/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/explore/who-decides/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/explore/who-decides/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/explore/who-decides/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <script defer src="/assets/topic-pages.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">Skip to content</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a href="/zh/explore/who-decides/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main">
+    <nav class="topic-path" aria-label="Breadcrumb">
+      <a href="/explore/">Explore OnToGraPh</a>
+      <span aria-hidden="true">/</span> <a href="/explore/#theory">The Theory</a>
+    </nav>
+    <header class="topic-hero">
+      <h1>Who decides at each stage</h1>
+      <p>Assign people to approve changes, inspect application behaviour and order verified withdrawal. The release records these actions separately.</p>
+    </header>
+    <section class="topic-copy">
+      <h2>Before activation</h2>
+      <p>An author proposes the change, its scope and its test cases. Assigned reviewers can approve or object to that specific frozen candidate. A publisher checks reviewer eligibility, quorum, evidence and any unresolved objection before activation.</p>
+    </section>
+    <section class="topic-copy">
+      <h2>After activation</h2>
+      <p>The consumer reports the version it received. An observer runs a case on the application and records its actual result, capture time and artifact digest. Time limits and the exact version matter because a past result may describe a different release.</p>
+    </section>
+    <section class="topic-copy">
+      <h2>When the decision must be withdrawn</h2>
+      <p>A supervisor orders withdrawal. Each affected application needs a fresh observation that it stopped applying the rule. Recovery to earlier content uses a new proposal and fresh approval.</p>
+      <p>In the WBS pilot, Calc acknowledged withdrawal while its calculation still admitted €800. Only the subsequent read of €0 supplied the required inactivity evidence for that case.</p>
+    </section>
+    <section class="topic-lab" aria-labelledby="lab-title" data-scenarios>
+      <h2 id="lab-title">Who should take the next action?</h2>
+      <label class="scenario-picker" hidden>
+        Choose a scenario
+        <select>
+          <option value="0">A mapping is ready for approval</option>
+          <option value="1">An application says it loaded the release</option>
+          <option value="2">A flawed release needs withdrawal</option>
+        </select>
+      </label>
+      <div class="scenario-results">
+      <section class="scenario-result" data-scenario="0"><noscript><p><strong>A mapping is ready for approval</strong></p></noscript><h3>Assigned reviewer</h3><p>Inspect the supporting sources and resolve any objection on the frozen candidate before the publisher activates it.</p></section>
+      <section class="scenario-result" data-scenario="1"><noscript><p><strong>An application says it loaded the release</strong></p></noscript><h3>Observer</h3><p>Run a test that can distinguish the old and new rule and save what the application actually returned.</p></section>
+      <section class="scenario-result" data-scenario="2"><noscript><p><strong>A flawed release needs withdrawal</strong></p></noscript><h3>Supervisor and observers</h3><p>Record the withdrawal decision under the supervisor’s authority. Ask observers for new inactivity evidence from each application.</p></section>
+      </div>
+    </section>
+    <section class="topic-follow">
+      <h2>Follow the workflow</h2>
+      <ul>
+        <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/FRAMEWORK.md#authority-and-accountability">Read the role and authority model</a></li>
+        <li><a href="/wbs/">Follow the recorded WBS withdrawal</a></li>
+      </ul>
+    </section>
+    <nav class="topic-neighbours" aria-labelledby="topic-related">
+      <h2 id="topic-related">More in this section</h2>
+      <ul>
+        <li><a href="/explore/operational-meaning/">Meaning in operational work</a></li>
+        <li><a href="/explore/model-building-blocks/">Building blocks of the model</a></li>
+        <li><a href="/explore/relationship-impact/">How relationships carry impact</a></li>
+        <li><a href="/explore/formation-to-release/">Two routes from change to decision</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

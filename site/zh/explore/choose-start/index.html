@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>选择入门路径 | OnToGraPh</title>
+  <meta name="description" content="选择当前可测试的问题。每条路径都有一份可检查的小型制品，以及一项能重复执行的核验。">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/zh/explore/choose-start/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/explore/choose-start/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/explore/choose-start/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/explore/choose-start/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <script defer src="/assets/topic-pages.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">跳转至正文</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/zh/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a href="/explore/choose-start/" hreflang="en" lang="en">English</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main">
+    <nav class="topic-path" aria-label="面包屑导航">
+      <a href="/zh/explore/">探索 OnToGraPh</a>
+      <span aria-hidden="true">/</span> <a href="/zh/explore/#apply">动手实践</a>
+    </nav>
+    <header class="topic-hero">
+      <h1>选择入门路径</h1>
+      <p>选择当前可测试的问题。每条路径都有一份可检查的小型制品，以及一项能重复执行的核验。</p>
+    </header>
+    <section class="topic-copy">
+      <h2>缩小首个模型</h2>
+      <p>记录一项决策的用途和范围。为每个概念保留稳定标识，并说明字段或术语来自何处。实体副本标识和 ISBN 对应不同对象。</p>
+    </section>
+    <section class="topic-copy">
+      <h2>选择他人可复现的检查</h2>
+      <p>记录输入、预期答案、执行环境和实际答案。使用 Copilot 时保存提示词，并核对返回的答案及来源。文件交换场景则要保留输入记录和对应的应用实测结果。</p>
+      <p>把核验结果交给术语或规则负责人。在纳入更多概念或应用之前，共同确定下一项测试。</p>
+    </section>
+    <section class="topic-lab" aria-labelledby="lab-title" data-scenarios>
+      <h2 id="lab-title">你当前想解决什么问题？</h2>
+      <label class="scenario-picker" hidden>
+        选择场景
+        <select>
+          <option value="0">构建一款个人应用</option>
+          <option value="1">对账：两个部门导出的文件</option>
+          <option value="2">让 Copilot 使用企业业务术语</option>
+          <option value="3">应对外部政策变更</option>
+        </select>
+      </label>
+      <div class="scenario-results">
+      <section class="scenario-result" data-scenario="0"><noscript><p><strong>构建一款个人应用</strong></p></noscript><h3>先建立词典和一条借阅规则</h3><p>区分出版版本和实体副本。使用 ISBN 相同的两份副本，为各自设置可借标记，验证应用能根据相应副本的标记作出决策。</p></section>
+      <section class="scenario-result" data-scenario="1"><noscript><p><strong>对账：两个部门导出的文件</strong></p></noscript><h3>先定义两条字段映射</h3><p>把每个团队的 WBS 字段映射到其自身流程所用的含义。在测试文件中加入一个有歧义的编码，并明确各导入程序应返回什么结果。</p></section>
+      <section class="scenario-result" data-scenario="2"><noscript><p><strong>让 Copilot 使用企业业务术语</strong></p></noscript><h3>先整理词汇表</h3><p>按部门整理术语、同义词和来源，把已审核定义放入你的 Copilot 部署所使用的知识源。分别在有、无部门背景时提出含 WBS 的问题，并核对回答。</p></section>
+      <section class="scenario-result" data-scenario="3"><noscript><p><strong>应对外部政策变更</strong></p></noscript><h3>先记录带日期的来源摘录</h3><p>查看 PALO 与 PolicyWatcher 联动试点，了解证据记录如何转交人工审核。说明哪条本地规则可能需要修改，以及由谁作出决定。</p></section>
+      </div>
+    </section>
+    <section class="topic-follow">
+      <h2>继续操作</h2>
+      <ul>
+        <li><a href="/guide/zh-Hans.html#个人项目做一个借书应用">构建个人借阅应用</a></li>
+        <li><a href="/guide/zh-Hans.html#企业场景对接各自独立的文件交换系统">对账：两个团队交换的文件</a></li>
+        <li><a href="/guide/zh-Hans.html#microsoft-365-copilot按本公司的定义解释术语">为 Copilot 准备企业词典</a></li>
+        <li><a href="/pilot/zh/">查看 PALO 与 PolicyWatcher 联动试点</a></li>
+      </ul>
+    </section>
+    <nav class="topic-neighbours" aria-labelledby="topic-related">
+      <h2 id="topic-related">本栏目其他主题</h2>
+      <ul>
+        <li><a href="/zh/explore/fit-check/">OnToGraPh 适合我的场景吗？</a></li>
+        <li><a href="/zh/explore/constraint-check/">定位决策瓶颈</a></li>
+        <li><a href="/zh/explore/dependency-diagnostic/">诊断缺失能力</a></li>
+        <li><a href="/zh/explore/release-audit/">审查发布和撤回</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

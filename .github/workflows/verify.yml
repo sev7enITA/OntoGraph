@@ -31,6 +31,10 @@ jobs:
           python -m examples.weighted.build_demo
           python tools/build_wbs_pages.py
           git diff --exit-code -- site/weights/ site/wbs/
+      - name: Verify the generated bilingual topic library
+        run: |
+          python -m tools.build_home_topics
+          git diff --exit-code -- site/index.html site/zh/index.html site/sitemap.xml site/explore/ site/zh/explore/
       - name: Exercise standalone customer adoption
         run: python examples/hub_pilot/standalone.py "$RUNNER_TEMP/standalone-evidence"
       - name: Generate offline evidence demo

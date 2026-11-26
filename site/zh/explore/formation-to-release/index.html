@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>从变更到决策的两条路径 | OnToGraPh</title>
+  <meta name="description" content="从治理要求或已发现的变更出发。不论走哪条路径，都要明确范围，把来源关联到规则，并记录应用执行规则时发生的情况。">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/zh/explore/formation-to-release/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/explore/formation-to-release/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/explore/formation-to-release/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/explore/formation-to-release/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <script defer src="/assets/topic-pages.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">跳转至正文</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/zh/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a href="/explore/formation-to-release/" hreflang="en" lang="en">English</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main">
+    <nav class="topic-path" aria-label="面包屑导航">
+      <a href="/zh/explore/">探索 OnToGraPh</a>
+      <span aria-hidden="true">/</span> <a href="/zh/explore/#theory">理论基础</a>
+    </nav>
+    <header class="topic-hero">
+      <h1>从变更到决策的两条路径</h1>
+      <p>从治理要求或已发现的变更出发。不论走哪条路径，都要明确范围，把来源关联到规则，并记录应用执行规则时发生的情况。</p>
+    </header>
+    <section class="topic-copy">
+      <h2>从治理要求出发</h2>
+      <p>通过治理要求明确哪项决策需要证据，以及由谁负责。在联动试点中，PALO 要求追踪决策。OnToGraPh 将来源变更的 ID、URL 和权限映射到词典字段，并与一项控制和接收契约绑定。</p>
+    </section>
+    <section class="topic-copy">
+      <h2>从已发现的变更出发</h2>
+      <p>根据 PolicyWatcher 的来源记录确定变更内容和时间。为受影响的决策起草规则，保留证据引用，并确认适用的控制措施。在试点中，匹配的信号触发了 PALO 的人工审核。审核决定仍在等待作出。</p>
+    </section>
+    <section class="topic-copy">
+      <h2>汇总为同一类证据记录</h2>
+      <p>两条路径都以有明确责任人的审核和完整记录为目标，记录关联来源、范围、决策和观察。独立运行的校准示例使用自己的词典和规则，沿用同样的发布和观察方式。</p>
+    </section>
+    <section class="topic-lab" aria-labelledby="lab-title" data-scenarios>
+      <h2 id="lab-title">选择你目前已有的内容</h2>
+      <label class="scenario-picker" hidden>
+        选择场景
+        <select>
+          <option value="0">要求追踪决策的治理指令</option>
+          <option value="1">外部来源已发生变化</option>
+          <option value="2">本地流程已有自己的规则负责人</option>
+        </select>
+      </label>
+      <div class="scenario-results">
+      <section class="scenario-result" data-scenario="0"><noscript><p><strong>要求追踪决策的治理指令</strong></p></noscript><h3>界定范围并选择测试用例</h3><p>确定负责人和使用方。选择实测结果足以区分新规则和旧行为的用例。</p></section>
+      <section class="scenario-result" data-scenario="1"><noscript><p><strong>外部来源已发生变化</strong></p></noscript><h3>核查来源并准备审核</h3><p>保留变更 ID、来源 URL、时间和适用范围。建立提案，注明受影响的控制，并提交相应人工审核人。</p></section>
+      <section class="scenario-result" data-scenario="2"><noscript><p><strong>本地流程已有自己的规则负责人</strong></p></noscript><h3>试用独立运行路径</h3><p>记录内部来源、受控决策，以及一个通过和一个暂缓的用例。撤回后重新运行用例，以核验规则已停止执行。</p></section>
+      </div>
+    </section>
+    <section class="topic-follow">
+      <h2>继续操作</h2>
+      <ul>
+        <li><a href="/pilot/zh/">探索联动试点和独立运行试点</a></li>
+        <li><a href="/zh/#ecosystem">查看三个项目的协作方式</a></li>
+        <li><a href="https://github.com/sev7enITA/OntoGraph/tree/main/examples/hub_pilot">查看试点工件（英文）</a></li>
+      </ul>
+    </section>
+    <nav class="topic-neighbours" aria-labelledby="topic-related">
+      <h2 id="topic-related">本栏目其他主题</h2>
+      <ul>
+        <li><a href="/zh/explore/operational-meaning/">业务语义如何落地</a></li>
+        <li><a href="/zh/explore/model-building-blocks/">模型的基本元素</a></li>
+        <li><a href="/zh/explore/who-decides/">各阶段由谁决策</a></li>
+        <li><a href="/zh/explore/relationship-impact/">关系如何传递影响</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Building blocks of the model | OnToGraPh</title>
+  <meta name="description" content="Follow a term from its definition to the fields, controls, applications and tests that depend on it.">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/explore/model-building-blocks/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/explore/model-building-blocks/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/explore/model-building-blocks/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/explore/model-building-blocks/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <script defer src="/assets/topic-pages.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">Skip to content</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a href="/zh/explore/model-building-blocks/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main">
+    <nav class="topic-path" aria-label="Breadcrumb">
+      <a href="/explore/">Explore OnToGraPh</a>
+      <span aria-hidden="true">/</span> <a href="/explore/#theory">The Theory</a>
+    </nav>
+    <header class="topic-hero">
+      <h1>Building blocks of the model</h1>
+      <p>Follow a term from its definition to the fields, controls, applications and tests that depend on it.</p>
+    </header>
+    <section class="topic-copy">
+      <h2>Name and organise the meaning</h2>
+      <p>A dictionary entry gives a concept a stable workspace ID, a definition and an owner. Labels and aliases help people find it. A taxonomy uses broader terms to organise concepts, while a class hierarchy uses subclass links to organise types.</p>
+    </section>
+    <section class="topic-copy">
+      <h2>Connect the word to the system</h2>
+      <p>In the WBS example, a field for a recognised code maps to the WBS concept. The eligibility control depends on that field, implements a WBS admission contract and, in the reviewed release, also depends on a department qualifier.</p>
+      <p>The Finance and PMO applications consume the admission contract. Their test cases record expected decisions and the registry checks observations against the application and release phase to which they belong.</p>
+    </section>
+    <section class="topic-copy">
+      <h2>Preserve a portable source of truth</h2>
+      <p>The release JSON carries mappings, controls, evidence and tests together. The JSON-LD projection represents the graph for exchange. Preserve the release JSON when you need to reconstruct the full decision record.</p>
+    </section>
+    <section class="topic-lab" aria-labelledby="lab-title" data-scenarios>
+      <h2 id="lab-title">Choose what you are modelling</h2>
+      <label class="scenario-picker" hidden>
+        Choose a scenario
+        <select>
+          <option value="0">A glossary term</option>
+          <option value="1">A column in a file</option>
+          <option value="2">What an application must apply</option>
+        </select>
+      </label>
+      <div class="scenario-results">
+      <section class="scenario-result" data-scenario="0"><noscript><p><strong>A glossary term</strong></p></noscript><h3>Define a concept</h3><p>Give WBS identifier a definition and owner. Add a broader category if it helps people find related concepts.</p></section>
+      <section class="scenario-result" data-scenario="1"><noscript><p><strong>A column in a file</strong></p></noscript><h3>Map the physical field</h3><p>Create a field node and link it to the WBS concept with mapsTo. State the source department and format in the mapping evidence.</p></section>
+      <section class="scenario-result" data-scenario="2"><noscript><p><strong>What an application must apply</strong></p></noscript><h3>Specify a control and expected outcome</h3><p>Write the condition for eligibility, connect the control to its contract and add an application-scoped case that distinguishes two versions of the rule.</p></section>
+      </div>
+    </section>
+    <section class="topic-follow">
+      <h2>Follow the workflow</h2>
+      <ul>
+        <li><a href="/#studio">See Semantic Studio</a></li>
+        <li><a href="/wbs/resolved.json">Download the reviewed WBS release model</a></li>
+        <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/PROTOCOL.md#files-and-identity">Read the model and validation protocol</a></li>
+      </ul>
+    </section>
+    <nav class="topic-neighbours" aria-labelledby="topic-related">
+      <h2 id="topic-related">More in this section</h2>
+      <ul>
+        <li><a href="/explore/operational-meaning/">Meaning in operational work</a></li>
+        <li><a href="/explore/who-decides/">Who decides at each stage</a></li>
+        <li><a href="/explore/relationship-impact/">How relationships carry impact</a></li>
+        <li><a href="/explore/formation-to-release/">Two routes from change to decision</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

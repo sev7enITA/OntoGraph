@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>诊断缺失能力 | OnToGraPh</title>
+  <meta name="description" content="查明架构中哪些组件是核验发布所必需的。Aurora 示例将语义输入、发布前提和应用实测结果分开呈现。">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/zh/explore/dependency-diagnostic/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/explore/dependency-diagnostic/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/explore/dependency-diagnostic/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/explore/dependency-diagnostic/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <script defer src="/assets/topic-pages.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">跳转至正文</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/zh/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a href="/explore/dependency-diagnostic/" hreflang="en" lang="en">English</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main">
+    <nav class="topic-path" aria-label="面包屑导航">
+      <a href="/zh/explore/">探索 OnToGraPh</a>
+      <span aria-hidden="true">/</span> <a href="/zh/explore/#apply">动手实践</a>
+    </nav>
+    <header class="topic-hero">
+      <h1>诊断缺失能力</h1>
+      <p>查明架构中哪些组件是核验发布所必需的。Aurora 示例将语义输入、发布前提和应用实测结果分开呈现。</p>
+    </header>
+    <section class="topic-copy">
+      <h2>一次只更改一个组件</h2>
+      <p>打开架构拼图，选择 Aurora 21 和“独立运行”预设。在激活检查点查看构建前提、证据覆盖、已观察到的偏差和未证实的应用数量。</p>
+      <p>移除 PMS 探针后，模拟中将缺少可用读数。该应用仍在评估范围内，状态为尚未证实。重新连接探针可再次看到此前观察到的偏差。</p>
+    </section>
+    <section class="topic-copy">
+      <h2>记录变化的内容</h2>
+      <p>记录缺失的能力、仍可核验的结果，以及如何恢复覆盖。拼图在浏览器中模拟不同配置，自定义适配器和契约选项依赖其明示的假设。</p>
+    </section>
+    <section class="topic-lab" aria-labelledby="lab-title" data-scenarios>
+      <h2 id="lab-title">选择一种 Aurora 反事实配置</h2>
+      <label class="scenario-picker" hidden>
+        选择场景
+        <select>
+          <option value="0">移除一个应用探针</option>
+          <option value="1">移除 CI 制品</option>
+          <option value="2">移除一个上游语义发现工具</option>
+        </select>
+      </label>
+      <div class="scenario-results">
+      <section class="scenario-result" data-scenario="0"><noscript><p><strong>移除一个应用探针</strong></p></noscript><h3>另一个应用保留其实测结果</h3><p>断开的应用仍在评估范围内，状态变为尚未证实。判断之前，请同时检查覆盖数量和已观察到的偏差数量。</p></section>
+      <section class="scenario-result" data-scenario="1"><noscript><p><strong>移除 CI 制品</strong></p></noscript><h3>发布失去一项构建前提</h3><p>在本场景中，CI 是必需条件，因此两个应用的结果均变为尚未证实。恢复 CI 证据后，才可使用这些实测结果支持发布结论。</p></section>
+      <section class="scenario-result" data-scenario="2"><noscript><p><strong>移除一个上游语义发现工具</strong></p></noscript><h3>输入能力随剩余工具而变化</h3><p>选择“语义技术栈”预设并移除 NVIDIA Auto Ontology。在没有选中其他语义发现工具时，该职责变为未分配。版本检查和应用核验仍使用已选择的组件。</p></section>
+      </div>
+    </section>
+    <section class="topic-follow">
+      <h2>继续操作</h2>
+      <ul>
+        <li><a href="/architecture/?lang=zh-Hans">运行架构拼图</a></li>
+        <li><a href="/pilot/zh/">查看 PALO 与 PolicyWatcher 联动试点</a></li>
+      </ul>
+    </section>
+    <nav class="topic-neighbours" aria-labelledby="topic-related">
+      <h2 id="topic-related">本栏目其他主题</h2>
+      <ul>
+        <li><a href="/zh/explore/fit-check/">OnToGraPh 适合我的场景吗？</a></li>
+        <li><a href="/zh/explore/choose-start/">选择入门路径</a></li>
+        <li><a href="/zh/explore/constraint-check/">定位决策瓶颈</a></li>
+        <li><a href="/zh/explore/release-audit/">审查发布和撤回</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

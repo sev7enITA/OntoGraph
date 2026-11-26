@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>界定试点范围并估算工作量 | OnToGraPh</title>
+  <meta name="description" content="估算在两个应用之间准备、接入、审核和核验同一项决策所需的工作量。">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/zh/explore/pilot-scope/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/explore/pilot-scope/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/explore/pilot-scope/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/explore/pilot-scope/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <script defer src="/assets/topic-pages.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">跳转至正文</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/zh/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a href="/explore/pilot-scope/" hreflang="en" lang="en">English</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main">
+    <nav class="topic-path" aria-label="面包屑导航">
+      <a href="/zh/explore/">探索 OnToGraPh</a>
+      <span aria-hidden="true">/</span> <a href="/zh/explore/#work-with-us">参与合作</a>
+    </nav>
+    <header class="topic-hero">
+      <h1>界定试点范围并估算工作量</h1>
+      <p>估算在两个应用之间准备、接入、审核和核验同一项决策所需的工作量。</p>
+    </header>
+    <section class="topic-copy">
+      <h2>区分共同工作与各应用的工作</h2>
+      <p>计算选定规则、取得样本记录和商定验收标准所需的时间。分别估算每个应用的准备工作。API 和工作簿通常需要不同的访问方式和核验流程。请在计算器中填写各应用的平均接入工时。例如，一个需要 5 小时，另一个需要 11 小时，则每个应用填 8 小时。</p>
+    </section>
+    <section class="topic-copy">
+      <h2>预留排查和恢复时间</h2>
+      <p>纳入发布成功、接收确认有效但结果仍旧，以及应用无法访问等场景。在现有流程与拟议试点中分别执行相同检查并计时。</p>
+    </section>
+    <section class="topic-copy">
+      <h2>用估算结果准备讨论</h2>
+      <p>将总数视为团队工时估算。讨论试点范围时，请带上涉及的两个应用、示例规则和预期决策。在明确访问权限与职责后，再与项目负责人商定商业条款。</p>
+    </section>
+    <section class="topic-lab" aria-labelledby="lab-title">
+      <h2 id="lab-title">估算试点工作量</h2>
+      <p>请用自己的估算替换示例工时。结果仅涵盖一次试点。</p>
+      <form data-estimate data-error="请为每一项输入有效数字。">
+      <label>应用数量<input type="number" id="applications" name="applications" min="1" max="100" step="1" value="2" required></label>
+      <label>每个应用的平均接入工时<input type="number" id="per-application" name="per-application" min="0" max="10000" step="0.5" value="8" required></label>
+      <label>建模与审核工时<input type="number" id="modelling" name="modelling" min="0" max="10000" step="0.5" value="6" required></label>
+      <label>生效与撤回测试工时<input type="number" id="verification" name="verification" min="0" max="10000" step="0.5" value="4" required></label>
+        <output aria-live="polite" for="applications per-application modelling verification"><span>预计总工时</span> <strong data-total>26</strong> 小时</output>
+      </form>
+      <noscript><p>将应用数量乘以每个应用的接入工时，再加上建模、审核与测试工时。</p></noscript>
+    </section>
+    <section class="topic-follow">
+      <h2>继续操作</h2>
+      <ul>
+        <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/MARKET.md#pilot-decision-criteria">阅读试点决策标准（英文）</a></li>
+        <li><a href="mailto:io@fabriziodegni.com">给 Fabrizio 发邮件</a></li>
+      </ul>
+    </section>
+    <nav class="topic-neighbours" aria-labelledby="topic-related">
+      <h2 id="topic-related">本栏目其他主题</h2>
+      <ul>
+        <li><a href="/zh/explore/pilot-partnership/">共同规划试点</a></li>
+        <li><a href="/zh/explore/learning-path/">操作学习路径</a></li>
+        <li><a href="/zh/explore/practitioner-workspace/">实务工作区</a></li>
+        <li><a href="/zh/explore/contact-project/">联系项目</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

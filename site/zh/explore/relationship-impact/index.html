@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>关系如何传递影响 | OnToGraPh</title>
+  <meta name="description" content="沿已声明的依赖关系追踪概念变更，分别核查错误后果、证据支持程度以及评估人之间的分歧。">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/zh/explore/relationship-impact/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/explore/relationship-impact/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/explore/relationship-impact/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/explore/relationship-impact/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <script defer src="/assets/topic-pages.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">跳转至正文</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/zh/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a href="/explore/relationship-impact/" hreflang="en" lang="en">English</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main">
+    <nav class="topic-path" aria-label="面包屑导航">
+      <a href="/zh/explore/">探索 OnToGraPh</a>
+      <span aria-hidden="true">/</span> <a href="/zh/explore/#theory">理论基础</a>
+    </nav>
+    <header class="topic-hero">
+      <h1>关系如何传递影响</h1>
+      <p>沿已声明的依赖关系追踪概念变更，分别核查错误后果、证据支持程度以及评估人之间的分歧。</p>
+    </header>
+    <section class="topic-copy">
+      <h2>分别提出两个问题</h2>
+      <p>关键程度衡量依赖关系判断错误可能带来的后果，范围为 1 到 5。置信度衡量评估人支持该映射的程度，范围为 0 到 1。缺少置信度时，状态为未知。</p>
+    </section>
+    <section class="topic-copy">
+      <h2>保留分歧记录</h2>
+      <p>在实测 WBS 试点中，财务部门支持同一映射，评定关键程度为 4、置信度为 0.85。项目管理办公室质疑该映射，评定关键程度为 5、置信度为 0.30。报告保留双方的主张和来源。分歧未解决时，路径可以显示已声明的最高关键程度，但有效置信度仍为未知。</p>
+    </section>
+    <section class="topic-copy">
+      <h2>将裁定绑定到证据</h2>
+      <p>审核人可以记录为何财务映射只有在附带来源部门时才适用。主张内容或引用来源发生变化后，原裁定可能失效。指定为关键范围的依赖关系，须在发布或首次导出策略前具有当前有效且经确认的评估。</p>
+      <p>对于已完成全部评估的路径，OnToGraPh 报告最高的有效关键程度和最低的有效置信度。路径可以揭示可能受影响的义务；应用观察记录用来确认实际发生的情况。</p>
+    </section>
+    <section class="topic-lab" aria-labelledby="lab-title" data-scenarios>
+      <h2 id="lab-title">查看三种审核状态</h2>
+      <label class="scenario-picker" hidden>
+        选择场景
+        <select>
+          <option value="0">评估人意见不一致</option>
+          <option value="1">审核人记录当前有效的裁定</option>
+          <option value="2">引用来源发生变更</option>
+        </select>
+      </label>
+      <div class="scenario-results">
+      <section class="scenario-result" data-scenario="0"><noscript><p><strong>评估人意见不一致</strong></p></noscript><h3>证据仍存在未决分歧</h3><p>保留两组评分及其来源。在指定的关键范围内，这条关系的分歧未解决前，发布会受阻。</p></section>
+      <section class="scenario-result" data-scenario="1"><noscript><p><strong>审核人记录当前有效的裁定</strong></p></noscript><h3>采用已选主张的评分</h3><p>路径可以采用所选支持主张的评分。保留有分歧的主张，并取得指定审核人在该候选版本上的身份验证审批。</p></section>
+      <section class="scenario-result" data-scenario="2"><noscript><p><strong>引用来源发生变更</strong></p></noscript><h3>重新审查裁定</h3><p>已保存裁定绑定原主张和原证据。再次使用该关系前，需审查新记录并更新裁定。</p></section>
+      </div>
+    </section>
+    <section class="topic-follow">
+      <h2>继续操作</h2>
+      <ul>
+        <li><a href="/weights/zh/?scenario=disputed">在在线工具中查看存在争议的影响</a></li>
+        <li><a href="/wbs/unresolved.json">查看 WBS 原始主张</a></li>
+        <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/PROTOCOL.md#several-judgments-about-one-relationship">阅读争议裁定协议（英文）</a></li>
+      </ul>
+    </section>
+    <nav class="topic-neighbours" aria-labelledby="topic-related">
+      <h2 id="topic-related">本栏目其他主题</h2>
+      <ul>
+        <li><a href="/zh/explore/operational-meaning/">业务语义如何落地</a></li>
+        <li><a href="/zh/explore/model-building-blocks/">模型的基本元素</a></li>
+        <li><a href="/zh/explore/who-decides/">各阶段由谁决策</a></li>
+        <li><a href="/zh/explore/formation-to-release/">从变更到决策的两条路径</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

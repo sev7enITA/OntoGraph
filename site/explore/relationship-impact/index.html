@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>How relationships carry impact | OnToGraPh</title>
+  <meta name="description" content="Follow a changed concept through its declared dependencies. Inspect separately the consequence of an error, the strength of the evidence and any disagreement between assessors.">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/explore/relationship-impact/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/explore/relationship-impact/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/explore/relationship-impact/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/explore/relationship-impact/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <script defer src="/assets/topic-pages.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">Skip to content</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a href="/zh/explore/relationship-impact/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main">
+    <nav class="topic-path" aria-label="Breadcrumb">
+      <a href="/explore/">Explore OnToGraPh</a>
+      <span aria-hidden="true">/</span> <a href="/explore/#theory">The Theory</a>
+    </nav>
+    <header class="topic-hero">
+      <h1>How relationships carry impact</h1>
+      <p>Follow a changed concept through its declared dependencies. Inspect separately the consequence of an error, the strength of the evidence and any disagreement between assessors.</p>
+    </header>
+    <section class="topic-copy">
+      <h2>Ask two different questions</h2>
+      <p>Criticality measures how consequential a mistaken dependency could be, from 1 to 5. Confidence measures how strongly an assessor is prepared to support the mapping, from 0 to 1. Missing confidence remains unknown.</p>
+    </section>
+    <section class="topic-copy">
+      <h2>Keep disagreement visible</h2>
+      <p>In the exercised WBS pilot, Finance supports an edge at criticality 4 and confidence 0.85. PMO challenges the same edge at criticality 5 and confidence 0.30. The report retains both assertions and sources. During unresolved disagreement, the route can show the highest stated criticality and leaves effective confidence unknown.</p>
+    </section>
+    <section class="topic-copy">
+      <h2>Bind resolution to the evidence</h2>
+      <p>A reviewer can record why the Finance mapping applies only with the source department attached. A change to an assertion or its cited source can make that resolution stale. A designated critical scope needs current, confirmed assessments before publication or initial policy export.</p>
+      <p>On a fully assessed path, OnToGraPh reports the highest effective criticality and the lowest effective confidence. The path shows which obligations may be affected. Observations from the applications establish what actually happened.</p>
+    </section>
+    <section class="topic-lab" aria-labelledby="lab-title" data-scenarios>
+      <h2 id="lab-title">Explore three review states</h2>
+      <label class="scenario-picker" hidden>
+        Choose a scenario
+        <select>
+          <option value="0">Assessors disagree</option>
+          <option value="1">Reviewer records a current resolution</option>
+          <option value="2">A cited source changes</option>
+        </select>
+      </label>
+      <div class="scenario-results">
+      <section class="scenario-result" data-scenario="0"><noscript><p><strong>Assessors disagree</strong></p></noscript><h3>Evidence remains unresolved</h3><p>Keep both grades and their sources. A release in a designated critical scope remains blocked while the edge is unresolved.</p></section>
+      <section class="scenario-result" data-scenario="1"><noscript><p><strong>Reviewer records a current resolution</strong></p></noscript><h3>Use the selected grades</h3><p>The route can use the selected supporting assessment. Keep the competing assertion visible and obtain the assigned reviewer’s authenticated approval on the candidate.</p></section>
+      <section class="scenario-result" data-scenario="2"><noscript><p><strong>A cited source changes</strong></p></noscript><h3>Re-examine the resolution</h3><p>The saved resolution is bound to the original assertions and evidence. Review the new record and update the adjudication before relying on that edge again.</p></section>
+      </div>
+    </section>
+    <section class="topic-follow">
+      <h2>Follow the workflow</h2>
+      <ul>
+        <li><a href="/weights/?scenario=disputed">Explore a disputed impact in the live tool</a></li>
+        <li><a href="/wbs/unresolved.json">Inspect the exact WBS assertions</a></li>
+        <li><a href="https://github.com/sev7enITA/OntoGraph/blob/main/docs/PROTOCOL.md#several-judgments-about-one-relationship">Read the adjudication protocol</a></li>
+      </ul>
+    </section>
+    <nav class="topic-neighbours" aria-labelledby="topic-related">
+      <h2 id="topic-related">More in this section</h2>
+      <ul>
+        <li><a href="/explore/operational-meaning/">Meaning in operational work</a></li>
+        <li><a href="/explore/model-building-blocks/">Building blocks of the model</a></li>
+        <li><a href="/explore/who-decides/">Who decides at each stage</a></li>
+        <li><a href="/explore/formation-to-release/">Two routes from change to decision</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

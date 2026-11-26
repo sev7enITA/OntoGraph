@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>定位决策瓶颈 | OnToGraPh</title>
+  <meta name="description" content="从变更后的概念沿依赖关系追踪控制与应用，优先处理缺失、有争议或过期的下一项必要证据。">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/zh/explore/constraint-check/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/explore/constraint-check/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/explore/constraint-check/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/explore/constraint-check/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <script defer src="/assets/topic-pages.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">跳转至正文</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/zh/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a href="/explore/constraint-check/" hreflang="en" lang="en">English</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main">
+    <nav class="topic-path" aria-label="面包屑导航">
+      <a href="/zh/explore/">探索 OnToGraPh</a>
+      <span aria-hidden="true">/</span> <a href="/zh/explore/#apply">动手实践</a>
+    </nav>
+    <header class="topic-hero">
+      <h1>定位决策瓶颈</h1>
+      <p>从变更后的概念沿依赖关系追踪控制与应用，优先处理缺失、有争议或过期的下一项必要证据。</p>
+    </header>
+    <section class="topic-copy">
+      <h2>追踪一条依赖关系</h2>
+      <p>在影响分析实验中，从过账对象开始，沿账本 WBS 字段追踪到月末结账，再将证据切换为“有争议”。查看该关系引用的来源，以及可推动审核的负责人。</p>
+    </section>
+    <section class="topic-copy">
+      <h2>确定下一步行动</h2>
+      <p>缺少评估时应补充来源及理由。必评关系存在分歧时，应指定审核人并记录裁决。证据得到确认后，仍需满足适用的审批、法定人数和 CI 要求。</p>
+      <p>发布生效后，选择能区分新旧版本的输入，核验应用是否给出预期答案。分别保留审批记录和应用实测记录。</p>
+    </section>
+    <section class="topic-lab" aria-labelledby="lab-title" data-scenarios>
+      <h2 id="lab-title">流程卡在哪一步？</h2>
+      <label class="scenario-picker" hidden>
+        选择场景
+        <select>
+          <option value="0">必评关系缺少评估</option>
+          <option value="1">两项评估存在分歧</option>
+          <option value="2">应用已经发送接收回执</option>
+        </select>
+      </label>
+      <div class="scenario-results">
+      <section class="scenario-result" data-scenario="0"><noscript><p><strong>必评关系缺少评估</strong></p></noscript><h3>找到依赖关系负责人</h3><p>收集带日期的来源，记录评估人、理由、关键程度和置信度。在提出变更前，确认来源覆盖规则的确切范围。</p></section>
+      <section class="scenario-result" data-scenario="1"><noscript><p><strong>两项评估存在分歧</strong></p></noscript><h3>将具体主张交给审核人</h3><p>保留两项判断及其来源。对必评关系，由指定审核人依据当前证据组合裁决，并对由此产生的候选版本投票。检查来源是否已确认，批准人数是否达到要求。</p></section>
+      <section class="scenario-result" data-scenario="2"><noscript><p><strong>应用已经发送接收回执</strong></p></noscript><h3>核验应用的决策结果</h3><p>运行事先约定、可区分版本的用例，将实际读数、采集时间和证据制品关联到发布版本与应用。取得可用结果后才可完成核验。</p></section>
+      </div>
+    </section>
+    <section class="topic-follow">
+      <h2>继续操作</h2>
+      <ul>
+        <li><a href="/weights/zh/?scenario=disputed">打开证据争议场景</a></li>
+        <li><a href="/wbs/zh/">查看完整 WBS 证据</a></li>
+      </ul>
+    </section>
+    <nav class="topic-neighbours" aria-labelledby="topic-related">
+      <h2 id="topic-related">本栏目其他主题</h2>
+      <ul>
+        <li><a href="/zh/explore/fit-check/">OnToGraPh 适合我的场景吗？</a></li>
+        <li><a href="/zh/explore/choose-start/">选择入门路径</a></li>
+        <li><a href="/zh/explore/dependency-diagnostic/">诊断缺失能力</a></li>
+        <li><a href="/zh/explore/release-audit/">审查发布和撤回</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

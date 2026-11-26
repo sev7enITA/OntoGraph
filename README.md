@@ -12,6 +12,8 @@
 
 ## Start here
 
+[Explore all nineteen topics in English](https://openontograph.org/explore/) · [简体中文](https://openontograph.org/zh/explore/)
+
 | Explore | What you can do |
 | --- | --- |
 | **[Run the interactive pilot](https://openontograph.org/pilot/)** · [中文](https://openontograph.org/pilot/zh/) | Follow a PolicyWatcher signal into a PALO case, change its evidence or authority, or try the standalone route. The public demo opens in a browser without an account. |
