@@ -8,7 +8,7 @@ Two physical copies on a shelf can share an ISBN. If a lending app uses ISBN as 
 
 ## Optional integration paths
 
-The four guided cases, the personal app workflow and hosted Studio can all be used standalone. Expand **Optional integrations** to open a recorded branch in another tab. PolicyWatcher can provide read-only evidence for a policy change. PALO can receive a case for human review. Following either link leaves the draft in place and transmits none of its content to those frameworks. [Source intake](https://openontograph.org/pilot/#policywatcher) · [Review handoff](https://openontograph.org/pilot/#palo) · [Five-minute launch film](https://openontograph.org/launch/)
+The four guided cases, the personal app workflow and hosted Studio can all be used standalone. Expand **Optional integrations** to open a recorded branch in another tab. PolicyWatcher can provide read-only evidence for a policy change. PALO can receive a case for human review. Following either link leaves the draft in place and transmits none of its content to those frameworks. [Source intake](https://openontograph.org/pilot/#policywatcher) · [Review handoff](https://openontograph.org/pilot/#palo) · [From hidden risks to verified decisions](https://openontograph.org/launch/)
 
 
 ## Describe your own app

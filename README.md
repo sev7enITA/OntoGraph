@@ -12,9 +12,9 @@
 
 ## Start here
 
-[Agent-ready ontology · watch WBS 0017 at 0:45](https://openontograph.org/launch/#agent-ready) · [面向智能体的本体](https://openontograph.org/zh/launch/#agent-ready)
+[From hidden risks to verified decisions · 5:18](https://openontograph.org/launch/) · [简体中文字幕](https://openontograph.org/zh/launch/) · [Download MP4](https://openontograph.org/launch/verified-decisions/film.mp4)
 
-[Watch the five-minute launch film](https://openontograph.org/launch/) · [简体中文字幕](https://openontograph.org/zh/launch/) · [Download MP4](https://openontograph.org/launch/ontograph-launch-en.mp4?v=project-film)
+[Second film · WBS 0017 and agent-ready ontology at 0:45](https://openontograph.org/launch/#agent-ready) · [观看 WBS 案例](https://openontograph.org/zh/launch/#agent-ready)
 
 [Hidden Risks of Vibe Coding](https://openontograph.org/hidden-risks/) · [氛围编程的隐性风险](https://openontograph.org/zh/hidden-risks/) · Describe your app, inspect four proposals and open its private Studio draft. [Start my case](https://openontograph.org/hidden-risks/#my-case) · [描述我的应用](https://openontograph.org/zh/hidden-risks/#my-case).
 

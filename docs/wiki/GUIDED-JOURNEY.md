@@ -4,7 +4,7 @@ Start with the decision you need to make. Each case links the relevant topic pag
 
 ## Optional integration paths
 
-The four guided cases, the personal app workflow and hosted Studio can all be used standalone. Expand **Optional integrations** to open a recorded branch in another tab. PolicyWatcher can provide read-only evidence for a policy change. PALO can receive a case for human review. Following either link leaves the draft in place and transmits none of its content to those frameworks. [Source intake](https://openontograph.org/pilot/#policywatcher) · [Review handoff](https://openontograph.org/pilot/#palo) · [Five-minute launch film](https://openontograph.org/launch/)
+The four guided cases, the personal app workflow and hosted Studio can all be used standalone. Expand **Optional integrations** to open a recorded branch in another tab. PolicyWatcher can provide read-only evidence for a policy change. PALO can receive a case for human review. Following either link leaves the draft in place and transmits none of its content to those frameworks. [Source intake](https://openontograph.org/pilot/#policywatcher) · [Review handoff](https://openontograph.org/pilot/#palo) · [From hidden risks to verified decisions](https://openontograph.org/launch/)
 
 
 ## Choose your case

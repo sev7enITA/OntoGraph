@@ -24,3 +24,12 @@ if (film.readyState >= HTMLMediaElement.HAVE_METADATA) {
   film.addEventListener('loadedmetadata', openLinkedChapter, {once: true});
 }
 window.addEventListener('hashchange', openLinkedChapter);
+
+const players = document.querySelectorAll('.film-player');
+for (const player of players) {
+  player.addEventListener('play', () => {
+    for (const other of players) {
+      if (other !== player && !other.paused) other.pause();
+    }
+  });
+}

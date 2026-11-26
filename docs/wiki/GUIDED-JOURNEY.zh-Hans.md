@@ -4,7 +4,7 @@
 
 ## 可选集成路径
 
-四个引导场景、自定义应用流程和在线 Studio 都支持独立使用。展开“可选集成”，可在新标签页查看已记录的分支。PolicyWatcher 可提供只读政策变更证据；PALO 可接收案例并交由人工复核。打开这些链接会保留草稿，不会向这两个框架发送草稿内容。[来源证据接收](https://openontograph.org/pilot/zh/#policywatcher) · [人工复核交接](https://openontograph.org/pilot/zh/#palo) · [五分钟发布影片](https://openontograph.org/zh/launch/)
+四个引导场景、自定义应用流程和在线 Studio 都支持独立使用。展开“可选集成”，可在新标签页查看已记录的分支。PolicyWatcher 可提供只读政策变更证据；PALO 可接收案例并交由人工复核。打开这些链接会保留草稿，不会向这两个框架发送草稿内容。[来源证据接收](https://openontograph.org/pilot/zh/#policywatcher) · [人工复核交接](https://openontograph.org/pilot/zh/#palo) · [从隐性风险到可验证的决策](https://openontograph.org/zh/launch/)
 
 
 ## 选择案例

@@ -1,0 +1,228 @@
+WEBVTT
+
+00:00:00.700 --> 00:00:02.930
+Software has never shipped faster.
+
+00:00:03.620 --> 00:00:08.250
+This is OnToGraPh, and the next five minutes are
+about what speed leaves behind.
+
+00:00:08.640 --> 00:00:10.190
+Scan to follow along.
+
+00:00:12.660 --> 00:00:16.070
+You describe an app. Seconds later, it runs.
+
+00:00:16.560 --> 00:00:18.990
+The tests are green, and everyone moves on.
+
+00:00:19.220 --> 00:00:24.190
+But nobody asked the one question code cannot
+answer: what do these words mean?
+
+00:00:25.800 --> 00:00:30.730
+Take a library. Two copies of a book share one
+ISBN.
+
+00:00:31.480 --> 00:00:37.190
+A member borrows one, the app marks the title as
+borrowed, and both copies disappear.
+
+00:00:37.800 --> 00:00:42.370
+Nothing crashed. The app never knew a book from
+a copy.
+
+00:00:43.500 --> 00:00:47.810
+Or take one project code. Finance reads it as a
+ledger entry.
+
+00:00:48.240 --> 00:00:51.760
+The project office reads it as a deliverable.
+Both are right.
+
+00:00:51.760 --> 00:00:56.150
+The application picks one meaning, and never
+tells you which.
+
+00:00:57.520 --> 00:00:59.370
+And this is not only vibe coding.
+
+00:00:59.860 --> 00:01:05.110
+Carefully engineered systems carry the same gap,
+because the meaning was never written down.
+
+00:01:05.520 --> 00:01:09.230
+Add AI agents, and the confusion repeats at
+machine speed.
+
+00:01:11.160 --> 00:01:17.250
+So we did the groundwork. A dictionary, so every
+term has one definition.
+
+00:01:18.680 --> 00:01:22.070
+A taxonomy, so every term has a class.
+
+00:01:24.000 --> 00:01:26.890
+An ontology, so every relationship has a type.
+
+00:01:28.000 --> 00:01:33.030
+Three layers, one model: written once, reviewed
+by people, readable by agents.
+
+00:01:34.340 --> 00:01:37.110
+That makes the model ready for agentic AI.
+
+00:01:37.660 --> 00:01:43.380
+An agent no longer guesses from rows. It asks
+the graph, follows typed relationships,
+
+00:01:43.380 --> 00:01:47.210
+and returns an answer you can trace to a
+definition a person approved.
+
+00:01:48.420 --> 00:01:52.890
+This is OnToGraPh. Ontology-driven governance
+for AI and agents.
+
+00:01:53.260 --> 00:01:56.110
+Govern the rules. Verify the decisions.
+
+00:01:58.420 --> 00:02:00.590
+Four letters, four commitments.
+
+00:02:01.800 --> 00:02:08.410
+O: an operational ontology, where definitions
+link to processes, controls and applications.
+
+00:02:09.500 --> 00:02:11.930
+T: traceability to every field.
+
+00:02:14.160 --> 00:02:20.270
+G: governance with human authority; people
+approve, monitor, and can withdraw.
+
+00:02:21.380 --> 00:02:26.910
+P: proof of behavior; evidence of what each
+application actually did.
+
+00:02:28.700 --> 00:02:30.650
+Here is why that last letter matters.
+
+00:02:31.160 --> 00:02:36.110
+In Aurora 21, a synthetic case, one rule feeds
+two applications.
+
+00:02:36.500 --> 00:02:41.130
+Both report the same release. The CRM applies
+the new rule.
+
+00:02:42.460 --> 00:02:46.910
+The PMS returns the old decision, behind a
+matching receipt.
+
+00:02:47.960 --> 00:02:50.210
+A matching receipt is not proof.
+
+00:02:55.020 --> 00:02:56.950
+Withdrawal works the same way.
+
+00:02:57.260 --> 00:03:02.330
+If an application is unreachable, it stays
+unverified. Never assumed.
+
+00:03:02.780 --> 00:03:05.650
+Only a fresh observation proves the rule has
+stopped.
+
+00:03:08.540 --> 00:03:10.810
+So where does it sit in the market?
+
+00:03:11.460 --> 00:03:15.090
+Catalogs, ontology editors and graph engines do
+valuable work:
+
+00:03:15.300 --> 00:03:17.490
+they verify the model and the platform.
+
+00:03:18.000 --> 00:03:22.610
+OnToGraPh verifies behavior after release; what
+each application actually decided.
+
+00:03:22.980 --> 00:03:27.130
+Keep your platform, and add the layer that
+proves it.
+
+00:03:31.040 --> 00:03:35.870
+Nothing is replaced. Your catalog, your graph
+engine and your pipelines stay.
+
+00:03:36.600 --> 00:03:41.710
+OnToGraPh speaks open formats: JSON, JSON-LD,
+SKOS, OWL and PROV-O.
+
+00:03:42.540 --> 00:03:44.550
+And it compiles reviewed rules to Rego.
+
+00:03:46.120 --> 00:03:51.870
+And you can use it today. Clone the repository,
+run the demo, start the Studio.
+
+00:03:52.140 --> 00:03:56.210
+Four commands. Python and SQLite, nothing else.
+
+00:03:56.480 --> 00:04:01.210
+It runs offline, on your machine, and reproduces
+Aurora 21 in front of you.
+
+00:04:02.120 --> 00:04:06.220
+Or start in the browser. Describe your own app
+in a sentence,
+
+00:04:06.220 --> 00:04:12.130
+and get four proposals: risks, dictionary,
+taxonomy and ontology.
+
+00:04:12.600 --> 00:04:15.370
+A private draft, ready to review in Studio.
+
+00:04:16.600 --> 00:04:20.890
+A quick tour. The Process Modeler: draw the
+process on a canvas,
+
+00:04:21.360 --> 00:04:25.250
+exchange inventories with Excel, and edit
+properties in place.
+
+00:04:28.640 --> 00:04:31.170
+Semantic Studio: the graph itself.
+
+00:04:31.520 --> 00:04:37.550
+Switch layers, select any object, and edit every
+property, visually or in JSON.
+
+00:04:38.360 --> 00:04:40.550
+Then compare drafts before release.
+
+00:04:42.560 --> 00:04:48.910
+The Evidence Workbench: delivery, receipt and
+observation, side by side, for every
+application.
+
+00:04:49.340 --> 00:04:52.110
+When they disagree, it says so, by name.
+
+00:04:56.500 --> 00:04:58.970
+OnToGraPh grew out of PALO Framework and
+PolicyWatcher.
+
+00:05:00.180 --> 00:05:03.630
+It is their shared engine, and it stands on its
+own.
+
+00:05:06.720 --> 00:05:10.390
+OnToGraPh. Govern the rules. Verify the
+decisions.
+
+00:05:11.020 --> 00:05:14.980
+Scan a code, clone the repository, and bring
+your own app.
