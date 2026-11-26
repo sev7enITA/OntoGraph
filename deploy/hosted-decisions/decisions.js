@@ -1,9 +1,10 @@
 import {assertionForm} from './assertions.js';
+import {mountChecklist} from './checklist.js';
 const $=id=>document.getElementById(id);
 const page=new URL(location.href);
 const zh=page.searchParams.get('lang')==='zh-Hans', t=(en,cn)=>zh?cn:en;
 const workspace=page.searchParams.get('workspace')||'wbs';
-let model, boot, revision, dirty=false, formAction, serial=0, writer=false;
+let model, boot, revision, refreshChecklist, dirty=false, formAction, serial=0, writer=false;
 document.documentElement.lang=zh?'zh-Hans':'en';
 document.title=t('Relationship evidence · OnToGraPh Studio','关系证据 · OnToGraPh 工作台');
 const labels={
@@ -24,7 +25,11 @@ async function api(op,body){
   const response=await fetch('./api/'+op+'?workspace='+encodeURIComponent(workspace),body===undefined?{}:{
     method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':boot.csrf},body:JSON.stringify(body)});
   const data=await response.json();
-  if(!response.ok)throw new Error(response.status===409?t('Another session saved a newer draft. Export your edits and reload.','另一会话已保存新版草稿。请导出您的更改并重新加载。'):data.error||String(response.status));
+  if(!response.ok){
+    const error=new Error(response.status===409?t('Another session saved a newer draft. Export your edits and reload.','另一会话已保存新版草稿。请导出您的更改并重新加载。'):data.error||String(response.status));
+    error.status=response.status;
+    throw error;
+  }
   return data;
 }
 function controls(){
@@ -105,6 +110,7 @@ $('save').onclick=async()=>{
   if(writer)return; writer=true; controls(); const saved=model;
   try{
     const result=await api('save',{model:saved,revision});revision=result.revision;dirty=model!==saved;
+    if(refreshChecklist)void refreshChecklist(revision);
     notice(t('Private draft saved. Registry publication requires separate authenticated reviews.','私有草稿已保存。登记发布需另行通过身份验证的审核。'));
   }catch(err){notice(err.message);}finally{writer=false;controls();}
 };
@@ -132,6 +138,16 @@ api('bootstrap').then(async data=>{
   model=draft.model;revision=draft.revision;$('controls').hidden=false;
   $('asof').hidden=!boot.editable;$('import').disabled=!boot.editable;$('import-label').hidden=!boot.editable;
   refreshModel();
+  refreshChecklist=mountChecklist({workspace,t,api,editable:boot.editable,inspectOrigin:id=>{
+    if(!model.nodes.some(node=>node.id===id)){
+      notice(t('This origin is missing in the current draft.','当前草稿缺少此起点。'));
+      return;
+    }
+    $('origin').value=id;
+    $('origin').focus();
+    void impact();
+  }});
+  if(refreshChecklist)void refreshChecklist(revision);
   const ready=prepare ? t('Starter model saved in this workspace.','入门模型已保存至此工作区。') : '';
   notice(boot.editable ? ready : t('Read-only access.','当前为只读访问。'));
 }).catch(err=>notice(err.message));

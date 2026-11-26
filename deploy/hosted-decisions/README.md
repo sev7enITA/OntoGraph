@@ -20,3 +20,9 @@ Install `journey.php` beside the adapter. Place the four public JSON files below
 | `journey-policy-change.json` | `site/journey/models/policy-change.json` |
 
 Back up and patch the already integrated gateway with `python3 deploy/hosted-decisions/integrate_journey.py CURRENT_GATEWAY REVIEWED_GATEWAY`. Verify that the deployed login template still uses the standard successful-login destination, then verify guided login in both locales.
+
+## Guided checklists
+
+Install `checklist.py` and `checklist.js` beside the existing workspace assets. The worker stores the checklist separately from the model under the account, guided workspace and saved draft revision. A new model revision opens a fresh checklist. Writes check both the model revision and checklist version. Viewers can run the reference checks without saving progress.
+
+The check runner evaluates the saved draft against the starter's fixed inputs and expected decisions. Its readout is a simulation. The observation selector and note are an account holder's record of what they saw in a replay or application.

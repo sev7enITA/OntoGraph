@@ -64,3 +64,42 @@ class HostedDrafts(unittest.TestCase):
                 self.assertEqual(request("viewer", workspace), preview)
             with self.assertRaises(service.Rejected):
                 request("editor", "ordinary-project", "prepare")
+
+
+    def test_checklist_records_breakouts_on_saved_revision_and_checks_fixed_reference_cases(self):
+        from copy import deepcopy
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            workspace = "journey-personal-library"
+            model = ROOT / "site/guide/personal-library.json"
+            (root / (workspace + ".json")).write_bytes(model.read_bytes())
+
+            def request(operation, payload=None, user="editor"):
+                return service.handle(operation, user, workspace, payload or {},
+                                      root / "drafts.sqlite", model, root)
+
+            draft = request("prepare")["model"]
+            self.assertEqual(request("checklist")["draft_revision"], 1)
+            run = request("checklist-run", {"draft_revision": 1})
+            self.assertEqual(len(run["checks"]), 3)
+            self.assertTrue(all(check["match"] for check in run["checks"]))
+            observation = {"draft_revision": 1, "version": 0, "completed": ["draft", "inspect"],
+                           "outcome": "different", "note": "The fixture used a different copy."}
+            with self.assertRaises(service.Rejected):
+                request("checklist-save", dict(observation, note=" "))
+            stored = request("checklist-save", observation)
+            self.assertEqual(stored, request("checklist"))
+            self.assertEqual(stored["outcome"], "different")
+            self.assertEqual(request("checklist", user="viewer")["outcome"], "unrecorded")
+            with self.assertRaises(service.Conflict):
+                request("checklist-save", observation)
+            modified = deepcopy(draft)
+            modified["rules"][0]["id"] = "lend-copy-revised"
+            for probe in modified["probes"]:
+                probe["rule"] = "lend-copy-revised"
+            request("save", {"revision": 1, "model": modified})
+            self.assertEqual(request("checklist")["outcome"], "unrecorded")
+            with self.assertRaises(service.Conflict):
+                request("checklist-save", dict(observation, version=1))
+            new_run = request("checklist-run", {"draft_revision": 2})
+            self.assertTrue(all(not check["match"] and check["result"] is None for check in new_run["checks"]))

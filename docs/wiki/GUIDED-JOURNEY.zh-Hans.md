@@ -25,3 +25,16 @@ Copilot 路径提供一份可选的[培训术语表 CSV](https://openontograph.o
 - **本地工作台。** 在代码仓库根目录运行 `python3 -m ontograph studio`，进入语义工作台（**Semantic Studio**），选择导入（**Import**）。也可运行 `python3 -m ontograph studio --model /path/to/model.json`，在启动时直接载入已下载的文件。检查对象与关系，修改后选择验证（**Validate**）和保存版本（**Save version**）。[本地工作台](http://127.0.0.1:8765/governance) · [工作台文档（英文）](https://github.com/sev7enITA/OntoGraph/wiki/Visual-Studio)
 
 [简体中文 Wiki](https://github.com/sev7enITA/OntoGraph/wiki/Guided-Journey-zh-Hans) · [English Wiki](https://github.com/sev7enITA/OntoGraph/wiki/Guided-Journey)
+
+## 核验已保存的草稿
+
+在在线工作台打开案例清单。检查草稿范围，追踪建议的对象或关系，并完成场景练习。点击**运行已保存草稿的检查**，将当前已保存规则与入门模型的参考决策进行比较。记录您在回放或应用中观察到的结果，并简要说明依据。点击**保存清单**可按账户与草稿修订保存进度。模型保存为新修订后会开始新的清单。
+
+| 场景 | 参考检查范围 | 单独记录的观察 |
+| --- | --- | --- |
+| 个人图书库 | 副本可借、已借出、可借状态未知 | 借书应用如何处理同一版本的两个副本 |
+| 跨部门 WBS | 财务和 PMO 的限定编码、旧编码及未知编码 | WBS 回放或自有应用的核验节点和原生读取结果 |
+| Copilot 词典 | 映射已获批准、存在歧义、缺失映射 | 自有 Copilot 测试租户中的问题、答案和来源 |
+| 政策变更 | 匹配记录、错误案例 ID、虚假授权声明 | PALO 审核节点以及已检查的证据 |
+
+勾选项和备注记录用户的练习过程。正式发布和独立观察到的运行结果仍由各自的工作流处理。

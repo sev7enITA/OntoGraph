@@ -26,7 +26,7 @@ def studio_handoff(case, data, studio_topic, lang):
       <div class="journey-download"><a class="button primary" href="{model}" download>{download} <code>{filename}</code></a></div>{companion}
       <h3>{t("Online Studio", "在线工作台")}</h3>
       <p>{when_online}</p>
-      <p>{t("Viewers can open the model in read-only mode.", "仅有查看权限的用户可以只读方式打开模型。")}</p>
+      <p>{t("Use the case checklist to inspect the draft, run reference checks and record the result you observed. Progress is saved with the current revision. Viewers can inspect the model and run the reference checks.", "使用场景清单查看草稿、运行参考检查并记录观察结果。进度与当前修订一同保存。仅有查看权限的用户可以查看模型并运行参考检查。")}</p>
       <p>{href(t("Open this case in online Studio", "在在线工作台打开此场景"), f"/OntoGraph/decisions/?lang={language}&workspace=journey-{case}")}</p>
       <h3>{t("Standalone Studio", "独立版工作台")}</h3>
       <p>{t("From your local OnToGraPh checkout, replace the filename with the full path to your downloaded file and run: Open Semantic Studio at http://127.0.0.1:8765/governance.", "在本地 OnToGraPh 代码目录运行下方命令。将文件名替换为已下载文件的完整路径。打开 http://127.0.0.1:8765/governance 进入语义工作台。")}</p>

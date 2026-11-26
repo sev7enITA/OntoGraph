@@ -13,6 +13,7 @@ JOURNEY_WORKSPACES = frozenset({
 sys.path.insert(0, str(ROOT))
 from ontograph.model import Rejected, canonical, require, validate, weighted_impact
 from ontograph.studio import basis_for_request, parse_json
+import checklist
 
 
 def handle(operation, user, workspace, payload, database, seed, case_dir=None):
@@ -23,14 +24,20 @@ def handle(operation, user, workspace, payload, database, seed, case_dir=None):
     if operation == "validate":
         validate(payload["model"])
         return {"valid": True}
-    require(operation in {"bootstrap", "prepare", "save"}, "Unknown operation")
+    guided = {"checklist", "checklist-save", "checklist-run"}
+    require(operation in {"bootstrap", "prepare", "save"} | guided, "Unknown operation")
     case = None
     if case_dir and workspace in JOURNEY_WORKSPACES:
         case = case_dir / (workspace + ".json")
-    require(operation != "prepare" or case is not None, "Unknown guided case")
+    require(operation not in guided | {"prepare"} or case is not None, "Unknown guided case")
     with closing(sqlite3.connect(database, timeout=5)) as db, db:
         db.execute("CREATE TABLE IF NOT EXISTS drafts (user_id TEXT, workspace TEXT, revision INTEGER NOT NULL,"
                    "model TEXT NOT NULL, PRIMARY KEY(user_id, workspace))")
+        if operation in guided:
+            db.execute("CREATE TABLE IF NOT EXISTS case_checklists (user_id TEXT, workspace TEXT, "
+                       "draft_revision INTEGER, version INTEGER NOT NULL, record TEXT NOT NULL, "
+                       "PRIMARY KEY(user_id, workspace, draft_revision))")
+            return checklist.handle(db, operation, user, workspace, payload, case, Conflict)
         if operation in {"bootstrap", "prepare"}:
             if operation == "prepare":
                 starter = canonical(validate(json.loads(case.read_text())))

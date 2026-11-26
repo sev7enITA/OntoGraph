@@ -3,3 +3,16 @@
 #asof{display:flex;align-items:end;gap:.7rem;flex-wrap:wrap}.decision-state{font-weight:650;color:var(--mint)}.decision-state[data-state="unresolved_conflict"],.decision-state[data-state="stale_resolution"]{color:#ffc78e}
 
 .require{display:flex;align-items:center;gap:.5rem}.require input{width:1.2rem;min-height:1.2rem;accent-color:var(--mint)}
+
+#case-checklist { border-inline-start: 3px solid var(--mint); }
+#case-checklist ol { padding-inline-start: 1.45rem; }
+#case-checklist li { padding-block: .35rem; }
+#case-checklist li > label { display: flex; align-items: start; column-gap: .65rem; cursor: pointer; }
+#case-checklist input[type=checkbox] {
+  flex: none; width: 1.25rem; height: 1.25rem; min-height: 0;
+  margin: .2rem .15rem 0 0; accent-color: var(--mint);
+}
+#case-checklist [role=status] { color: var(--mint); }
+#case-checklist [role=status]:empty { display: none; }
+#case-checklist select, #case-checklist textarea { width: min(100%, 40rem); }
+#case-checklist textarea:focus-visible { outline: 2px solid var(--mint); outline-offset: 2px; }

@@ -46,7 +46,7 @@ header("Content-Security-Policy: default-src 'none'; script-src 'self'; style-sr
 if (!$api) {
     if (!in_array($method,['GET','HEAD'],true)) decisionError(405,'Unsupported method.');
     $files = [''=>['index.html','text/html'],'decisions.js'=>['decisions.js','text/javascript'],
-              'assertions.js'=>['ontograph/web/assertions.js','text/javascript'],'style.css'=>['style.css','text/css']];
+              'checklist.js'=>['checklist.js','text/javascript'],'assertions.js'=>['ontograph/web/assertions.js','text/javascript'],'style.css'=>['style.css','text/css']];
     if (!isset($files[$route])) decisionError(404,'Unknown resource.');
     [$file,$mime] = $files[$route];
     header('Content-Type: '.$mime.'; charset=utf-8');
@@ -54,17 +54,17 @@ if (!$api) {
     exit;
 }
 $operation = substr($route,4);
-if (!in_array($operation,['bootstrap','prepare','save','basis','impact','validate'],true)) decisionError(404,'Unknown operation.');
+if (!in_array($operation,['bootstrap','prepare','save','basis','impact','validate','checklist','checklist-save','checklist-run'],true)) decisionError(404,'Unknown operation.');
 $editable = in_array($user['role'] ?? '', ['admin','editor','reviewer'],true);
 $payload = [];
-if ($operation === 'bootstrap') {
+if (in_array($operation, ['bootstrap', 'checklist'], true)) {
     if ($method !== 'GET') decisionError(405,'Use GET.');
 } else {
     if ($method !== 'POST') decisionError(405,'Use POST.');
     $csrf = $identity['csrfToken'] ?? '';
     if (!is_string($csrf) || $csrf === '' || !hash_equals($csrf, $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '') ||
         ($_SERVER['HTTP_SEC_FETCH_SITE'] ?? '') === 'cross-site') decisionError(403,'Invalid request token.');
-    if (in_array($operation, ['prepare', 'save'], true) && !$editable) decisionError(403,'A Studio editor or reviewer role is required.');
+    if (in_array($operation, ['prepare', 'save', 'checklist-save'], true) && !$editable) decisionError(403,'A Studio editor or reviewer role is required.');
     if ($operation === 'prepare' && $case === null) decisionError(404,'Unknown guided case.');
     if (strtolower(explode(';',$_SERVER['CONTENT_TYPE'] ?? '')[0])!=='application/json') decisionError(415,'Expected JSON.');
     $raw=file_get_contents('php://input',false,null,0,5*1024*1024+1);

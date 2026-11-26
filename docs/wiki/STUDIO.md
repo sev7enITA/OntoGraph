@@ -90,3 +90,5 @@ In Graph select an explicit relationship, choose **Assess relationship**, and en
 ### Resolve contradictory assessments
 
 Sign in, open **Relationship evidence**, and import the unresolved WBS model from the pilot. Select the disputed relationship. Read each source, date, rationale and pair of grades. Choose a supported assertion, name the reviewer, give the reason and save the resolution. Reload to confirm the draft was saved. Changing a claim or evidence basis requires a new resolution. The hosted workspace stores drafts by account and detects conflicting saves. Authenticated release approval remains a separate registry operation. [Hosted workspace](https://openontograph.org/OntoGraph/decisions/?lang=en) · [中文](https://openontograph.org/OntoGraph/decisions/?lang=zh-Hans) · [Working models and native results](https://openontograph.org/wbs/)
+
+In a guided workspace, **Run saved draft checks** opens the reference decisions for the saved revision. Use **Save checklist** to keep your steps and observation notes. [Guided checklist](GUIDED-JOURNEY.md#verify-the-saved-draft) · [简体中文](GUIDED-JOURNEY.zh-Hans.md#核验已保存的草稿)

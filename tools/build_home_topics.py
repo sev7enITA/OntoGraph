@@ -15,7 +15,7 @@ DOMAIN = "https://openontograph.org"
 GROUPS = (
     ("theory", ("The Theory", "理论基础"), home_topics_theory.PAGES),
     ("apply", ("Apply It", "动手实践"), home_topics_apply.PAGES),
-    ("work-with-us", ("Work With Us", "参与合作"), dict(list(home_topics_project.PAGES.items())[:5])),
+    ("collaborate", ("Collaborate on OnToGraPh", "参与 OnToGraPh"), dict(list(home_topics_project.PAGES.items())[:5])),
     ("about", ("About OnToGraPh", "关于 OnToGraPh"), dict(list(home_topics_project.PAGES.items())[5:])),
 )
 

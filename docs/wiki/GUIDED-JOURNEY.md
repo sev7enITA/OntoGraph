@@ -24,4 +24,18 @@ The Copilot route includes an optional [training glossary CSV](https://openontog
 - **Online Studio.** Open the Studio link in the case’s model step and sign in if prompted. Studio opens that case directly. An editor’s first visit saves the starter as a private draft. Return visits reopen the latest saved draft. Viewers can inspect the model in read-only mode. Choose **Save draft** after any edits you want to keep.
 - **Local Studio.** From the repository root, run `python3 -m ontograph studio`, open **Semantic Studio** and use **Import**. Alternatively, load a downloaded file at startup with `python3 -m ontograph studio --model /path/to/model.json`. Inspect the objects and relationships, then choose **Validate** and **Save version** when you have made a change. [Local Studio](http://127.0.0.1:8765/governance) · [Studio documentation](https://github.com/sev7enITA/OntoGraph/wiki/Visual-Studio)
 
+
+## Verify the saved draft
+
+Open the case checklist inside online Studio. Check the draft scope, follow the suggested object or relationship and try the case exercise. **Run saved draft checks** compares the current saved rules with the starter’s reference decisions. Record what you independently observed in a replay or application, select a result and supply a short note about its basis. **Save checklist** keeps this progress under your account for the current draft revision. A newly saved model revision starts a fresh checklist.
+
+| Case | What the reference run covers | What to record separately |
+| --- | --- | --- |
+| Personal library | An available copy, an on-loan copy and unknown availability | The lending application’s response to two copies of the same edition |
+| Department WBS | Qualified, legacy and unknown codes in Finance and PMO | The checkpoint and native application readback in the WBS replay or your own installation |
+| Copilot glossary | Approved, ambiguous and missing mappings | The question, answer and source from your own Copilot test tenant |
+| Policy change | A matching record, a wrong case ID and a false authority claim | The PALO review checkpoint and the evidence you inspected |
+
+Checklist ticks and notes record the user’s exercise. Publication and independently observed operational results remain governed by their own workflows.
+
 [GitHub Wiki](https://github.com/sev7enITA/OntoGraph/wiki/Guided-Journey) · [简体中文 Wiki](https://github.com/sev7enITA/OntoGraph/wiki/Guided-Journey-zh-Hans)
