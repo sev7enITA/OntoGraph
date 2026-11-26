@@ -12,6 +12,8 @@ OnToGraPh 最初为 PALO Framework 和 PolicyWatcher 提供共享本体层，如
 
 ## Start here
 
+[Download from SourceForge](https://sourceforge.net/projects/openontograph/) · [OnToGraPh on Product Hunt](https://www.producthunt.com/products/ontograph)
+
 - [From hidden risks to verified decisions · 5:18](https://openontograph.org/launch/) · [从隐性风险到可验证的决策](https://openontograph.org/zh/launch/). [WBS 0017 use-case film · 5:00](https://openontograph.org/launch/#wbs-case) · [WBS 0017 案例影片](https://openontograph.org/zh/launch/#wbs-case).
 
 - [Hidden Risks of Vibe Coding](https://openontograph.org/hidden-risks/) · [氛围编程的隐性风险](https://openontograph.org/zh/hidden-risks/). [Field guide](https://github.com/sev7enITA/OntoGraph/wiki/Hidden-Risks) · [中文指南](https://github.com/sev7enITA/OntoGraph/wiki/Hidden-Risks-zh-Hans).

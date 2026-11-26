@@ -12,6 +12,8 @@
 
 ## Start here
 
+[Download from SourceForge](https://sourceforge.net/projects/openontograph/) · [OnToGraPh on Product Hunt](https://www.producthunt.com/products/ontograph)
+
 [From hidden risks to verified decisions · 5:18](https://openontograph.org/launch/) · [简体中文字幕](https://openontograph.org/zh/launch/) · [Download MP4](https://openontograph.org/launch/verified-decisions/film.mp4)
 
 [Second film · WBS 0017 and agent-ready ontology at 0:45](https://openontograph.org/launch/#agent-ready) · [观看 WBS 案例](https://openontograph.org/zh/launch/#agent-ready)
