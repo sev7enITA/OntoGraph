@@ -17,6 +17,11 @@ const labels={
   'required-label':['Require complete assessments for this origin at release','发布时要求此起点的关系评估完整'],'asof-label':['Model effective time (UTC)','模型生效时间（UTC）'],'set-time':['Apply time','应用时间'],notice:['Opening your private workspace…','正在打开您的私有工作区…']
 };
 for(const [id,pair] of Object.entries(labels)) $(id).textContent=t(...pair);
+const pilot=zh?'/pilot/zh/':'/pilot/';
+$('integration-label').textContent=t('Optional integration paths','可选集成路径');
+$('integration-copy').textContent=t('Explore how PolicyWatcher can supply source evidence and PALO Framework can receive an authorized case for human review. The pilot opens in a separate tab. You can finish your draft here independently.','了解 PolicyWatcher 如何提供来源证据，以及 PALO Framework 如何接收获授权的案例并提交人工复核。试点在新标签页打开，你可在此独立完成草稿。');
+$('integration-source').href=pilot+'#policywatcher';$('integration-source').textContent=t('PolicyWatcher · evidence intake','PolicyWatcher · 证据接收');
+$('integration-review').href=pilot+'#palo';$('integration-review').textContent=t('PALO Framework · human review','PALO Framework · 人工复核');
 const other=new URL(page); other.searchParams.set('lang',zh?'en':'zh-Hans');
 $('language').href=other; $('language').textContent=zh?'English':'简体中文';
 $('language').lang=$('language').hreflang=zh?'en':'zh-Hans'; $('back').href='../?lang='+(zh?'zh-Hans':'en');

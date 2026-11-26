@@ -6,6 +6,17 @@ from tools.build_home_topics import GROUPS, SITE, href, layout, phr, route
 from tools.journey_routes import CASES, journey_path
 
 
+def optional_integrations(lang):
+    t = lambda en, zh: phr(en, zh, lang)
+    pilot = "/pilot/zh/" if lang else "/pilot/"
+    return f'''<details class="topic-follow optional-paths">
+      <summary>{t("Optional integrations · PolicyWatcher and PALO Framework", "可选集成 · PolicyWatcher 和 PALO Framework")}</summary>
+      <p>{t("Your case works in OnToGraPh on its own. Explore either branch in a separate tab. Your draft stays in this workflow.", "你可以独立使用 OnToGraPh 完成场景。可以在新标签页探索任一分支，草稿保留在当前流程中。")}</p>
+      <ul><li><strong>PolicyWatcher</strong> · {t("When an external policy changes, a read-only source packet can support a proposed change.", "外部政策变化时，只读来源证据包可为拟议变更提供依据。")} <a href="{pilot}#policywatcher" target="_blank" rel="noopener noreferrer">{t("Replay the evidence intake", "回放证据接收过程")}</a></li>
+      <li><strong>PALO Framework</strong> · {t("When a change calls for oversight, send an authorized case for human review. The recorded pilot ends with review pending.", "变更需要监督时，可将已获授权的案例提交人工复核。在试点记录中，该案例仍待人工复核。")} <a href="{pilot}#palo" target="_blank" rel="noopener noreferrer">{t("Replay the review handoff", "回放人工复核交接")}</a></li></ul>
+    </details>'''
+
+
 def studio_handoff(case, data, studio_topic, lang):
     model = data["model"]
     filename = Path(model).name
@@ -68,6 +79,7 @@ def case_page(key, data, lang, topics):
       <p>{href(t("Continue to the model", "继续到模型"), "#model")}</p>
     </section>
 {handoff}
+    {optional_integrations(lang)}
     <section class="topic-follow" aria-labelledby="related-details">
       <h2 id="related-details">{t("Further reading for this case", "本场景的延伸阅读")}</h2>
       <ul>
@@ -92,6 +104,7 @@ def index_page(lang):
     <div class="journey-grid">
 {cards}
     </div>
+    {optional_integrations(lang)}
     <p class="journey-directory">{href(phr("Browse all 19 topics", "浏览全部 19 个主题", lang), route("", lang))}</p>'''
     return layout("", title, lead, body, lang, area="journey")
 

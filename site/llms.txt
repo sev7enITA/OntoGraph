@@ -4,6 +4,8 @@
 
 ## Project and evidence
 
+- [Five-minute launch film](https://openontograph.org/launch/) and [简体中文字幕与文字稿](https://openontograph.org/zh/launch/). English audio, worked app example, optional integration paths, market sources and timed chapters.
+
 - [English overview](https://openontograph.org/) and [简体中文](https://openontograph.org/zh/).
 - [Governance hub](https://openontograph.org/#ecosystem): PolicyWatcher supplies source evidence. PALO Framework defines review gates. The standalone engine can also use an adopter’s own sources and vocabulary.
 - [Interactive pilot](https://openontograph.org/pilot/) and [中文试点](https://openontograph.org/pilot/zh/). In the recorded pilot, PolicyWatcher was read-only and PALO was local. The case remained pending human review.

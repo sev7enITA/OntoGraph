@@ -1,0 +1,232 @@
+WEBVTT
+
+00:00:01.053 --> 00:00:04.286
+A reader brings two identical books to the desk.
+
+00:00:04.627 --> 00:00:07.678
+You scan the first, lend it out, and the second
+
+00:00:07.678 --> 00:00:10.600
+disappears from the list of available copies.
+
+00:00:10.941 --> 00:00:14.212
+The app did exactly what the code told it to do.
+
+00:00:14.553 --> 00:00:17.823
+Scan the code on screen to try this case yourself.
+
+00:00:19.821 --> 00:00:23.342
+An AI assistant can make that mistake in a prototype.
+
+00:00:23.647 --> 00:00:28.082
+An experienced engineer can make it in a carefully tested system.
+
+00:00:28.387 --> 00:00:34.221
+If the test data contains only one copy per edition, every test can pass.
+
+00:00:34.526 --> 00:00:37.291
+An ISBN identifies the edition.
+
+00:00:37.596 --> 00:00:40.575
+When I lend a book, I lend one physical copy.
+
+00:00:40.880 --> 00:00:43.893
+That distinction changes who gets to borrow the book.
+
+00:00:45.838 --> 00:00:49.959
+This is OntoGraph, an independent project by Fabrizio Degni.
+
+00:00:50.282 --> 00:00:54.427
+A business owner can describe the distinction in ordinary language.
+
+00:00:54.750 --> 00:00:58.596
+A developer can turn it into a model and run examples.
+
+00:00:58.919 --> 00:01:02.166
+A reviewer can follow a decision back to its source.
+
+00:01:02.489 --> 00:01:06.107
+Start with one question your application has to answer,
+
+00:01:06.107 --> 00:01:09.857
+and a case where the wrong definition changes the answer.
+
+00:01:11.847 --> 00:01:16.286
+On the homepage, open Hidden Risks and choose Describe my app.
+
+00:01:16.620 --> 00:01:18.042
+Here is a different brief.
+
+00:01:18.376 --> 00:01:21.801
+A community group assigns volunteers to shelters.
+
+00:01:22.135 --> 00:01:24.459
+A night shift is a type of shift.
+
+00:01:24.793 --> 00:01:26.994
+A shift depends on a volunteer.
+
+00:01:27.328 --> 00:01:29.480
+Generate the proposal.
+
+00:01:29.814 --> 00:01:33.392
+The browser uses local language patterns and keeps the
+
+00:01:33.392 --> 00:01:36.837
+description in this tab until you open it in Studio.
+
+00:01:38.832 --> 00:01:40.610
+Look at the suggested risk.
+
+00:01:40.928 --> 00:01:45.848
+If the same assignment arrives twice, is it a retry or a second shift?
+
+00:01:46.166 --> 00:01:49.038
+The dictionary proposes terms from the brief.
+
+00:01:49.355 --> 00:01:51.286
+The taxonomy groups them.
+
+00:01:51.604 --> 00:01:55.594
+The ontology connects the assignment, volunteer and shelter.
+
+00:01:55.912 --> 00:01:57.371
+These are suggestions.
+
+00:01:57.689 --> 00:02:00.011
+The person who schedules the shifts can
+
+00:02:00.011 --> 00:02:02.868
+correct a definition before anyone builds on it.
+
+00:02:04.855 --> 00:02:07.294
+Choose Review in Studio and sign in.
+
+00:02:07.637 --> 00:02:10.291
+The case opens in its own workspace.
+
+00:02:10.634 --> 00:02:13.264
+Expand a dictionary entry, edit the
+
+00:02:13.264 --> 00:02:16.871
+definition, apply the change and save the draft.
+
+00:02:17.214 --> 00:02:20.567
+Reopen the workspace to see the saved revision.
+
+00:02:20.910 --> 00:02:24.434
+You can also download the model as JSON and use the
+
+00:02:24.434 --> 00:02:27.820
+standalone Studio locally with Python and SQLite.
+
+00:02:29.853 --> 00:02:34.834
+Now consider two departments using the same project code.
+
+00:02:35.175 --> 00:02:39.017
+In our recorded pilot, a spreadsheet acknowledged a new
+
+00:02:39.017 --> 00:02:43.278
+rule and still counted two thousand euros of eligible budget.
+
+00:02:43.620 --> 00:02:47.083
+The corrected workbook counted eight hundred.
+
+00:02:47.424 --> 00:02:51.166
+After withdrawal it still counted eight hundred.
+
+00:02:51.508 --> 00:02:55.957
+A later reading of zero verified withdrawal for those records.
+
+00:02:56.299 --> 00:02:58.245
+The applications were real.
+
+00:02:58.587 --> 00:03:01.823
+The records and review roles were synthetic.
+
+00:03:03.825 --> 00:03:06.765
+The guided journeys cover a personal library,
+
+00:03:06.765 --> 00:03:10.881
+departmental codes, a glossary for Copilot, and policy changes.
+
+00:03:11.190 --> 00:03:13.698
+Each has a starting model and checks.
+
+00:03:14.008 --> 00:03:17.027
+In Weighted Relationships, compare confidence in the
+
+00:03:17.027 --> 00:03:19.872
+evidence with the consequence of a wrong mapping.
+
+00:03:20.182 --> 00:03:24.042
+Use the architecture puzzle to explore missing components.
+
+00:03:24.351 --> 00:03:28.382
+In a delivery pipeline, the policy compiler turns a reviewed
+
+00:03:28.382 --> 00:03:32.884
+rule into an artifact that can be tested in continuous integration.
+
+00:03:34.826 --> 00:03:37.495
+Different tools answer different questions.
+
+00:03:37.805 --> 00:03:41.635
+NVIDIA Auto Ontology builds semantic reasoning layers.
+
+00:03:41.946 --> 00:03:45.891
+OntoBricks maps ontologies onto Databricks tables.
+
+00:03:46.202 --> 00:03:49.549
+Genie answers business questions using governed data.
+
+00:03:49.860 --> 00:03:52.804
+Stardog supports graph queries and inference.
+
+00:03:53.115 --> 00:03:55.530
+Drools executes business rules.
+
+00:03:55.841 --> 00:04:00.265
+OntoGraph connects a reviewed meaning to the behavior observed in the
+
+00:04:00.265 --> 00:04:04.882
+receiving application, including what happens after a rule is withdrawn.
+
+00:04:06.832 --> 00:04:09.092
+You can run the whole case on its own.
+
+00:04:09.410 --> 00:04:14.448
+If an external policy changes, PolicyWatcher can supply source evidence.
+
+00:04:14.766 --> 00:04:19.274
+If a decision needs a governance review, PALO can receive the case.
+
+00:04:19.592 --> 00:04:23.662
+In the recorded integration pilot, PolicyWatcher was read
+
+00:04:23.662 --> 00:04:28.090
+only and a local PALO case remained open for a human decision.
+
+00:04:28.407 --> 00:04:31.868
+Opening an optional path sends nothing from your draft.
+
+00:04:33.830 --> 00:04:36.998
+Pick one term two people use differently.
+
+00:04:37.312 --> 00:04:41.273
+Write one example that should pass and another that should be held.
+
+00:04:41.587 --> 00:04:44.138
+Scan the first code to try your own app.
+
+00:04:44.453 --> 00:04:49.229
+The second takes you to the source, sample models and local setup.
+
+00:04:49.543 --> 00:04:53.364
+Bring the result back to the person who owns the decision.
+
+00:04:53.678 --> 00:04:55.635
+That is where a working prototype
+
+00:04:55.635 --> 00:04:58.244
+becomes a model you can trust for that case.

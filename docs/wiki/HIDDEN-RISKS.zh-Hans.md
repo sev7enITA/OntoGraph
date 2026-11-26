@@ -2,6 +2,11 @@
 
 书架上的两本书可以共用同一个 ISBN。如果借阅应用用 ISBN 记录可借状态，借出第一本时，第二本也可能显示为已借出。个人图书馆示例将版本、每一本实体书和借阅记录分别建模。[打开个人图书馆场景](https://openontograph.org/zh/journey/personal-library/)
 
+## 可选集成路径
+
+四个引导场景、自定义应用流程和在线 Studio 都支持独立使用。展开“可选集成”，可在新标签页查看已记录的分支。PolicyWatcher 可提供只读政策变更证据；PALO 可接收案例并交由人工复核。打开这些链接会保留草稿，不会向这两个框架发送草稿内容。[来源证据接收](https://openontograph.org/pilot/zh/#policywatcher) · [人工复核交接](https://openontograph.org/pilot/zh/#palo) · [五分钟发布影片](https://openontograph.org/zh/launch/)
+
+
 ## 描述自己的应用
 
 从[首页预览](https://openontograph.org/zh/#hidden-risks)播放图书馆或 WBS 示例，也可以直接打开[描述我的应用](https://openontograph.org/zh/hidden-risks/#my-case)。用 10 至 3,000 个字符说明参与者、对象和待做的决策。例如：应用将志愿者分配到避难所，单独追踪“夜班”。可以用引号标记需要保留的业务术语。

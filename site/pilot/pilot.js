@@ -276,4 +276,9 @@
   });
   selectRoute(location.hash === "#standalone" ? "standalone" : "hub");
   el("console").hidden = false;
+  const branch = { "#policywatcher": 0, "#palo": 3 }[location.hash];
+  if (branch !== undefined) {
+    displayStep(branch);
+    el("console").scrollIntoView({block: "start"});
+  }
 })();

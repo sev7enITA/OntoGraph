@@ -6,6 +6,7 @@
 <form id="navigation"><label><span id="workspace-name">Workspace ID</span><input name="workspace" required pattern="[a-z][a-z0-9_\-]{0,63}" maxlength="64" value="wbs"></label><button id="open">Open</button></form>
 <form id="asof"><label><span id="asof-label">Model effective time (UTC)</span><input id="effective" required maxlength="20"></label><button id="set-time">Apply time</button></form>
 <div class="bar"><button type="button" id="import-label">Import model</button><input hidden type="file" id="import" accept=".json,application/json"><button id="export">Export JSON</button><button id="save" class="primary">Save draft</button></div><p id="scope"></p></section>
+<details id="integration-paths"><summary id="integration-label"></summary><p id="integration-copy"></p><p><a id="integration-source" target="_blank" rel="noopener noreferrer"></a> · <a id="integration-review" target="_blank" rel="noopener noreferrer"></a></p></details>
 <section id="personal-review" hidden></section>
 <section id="case-checklist" aria-labelledby="checklist-title" hidden></section>
 <div class="columns"><section><h2 id="editor-label">Relationship review</h2><label><span id="edge-label">Relationship</span><select id="edge"></select></label><form id="edit"></form></section>

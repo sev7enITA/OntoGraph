@@ -2,6 +2,11 @@
 
 Two physical copies on a shelf can share an ISBN. If a lending app uses ISBN as the key for availability, lending the first copy can also hide the second. The screen can show exactly what the developer asked it to show while the person at the shelf gets the wrong answer. The personal library starter models the edition, the individual copy and the loan. [Open the library case](https://openontograph.org/journey/personal-library/)
 
+## Optional integration paths
+
+The four guided cases, the personal app workflow and hosted Studio can all be used standalone. Expand **Optional integrations** to open a recorded branch in another tab. PolicyWatcher can provide read-only evidence for a policy change. PALO can receive a case for human review. Following either link leaves the draft in place and transmits none of its content to those frameworks. [Source intake](https://openontograph.org/pilot/#policywatcher) · [Review handoff](https://openontograph.org/pilot/#palo) · [Five-minute launch film](https://openontograph.org/launch/)
+
+
 ## Describe your own app
 
 From the [homepage preview](https://openontograph.org/#hidden-risks), play the library or WBS example or jump to [Describe my app](https://openontograph.org/hidden-risks/#my-case). Write 10–3,000 characters about the actors, objects and decision. Try this brief: My app assigns volunteers to shelters and tracks “night shift” separately. Quotation marks help preserve your business terms.

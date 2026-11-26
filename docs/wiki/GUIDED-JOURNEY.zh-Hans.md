@@ -2,6 +2,11 @@
 
 从需要作出的决策开始。每个案例都提供相关主题、互动工具、可下载模型和一项可在语义工作台中完成的任务。[开始引导流程](https://openontograph.org/zh/journey/) · [English](https://openontograph.org/journey/)
 
+## 可选集成路径
+
+四个引导场景、自定义应用流程和在线 Studio 都支持独立使用。展开“可选集成”，可在新标签页查看已记录的分支。PolicyWatcher 可提供只读政策变更证据；PALO 可接收案例并交由人工复核。打开这些链接会保留草稿，不会向这两个框架发送草稿内容。[来源证据接收](https://openontograph.org/pilot/zh/#policywatcher) · [人工复核交接](https://openontograph.org/pilot/zh/#palo) · [五分钟发布影片](https://openontograph.org/zh/launch/)
+
+
 ## 选择案例
 
 | 案例 | 先做什么 | 工作台模型 |

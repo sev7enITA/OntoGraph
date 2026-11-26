@@ -1,0 +1,6 @@
+#launch-film{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#0d171a;margin:1rem 0}
+.film-links{display:flex;flex-wrap:wrap;align-items:center;gap:.7rem}
+.chapters{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:.2rem 1rem}
+.chapters a{display:block;padding:.55rem 0}.chapters time{font-family:ui-monospace,monospace;color:var(--accent)}
+details.topic-copy summary{font-size:1.3rem;cursor:pointer;font-weight:700;padding:.75rem 0}
+details.topic-copy h3{margin-top:1rem}
