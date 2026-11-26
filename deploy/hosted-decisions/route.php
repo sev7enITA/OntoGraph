@@ -34,8 +34,8 @@ if (!is_array($user) || empty($user['id'])) {
     if ($api) decisionError(401,'Sign in to Studio.');
     $locale = ($_GET['lang'] ?? '') === 'zh-Hans' ? 'zh-Hans' : 'en';
     $query = $locale === 'zh-Hans' ? ['lang' => $locale] : [];
-    if ($route === '' && $case !== null) {
-        $query = ['lang' => $locale, 'journey' => $case];
+    if ($route === '' && ($case !== null || studioPersonalCase($workspace))) {
+        $query = ['lang' => $locale, 'journey' => $case ?? $workspace];
     }
     header('Location: /OntoGraph/login'.($query ? '?'.http_build_query($query) : ''),true,303);
     exit;
@@ -46,7 +46,7 @@ header("Content-Security-Policy: default-src 'none'; script-src 'self'; style-sr
 if (!$api) {
     if (!in_array($method,['GET','HEAD'],true)) decisionError(405,'Unsupported method.');
     $files = [''=>['index.html','text/html'],'decisions.js'=>['decisions.js','text/javascript'],
-              'checklist.js'=>['checklist.js','text/javascript'],'assertions.js'=>['ontograph/web/assertions.js','text/javascript'],'style.css'=>['style.css','text/css']];
+              'case-review.js'=>['case-review.js','text/javascript'],'checklist.js'=>['checklist.js','text/javascript'],'assertions.js'=>['ontograph/web/assertions.js','text/javascript'],'style.css'=>['style.css','text/css']];
     if (!isset($files[$route])) decisionError(404,'Unknown resource.');
     [$file,$mime] = $files[$route];
     header('Content-Type: '.$mime.'; charset=utf-8');

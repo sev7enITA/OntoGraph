@@ -2,6 +2,18 @@
 
 Two physical copies on a shelf can share an ISBN. If a lending app uses ISBN as the key for availability, lending the first copy can also hide the second. The screen can show exactly what the developer asked it to show while the person at the shelf gets the wrong answer. The personal library starter models the edition, the individual copy and the loan. [Open the library case](https://openontograph.org/journey/personal-library/)
 
+## Describe your own app
+
+From the [homepage preview](https://openontograph.org/#hidden-risks), play the library or WBS example or jump to [Describe my app](https://openontograph.org/hidden-risks/#my-case). Write 10–3,000 characters about the actors, objects and decision. Try this brief: My app assigns volunteers to shelters and tracks “night shift” separately. Quotation marks help preserve your business terms.
+
+You can also state definitions and typed relationships explicitly. For example, “Night shift” means a duty starting after midnight. “Night shift” is a type of “shift”. “Shift” depends on “volunteer”. Check the resulting definition, hierarchy and dependency in the proposal.
+
+The browser uses bilingual patterns and extracts candidate terms. Four panels show risk questions and suggested tests, dictionary entries linked to words in the brief, a proposed taxonomy, and typed dependencies. Unrecognized vocabulary stays open for classification. The animated chart on the homepage counts items in the selected example.
+
+Choose **Review in Studio** in the same tab. After sign-in, an editor gets a new private workspace for that proposal. Expand the review panels, edit a definition, classification or relationship, choose **Apply proposal edits**, then **Save draft**. Bookmark the workspace URL to reopen the saved revision. Viewers can inspect the proposal. **Download draft JSON** keeps a portable copy for offline use.
+
+Generation runs in your browser. Opening Studio sends the model, including your description, to the authenticated service. The brief starts as insufficient evidence. The example rule and its two probes exercise a human-review condition. The owner still needs to review terms and verify the intended decisions in the receiving app.
+
 ## Bring one decision from your prototype
 
 Start with a decision someone will rely on, such as “Can I lend this copy?” Write one case that should pass, one that should be held, and one with a missing input. Someone who does the work can supply all three examples before the team chooses a database or an AI model.

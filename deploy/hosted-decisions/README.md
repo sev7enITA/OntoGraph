@@ -26,3 +26,7 @@ Back up and patch the already integrated gateway with `python3 deploy/hosted-dec
 Install `checklist.py` and `checklist.js` beside the existing workspace assets. The worker stores the checklist separately from the model under the account, guided workspace and saved draft revision. A new model revision opens a fresh checklist. Writes check both the model revision and checklist version. Viewers can run the reference checks without saving progress.
 
 The check runner evaluates the saved draft against the starter's fixed inputs and expected decisions. Its readout is a simulation. The observation selector and note are an account holder's record of what they saw in a replay or application.
+
+## Personal app proposals
+
+Deploy `case-review.js` beside `decisions.js`. Publish the case generator and the two Hidden Risks pages on the same origin as Studio. The browser carries the proposed release across sign-in using a per-tab key and an opaque `case-<UUIDv4>` workspace ID. The URL carries only the ID and locale. The authenticated workspace validates the release and uses the ordinary account-scoped, revision-checked draft save. A saved revision takes precedence when reopening the workspace. Generation uses bilingual rules and candidate terms from the brief. It marks the brief as insufficient evidence pending review.

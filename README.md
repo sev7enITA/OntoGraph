@@ -12,7 +12,7 @@
 
 ## Start here
 
-[Hidden Risks of Vibe Coding](https://openontograph.org/hidden-risks/) · [氛围编程的隐性风险](https://openontograph.org/zh/hidden-risks/) · Try the same code in Finance and PMO, then verify the decision in Studio.
+[Hidden Risks of Vibe Coding](https://openontograph.org/hidden-risks/) · [氛围编程的隐性风险](https://openontograph.org/zh/hidden-risks/) · Describe your app, inspect four proposals and open its private Studio draft. [Start my case](https://openontograph.org/hidden-risks/#my-case) · [描述我的应用](https://openontograph.org/zh/hidden-risks/#my-case).
 
 [Choose a guided case and open its model in Studio](https://openontograph.org/journey/) · [简体中文](https://openontograph.org/zh/journey/)
 

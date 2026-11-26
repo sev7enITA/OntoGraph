@@ -1,9 +1,11 @@
 import {assertionForm} from './assertions.js';
+import {renderCaseReview} from './case-review.js';
 import {mountChecklist} from './checklist.js';
 const $=id=>document.getElementById(id);
 const page=new URL(location.href);
 const zh=page.searchParams.get('lang')==='zh-Hans', t=(en,cn)=>zh?cn:en;
 const workspace=page.searchParams.get('workspace')||'wbs';
+const personal=/^case-[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(workspace);
 let model, boot, revision, refreshChecklist, dirty=false, formAction, serial=0, writer=false;
 document.documentElement.lang=zh?'zh-Hans':'en';
 document.title=t('Relationship evidence · OnToGraPh Studio','关系证据 · OnToGraPh 工作台');
@@ -46,6 +48,17 @@ function refreshModel(){
   else if(model.required_assessment_origins?.length)$('origin').value=model.required_assessment_origins[0];
   if(prevEdge && model.edges[Number(prevEdge)])$('edge').value=prevEdge;
   else {const i=model.edges.findIndex(e=>e.assertions?.length||e.assessment); if(i>=0)$('edge').value=String(i);}
+  if(personal && model.domain===workspace){
+    renderCaseReview(model,{t,editable:boot.editable,apply:async draft=>{
+      const initial=model;
+      try{
+        await api('validate',{model:draft});
+        if(initial!==model)return;
+        model=draft;dirty=true;refreshModel();
+        notice(t('Edits applied. Save the draft to keep this revision.','修改已应用。请保存草稿以保留此修订。'));
+      }catch(error){notice(error.message);}
+    }});
+  }else $('personal-review').hidden=true;
   renderEditor(); controls(); void impact();
 }
 function renderEditor(){
@@ -135,6 +148,22 @@ api('bootstrap').then(async data=>{
   boot=data;
   const prepare=data.starter && data.editable;
   const draft=prepare ? await api('prepare',{}) : data;
+  if(personal){
+    $('title').textContent=t('My app model','我的应用模型');
+    $('subtitle').textContent=t('Review the risks, dictionary, taxonomy and relationships proposed from your brief.','复核根据你的描述提出的风险、词典、分类体系和本体关系。');
+    if(!draft.revision){
+      const pending=sessionStorage.getItem('ontograph:'+workspace);
+      if(!pending)throw new Error(t('This draft has not been saved. Open your proposal from the Hidden Risks tab.','此草稿尚未保存。请从隐性风险标签页打开你的提案。'));
+      draft.model=JSON.parse(pending);
+      await api('validate',{model:draft.model});
+      if(draft.model.domain!==workspace)throw new Error(t('Draft ID mismatch.','草稿标识不匹配。'));
+      if(data.editable){
+        try{draft.revision=(await api('save',{model:draft.model,revision:0})).revision;}
+        catch(error){if(error.status!==409)throw error;Object.assign(draft,await api('bootstrap'));}
+      }
+    }
+    if(draft.revision)sessionStorage.removeItem('ontograph:'+workspace);
+  }
   model=draft.model;revision=draft.revision;$('controls').hidden=false;
   $('asof').hidden=!boot.editable;$('import').disabled=!boot.editable;$('import-label').hidden=!boot.editable;
   refreshModel();

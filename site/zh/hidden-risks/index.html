@@ -20,8 +20,9 @@
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="stylesheet" href="/assets/topic-pages.css">
   <link rel="stylesheet" href="/assets/journey.css">
-  <link rel="stylesheet" href="/assets/hidden-risks.css">
+  <link rel="stylesheet" href="/assets/hidden-risks.css?v=2">
   <script defer src="/assets/hidden-risks.js"></script>
+  <script type="module" src="/assets/my-case.js?v=3"></script>
 </head>
 <body>
   <a class="skip-link" href="#topic-main">跳转至正文</a>
@@ -37,8 +38,27 @@
       <h1>氛围编程的隐性风险</h1>
       <p>用 AI 搭建的借阅应用扫描 ISBN 后，将书标为已借出。另一位读者拿着第二本相同版本的书来到柜台，还能借走吗？</p>
       <p>如果只提示 AI“把这本书标为已借出”，就把“这本书”指什么的决定留给了 AI。ISBN 标识图书版本，每笔借阅则对应一本具体的馆藏书。在 OnToGraPh 中，熟悉借阅规则的人可以写清这层区别，开发者可以用模型草案验证规则。</p>
-      <nav class="topic-path" aria-label="本页导航"><a href="#risk-lab">试用 WBS 示例</a><span aria-hidden="true"> / </span><a href="/zh/journey/personal-library/">为借阅场景建模</a></nav>
+      <nav class="topic-path" aria-label="本页导航"><a href="#my-case">描述我的应用</a><span aria-hidden="true"> / </span><a href="#risk-lab">试用 WBS 示例</a><span aria-hidden="true"> / </span><a href="/zh/journey/personal-library/">为借阅场景建模</a></nav>
     </header>
+    <section id="my-case" class="topic-lab" aria-labelledby="my-case-title">
+      <h2 id="my-case-title">从你自己的应用开始</h2>
+      <p>描述谁使用应用、它追踪什么，以及需要做出的一项决策。可以用引号标出希望加入草稿的业务术语。</p>
+      <form id="case-form">
+        <label for="app-brief">我的应用描述</label>
+        <textarea id="app-brief" required minlength="10" maxlength="3000" rows="4" placeholder="我想开发一个应用，用来……"></textarea>
+        <details><summary>如何明确表达自己的定义和关系</summary><p>例如：“夜班”是指午夜后开始的值班。“夜班”属于“班次”。“班次”依赖于“志愿者”。生成后检查术语、分类和依赖关系。</p></details>
+        <p>浏览器中的语言规则会建议术语和问题。在你选择用 Studio 打开之前，描述只保留在此标签页中。</p>
+        <div class="case-actions"><button class="button primary" type="submit" disabled>生成我的提案</button><button class="button" type="button" id="case-example" disabled>使用图书馆示例</button></div>
+      </form>
+      <p id="case-status" role="status"></p>
+      <div id="case-output" hidden>
+        <h2 id="proposal-title" tabindex="-1">你的拟议模型</h2>
+        <div id="proposal-panels"></div>
+        <p>在 Studio 中打开会将此草稿发送到你的私有工作区以供复核。也可以下载模型，在本地使用。</p>
+        <div class="case-actions"><button class="button primary" id="case-open">在 Studio 中复核</button><button class="button" id="case-download">下载草稿 JSON</button></div>
+      </div>
+      <noscript><p>启用 JavaScript 即可生成自己的草稿。你也可以阅读下方示例。</p></noscript>
+    </section>
     <section class="topic-copy" aria-labelledby="layer-title">
       <h2 id="layer-title">使用数据做决定前，先问四个问题</h2>
       <p>假设财务部门和项目管理办公室导出的文件中都有一个名为 WBS 的字段，也都有编码 0017。在按编码合并记录前，先就以下问题达成共识。</p>

@@ -20,8 +20,9 @@
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="stylesheet" href="/assets/topic-pages.css">
   <link rel="stylesheet" href="/assets/journey.css">
-  <link rel="stylesheet" href="/assets/hidden-risks.css">
+  <link rel="stylesheet" href="/assets/hidden-risks.css?v=2">
   <script defer src="/assets/hidden-risks.js"></script>
+  <script type="module" src="/assets/my-case.js?v=3"></script>
 </head>
 <body>
   <a class="skip-link" href="#topic-main">Skip to content</a>
@@ -37,8 +38,27 @@
       <h1>Hidden Risks of Vibe Coding</h1>
       <p>Your AI-built lending app scans an ISBN and marks the book as on loan. A reader brings a second copy to the desk. Can they borrow it?</p>
       <p>A prompt like “mark this book as borrowed” leaves the AI to choose what “book” means. An ISBN identifies the edition. A loan belongs to one physical copy. With OnToGraPh, the person who knows the lending policy can define that distinction, and the developer can test it against the draft model.</p>
-      <nav class="topic-path" aria-label="On this page"><a href="#risk-lab">Try the WBS example</a><span aria-hidden="true"> / </span><a href="/journey/personal-library/">Model the library case</a></nav>
+      <nav class="topic-path" aria-label="On this page"><a href="#my-case">Describe my app</a><span aria-hidden="true"> / </span><a href="#risk-lab">Try the WBS example</a><span aria-hidden="true"> / </span><a href="/journey/personal-library/">Model the library case</a></nav>
     </header>
+    <section id="my-case" class="topic-lab" aria-labelledby="my-case-title">
+      <h2 id="my-case-title">Start with your own app</h2>
+      <p>Describe who uses it, what it tracks and one decision it makes. Put a distinctive business term in quotation marks to include it in the draft.</p>
+      <form id="case-form">
+        <label for="app-brief">My app description</label>
+        <textarea id="app-brief" required minlength="10" maxlength="3000" rows="4" placeholder="I want to build an app that…"></textarea>
+        <details><summary>How to state your own definitions and relationships</summary><p>Try: “Night shift” means a duty starting after midnight. “Night shift” is a type of “shift”. “Shift” depends on “volunteer”. Inspect the terms, hierarchy and dependency in the proposal.</p></details>
+        <p>Local language patterns suggest terms and questions. Your description stays in this tab until you choose to open it in Studio.</p>
+        <div class="case-actions"><button class="button primary" type="submit" disabled>Generate my proposal</button><button class="button" type="button" id="case-example" disabled>Use the library example</button></div>
+      </form>
+      <p id="case-status" role="status"></p>
+      <div id="case-output" hidden>
+        <h2 id="proposal-title" tabindex="-1">Your proposed model</h2>
+        <div id="proposal-panels"></div>
+        <p>Opening Studio sends this draft to your private workspace for review. You can also download the model for local use.</p>
+        <div class="case-actions"><button class="button primary" id="case-open">Review in Studio</button><button class="button" id="case-download">Download draft JSON</button></div>
+      </div>
+      <noscript><p>Enable JavaScript to generate your own draft. The worked example below is available to read.</p></noscript>
+    </section>
     <section class="topic-copy" aria-labelledby="layer-title">
       <h2 id="layer-title">Four questions to ask before you rely on the data</h2>
       <p>Suppose Finance and the project office both export a field called WBS. Both files contain 0017. Before joining the records, agree on the answers.</p>
