@@ -13,9 +13,11 @@ for(const link of document.querySelectorAll('a[data-second]')){
 function openLinkedChapter() {
   const chapter = document.querySelector('[data-chapter="agent-ready"]');
   if (location.hash === '#agent-ready' && chapter) {
+    film.preload = 'auto';
     film.currentTime = Number(chapter.dataset.second);
   }
 }
+if (location.hash === '#agent-ready') film.preload = 'auto';
 if (film.readyState >= HTMLMediaElement.HAVE_METADATA) {
   openLinkedChapter();
 } else {
