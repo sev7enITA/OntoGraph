@@ -125,8 +125,13 @@ $('export').onclick=()=>{
 window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue='';}});
 $('navigation').onsubmit=e=>{e.preventDefault();const dest=new URL(location.href);dest.searchParams.set('workspace',new FormData(e.target).get('workspace'));location.assign(dest);};
 $('navigation').elements.workspace.value=workspace;
-api('bootstrap').then(data=>{
-  boot=data;model=data.model;revision=data.revision;$('controls').hidden=false;
+api('bootstrap').then(async data=>{
+  boot=data;
+  const prepare=data.starter && data.editable;
+  const draft=prepare ? await api('prepare',{}) : data;
+  model=draft.model;revision=draft.revision;$('controls').hidden=false;
   $('asof').hidden=!boot.editable;$('import').disabled=!boot.editable;$('import-label').hidden=!boot.editable;
-  refreshModel();notice(boot.editable?'':t('Read-only access.','当前为只读访问。'));
+  refreshModel();
+  const ready=prepare ? t('Starter model saved in this workspace.','入门模型已保存至此工作区。') : '';
+  notice(boot.editable ? ready : t('Read-only access.','当前为只读访问。'));
 }).catch(err=>notice(err.message));

@@ -17,8 +17,8 @@ def studio_handoff(case, data, studio_topic, lang):
         companion = (f'\n      <p class="journey-option"><a href="{extra_file}" download>'
                      f'{escape(extra_label[lang])} <code>{Path(extra_file).name}</code></a></p>')
     language = t("en", "zh-Hans")
-    when_online = t("If you are asked to sign in, sign in first, then reopen the online Studio link below to enter this case’s workspace. With edit access, activate Import model using Enter or a click and choose the downloaded JSON. Save draft when you want to keep your changes.",
-                    "如果系统要求登录，请先登录，再打开下方的在线工作台链接，即可进入此场景的工作区。具备编辑权限时，按 Enter 或点击“导入模型”，再选择已下载的 JSON。需要保留改动时再保存草稿。")
+    when_online = t("Sign in if prompted. Studio opens this case with the starter model in your private draft if you can edit. If you already saved a draft for this case, Studio reopens that draft.",
+                    "如有提示，请登录。具备编辑权限时，工作台会打开此场景并将入门模型载入您的私有草稿。如果此前已保存此场景的草稿，工作台会重新打开该草稿。")
     return f'''    <section class="journey-handoff" id="model" aria-labelledby="model-title">
       <h2 id="model-title">{t("Open the model in Studio", "在工作台打开模型")}</h2>
       <p>{escape(data["check"][lang])}</p>
@@ -26,6 +26,7 @@ def studio_handoff(case, data, studio_topic, lang):
       <div class="journey-download"><a class="button primary" href="{model}" download>{download} <code>{filename}</code></a></div>{companion}
       <h3>{t("Online Studio", "在线工作台")}</h3>
       <p>{when_online}</p>
+      <p>{t("Viewers can open the model in read-only mode.", "仅有查看权限的用户可以只读方式打开模型。")}</p>
       <p>{href(t("Open this case in online Studio", "在在线工作台打开此场景"), f"/OntoGraph/decisions/?lang={language}&workspace=journey-{case}")}</p>
       <h3>{t("Standalone Studio", "独立版工作台")}</h3>
       <p>{t("From your local OnToGraPh checkout, replace the filename with the full path to your downloaded file and run: Open Semantic Studio at http://127.0.0.1:8765/governance.", "在本地 OnToGraPh 代码目录运行下方命令。将文件名替换为已下载文件的完整路径。打开 http://127.0.0.1:8765/governance 进入语义工作台。")}</p>

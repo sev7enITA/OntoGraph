@@ -1,6 +1,7 @@
 <?php
 // Included by the existing Studio gateway after it loads its private upstream configuration.
 declare(strict_types=1);
+require_once __DIR__ . '/journey.php';
 function decisionError(int $status, string $message): never {
     http_response_code($status);
     header('Content-Type: application/json; charset=utf-8');
@@ -11,6 +12,9 @@ $prefix = '/OntoGraph/decisions/';
 $route = substr(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), strlen($prefix));
 $api = str_starts_with($route, 'api/');
 $method = $_SERVER['REQUEST_METHOD'];
+$workspace = $_GET['workspace'] ?? 'wbs';
+if (!is_string($workspace) || !preg_match('/^[a-z][a-z0-9_-]{0,63}$/D',$workspace)) decisionError(400,'Invalid workspace ID.');
+$case = studioJourneyCase($workspace);
 $session = $_COOKIE['ontograph_session'] ?? '';
 if (is_string($session) && preg_match('/^[a-zA-Z0-9_-]{20,150}$/D', $session)) {
     $check = curl_init($config['origin'].'/OntoGraph/api/auth/session');
@@ -28,7 +32,12 @@ if (is_string($session) && preg_match('/^[a-zA-Z0-9_-]{20,150}$/D', $session)) {
 $user = $identity['user'] ?? null;
 if (!is_array($user) || empty($user['id'])) {
     if ($api) decisionError(401,'Sign in to Studio.');
-    header('Location: /OntoGraph/login'.(($_GET['lang'] ?? '')==='zh-Hans'?'?lang=zh-Hans':''),true,303);
+    $locale = ($_GET['lang'] ?? '') === 'zh-Hans' ? 'zh-Hans' : 'en';
+    $query = $locale === 'zh-Hans' ? ['lang' => $locale] : [];
+    if ($route === '' && $case !== null) {
+        $query = ['lang' => $locale, 'journey' => $case];
+    }
+    header('Location: /OntoGraph/login'.($query ? '?'.http_build_query($query) : ''),true,303);
     exit;
 }
 header('Referrer-Policy: no-referrer');
@@ -45,9 +54,7 @@ if (!$api) {
     exit;
 }
 $operation = substr($route,4);
-if (!in_array($operation,['bootstrap','save','basis','impact','validate'],true)) decisionError(404,'Unknown operation.');
-$workspace = $_GET['workspace'] ?? 'wbs';
-if (!is_string($workspace) || !preg_match('/^[a-z][a-z0-9_-]{0,63}$/D',$workspace)) decisionError(400,'Invalid workspace ID.');
+if (!in_array($operation,['bootstrap','prepare','save','basis','impact','validate'],true)) decisionError(404,'Unknown operation.');
 $editable = in_array($user['role'] ?? '', ['admin','editor','reviewer'],true);
 $payload = [];
 if ($operation === 'bootstrap') {
@@ -57,7 +64,8 @@ if ($operation === 'bootstrap') {
     $csrf = $identity['csrfToken'] ?? '';
     if (!is_string($csrf) || $csrf === '' || !hash_equals($csrf, $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '') ||
         ($_SERVER['HTTP_SEC_FETCH_SITE'] ?? '') === 'cross-site') decisionError(403,'Invalid request token.');
-    if ($operation === 'save' && !$editable) decisionError(403,'A Studio editor or reviewer role is required.');
+    if (in_array($operation, ['prepare', 'save'], true) && !$editable) decisionError(403,'A Studio editor or reviewer role is required.');
+    if ($operation === 'prepare' && $case === null) decisionError(404,'Unknown guided case.');
     if (strtolower(explode(';',$_SERVER['CONTENT_TYPE'] ?? '')[0])!=='application/json') decisionError(415,'Expected JSON.');
     $raw=file_get_contents('php://input',false,null,0,5*1024*1024+1);
     if ($raw === false || strlen($raw)>5*1024*1024) decisionError(413,'Request too large.');

@@ -21,7 +21,7 @@ Copilot 路径提供一份可选的[培训术语表 CSV](https://openontograph.o
 
 ## 导入并保存草稿
 
-- **在线工作台。** 打开案例模型步骤中的在线工作台链接。如果系统要求登录，请先登录，再返回案例页面重新打开此链接，以进入该案例的命名工作区。具备编辑权限时，按 Enter 或点击**导入模型**，并选择已下载的 JSON。点击**保存草稿**可将改动保存至账户。
+- **在线工作台。** 打开案例模型步骤中的工作台链接，如有提示请登录。工作台会直接打开该场景。有编辑权限的用户首次进入时，入门模型会保存为私有草稿。再次进入时，会打开最近保存的草稿。仅有查看权限的用户可只读查看模型。编辑后，如需保留更改，请选择**保存草稿**。
 - **本地工作台。** 在代码仓库根目录运行 `python3 -m ontograph studio`，进入语义工作台（**Semantic Studio**），选择导入（**Import**）。也可运行 `python3 -m ontograph studio --model /path/to/model.json`，在启动时直接载入已下载的文件。检查对象与关系，修改后选择验证（**Validate**）和保存版本（**Save version**）。[本地工作台](http://127.0.0.1:8765/governance) · [工作台文档（英文）](https://github.com/sev7enITA/OntoGraph/wiki/Visual-Studio)
 
 [简体中文 Wiki](https://github.com/sev7enITA/OntoGraph/wiki/Guided-Journey-zh-Hans) · [English Wiki](https://github.com/sev7enITA/OntoGraph/wiki/Guided-Journey)

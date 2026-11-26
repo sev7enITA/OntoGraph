@@ -16,7 +16,7 @@ GROUPS = (
     ("theory", ("The Theory", "理论基础"), home_topics_theory.PAGES),
     ("apply", ("Apply It", "动手实践"), home_topics_apply.PAGES),
     ("work-with-us", ("Work With Us", "参与合作"), dict(list(home_topics_project.PAGES.items())[:5])),
-    ("company", ("Company", "关于项目"), dict(list(home_topics_project.PAGES.items())[5:])),
+    ("about", ("About OnToGraPh", "关于 OnToGraPh"), dict(list(home_topics_project.PAGES.items())[5:])),
 )
 
 
@@ -269,7 +269,7 @@ def add_home_links(path, page_ids, lang):
     updated = re.sub(r'(<details class="route-topic" id="([a-z-]+)">\s*<summary>([^<]+)</summary>\s*<p>[^<]+</p>\s*<ul>)', add, raw)
     if found != page_ids:
         raise ValueError(f"Topic pages and home cards disagree in {path}: {found}")
-    path.write_text(updated.replace("/assets/home-directory.css?v=2", "/assets/home-directory.css?v=3"))
+    path.write_text(re.sub(r"/assets/home-directory\.css\?v=\d+", "/assets/home-directory.css?v=4", updated))
 
 
 def add_sitemap(page_ids):

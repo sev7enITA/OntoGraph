@@ -248,7 +248,7 @@ PAGES = {
         ],
     },
     "about-project": {
-        "title": ("About OnToGraPh", "关于 OnToGraPh"),
+        "title": ("Project origins", "项目缘起"),
         "lead": (
             "Fabrizio Degni created OnToGraPh to connect the meaning of data to the decisions that applications actually make.",
             "Fabrizio Degni 创建 OnToGraPh，目的是将数据含义与应用实际作出的决策联系起来。",

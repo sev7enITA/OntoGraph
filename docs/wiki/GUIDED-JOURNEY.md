@@ -21,7 +21,7 @@ The Copilot route includes an optional [training glossary CSV](https://openontog
 
 ## Import and keep a draft
 
-- **Online Studio.** Open the Studio link in the case’s model step. If asked to sign in, sign in first, return to the case page and open that link again to enter its named workspace. With editing access, activate **Import model** using Enter or a click and choose the downloaded JSON. **Save draft** keeps your changes under your account.
+- **Online Studio.** Open the Studio link in the case’s model step and sign in if prompted. Studio opens that case directly. An editor’s first visit saves the starter as a private draft. Return visits reopen the latest saved draft. Viewers can inspect the model in read-only mode. Choose **Save draft** after any edits you want to keep.
 - **Local Studio.** From the repository root, run `python3 -m ontograph studio`, open **Semantic Studio** and use **Import**. Alternatively, load a downloaded file at startup with `python3 -m ontograph studio --model /path/to/model.json`. Inspect the objects and relationships, then choose **Validate** and **Save version** when you have made a change. [Local Studio](http://127.0.0.1:8765/governance) · [Studio documentation](https://github.com/sev7enITA/OntoGraph/wiki/Visual-Studio)
 
 [GitHub Wiki](https://github.com/sev7enITA/OntoGraph/wiki/Guided-Journey) · [简体中文 Wiki](https://github.com/sev7enITA/OntoGraph/wiki/Guided-Journey-zh-Hans)
