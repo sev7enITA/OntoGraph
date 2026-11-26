@@ -6,7 +6,7 @@
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-dffb78?labelColor=101419)](#run-the-engine-and-studio)
 [![Project site](https://img.shields.io/badge/Website-openontograph.org-dffb78?labelColor=101419)](https://openontograph.org/)
 
-**OnToGraPh is a standalone semantic governance engine.** It connects dictionaries, taxonomies and ontology relationships to versioned rules, human approval and tests of downstream behavior. A data steward can trace a field back to its source, a reviewer can decide whether a rule should be released, and an operator can see which applications actually applied it.
+**OnToGraPh is an independent open-source framework for semantic governance.** It began as the shared ontology layer for PALO Framework and PolicyWatcher. It connects dictionaries, taxonomies and ontology relationships to versioned rules, human approval and tests of downstream behavior. A data steward can trace a field back to its source, a reviewer can decide whether a rule should be released, and an operator can see which applications actually applied it.
 
 [Project website](https://openontograph.org/) · [简体中文](https://openontograph.org/zh/) · [Wiki](https://github.com/sev7enITA/OntoGraph/wiki) · [Market and standards](docs/wiki/MARKET-AND-STANDARDS.md) · [Issues](https://github.com/sev7enITA/OntoGraph/issues)
 
@@ -14,7 +14,7 @@
 
 [Agent-ready ontology · watch WBS 0017 at 0:45](https://openontograph.org/launch/#agent-ready) · [面向智能体的本体](https://openontograph.org/zh/launch/#agent-ready)
 
-[Watch the five-minute launch film](https://openontograph.org/launch/) · [简体中文字幕](https://openontograph.org/zh/launch/) · [Download MP4](https://openontograph.org/launch/ontograph-launch-en.mp4?v=agent-ready)
+[Watch the five-minute launch film](https://openontograph.org/launch/) · [简体中文字幕](https://openontograph.org/zh/launch/) · [Download MP4](https://openontograph.org/launch/ontograph-launch-en.mp4?v=project-film)
 
 [Hidden Risks of Vibe Coding](https://openontograph.org/hidden-risks/) · [氛围编程的隐性风险](https://openontograph.org/zh/hidden-risks/) · Describe your app, inspect four proposals and open its private Studio draft. [Start my case](https://openontograph.org/hidden-risks/#my-case) · [描述我的应用](https://openontograph.org/zh/hidden-risks/#my-case).
 
@@ -108,7 +108,11 @@ The reference implementation uses one local registry per workspace. Aurora 21 us
 | [Examples](examples/) and [tests](tests/) | Reference fixtures, the optional hub adapters and regression checks |
 | [Website](site/) and [brand assets](assets/brand/) | Source for the bilingual public site, pilot and project wordmark |
 
-OnToGraPh was created by **Fabrizio Degni**. If you find an issue or want to propose an example, include the affected version, steps and the expected result. [Open an issue](https://github.com/sev7enITA/OntoGraph/issues/new) · [Citation metadata](CITATION.cff)
+If you find an issue or want to propose an example, include the affected version, steps and the expected result. [Open an issue](https://github.com/sev7enITA/OntoGraph/issues/new) · [Citation metadata](CITATION.cff)
+
+## License
+
+The [MIT License](LICENSE) covers the original OnToGraPh software and its accompanying software documentation. Bundled third-party components retain their own licenses. The grant for the code does not extend to project logos, photographs, films or voice recordings.
 
 ## Assess the impact of a relationship change
 

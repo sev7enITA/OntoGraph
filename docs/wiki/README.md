@@ -6,6 +6,10 @@
 
 OnToGraPh links the source excerpt, the affected control, the approval and the delivered version to the results observed in each application. It is designed for data governance, AI governance and operational risk owners who need to close a change across systems with different owners.
 
+OnToGraPh began as the shared ontology layer for PALO Framework and PolicyWatcher. Today it is an independent open-source framework. You can model your own domain, review its rules and test them in your applications. [MIT License](https://github.com/sev7enITA/OntoGraph/blob/main/LICENSE).
+
+OnToGraPh 最初为 PALO Framework 和 PolicyWatcher 提供共享本体层，如今已成为可独立运行的开源框架。你可以为自己的业务领域建模、审核规则，并在自己的应用中验证规则的实际效果。 [MIT 许可证](https://github.com/sev7enITA/OntoGraph/blob/main/LICENSE)。
+
 ## Start here
 
 - [Hidden Risks of Vibe Coding](https://openontograph.org/hidden-risks/) · [氛围编程的隐性风险](https://openontograph.org/zh/hidden-risks/). [Field guide](https://github.com/sev7enITA/OntoGraph/wiki/Hidden-Risks) · [中文指南](https://github.com/sev7enITA/OntoGraph/wiki/Hidden-Risks-zh-Hans).

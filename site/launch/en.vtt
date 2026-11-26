@@ -198,22 +198,25 @@ OntoGraph connects a reviewed meaning to the behavior observed in the
 00:04:00.265 --> 00:04:04.882
 receiving application, including what happens after a rule is withdrawn.
 
-00:04:06.832 --> 00:04:09.092
-You can run the whole case on its own.
+00:04:06.766 --> 00:04:10.666
+OnToGraPh began as the shared ontology layer for PALO Framework and
 
-00:04:09.410 --> 00:04:14.448
+00:04:10.666 --> 00:04:14.565
+PolicyWatcher. Today this open-source framework runs independently.
+
+00:04:14.809 --> 00:04:18.667
 If an external policy changes, PolicyWatcher can supply source evidence.
 
-00:04:14.766 --> 00:04:19.274
+00:04:18.911 --> 00:04:22.364
 If a decision needs a governance review, PALO can receive the case.
 
-00:04:19.592 --> 00:04:23.662
+00:04:22.607 --> 00:04:25.726
 In the recorded integration pilot, PolicyWatcher was read
 
-00:04:23.662 --> 00:04:28.090
+00:04:25.726 --> 00:04:29.117
 only and a local PALO case remained open for a human decision.
 
-00:04:28.407 --> 00:04:31.868
+00:04:29.360 --> 00:04:32.011
 Opening an optional path sends nothing from your draft.
 
 00:04:33.830 --> 00:04:36.998

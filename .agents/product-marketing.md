@@ -4,7 +4,9 @@ Document version v1 · 2026-11-25
 
 ## Product
 
-OntoGraph verifies how applications behave after a shared rule or definition changes. It links the source, scope, approval and release to the observations made on each application. A withdrawn release can still be active on a consumer, so withdrawal is verified separately.
+OnToGraPh is an independent open-source framework. It began as the shared ontology layer for PALO Framework and PolicyWatcher. The original software is MIT-licensed.
+
+OnToGraPh verifies how applications behave after a shared rule or definition changes. It links the source, scope, approval and release to the observations made on each application. A withdrawn release can still be active on a consumer, so withdrawal is verified separately.
 
 The current offer is an offline reference implementation and a scoped pilot proposal. The core runtime uses Python and SQLite. A possible business model is a fixed-scope paid pilot, followed by support and connector maintenance. Pricing and willingness to pay require customer evidence.
 

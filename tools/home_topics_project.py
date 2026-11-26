@@ -12,7 +12,7 @@ STUDIO = (
     ("Sign in to Semantic Studio", "登录语义工作台"),
     "/OntoGraph/decisions/?lang=en", "/OntoGraph/decisions/?lang=zh-Hans",
 )
-EMAIL = (("Email Fabrizio", "给 Fabrizio 发邮件"), CONTACT, CONTACT)
+EMAIL = (("Email the project", "通过邮件联系项目"), CONTACT, CONTACT)
 SOURCE = (("Browse the public repository", "浏览公共代码仓库"), GITHUB, GITHUB)
 ISSUE_LINK = (("Open GitHub Issues", "打开 GitHub Issues"), ISSUES, ISSUES)
 
@@ -214,8 +214,8 @@ PAGES = {
     "contact-project": {
         "title": ("Contact the project", "联系项目"),
         "lead": (
-            "Reach Fabrizio Degni for a pilot or research discussion. Use GitHub Issues for a technical problem others should be able to reproduce.",
-            "如需讨论试点或研究合作，请联系 Fabrizio Degni。对于适合公开复现的技术问题，请使用 GitHub Issues。",
+            "Get in touch to discuss a pilot or research question. Use GitHub Issues for a technical problem others should be able to reproduce.",
+            "欢迎联系本项目，讨论试点或研究合作。对于适合公开复现的技术问题，请使用 GitHub Issues。",
         ),
         "sections": [
             (
@@ -241,8 +241,8 @@ PAGES = {
             ),
         ],
         "links": [
-            (("io@fabriziodegni.com", "io@fabriziodegni.com"), CONTACT, CONTACT),
-            (("Find Fabrizio on LinkedIn", "在 LinkedIn 联系 Fabrizio"), "https://www.linkedin.com/in/fdegni/", "https://www.linkedin.com/in/fdegni/"),
+            EMAIL,
+            (("Contact via LinkedIn", "通过 LinkedIn 联系"), "https://www.linkedin.com/in/fdegni/", "https://www.linkedin.com/in/fdegni/"),
             (("Collaboration page", "合作页面（英文）"), PORTFOLIO + "/collaborate/#contact", PORTFOLIO + "/collaborate/#contact"),
             ISSUE_LINK,
         ],
@@ -250,8 +250,8 @@ PAGES = {
     "about-project": {
         "title": ("Project origins", "项目缘起"),
         "lead": (
-            "Fabrizio Degni created OnToGraPh to connect the meaning of data to the decisions that applications actually make.",
-            "Fabrizio Degni 创建 OnToGraPh，目的是将数据含义与应用实际作出的决策联系起来。",
+            "OnToGraPh began as the shared ontology layer for PALO Framework and PolicyWatcher. Today it is an independent open-source framework. You can model your own domain, review its rules and test them in your applications.",
+            "OnToGraPh 最初为 PALO Framework 和 PolicyWatcher 提供共享本体层，如今已成为可独立运行的开源框架。你可以为自己的业务领域建模、审核规则，并在自己的应用中验证规则的实际效果。",
         ),
         "sections": [
             (
@@ -270,7 +270,7 @@ PAGES = {
             ),
         ],
         "links": [
-            (("Meet Fabrizio and explore related projects", "认识 Fabrizio 并查看相关项目"), "/#behind", "/zh/#behind"),
+            (("Explore the related projects", "探索相关项目"), "/#behind", "/zh/#behind"),
             (("PALO Framework", "PALO Framework"), "https://paloframework.org/", "https://paloframework.org/"),
             (("PolicyWatcher", "PolicyWatcher"), "https://policywatcher.online/", "https://policywatcher.online/"),
             (("Research and publications", "研究与出版物（英文）"), PORTFOLIO + "/research/", PORTFOLIO + "/research/"),
@@ -339,8 +339,8 @@ PAGES = {
     "access-and-reuse": {
         "title": ("Project access and reuse", "项目访问与复用"),
         "lead": (
-            "Find the public material, the authenticated workspace and the right contact for reuse questions.",
-            "了解如何访问公开材料和需要登录的工作区，以及就复用问题应联系谁。",
+            "Read the software license, reproduce a reference case or access the hosted workspace.",
+            "了解软件许可、如何复现参考案例，以及如何访问托管工作区。",
         ),
         "sections": [
             (
@@ -351,10 +351,10 @@ PAGES = {
                 ),
             ),
             (
-                ("Ask about reuse or hosted access", "咨询复用或托管访问"),
+                ("Use the code under MIT", "按 MIT 许可证使用代码"),
                 (
-                    "For redistribution, incorporation into another product or a hosted deployment, contact the project owner with the components, versions and intended audience. Access to the online evidence workspace is managed through the Studio sign-in.",
-                    "如计划再分发、集成到其他产品或进行托管部署，请联系项目负责人，说明涉及的组件、版本及目标用户。在线证据工作区的访问通过工作台登录管理。",
+                    "The OnToGraPh code is available under the MIT License. You can use it commercially, modify it and redistribute it. Include the copyright and permission notices with copies or substantial portions of the code. Third-party components retain their own licenses. The hosted Studio requires sign-in.",
+                    "OnToGraPh 项目代码采用 MIT 许可证，可用于商业用途，也可修改和再分发。复制全部或实质性部分代码时须保留版权和许可声明。第三方组件遵循各自的许可证。 托管的 Studio 需要登录。",
                 ),
             ),
             (
@@ -367,6 +367,7 @@ PAGES = {
         ],
         "links": [
             SOURCE,
+            (("Read the MIT License", "阅读 MIT 许可证"), DOCS + "LICENSE", DOCS + "LICENSE"),
             (("View project citation metadata", "查看项目引用信息"), DOCS + "CITATION.cff", DOCS + "CITATION.cff"),
             PILOT,
             EMAIL,

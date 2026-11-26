@@ -1,6 +1,6 @@
 # OnToGraPh
 
-> OnToGraPh is a standalone semantic governance framework by Fabrizio Degni. It connects dictionaries, taxonomies, controls and application observations to a frozen release. It runs locally with Python and SQLite.
+> OnToGraPh is an independent open-source framework for semantic governance. It began as the shared ontology layer for PALO Framework and PolicyWatcher. The original software is MIT-licensed. It connects dictionaries, taxonomies, controls and application observations to a frozen release. It runs locally with Python and SQLite.
 
 ## Project and evidence
 
