@@ -8,6 +8,7 @@ OnToGraPh links the source excerpt, the affected control, the approval and the d
 
 ## Start here
 
+- [Hidden Risks of Vibe Coding](https://openontograph.org/hidden-risks/) · [氛围编程的隐性风险](https://openontograph.org/zh/hidden-risks/). [Field guide](https://github.com/sev7enITA/OntoGraph/wiki/Hidden-Risks) · [中文指南](https://github.com/sev7enITA/OntoGraph/wiki/Hidden-Risks-zh-Hans).
 - **Choose a case, try the relevant tools and download a Studio model.** [English](https://openontograph.org/journey/) · [简体中文](https://openontograph.org/zh/journey/) · [Workflow guide](GUIDED-JOURNEY.md) · [简体中文文档](GUIDED-JOURNEY.zh-Hans.md).
 - [Try the interactive pilot](https://openontograph.org/pilot/) or [简体中文](https://openontograph.org/pilot/zh/). Follow the PolicyWatcher-to-PALO case or switch to the standalone scenario.
 - [Inspect Aurora 21 evidence](https://openontograph.org/demo/). Compare what the simulated CRM and PMS report with their observed decisions.

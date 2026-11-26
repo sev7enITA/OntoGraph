@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>氛围编程的隐性风险 | OnToGraPh</title>
+  <meta name="description" content="同一个 WBS 编码在两个部门有不同含义。试试看，定义、分类、关系和证据怎样影响应用计入哪些记录。">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/zh/hidden-risks/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/hidden-risks/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/hidden-risks/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/hidden-risks/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="氛围编程的隐性风险 | OnToGraPh">
+  <meta property="og:description" content="同一个 WBS 编码在两个部门有不同含义。试试看，定义、分类、关系和证据怎样影响应用计入哪些记录。">
+  <meta property="og:url" content="https://openontograph.org/zh/hidden-risks/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:image" content="https://openontograph.org/assets/on-tograph-logo.png">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <link rel="stylesheet" href="/assets/journey.css">
+  <link rel="stylesheet" href="/assets/hidden-risks.css">
+  <script defer src="/assets/hidden-risks.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">跳转至正文</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/zh/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a class="topic-language" href="/hidden-risks/" hreflang="en" lang="en">English</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main" tabindex="-1">
+    <nav class="topic-path" aria-label="面包屑导航"><a href="/zh/">OnToGraPh 首页</a></nav>
+    <header class="topic-hero">
+      <h1>氛围编程的隐性风险</h1>
+      <p>用 AI 搭建的借阅应用扫描 ISBN 后，将书标为已借出。另一位读者拿着第二本相同版本的书来到柜台，还能借走吗？</p>
+      <p>如果只提示 AI“把这本书标为已借出”，就把“这本书”指什么的决定留给了 AI。ISBN 标识图书版本，每笔借阅则对应一本具体的馆藏书。在 OnToGraPh 中，熟悉借阅规则的人可以写清这层区别，开发者可以用模型草案验证规则。</p>
+      <nav class="topic-path" aria-label="本页导航"><a href="#risk-lab">试用 WBS 示例</a><span aria-hidden="true"> / </span><a href="/zh/journey/personal-library/">为借阅场景建模</a></nav>
+    </header>
+    <section class="topic-copy" aria-labelledby="layer-title">
+      <h2 id="layer-title">使用数据做决定前，先问四个问题</h2>
+      <p>假设财务部门和项目管理办公室导出的文件中都有一个名为 WBS 的字段，也都有编码 0017。在按编码合并记录前，先就以下问题达成共识。</p>
+      <div class="journey-grid">
+        <div class="journey-card"><h3>数据字典</h3><p><strong>这个字段在这里是什么意思？</strong></p><p>将 0017 按文本保存，避免导入文件时丢失前导零。记录各部门由谁负责定义这个编码。</p></div>
+        <div class="journey-card"><h3>分类体系</h3><p><strong>这条记录应归入哪一类？</strong></p><p>将财务核算对象和项目管理办公室（PMO）的工作包分开归类。为暂时无法归类的记录安排人工复核。</p></div>
+        <div class="journey-card"><h3>本体</h3><p><strong>这个标识符指的是什么？</strong></p><p>把每个部门的编码关联到它所指的业务对象。仅凭写法相同，无法判定两条记录指向同一个对象。</p></div>
+        <div class="journey-card"><h3>数据管护</h3><p><strong>怎样确认变更已经生效？</strong></p><p>保留来源、负责人和生效版本。规则发布或撤回后，请接收方核对自己应用的实际输出。</p></div>
+      </div>
+    </section>
+    <section id="risk-lab" class="topic-lab" data-risk-lab aria-labelledby="lab-title">
+      <h2 id="lab-title">这里的 WBS 0017 指什么？</h2>
+      <p>保留同一个模拟编码，切换记录所属部门和源文件。对比仅按编码匹配和同时核对部门与来源的结果。本示例在浏览器中运行。</p>
+      <div data-risk-controls></div>
+      <div data-risk-result><p><strong>财务部门，有来源证据。</strong> 按照财务部门的定义，0017 指一个核算对象。在项目管理办公室，同一编码指一个工作包。只看编码无法判断应取哪个含义。</p></div>
+    </section>
+    <section class="topic-copy" aria-labelledby="pilot-title">
+      <h2 id="pilot-title">工作簿确认收到了规则。它实际计入了多少预算？</h2>
+      <p>在有记录可查的 WBS 试点中，项目工作簿确认收到按部门区分的新规则后，符合条件的预算仍显示为 2,000 欧元。实际应用规则后，同一工作簿显示为 800 欧元。撤回规则后的首次核对仍读到 800 欧元。后来工作簿离线，团队无法核实其状态。恢复访问后，重新读到的预算为 0 欧元，才确认这些测试记录已不再计入。</p>
+      <p>试点在本地运行 Beancount 和 LibreOffice Calc，使用模拟数据，由脚本执行审核步骤。 <a href="/wbs/zh/">查看记录中的应用输出</a></p>
+    </section>
+    <section class="journey-handoff" aria-labelledby="draft-title">
+      <h2 id="draft-title">带着一个业务判断进入 Studio</h2>
+      <h3>如果你负责业务判断</h3>
+      <p>选一个团队成员理解不一致的术语。写下一条应该计入的记录、一条应该暂缓并复核的记录，以及发生分歧时由谁裁定。</p>
+      <h3>如果你负责开发应用</h3>
+      <p>打开场景草案，用场景清单核对映射并运行参考用例。再查看自己的应用实际做了什么，记录观察结果。草案检查通过，只表明被测模型在这些用例中符合预期。</p>
+      <div class="journey-grid">
+        <a class="button primary" href="/zh/journey/department-wbs/">开始部门 WBS 场景</a>
+        <a class="button" href="/guide/zh-Hans.html">阅读实用指南</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

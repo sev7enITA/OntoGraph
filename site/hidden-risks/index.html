@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Hidden Risks of Vibe Coding | OnToGraPh</title>
+  <meta name="description" content="Try one WBS code in two departments. See how definitions, categories, relationships and evidence can change what an app counts.">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/hidden-risks/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/hidden-risks/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/hidden-risks/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/hidden-risks/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Hidden Risks of Vibe Coding | OnToGraPh">
+  <meta property="og:description" content="Try one WBS code in two departments. See how definitions, categories, relationships and evidence can change what an app counts.">
+  <meta property="og:url" content="https://openontograph.org/hidden-risks/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:image" content="https://openontograph.org/assets/on-tograph-logo.png">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <link rel="stylesheet" href="/assets/journey.css">
+  <link rel="stylesheet" href="/assets/hidden-risks.css">
+  <script defer src="/assets/hidden-risks.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">Skip to content</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a class="topic-language" href="/zh/hidden-risks/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main" tabindex="-1">
+    <nav class="topic-path" aria-label="Breadcrumb"><a href="/">OnToGraPh home</a></nav>
+    <header class="topic-hero">
+      <h1>Hidden Risks of Vibe Coding</h1>
+      <p>Your AI-built lending app scans an ISBN and marks the book as on loan. A reader brings a second copy to the desk. Can they borrow it?</p>
+      <p>A prompt like “mark this book as borrowed” leaves the AI to choose what “book” means. An ISBN identifies the edition. A loan belongs to one physical copy. With OnToGraPh, the person who knows the lending policy can define that distinction, and the developer can test it against the draft model.</p>
+      <nav class="topic-path" aria-label="On this page"><a href="#risk-lab">Try the WBS example</a><span aria-hidden="true"> / </span><a href="/journey/personal-library/">Model the library case</a></nav>
+    </header>
+    <section class="topic-copy" aria-labelledby="layer-title">
+      <h2 id="layer-title">Four questions to ask before you rely on the data</h2>
+      <p>Suppose Finance and the project office both export a field called WBS. Both files contain 0017. Before joining the records, agree on the answers.</p>
+      <div class="journey-grid">
+        <div class="journey-card"><h3>Dictionary</h3><p><strong>What does this field mean here?</strong></p><p>Keep 0017 as text so a file import preserves its leading zeros. Record who defines it in each department.</p></div>
+        <div class="journey-card"><h3>Taxonomy</h3><p><strong>Which group does this record belong to?</strong></p><p>Classify a Finance posting object and a PMO work package separately. Give an unclassified record a review path.</p></div>
+        <div class="journey-card"><h3>Ontology</h3><p><strong>What does this identifier refer to?</strong></p><p>Link each department’s code to the business object it identifies. A shared spelling alone cannot establish that two records describe the same object.</p></div>
+        <div class="journey-card"><h3>Data stewardship</h3><p><strong>How would we know a change took effect?</strong></p><p>Keep the source, owner and effective version. Ask the receiving team to check its own output after a release or withdrawal.</p></div>
+      </div>
+    </section>
+    <section id="risk-lab" class="topic-lab" data-risk-lab aria-labelledby="lab-title">
+      <h2 id="lab-title">What does WBS 0017 mean here?</h2>
+      <p>Change the department and source file for the same synthetic code. Compare a match on the code alone with a rule that checks both inputs. This example runs in your browser.</p>
+      <div data-risk-controls></div>
+      <div data-risk-result><p><strong>Finance, source available.</strong> The Finance definition identifies 0017 as a posting object. In the project office the same code identifies a work package. A bare code leaves the choice unresolved.</p></div>
+    </section>
+    <section class="topic-copy" aria-labelledby="pilot-title">
+      <h2 id="pilot-title">The workbook acknowledged the rule. What did it count?</h2>
+      <p>In the recorded WBS pilot, the project workbook acknowledged the department-qualified rule while its eligible budget still showed €2,000. Once it applied the rule, that same workbook showed €800. After withdrawal, the first check still found €800. When the workbook went offline, the team could no longer verify its state. A fresh reading of €0 after recovery confirmed withdrawal for the test records.</p>
+      <p>The pilot ran Beancount and LibreOffice Calc locally with synthetic data and scripted reviews. <a href="/wbs/">Inspect the recorded application outputs</a></p>
+    </section>
+    <section class="journey-handoff" aria-labelledby="draft-title">
+      <h2 id="draft-title">Bring one decision into Studio</h2>
+      <h3>If you own the business decision</h3>
+      <p>Pick one term your team uses differently. Write down one record that should count, one that should be held for review and the person who can resolve a disagreement.</p>
+      <h3>If you build the app</h3>
+      <p>Open the case draft. Use its checklist to inspect the mapping and run the reference decisions. Then check what your own app actually did and record the result. A successful draft check only covers the model you tested.</p>
+      <div class="journey-grid">
+        <a class="button primary" href="/journey/department-wbs/">Start the department WBS case</a>
+        <a class="button" href="/guide/">Read the practical guide</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

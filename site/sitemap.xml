@@ -86,6 +86,18 @@
   </url>
   <url><loc>https://openontograph.org/wbs/</loc><xhtml:link rel="alternate" hreflang="en" href="https://openontograph.org/wbs/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/wbs/zh/"/></url>
   <url><loc>https://openontograph.org/wbs/zh/</loc><xhtml:link rel="alternate" hreflang="en" href="https://openontograph.org/wbs/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/wbs/zh/"/></url>
+  <url>
+    <loc>https://openontograph.org/hidden-risks/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://openontograph.org/hidden-risks/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/hidden-risks/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://openontograph.org/hidden-risks/"/>
+  </url>
+  <url>
+    <loc>https://openontograph.org/zh/hidden-risks/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://openontograph.org/hidden-risks/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/hidden-risks/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://openontograph.org/hidden-risks/"/>
+  </url>
   <!-- topics:start -->
   <url><loc>https://openontograph.org/explore/</loc><xhtml:link rel="alternate" hreflang="en" href="https://openontograph.org/explore/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/explore/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://openontograph.org/explore/"/></url>
   <url><loc>https://openontograph.org/zh/explore/</loc><xhtml:link rel="alternate" hreflang="en" href="https://openontograph.org/explore/"/><xhtml:link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/explore/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://openontograph.org/explore/"/></url>

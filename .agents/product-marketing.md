@@ -10,6 +10,8 @@ The current offer is an offline reference implementation and a scoped pilot prop
 
 ## Audience and jobs
 
+People who build with AI can start with one business decision and a counterexample. A business owner defines the term in context and the expected outcome. A developer can reuse that distinction in the model and check the receiving app. Use the two-copy library example for personal projects and the departmental WBS pilot for cross-application evidence. This positioning addresses an existing data risk that rapid prototyping can carry into production.
+
 | Role | Job to be done |
 | --- | --- |
 | Head of Data Governance, AI Governance or Operational Risk | Know whether a cross-application change can be closed with sufficient evidence |
