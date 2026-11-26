@@ -2,6 +2,10 @@
 
 书架上的两本书可以共用同一个 ISBN。如果借阅应用用 ISBN 记录可借状态，借出第一本时，第二本也可能显示为已借出。个人图书馆示例将版本、每一本实体书和借阅记录分别建模。[打开个人图书馆场景](https://openontograph.org/zh/journey/personal-library/)
 
+## 面向智能体的本体（Agent-ready ontology）
+
+“请将这笔费用记到 WBS 0017。”在财务部门，这个编码指记账对象；在项目管理办公室，它指工作包。影片中，智能体核对这两种含义，先问“你指的是哪个部门？”，并暂缓入账。这段示例对话展示了智能体如何使用模型。启用记账操作前，请在接收应用中测试缺少部门的情况。[从 0:45 观看示例](https://openontograph.org/zh/launch/#agent-ready) · [探索 WBS 场景](https://openontograph.org/zh/journey/department-wbs/)
+
 ## 可选集成路径
 
 四个引导场景、自定义应用流程和在线 Studio 都支持独立使用。展开“可选集成”，可在新标签页查看已记录的分支。PolicyWatcher 可提供只读政策变更证据；PALO 可接收案例并交由人工复核。打开这些链接会保留草稿，不会向这两个框架发送草稿内容。[来源证据接收](https://openontograph.org/pilot/zh/#policywatcher) · [人工复核交接](https://openontograph.org/pilot/zh/#palo) · [五分钟发布影片](https://openontograph.org/zh/launch/)

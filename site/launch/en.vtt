@@ -33,23 +33,29 @@ When I lend a book, I lend one physical copy.
 00:00:40.880 --> 00:00:43.893
 That distinction changes who gets to borrow the book.
 
-00:00:45.838 --> 00:00:49.959
-This is OntoGraph, an independent project by Fabrizio Degni.
+00:00:45.767 --> 00:00:48.127
+With OnToGraPh’s agent-ready ontology, an
 
-00:00:50.282 --> 00:00:54.427
-A business owner can describe the distinction in ordinary language.
+00:00:48.127 --> 00:00:50.891
+agent can check what a code means before acting.
 
-00:00:54.750 --> 00:00:58.596
-A developer can turn it into a model and run examples.
+00:00:51.135 --> 00:00:55.493
+Charge this expense to WBS 0017.
 
-00:00:58.919 --> 00:01:02.166
-A reviewer can follow a decision back to its source.
+00:00:55.737 --> 00:00:58.525
+In Finance, that code identifies a posting object.
 
-00:01:02.489 --> 00:01:06.107
-Start with one question your application has to answer,
+00:00:58.768 --> 00:01:01.385
+In the project office, it identifies a work package.
 
-00:01:06.107 --> 00:01:09.857
-and a case where the wrong definition changes the answer.
+00:01:01.629 --> 00:01:03.970
+The agent pauses and asks: Which department
+
+00:01:03.970 --> 00:01:06.311
+do you mean, Finance or the project office?
+
+00:01:06.555 --> 00:01:10.011
+The agent waits for your answer. The expense stays on hold.
 
 00:01:11.847 --> 00:01:16.286
 On the homepage, open Hidden Risks and choose Describe my app.

@@ -9,3 +9,16 @@ for(const link of document.querySelectorAll('a[data-second]')){
     film.play().catch(()=>{});
   });
 }
+
+function openLinkedChapter() {
+  const chapter = document.querySelector('[data-chapter="agent-ready"]');
+  if (location.hash === '#agent-ready' && chapter) {
+    film.currentTime = Number(chapter.dataset.second);
+  }
+}
+if (film.readyState >= HTMLMediaElement.HAVE_METADATA) {
+  openLinkedChapter();
+} else {
+  film.addEventListener('loadedmetadata', openLinkedChapter, {once: true});
+}
+window.addEventListener('hashchange', openLinkedChapter);

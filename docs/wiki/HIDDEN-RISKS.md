@@ -2,6 +2,10 @@
 
 Two physical copies on a shelf can share an ISBN. If a lending app uses ISBN as the key for availability, lending the first copy can also hide the second. The screen can show exactly what the developer asked it to show while the person at the shelf gets the wrong answer. The personal library starter models the edition, the individual copy and the loan. [Open the library case](https://openontograph.org/journey/personal-library/)
 
+## Agent-ready ontology
+
+“Charge this expense to WBS 0017.” Finance uses the code for a posting object. The project management office uses it for a work package. In the film, the agent checks those definitions, asks “Which department do you mean?” and holds the expense. This illustrative dialogue shows how an agent can use the model. Test the missing-department case in your receiving application before enabling a posting action. [Watch the scene at 0:45](https://openontograph.org/launch/#agent-ready) · [Explore the WBS case](https://openontograph.org/journey/department-wbs/)
+
 ## Optional integration paths
 
 The four guided cases, the personal app workflow and hosted Studio can all be used standalone. Expand **Optional integrations** to open a recorded branch in another tab. PolicyWatcher can provide read-only evidence for a policy change. PALO can receive a case for human review. Following either link leaves the draft in place and transmits none of its content to those frameworks. [Source intake](https://openontograph.org/pilot/#policywatcher) · [Review handoff](https://openontograph.org/pilot/#palo) · [Five-minute launch film](https://openontograph.org/launch/)
