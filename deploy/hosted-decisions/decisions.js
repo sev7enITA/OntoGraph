@@ -15,7 +15,8 @@ const labels={
 };
 for(const [id,pair] of Object.entries(labels)) $(id).textContent=t(...pair);
 const other=new URL(page); other.searchParams.set('lang',zh?'en':'zh-Hans');
-$('language').href=other; $('language').textContent=zh?'English':'简体中文'; $('back').href='../?lang='+(zh?'zh-Hans':'en');
+$('language').href=other; $('language').textContent=zh?'English':'简体中文';
+$('language').lang=$('language').hreflang=zh?'en':'zh-Hans'; $('back').href='../?lang='+(zh?'zh-Hans':'en');
 const notice=text=>{$('notice').textContent=text;};
 const elem=(tag,text)=>{const n=document.createElement(tag);n.textContent=text;return n;};
 function option(text,value){return new Option(text,value);}
@@ -107,6 +108,7 @@ $('save').onclick=async()=>{
     notice(t('Private draft saved. Registry publication requires separate authenticated reviews.','私有草稿已保存。登记发布需另行通过身份验证的审核。'));
   }catch(err){notice(err.message);}finally{writer=false;controls();}
 };
+$('import-label').onclick=()=>{ if(boot?.editable) $('import').click(); };
 $('import').onchange=async event=>{
   try{
     const file=event.target.files[0]; if(!file)return;

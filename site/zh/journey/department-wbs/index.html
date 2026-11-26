@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>对齐跨部门的 WBS 定义 | OnToGraPh</title>
+  <meta name="description" content="追踪同一个 WBS 编码在财务部门和 PMO 中引起的证据分歧、发布及撤回。">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/zh/journey/department-wbs/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/journey/department-wbs/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/journey/department-wbs/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/journey/department-wbs/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <link rel="stylesheet" href="/assets/journey.css">
+  <script defer src="/assets/topic-pages.js"></script>
+  <script defer src="/assets/journey.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">跳转至正文</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/zh/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a class="topic-language" href="/journey/department-wbs/" hreflang="en" lang="en">English</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main" tabindex="-1">
+    <nav class="topic-path" aria-label="面包屑导航"><a href="/zh/journey/">选择其他场景</a></nav>
+    <header class="topic-hero" id="case">
+      <h1>对齐跨部门的 WBS 定义</h1>
+      <p>追踪同一个 WBS 编码在财务部门和 PMO 中引起的证据分歧、发布及撤回。</p>
+      <nav class="journey-stages" aria-label="本场景步骤"><ol><li><a href="#case">了解场景</a></li><li><a href="#tools">试用工具</a></li><li><a href="#model">下载模型</a></li></ol></nav>
+    </header>
+    <section class="journey-practice" id="tools" aria-labelledby="tools-title">
+      <h2 id="tools-title">试用工具</h2>
+      <p><a href="/wbs/zh/">回放发布生效与撤回</a></p>
+      <p>试用工具后，请使用浏览器的返回按钮回到这里。</p>
+      <p>按顺序查看下列主题。每个主题都提供跳转到下一主题或模型的链接。</p>
+      <ol class="journey-topic-list">
+        <li><a href="/zh/explore/fit-check/?journey=department-wbs">OnToGraPh 适合我的场景吗？</a></li>
+        <li><a href="/zh/explore/relationship-impact/?journey=department-wbs">关系如何传递影响</a></li>
+        <li><a href="/zh/explore/constraint-check/?journey=department-wbs">定位决策瓶颈</a></li>
+        <li><a href="/zh/explore/dependency-diagnostic/?journey=department-wbs">诊断缺失能力</a></li>
+        <li><a href="/zh/explore/release-audit/?journey=department-wbs">审查发布和撤回</a></li>
+      </ol>
+      <p><a href="#model">继续到模型</a></p>
+    </section>
+    <section class="journey-handoff" id="model" aria-labelledby="model-title">
+      <h2 id="model-title">在工作台打开模型</h2>
+      <p>导入未裁决模型。查看已识别编码与 WBS 标识之间的映射，在记录裁决前比较财务与 PMO 的主张。</p>
+      <p>入门模型保留英文对象标签。</p>
+      <div class="journey-download"><a class="button primary" href="/wbs/unresolved.json" download>下载工作台 JSON <code>unresolved.json</code></a></div>
+      <p class="journey-option"><a href="/guide/department-wbs.json" download>可选模型，用于 PMO、财务和仓库的文件交换 <code>department-wbs.json</code></a></p>
+      <h3>在线工作台</h3>
+      <p>如果系统要求登录，请先登录，再打开下方的在线工作台链接，即可进入此场景的工作区。具备编辑权限时，按 Enter 或点击“导入模型”，再选择已下载的 JSON。需要保留改动时再保存草稿。</p>
+      <p><a href="/OntoGraph/decisions/?lang=zh-Hans&amp;workspace=journey-department-wbs">在在线工作台打开此场景</a></p>
+      <h3>独立版工作台</h3>
+      <p>在本地 OnToGraPh 代码目录运行下方命令。将文件名替换为已下载文件的完整路径。打开 http://127.0.0.1:8765/governance 进入语义工作台。</p>
+      <pre><code>python3 -m ontograph studio --model unresolved.json</code></pre>
+      <p><a href="/zh/explore/practitioner-workspace/?journey=department-wbs">阅读工作台操作说明</a></p>
+    </section>
+    <section class="topic-follow" aria-labelledby="related-details">
+      <h2 id="related-details">本场景的延伸阅读</h2>
+      <ul>
+        <li><a href="/zh/explore/pilot-partnership/?journey=department-wbs">共同规划试点</a></li>
+        <li><a href="/zh/explore/pilot-scope/?journey=department-wbs">界定试点范围并估算工作量</a></li>
+        <li><a href="/zh/explore/data-handling/?journey=department-wbs">数据处理与隐私</a></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

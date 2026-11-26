@@ -8,6 +8,7 @@ OnToGraPh links the source excerpt, the affected control, the approval and the d
 
 ## Start here
 
+- **Choose a case, try the relevant tools and download a Studio model.** [English](https://openontograph.org/journey/) · [简体中文](https://openontograph.org/zh/journey/) · [Workflow guide](GUIDED-JOURNEY.md) · [简体中文文档](GUIDED-JOURNEY.zh-Hans.md).
 - [Try the interactive pilot](https://openontograph.org/pilot/) or [简体中文](https://openontograph.org/pilot/zh/). Follow the PolicyWatcher-to-PALO case or switch to the standalone scenario.
 - [Inspect Aurora 21 evidence](https://openontograph.org/demo/). Compare what the simulated CRM and PMS report with their observed decisions.
 - [Run the engine and local Studio](../../README.md#run-the-engine-and-studio). Start with the bundled model and inspect individual fields, rules and controls.

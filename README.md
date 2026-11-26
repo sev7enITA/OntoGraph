@@ -12,6 +12,8 @@
 
 ## Start here
 
+[Choose a guided case and open its model in Studio](https://openontograph.org/journey/) · [简体中文](https://openontograph.org/zh/journey/)
+
 [Explore all nineteen topics in English](https://openontograph.org/explore/) · [简体中文](https://openontograph.org/zh/explore/)
 
 | Explore | What you can do |

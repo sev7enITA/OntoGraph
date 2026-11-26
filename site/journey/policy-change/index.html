@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Route a policy change for review | OnToGraPh</title>
+  <meta name="description" content="Start from a PolicyWatcher-style change record and follow the evidence to a human review decision in the PALO workflow.">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="canonical" href="https://openontograph.org/journey/policy-change/">
+  <link rel="alternate" hreflang="en" href="https://openontograph.org/journey/policy-change/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://openontograph.org/zh/journey/policy-change/">
+  <link rel="alternate" hreflang="x-default" href="https://openontograph.org/journey/policy-change/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/topic-pages.css">
+  <link rel="stylesheet" href="/assets/journey.css">
+  <script defer src="/assets/topic-pages.js"></script>
+  <script defer src="/assets/journey.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#topic-main">Skip to content</a>
+  <header class="topic-masthead">
+    <div class="wrap topic-masthead-inner">
+      <a class="brand" href="/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
+      <a class="topic-language" href="/zh/journey/policy-change/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a>
+    </div>
+  </header>
+  <main id="topic-main" class="wrap topic-main" tabindex="-1">
+    <nav class="topic-path" aria-label="Breadcrumb"><a href="/journey/">Choose another case</a></nav>
+    <header class="topic-hero" id="case">
+      <h1>Route a policy change for review</h1>
+      <p>Start from a PolicyWatcher-style change record and follow the evidence to a human review decision in the PALO workflow.</p>
+      <nav class="journey-stages" aria-label="Steps in this case"><ol><li><a href="#case">Understand the case</a></li><li><a href="#tools">Try the tools</a></li><li><a href="#model">Get the model</a></li></ol></nav>
+    </header>
+    <section class="journey-practice" id="tools" aria-labelledby="tools-title">
+      <h2 id="tools-title">Try the tools</h2>
+      <p><a href="/pilot/">Follow the PolicyWatcher and PALO demo</a></p>
+      <p>After trying the tool, return here using your browser’s Back button.</p>
+      <p>Follow these topics in order. Each takes you to the next topic or to your model.</p>
+      <ol class="journey-topic-list">
+        <li><a href="/explore/formation-to-release/?journey=policy-change">Two routes from change to decision</a></li>
+        <li><a href="/explore/who-decides/?journey=policy-change">Who decides at each stage</a></li>
+        <li><a href="/explore/pilot-partnership/?journey=policy-change">Plan a pilot together</a></li>
+        <li><a href="/explore/release-audit/?journey=policy-change">Audit a release and its withdrawal</a></li>
+      </ol>
+      <p><a href="#model">Continue to the model</a></p>
+    </section>
+    <section class="journey-handoff" id="model" aria-labelledby="model-title">
+      <h2 id="model-title">Open the model in Studio</h2>
+      <p>In Studio, select Source change ID as the origin and inspect the control and review intake. The downloadable model is a synthetic training case.</p>
+      <p>The starter model keeps its original English object labels.</p>
+      <div class="journey-download"><a class="button primary" href="/journey/models/policy-change.json" download>Download Studio JSON <code>policy-change.json</code></a></div>
+      <h3>Online Studio</h3>
+      <p>If you are asked to sign in, sign in first, then reopen the online Studio link below to enter this case’s workspace. With edit access, activate Import model using Enter or a click and choose the downloaded JSON. Save draft when you want to keep your changes.</p>
+      <p><a href="/OntoGraph/decisions/?lang=en&amp;workspace=journey-policy-change">Open this case in online Studio</a></p>
+      <h3>Standalone Studio</h3>
+      <p>From your local OnToGraPh checkout, replace the filename with the full path to your downloaded file and run: Open Semantic Studio at http://127.0.0.1:8765/governance.</p>
+      <pre><code>python3 -m ontograph studio --model policy-change.json</code></pre>
+      <p><a href="/explore/practitioner-workspace/?journey=policy-change">Read the Studio walkthrough</a></p>
+    </section>
+    <section class="topic-follow" aria-labelledby="related-details">
+      <h2 id="related-details">Further reading for this case</h2>
+      <ul>
+        <li><a href="/explore/about-project/?journey=policy-change">About OnToGraPh</a></li>
+        <li><a href="/explore/contact-project/?journey=policy-change">Contact the project</a></li>
+        <li><a href="/explore/contribute/?journey=policy-change">Contribute to the project</a></li>
+        <li><a href="/explore/data-handling/?journey=policy-change">Data handling and privacy</a></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

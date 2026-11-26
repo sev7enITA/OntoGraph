@@ -20,3 +20,4 @@
 - [Weighted decision impact](https://openontograph.org/weights/) and [加权关系](https://openontograph.org/weights/zh/). Five synthetic evidence scenarios compare assessed, incomplete and disputed paths to Finance processes and a mandatory release assessment requirement.
 - [WBS application pilot](https://openontograph.org/wbs/): Observed rule activation, disagreement and withdrawal in Beancount and LibreOffice Calc using synthetic data. [简体中文](https://openontograph.org/wbs/zh/)
 - [Explore OnToGraPh](https://openontograph.org/explore/) · [简体中文](https://openontograph.org/zh/explore/). Nineteen focused pages with worked examples on operational ontology, decision checks, adoption and project operations.
+- [Guided journey](https://openontograph.org/journey/) · [简体中文](https://openontograph.org/zh/journey/). Choose a case, try its tools and import the starter JSON into Semantic Studio.

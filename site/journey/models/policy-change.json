@@ -1,0 +1,209 @@
+{
+  "format": "ontograph.release/1",
+  "domain": "policy-change-training",
+  "owner": "Training reviewer",
+  "scope": "Synthetic training only. A matching observation is eligible for review.",
+  "purpose": "Route a fictional PolicyWatcher-style observation to a PALO-style human review queue.",
+  "effective_at": "2026-11-25T12:00:00Z",
+  "nodes": [
+    {
+      "id": "evidence",
+      "kind": "concept",
+      "label": "Evidence",
+      "definition": "Information offered for review",
+      "owner": "Local pilot reviewer"
+    },
+    {
+      "id": "monitoring",
+      "kind": "concept",
+      "label": "Monitoring signal",
+      "definition": "A non-authoritative observation",
+      "owner": "Local pilot reviewer"
+    },
+    {
+      "id": "case-key",
+      "kind": "concept",
+      "label": "Case identity",
+      "definition": "Identity of the reviewed public change",
+      "owner": "Local pilot reviewer"
+    },
+    {
+      "id": "change-ref",
+      "kind": "field",
+      "label": "Source change ID",
+      "definition": "PolicyWatcher change identifier",
+      "owner": "Local pilot reviewer",
+      "aliases": [
+        "/extensions/policyWatcherRecord/changeId"
+      ]
+    },
+    {
+      "id": "source-link",
+      "kind": "field",
+      "label": "Change URL",
+      "definition": "Public evidence locator",
+      "owner": "Local pilot reviewer",
+      "aliases": [
+        "/source/url"
+      ]
+    },
+    {
+      "id": "authority",
+      "kind": "field",
+      "label": "Signal authority",
+      "definition": "Claim made by the source",
+      "owner": "Local pilot reviewer",
+      "aliases": [
+        "/authority/status"
+      ]
+    },
+    {
+      "id": "route",
+      "kind": "process",
+      "label": "Measure review (training)",
+      "definition": "Review the source and evidence before deciding how to handle a monitoring signal.",
+      "owner": "Local pilot reviewer"
+    },
+    {
+      "id": "ctrl-decision-trace",
+      "kind": "control",
+      "label": "Decision trace",
+      "definition": "Bind a signal to its reviewed source",
+      "owner": "Local pilot reviewer"
+    },
+    {
+      "id": "intake-contract",
+      "kind": "contract",
+      "label": "Review admission",
+      "definition": "Admission opens human review",
+      "owner": "Local pilot reviewer"
+    },
+    {
+      "id": "review-intake",
+      "kind": "application",
+      "label": "Local review intake",
+      "definition": "Pilot adapter to the PALO signal importer",
+      "owner": "Local pilot reviewer"
+    }
+  ],
+  "edges": [
+    {
+      "source": "monitoring",
+      "predicate": "broader",
+      "target": "evidence"
+    },
+    {
+      "source": "change-ref",
+      "predicate": "mapsTo",
+      "target": "case-key"
+    },
+    {
+      "source": "source-link",
+      "predicate": "mapsTo",
+      "target": "case-key"
+    },
+    {
+      "source": "authority",
+      "predicate": "mapsTo",
+      "target": "monitoring"
+    },
+    {
+      "source": "route",
+      "predicate": "dependsOn",
+      "target": "ctrl-decision-trace"
+    },
+    {
+      "source": "ctrl-decision-trace",
+      "predicate": "implements",
+      "target": "intake-contract"
+    },
+    {
+      "source": "review-intake",
+      "predicate": "consumes",
+      "target": "intake-contract"
+    },
+    {
+      "source": "ctrl-decision-trace",
+      "predicate": "dependsOn",
+      "target": "change-ref"
+    },
+    {
+      "source": "ctrl-decision-trace",
+      "predicate": "dependsOn",
+      "target": "source-link"
+    },
+    {
+      "source": "ctrl-decision-trace",
+      "predicate": "dependsOn",
+      "target": "authority"
+    }
+  ],
+  "probes": [
+    {
+      "id": "matched",
+      "application": "review-intake",
+      "rule": "route-signal",
+      "expected": "allow",
+      "facts": {
+        "change-ref": "training-policy-change",
+        "source-link": "urn:ontograph:training:policy-change:training-monitoring",
+        "authority": "non-authoritative-monitoring-signal"
+      }
+    },
+    {
+      "id": "wrong-case",
+      "application": "review-intake",
+      "rule": "route-signal",
+      "expected": "hold",
+      "facts": {
+        "change-ref": "other-pilot-case",
+        "source-link": "urn:ontograph:training:policy-change:training-monitoring",
+        "authority": "non-authoritative-monitoring-signal"
+      }
+    },
+    {
+      "id": "false-authority",
+      "application": "review-intake",
+      "rule": "route-signal",
+      "expected": "hold",
+      "facts": {
+        "change-ref": "training-policy-change",
+        "source-link": "urn:ontograph:training:policy-change:training-monitoring",
+        "authority": "approved"
+      }
+    }
+  ],
+  "rules": [
+    {
+      "id": "route-signal",
+      "control": "ctrl-decision-trace",
+      "evidence": "training-monitoring",
+      "applies": {},
+      "requires": {
+        "change-ref": "training-policy-change",
+        "source-link": "urn:ontograph:training:policy-change:training-monitoring",
+        "authority": "non-authoritative-monitoring-signal"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "id": "training-monitoring",
+      "uri": "urn:ontograph:training:policy-change:training-monitoring",
+      "excerpt": "A fictional service now retains support transcripts for 30 days.",
+      "sha256": "5c9dc68cfc727ee8619e92618514e4a8b6323d9f040914ce890fa405c288c23e",
+      "observed_at": "2026-11-25T12:00:00Z",
+      "status": "confirmed",
+      "applicability": "Verified only against this fictional training scenario."
+    },
+    {
+      "id": "palo-measure",
+      "uri": "urn:ontograph:training:policy-change:palo-measure",
+      "excerpt": "Review the source and evidence before deciding how to handle a monitoring signal.",
+      "sha256": "aee4cf697d007541b907dd689c5cf8540d9f52e991cbd2c59bbaacf6136ebbb5",
+      "observed_at": "2026-11-25T12:00:00Z",
+      "status": "confirmed",
+      "applicability": "Verified only against this fictional training scenario."
+    }
+  ]
+}

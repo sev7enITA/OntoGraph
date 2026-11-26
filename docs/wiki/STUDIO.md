@@ -2,6 +2,8 @@
 
 # OnToGraPh Visual Studio
 
+Use the [guided journey](GUIDED-JOURNEY.md) to choose a case and download a model to import. [English](https://openontograph.org/journey/) · [简体中文](https://openontograph.org/zh/journey/)
+
 Run from the repository root:
 
 ```sh

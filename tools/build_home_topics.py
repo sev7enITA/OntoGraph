@@ -6,6 +6,7 @@ import re
 
 from tools import home_topics_apply, home_topics_project, home_topics_theory
 from tools.build_wbs_pages import LABELS, STATES
+from tools.journey_routes import CASES, journey_path, topic_cases
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,14 +32,15 @@ def href(label, url):
     return f'<a href="{escape(url, quote=True)}">{escape(label)}</a>'
 
 
-def lang_links(slug):
-    en = DOMAIN + route(slug, 0)
-    zh = DOMAIN + route(slug, 1)
+def lang_links(slug, base):
+    en = DOMAIN + base(slug, 0)
+    zh = DOMAIN + base(slug, 1)
     return "".join(f'\n  <link rel="alternate" hreflang="{locale}" href="{url}">'
                    for locale, url in (("en", en), ("zh-Hans", zh), ("x-default", en)))
 
 
-def layout(slug, title, lead, content, lang):
+def layout(slug, title, lead, content, lang, area="explore"):
+    base = journey_path if area == "journey" else route
     home = "/zh/" if lang else "/"
     locale = "zh-Hans" if lang else "en"
     language = phr("简体中文", "English", lang)
@@ -51,20 +53,22 @@ def layout(slug, title, lead, content, lang):
   <title>{escape(title)} | OnToGraPh</title>
   <meta name="description" content="{escape(lead, quote=True)}">
   <link rel="icon" href="/assets/icon.png">
-  <link rel="canonical" href="{DOMAIN + route(slug, lang)}">{lang_links(slug)}
+  <link rel="canonical" href="{DOMAIN + base(slug, lang)}">{lang_links(slug, base)}
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="stylesheet" href="/assets/topic-pages.css">
+  <link rel="stylesheet" href="/assets/journey.css">
   <script defer src="/assets/topic-pages.js"></script>
+  <script defer src="/assets/journey.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#topic-main">{phr('Skip to content', '跳转至正文', lang)}</a>
   <header class="topic-masthead">
     <div class="wrap topic-masthead-inner">
       <a class="brand" href="{home}" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
-      <a href="{route(slug, 1-lang)}" hreflang="{other}" lang="{other}">{language}</a>
+      <a class="topic-language" href="{base(slug, 1-lang)}" hreflang="{other}" lang="{other}">{language}</a>
     </div>
   </header>
-  <main id="topic-main" class="wrap topic-main">
+  <main id="topic-main" class="wrap topic-main" tabindex="-1">
 {content}
   </main>
 </body>
@@ -146,6 +150,42 @@ def estimate_lab(lang):
     </section>'''
 
 
+def continue_journey(slug, lang):
+    assigned = topic_cases(slug)
+    label = phr("Continue a guided case", "继续引导场景", lang)
+    model_label = phr("Get the model for this case", "获取此场景的模型", lang)
+    links = []
+    topics = {key: page for _, _, group in GROUPS for key, page in group.items()}
+    for key, data in assigned:
+        home = journey_path(key, lang)
+        model_link = href(model_label, home + "#model")
+        onward = ""
+        highlight = model_link
+        sequence = data["sequence"]
+        if slug in sequence:
+            position = sequence.index(slug)
+            if position + 1 < len(sequence) and sequence[position + 1] != "practitioner-workspace":
+                next_slug = sequence[position + 1]
+                next_title = topics[next_slug]["title"][lang]
+                text = phr("Continue to ", "继续学习 ", lang) + next_title
+                onward = href(text, route(next_slug, lang) + "?journey=" + key)
+                highlight = onward
+        secondary = href(phr("Return to case tools", "返回场景工具", lang), home + "#tools")
+        if onward:
+            secondary += " · " + model_link
+        current = phr("Current case", "当前场景", lang)
+        links.append(f'      <li data-case="{key}"><strong>{escape(data["title"][lang])}</strong>'
+                     f' <small class="journey-current" hidden>{current}</small>'
+                     f'<p class="journey-next">{highlight}</p><p>{secondary}</p></li>')
+    return f'''    <nav class="topic-journey" aria-labelledby="journey-title" data-topic-journey>
+      <h2 id="journey-title">{label}</h2>
+      <ul role="list">
+{chr(10).join(links)}
+      </ul>
+      <p>{href(phr("Choose another case", "选择其他场景", lang), journey_path("", lang))}</p>
+    </nav>'''
+
+
 def topic(slug, page, group, group_name, pages, lang):
     title, lead = page["title"][lang], page["lead"][lang]
     directory = f'{route("", lang)}#{group}'
@@ -177,8 +217,10 @@ def topic(slug, page, group, group_name, pages, lang):
     <header class="topic-hero">
       <h1>{escape(title)}</h1>
       <p>{escape(lead)}</p>
+      <p class="topic-jump">{href(phr("Go to guided case links", "跳转至引导场景链接", lang), "#journey-title")}</p>
     </header>
 {chr(10).join(chunks)}
+{continue_journey(slug, lang)}
     <nav class="topic-neighbours" aria-labelledby="topic-related">
       <h2 id="topic-related">{phr('More in this section', '本栏目其他主题', lang)}</h2>
       <ul>
@@ -205,6 +247,7 @@ def directory_page(lang):
       <h1>{title}</h1>
       <p>{lead}</p>
     </header>
+    <p class="journey-directory">{href(phr("Start a guided case", "开始引导场景", lang), journey_path("", lang))}</p>
     <div class="topic-directory">
 {chr(10).join(groups)}
     </div>'''
@@ -234,8 +277,9 @@ def add_sitemap(page_ids):
     raw = path.read_text()
     clean = re.sub(r"  <!-- topics:start -->.*?  <!-- topics:end -->\n", "", raw, flags=re.S)
     entries = ["  <!-- topics:start -->"]
-    for slug in ["", *page_ids]:
-        en, zh = [DOMAIN + route(slug, lang) for lang in (0, 1)]
+    routes = [(route, slug) for slug in ["", *page_ids]] + [(journey_path, case) for case in ["", *CASES]]
+    for base, slug in routes:
+        en, zh = [DOMAIN + base(slug, lang) for lang in (0, 1)]
         for url in (en, zh):
             entries.append(f"  <url><loc>{url}</loc>"
                            f'<xhtml:link rel="alternate" hreflang="en" href="{en}"/>'

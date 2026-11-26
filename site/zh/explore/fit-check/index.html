@@ -12,17 +12,19 @@
   <link rel="alternate" hreflang="x-default" href="https://openontograph.org/explore/fit-check/">
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="stylesheet" href="/assets/topic-pages.css">
+  <link rel="stylesheet" href="/assets/journey.css">
   <script defer src="/assets/topic-pages.js"></script>
+  <script defer src="/assets/journey.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#topic-main">跳转至正文</a>
   <header class="topic-masthead">
     <div class="wrap topic-masthead-inner">
       <a class="brand" href="/zh/" aria-label="OnToGraPh"><img src="/assets/on-tograph-logo.png" width="126" height="30" alt=""></a>
-      <a href="/explore/fit-check/" hreflang="en" lang="en">English</a>
+      <a class="topic-language" href="/explore/fit-check/" hreflang="en" lang="en">English</a>
     </div>
   </header>
-  <main id="topic-main" class="wrap topic-main">
+  <main id="topic-main" class="wrap topic-main" tabindex="-1">
     <nav class="topic-path" aria-label="面包屑导航">
       <a href="/zh/explore/">探索 OnToGraPh</a>
       <span aria-hidden="true">/</span> <a href="/zh/explore/#apply">动手实践</a>
@@ -30,6 +32,7 @@
     <header class="topic-hero">
       <h1>OnToGraPh 适合我的场景吗？</h1>
       <p>从依赖术语含义或规则的决策入手，检查能否明确负责人、执行决策的应用及证明结果的证据。</p>
+      <p class="topic-jump"><a href="#journey-title">跳转至引导场景链接</a></p>
     </header>
     <section class="topic-copy">
       <h2>明确一项决策</h2>
@@ -64,6 +67,14 @@
         <li><a href="/wbs/zh/">查看完整 WBS 证据</a></li>
       </ul>
     </section>
+    <nav class="topic-journey" aria-labelledby="journey-title" data-topic-journey>
+      <h2 id="journey-title">继续引导场景</h2>
+      <ul role="list">
+      <li data-case="department-wbs"><strong>对齐跨部门的 WBS 定义</strong> <small class="journey-current" hidden>当前场景</small><p class="journey-next"><a href="/zh/explore/relationship-impact/?journey=department-wbs">继续学习 关系如何传递影响</a></p><p><a href="/zh/journey/department-wbs/#tools">返回场景工具</a> · <a href="/zh/journey/department-wbs/#model">获取此场景的模型</a></p></li>
+      <li data-case="personal-library"><strong>为个人图书库建模</strong> <small class="journey-current" hidden>当前场景</small><p class="journey-next"><a href="/zh/journey/personal-library/#model">获取此场景的模型</a></p><p><a href="/zh/journey/personal-library/#tools">返回场景工具</a></p></li>
+      </ul>
+      <p><a href="/zh/journey/">选择其他场景</a></p>
+    </nav>
     <nav class="topic-neighbours" aria-labelledby="topic-related">
       <h2 id="topic-related">本栏目其他主题</h2>
       <ul>

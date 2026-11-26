@@ -1,0 +1,40 @@
+.journey-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.15rem;
+  margin-top: 2rem;
+}
+.journey-card, .journey-practice, .journey-handoff, .topic-journey {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: clamp(1.05rem, 4vw, 2.2rem);
+}
+.journey-card p, .journey-practice p, .journey-handoff p { margin: .75rem 0; color: var(--muted); }
+.journey-card a { margin-top: .35rem; }
+.journey-card { display: flex; flex-direction: column; align-items: flex-start; }
+.journey-card .button { margin-top: auto; }
+.journey-directory { margin-top: 1.5rem; }
+.journey-directory a, .journey-stages a { color: var(--accent); }
+.journey-stages ol, .journey-topic-list { padding-inline-start: 1.45rem; margin: 1rem 0; }
+.journey-stages li, .journey-topic-list li { padding-block: .2rem; }
+.journey-stages ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem 1.7rem; }
+.journey-practice, .journey-handoff, .topic-journey { margin-top: 2rem; scroll-margin-top: 1rem; }
+.journey-handoff h3 { margin-top: 1.5rem; }
+.journey-handoff { border-inline-start: 3px solid var(--accent); }
+.journey-download { margin: .8rem 0; }
+.journey-download .button { flex-wrap: wrap; overflow-wrap: anywhere; }
+.journey-option code { overflow-wrap: anywhere; }
+.journey-handoff pre { padding: .65rem; background: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere; }
+.topic-journey ul { list-style: none; margin: 1rem 0; padding: 0; }
+.topic-journey li { padding: .7rem; border-top: 1px solid var(--line); }
+.topic-journey li p { margin-top: .35rem; overflow-wrap: anywhere; }
+.topic-journey .journey-selected { border-inline-start: 3px solid var(--accent); }
+.homepage-journey { margin-bottom: .65rem; }
+@media (max-width: 580px) {
+  .journey-grid, .journey-stages ol { grid-template-columns: 1fr; }
+}
+
+.journey-download .button code { color: inherit; }
+.journey-handoff pre code { white-space: inherit; overflow-wrap: inherit; }
+.journey-next a { color: var(--accent); font-weight: 700; }
+.journey-current { color: var(--accent); margin-inline-start: .4rem; }
